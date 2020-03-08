@@ -1,8 +1,8 @@
 ﻿namespace EzhaBy.Entities
 {
-    public class DescriptionKeyWord
+    public class DescriptionKeyword
     {
         public string Id { get; set; }
-        public string KeyWordName { get; set; }
+        public string KeywordName { get; set; }
     }
 }
