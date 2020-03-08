@@ -12,5 +12,6 @@
         public string Phone { get; set; }
         public string Email { get; set; }
         public CafeTypes CafeType { get; set; }
+        public RequestStatuses RequestStatus { get; set; } 
     }
 }
