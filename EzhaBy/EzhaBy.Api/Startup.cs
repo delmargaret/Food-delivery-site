@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using EzhaBy.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NetCoreCqs.Infrastructure.BaseMediator;
 
 namespace EzhaBy.Api
@@ -31,11 +25,13 @@ namespace EzhaBy.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddDbContext<DataContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("Db")));
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterModule(new MediatorModule());
-            containerBuilder.RegisterModule(new DataModule("Db"));
+            containerBuilder.RegisterModule(new DataModule(Configuration.GetConnectionString("Db")));
 
             AutofacContainer = containerBuilder.Build();
             return new AutofacServiceProvider(AutofacContainer);
