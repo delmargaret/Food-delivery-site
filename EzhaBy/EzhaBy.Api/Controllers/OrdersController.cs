@@ -16,6 +16,13 @@
 
 //        public OrdersController(IMediator mediator) => this.mediator = mediator;
 
+//        [HttpPost]
+//        public async Task<IActionResult> Create([FromBody] CreateOrder.Command command)
+//        {
+//            await mediator.Send(command);
+//            return Ok();
+//        }
+
 //        [HttpGet]
 //        public async Task<IActionResult> GetOrders(GetOrders.Query query) => Ok(await mediator.Send(query));
 

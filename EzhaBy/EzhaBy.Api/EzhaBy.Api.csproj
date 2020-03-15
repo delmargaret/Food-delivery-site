@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EzhaBy.Business\EzhaBy.Business.csproj" />
+    <ProjectReference Include="..\EzhaBy.Infrastructure\EzhaBy.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
