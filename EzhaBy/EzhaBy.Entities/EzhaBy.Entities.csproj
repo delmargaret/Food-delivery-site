@@ -43,17 +43,16 @@
   <ItemGroup>
     <Compile Include="Enums\RequestStatuses.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Cafe.cs" />
-    <Compile Include="Models\CafeDescription.cs" />
     <Compile Include="Models\CafeSection.cs" />
     <Compile Include="Enums\CafeTypes.cs" />
+    <Compile Include="Models\CateringFacility.cs" />
+    <Compile Include="Models\CateringFacilityTag.cs" />
     <Compile Include="Models\Complaint.cs" />
     <Compile Include="Enums\ComplaintCategories.cs" />
     <Compile Include="Enums\ComplaintStatuses.cs" />
     <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierRequest.cs" />
     <Compile Include="Enums\CourierStatuses.cs" />
-    <Compile Include="Models\DescriptionKeyword.cs" />
     <Compile Include="Models\Dish.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderLine.cs" />
@@ -62,6 +61,7 @@
     <Compile Include="Enums\PaymentTypes.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Enums\Towns.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
