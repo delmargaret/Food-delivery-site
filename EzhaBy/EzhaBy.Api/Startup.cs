@@ -5,6 +5,7 @@ using EzhaBy.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreCqs.Infrastructure.BaseMediator;
@@ -25,13 +26,13 @@ namespace EzhaBy.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //services.AddDbContext<DataContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("Db")));
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Db")));
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterModule(new MediatorModule());
-            containerBuilder.RegisterModule(new DataModule(Configuration.GetConnectionString("Db")));
+            containerBuilder.RegisterModule(new DataModule());
 
             AutofacContainer = containerBuilder.Build();
             return new AutofacServiceProvider(AutofacContainer);

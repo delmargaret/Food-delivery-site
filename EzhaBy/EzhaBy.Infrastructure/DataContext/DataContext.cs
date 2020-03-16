@@ -1,5 +1,6 @@
 ﻿using EzhaBy.Entities;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace EzhaBy.Infrastructure
 {
@@ -20,22 +21,13 @@ namespace EzhaBy.Infrastructure
         public DbSet<Section> Sections { get; set; }
         public DbSet<User> Users { get; set; }
 
-        static DataContext()
+        public Task<int> SaveChangesAsync() => base.SaveChangesAsync();
+
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
         {
-            Database.SetInitializer(new ProjectDbInitializer());
+            Database.EnsureCreated(); 
         }
 
-        public DataContext(string connectionString)
-            : base(connectionString)
-        {
-        }
-    }
-
-    public class ProjectDbInitializer : DropCreateDatabaseIfModelChanges<DataContext>
-    {
-        protected override void Seed(DataContext db)
-        {
-            
-        }
     }
 }
