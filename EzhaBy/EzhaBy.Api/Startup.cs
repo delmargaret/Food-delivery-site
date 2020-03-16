@@ -33,7 +33,6 @@ namespace EzhaBy.Api
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterModule(new MediatorModule());
-            containerBuilder.RegisterModule(new DataModule());
 
             AutofacContainer = containerBuilder.Build();
             return new AutofacServiceProvider(AutofacContainer);

@@ -21,9 +21,9 @@ namespace EzhaBy.Business.Tags
 
         public class Handler : IRequestHandler<Query, bool>
         {
-            private readonly IDataContext context;
+            private readonly DataContext context;
 
-            public Handler(IDataContext context) => this.context = context;
+            public Handler(DataContext context) => this.context = context;
 
             public Task<bool> Handle(Query request, CancellationToken cancellationToken) =>
                 context.Tags.Find(request.Id).CateringFacilityTags.AnyAsync(cancellationToken);

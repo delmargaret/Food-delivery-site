@@ -24,9 +24,9 @@ namespace EzhaBy.Business.Tags
 
         public class Handler : IRequestHandler<Query, TagDto>
         {
-            private readonly IDataContext context;
+            private readonly DataContext context;
 
-            public Handler(IDataContext context) => this.context = context;
+            public Handler(DataContext context) => this.context = context;
 
             public Task<TagDto> Handle(Query request, CancellationToken cancellationToken)
             {

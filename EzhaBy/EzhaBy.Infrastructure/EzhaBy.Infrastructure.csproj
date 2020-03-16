@@ -145,8 +145,6 @@
   <ItemGroup>
     <Compile Include="BaseMediator\MediatorModule.cs" />
     <Compile Include="DataContext\DataContext.cs" />
-    <Compile Include="DataContext\DataModule.cs" />
-    <Compile Include="DataContext\IDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

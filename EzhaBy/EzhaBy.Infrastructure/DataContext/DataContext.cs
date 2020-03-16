@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EzhaBy.Infrastructure
 {
-    public class DataContext : DbContext, IDataContext
+    public class DataContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
         public DbSet<CateringFacility> Cafes { get; set; }
@@ -26,7 +26,6 @@ namespace EzhaBy.Infrastructure
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
-            //Database.EnsureCreated(); 
         }
 
     }
