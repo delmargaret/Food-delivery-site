@@ -1,14 +1,12 @@
-﻿using System;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
+﻿using EzhaBy.Business.Tags;
 using EzhaBy.Infrastructure;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetCoreCqs.Infrastructure.BaseMediator;
 
 namespace EzhaBy.Api
 {
@@ -20,22 +18,17 @@ namespace EzhaBy.Api
         }
 
         public IConfiguration Configuration { get; }
-        public IContainer AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddDbContext<DataContext>(options => options
             .UseLazyLoadingProxies()
             .UseSqlServer(Configuration.GetConnectionString("Db")));
 
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.Populate(services);
-            containerBuilder.RegisterModule(new MediatorModule());
-
-            AutofacContainer = containerBuilder.Build();
-            return new AutofacServiceProvider(AutofacContainer);
+            services.AddMediatR(typeof(CreateTag.Handler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

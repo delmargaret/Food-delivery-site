@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using EzhaBy.Business.Tags;
@@ -26,10 +27,10 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTags(GetTags.Query query) => Ok(await mediator.Send(query));
+        public async Task<IActionResult> GetTags() => Ok(await mediator.Send(new GetTags.Query()));
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTag(GetTag.Query query) => Ok(await mediator.Send(query));
+        public async Task<IActionResult> GetTag(string id) => Ok(await mediator.Send(new GetTag.Query(Guid.Parse(id))));
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTagName([FromBody] UpdateTagName.Command command)
