@@ -3,16 +3,16 @@ using System.Data.Entity;
 
 namespace EzhaBy.Infrastructure
 {
-    public class DataContext : DbContext
+    public class DataContext : DbContext, IDataContext
     {
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Cafe> Cafes { get; set; }
-        public DbSet<CafeDescription> CafeDescriptions { get; set; }
+        public DbSet<CateringFacility> Cafes { get; set; }
+        public DbSet<CateringFacilityTag> CateringFacilityTags { get; set; }
         public DbSet<CafeSection> CafeSections { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<CourierRequest> CourierRequests { get; set; }
-        public DbSet<DescriptionKeyword> KeyWords { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EzhaBy.Entities
 {
-    public class Cafe
+    public class CateringFacility
     {
         public string Id { get; set; }
-        public string CafeName { get; set; }
+        public string CateringFacilityName { get; set; }
         public byte[] MainImage { get; set; }
         public byte[] BackgroundImage { get; set; }
         public string DeliveryTime { get; set; }
@@ -15,7 +16,7 @@ namespace EzhaBy.Entities
         public float Rating { get; set; }
         public string AddressId { get; set; }
         public virtual Address Address { get; set; }
-        public virtual List<CafeDescription> KeyWords { get; set; }
+        public virtual IQueryable<CateringFacilityTag> CateringFacilityTags { get; set; }
         public virtual List<CafeSection> Sections { get; set; }
     }
 }
