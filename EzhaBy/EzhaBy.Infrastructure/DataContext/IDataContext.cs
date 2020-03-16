@@ -1,5 +1,5 @@
 ﻿using EzhaBy.Entities;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace EzhaBy.Infrastructure
