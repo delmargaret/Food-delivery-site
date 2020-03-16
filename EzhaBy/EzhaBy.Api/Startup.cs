@@ -26,13 +26,13 @@ namespace EzhaBy.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Db")));
+            services.AddDbContext<DataContext>(options => options
+            .UseLazyLoadingProxies()
+            .UseSqlServer(Configuration.GetConnectionString("Db")));
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterModule(new MediatorModule());
-            containerBuilder.RegisterModule(new DataModule());
 
             AutofacContainer = containerBuilder.Build();
             return new AutofacServiceProvider(AutofacContainer);

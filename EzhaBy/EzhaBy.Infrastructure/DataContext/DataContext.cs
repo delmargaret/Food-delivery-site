@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EzhaBy.Infrastructure
 {
-    public class DataContext : DbContext, IDataContext
+    public class DataContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
         public DbSet<CateringFacility> Cafes { get; set; }
@@ -26,8 +26,26 @@ namespace EzhaBy.Infrastructure
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
-            Database.EnsureCreated(); 
         }
 
+    }
+
+    public static class DbInitializer
+    {
+        public static void Initialize(DataContext context)
+        {
+            context.Database.EnsureCreated();
+
+            var tags = new Tag[]
+            {
+                new Tag{ Id = new System.Guid(), TagName = "First" },
+                new Tag{ Id = new System.Guid(), TagName = "Second" },
+            };
+            foreach (var tag in tags)
+            {
+                context.Tags.Add(tag);
+            }
+            context.SaveChanges();
+        }
     }
 }

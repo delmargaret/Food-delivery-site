@@ -20,6 +20,6 @@ namespace EzhaBy.Entities
         public virtual User User { get; set; }
         public string CourierId { get; set; }
         public virtual Courier Courier { get; set; }
-        public List<OrderLine> OrderDishes { get; set; }
+        public virtual List<OrderLine> OrderDishes { get; set; }
     }
 }

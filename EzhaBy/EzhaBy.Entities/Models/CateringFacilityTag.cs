@@ -4,9 +4,10 @@ namespace EzhaBy.Entities
 {
     public class CateringFacilityTag
     {
+        public Guid Id { get; set; } 
         public Guid CateringFacilityId { get; set; }
-        public CateringFacility CateringFacility { get; set; }
+        public virtual CateringFacility CateringFacility { get; set; }
         public Guid TagId { get; set; }
-        public Tag Tag { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

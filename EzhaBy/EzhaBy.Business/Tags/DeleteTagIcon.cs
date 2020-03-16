@@ -20,9 +20,9 @@ namespace EzhaBy.Business.Tags
 
         public class Handler : IRequestHandler<Command, Unit>
         {
-            private readonly IDataContext context;
+            private readonly DataContext context;
 
-            public Handler(IDataContext context)
+            public Handler(DataContext context)
             {
                 this.context = context;
             }
