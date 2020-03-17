@@ -30,7 +30,7 @@ namespace EzhaBy.Business.Tags
 
             public Task<TagDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var tag = context.Tags.Find(cancellationToken, request.Id);
+                var tag = context.Tags.Find(request.Id);
 
                 return Task.FromResult(new TagDto
                 {

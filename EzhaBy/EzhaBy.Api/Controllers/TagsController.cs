@@ -15,8 +15,8 @@ namespace EzhaBy.Api.Controllers
         public TagsController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost("isAssigned")]
-        public async Task<IActionResult> IsAssigned(IsTagAssigned.Query query) =>
-            Ok(await mediator.Send(query));
+        public async Task<IActionResult> IsAssigned(string id) =>
+            Ok(await mediator.Send(new IsTagAssigned.Query(Guid.Parse(id))));
 
 
         [HttpPost]
@@ -33,30 +33,32 @@ namespace EzhaBy.Api.Controllers
         public async Task<IActionResult> GetTag(string id) => Ok(await mediator.Send(new GetTag.Query(Guid.Parse(id))));
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTagName([FromBody] UpdateTagName.Command command)
+        public async Task<IActionResult> UpdateTagName(string id, [FromBody] UpdateTagName.Command command)
         {
+            command.Id = Guid.Parse(id);
             await mediator.Send(command);
             return Ok();
         }
 
         [HttpPut("{id}/icon")]
-        public async Task<IActionResult> UpdateTagIcon([FromBody] UpdateTagIcon.Command command)
+        public async Task<IActionResult> UpdateTagIcon(string id, [FromBody] UpdateTagIcon.Command command)
         {
+            command.Id = Guid.Parse(id);
             await mediator.Send(command);
             return Ok();
         }
 
         [HttpDelete("{id}/icon")]
-        public async Task<IActionResult> DeleteTagIcon(DeleteTagIcon.Command command)
+        public async Task<IActionResult> DeleteTagIcon(string id)
         {
-            await mediator.Send(command);
+            await mediator.Send(new DeleteTagIcon.Command(Guid.Parse(id)));
             return Ok();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTag(DeleteTag.Command command)
+        public async Task<IActionResult> DeleteTag(string id)
         {
-            await mediator.Send(command);
+            await mediator.Send(new DeleteTag.Command(Guid.Parse(id)));
             return Ok();
         }
     }

@@ -23,14 +23,14 @@ namespace EzhaBy.Business.Tags
             public byte[] TagIcon { get; set; }
         }
 
-        public class Handler : IRequestHandler<Command, Unit>, IPipelineBehavior<Command, Unit>
+        public class Handler : IRequestHandler<Command, Unit>
         {
-            private readonly IValidator<string> tagValidator;
+            //private readonly IValidator<string> tagValidator;
             private readonly DataContext context;
 
-            public Handler(IValidator<string> tagValidator, DataContext context)
+            public Handler(DataContext context)
             {
-                this.tagValidator = tagValidator;
+                //this.tagValidator = tagValidator;
                 this.context = context;
             }
 
@@ -44,7 +44,7 @@ namespace EzhaBy.Business.Tags
 
                 var tag = new Tag
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     TagName = request.TagName,
                     TagIcon = request.TagIcon
                 };
@@ -54,11 +54,11 @@ namespace EzhaBy.Business.Tags
                 return Unit.Value;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<Unit> next)
-            {
-                await tagValidator.ValidateAndThrowAsync(request.TagName, cancellationToken: cancellationToken);
-                return await next();
-            }
+            //public async Task<Unit> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<Unit> next)
+            //{
+            //    await tagValidator.ValidateAndThrowAsync(request.TagName, cancellationToken: cancellationToken);
+            //    return await next();
+            //}
         }
     }
 }
