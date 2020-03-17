@@ -1,4 +1,5 @@
 ﻿using EzhaBy.Entities;
+using EzhaBy.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -26,26 +27,12 @@ namespace EzhaBy.Infrastructure
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
-    }
-
-    public static class DbInitializer
-    {
-        public static void Initialize(DataContext context)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            context.Database.EnsureCreated();
-
-            var tags = new Tag[]
-            {
-                new Tag{ Id = new System.Guid(), TagName = "First" },
-                new Tag{ Id = new System.Guid(), TagName = "Second" },
-            };
-            foreach (var tag in tags)
-            {
-                context.Tags.Add(tag);
-            }
-            context.SaveChanges();
+            modelBuilder.Seed();
         }
     }
 }
