@@ -2,9 +2,6 @@
 using EzhaBy.Infrastructure;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,6 +28,10 @@ namespace EzhaBy.Business.Tags
             public Task<TagDto> Handle(Query request, CancellationToken cancellationToken)
             {
                 var tag = context.Tags.Find(request.Id);
+                if (tag == null)
+                {
+                    throw new Exception("tag isn't exists");
+                }
 
                 return Task.FromResult(new TagDto
                 {

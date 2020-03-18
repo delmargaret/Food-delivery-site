@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EzhaBy.Entities
@@ -11,7 +12,7 @@ namespace EzhaBy.Entities
 
         public byte[] TagIcon { get; set; }
 
-        public virtual IQueryable<CateringFacilityTag> CateringFacilityTags { get; set; }
+        public virtual IList<CateringFacilityTag> CateringFacilityTags { get; set; }
 
     }
 }

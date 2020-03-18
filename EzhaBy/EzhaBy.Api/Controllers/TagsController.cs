@@ -14,7 +14,7 @@ namespace EzhaBy.Api.Controllers
 
         public TagsController(IMediator mediator) => this.mediator = mediator;
 
-        [HttpPost("isAssigned")]
+        [HttpGet("{id}/isAssigned")]
         public async Task<IActionResult> IsAssigned(string id) =>
             Ok(await mediator.Send(new IsTagAssigned.Query(Guid.Parse(id))));
 

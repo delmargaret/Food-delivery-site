@@ -8,7 +8,7 @@ namespace EzhaBy.Infrastructure
     public class DataContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<CateringFacility> Cafes { get; set; }
+        public DbSet<CateringFacility> CateringFacilities { get; set; }
         public DbSet<CateringFacilityTag> CateringFacilityTags { get; set; }
         public DbSet<CafeSection> CafeSections { get; set; }
         public DbSet<Complaint> Complaints { get; set; }

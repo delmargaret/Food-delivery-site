@@ -16,7 +16,7 @@ namespace EzhaBy.Entities
         public float Rating { get; set; }
         public string AddressId { get; set; }
         public virtual Address Address { get; set; }
-        public virtual IQueryable<CateringFacilityTag> CateringFacilityTags { get; set; }
+        public virtual IList<CateringFacilityTag> CateringFacilityTags { get; set; }
         public virtual List<CafeSection> Sections { get; set; }
     }
 }

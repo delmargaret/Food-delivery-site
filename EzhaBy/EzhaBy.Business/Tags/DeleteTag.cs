@@ -1,7 +1,7 @@
 ﻿using EzhaBy.Infrastructure;
 using MediatR;
 using System;
-using System.Data.Entity;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,7 +36,7 @@ namespace EzhaBy.Business.Tags
                     throw new Exception("tag isn't exists");
                 }
 
-                var isAssigned = await tag.CateringFacilityTags.AnyAsync(cancellationToken);
+                var isAssigned = tag.CateringFacilityTags.Any();
                 if (isAssigned)
                 {
                     throw new Exception("tag is assigned and can't be deleted");

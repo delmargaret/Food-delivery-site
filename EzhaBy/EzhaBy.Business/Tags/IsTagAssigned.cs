@@ -1,7 +1,7 @@
 ﻿using EzhaBy.Infrastructure;
 using MediatR;
 using System;
-using System.Data.Entity;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,8 +25,16 @@ namespace EzhaBy.Business.Tags
 
             public Handler(DataContext context) => this.context = context;
 
-            public Task<bool> Handle(Query request, CancellationToken cancellationToken) =>
-                context.Tags.Find(request.Id).CateringFacilityTags.AnyAsync(cancellationToken);
+            public Task<bool> Handle(Query request, CancellationToken cancellationToken)
+            {
+                var tag = context.Tags.Find(request.Id);
+                if (tag == null)
+                {
+                    throw new Exception("tag isn't exists");
+                }
+
+                return Task.FromResult(tag.CateringFacilityTags.Any());
+            }
         }
     }
 }
