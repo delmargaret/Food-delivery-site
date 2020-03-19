@@ -29,7 +29,8 @@ namespace EzhaBy.Business.Tags
                     {
                         Id = tag.Id,
                         TagName = tag.TagName,
-                        TagIcon = tag.TagIcon
+                        TagIcon = tag.TagIcon,
+                        isAssigned = tag.CateringFacilityTags.Any()
                     });
 
                 if (tags == null)

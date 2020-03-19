@@ -1,0 +1,43 @@
+import React, { Component } from 'react';
+import TagsService, { TAG_LIST_UPDATED } from '../../services/tags-service';
+import TagsList from './tags-list';
+import AddTagForm from './add-tag-form';
+import Emitter from '../../services/event-emitter';
+import './tags.css';
+
+export default class TagsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tags: []
+    };
+
+    this.getTags = this.getTags.bind(this);
+  }
+
+  getTags() {
+    TagsService.getTags().then(result => {
+      this.setState({ tags: result.data });
+    });
+  }
+
+  componentDidMount() {
+    this.getTags();
+    Emitter.on(TAG_LIST_UPDATED, _ => this.getTags());
+  }
+
+  componentWillUnmount() {
+    Emitter.off(TAG_LIST_UPDATED);
+  }
+
+  render() {
+    return (
+      <div>
+        <AddTagForm />
+        <div id='tags-list'>
+          <TagsList tags={this.state.tags} />
+        </div>
+      </div>
+    );
+  }
+}

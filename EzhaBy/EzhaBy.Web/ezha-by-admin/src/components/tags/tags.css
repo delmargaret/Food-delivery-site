@@ -1,0 +1,14 @@
+/* .header-hidden { display: none } */
+
+#tags-list .clear-search-btn {
+  border-color: #ced4da;
+}
+
+#tags-list {
+  text-align: left;
+}
+
+/* #tags-list .scrollTable {
+  height: 250px;
+  overflow-y: auto;
+} */
