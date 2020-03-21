@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EzhaBy.Entities
 {
     public class CateringFacility
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string CateringFacilityName { get; set; }
-        public byte[] MainImage { get; set; }
-        public byte[] BackgroundImage { get; set; }
+        public byte[] CateringFacilityIcon { get; set; }
         public string DeliveryTime { get; set; }
         public decimal DeliveryPrice { get; set; }
-        public CafeTypes CafeType { get; set; }
+        public CateringFacilityTypes CateringFacilityType { get; set; }
         public string WorkingHours { get; set; }
-        public float Rating { get; set; }
-        public string AddressId { get; set; }
-        public virtual Address Address { get; set; }
+        public Towns Town { get; set; }
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public CateringFacilityStatuses CateringFacilityStatus { get; set; }
         public virtual IList<CateringFacilityTag> CateringFacilityTags { get; set; }
-        public virtual List<CafeSection> Sections { get; set; }
+        public virtual IList<CafeSection> Sections { get; set; }
     }
 }

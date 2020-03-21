@@ -133,6 +133,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
+    <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tags\CreateTag.cs" />
     <Compile Include="Tags\DeleteTag.cs" />

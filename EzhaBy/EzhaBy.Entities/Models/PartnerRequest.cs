@@ -11,7 +11,7 @@
         public string Patronymic { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public CafeTypes CafeType { get; set; }
+        public CateringFacilityTypes CafeType { get; set; }
         public RequestStatuses RequestStatus { get; set; } 
     }
 }

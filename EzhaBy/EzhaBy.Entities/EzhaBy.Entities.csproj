@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CateringFacilityStatuses.cs" />
+    <Compile Include="Enums\CateringFacilityTypes.cs" />
     <Compile Include="Enums\RequestStatuses.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\CafeSection.cs" />
-    <Compile Include="Enums\CafeTypes.cs" />
     <Compile Include="Models\CateringFacility.cs" />
     <Compile Include="Models\CateringFacilityTag.cs" />
     <Compile Include="Models\Complaint.cs" />

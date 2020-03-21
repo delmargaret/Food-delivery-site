@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import TagsPage from '../tags/tags';
+import CateringFacilityForm from '../catering-facilities/catering-facility-form';
 
 export default class HomePage extends Component {
   render() {
     return (
-      <Tabs defaultActiveKey="tags" id="uncontrolled-tab-example">
+      <Tabs defaultActiveKey="catering-facilities" id="uncontrolled-tab-example">
         <Tab eventKey="tags" title="Тэги">
           <TagsPage />
         </Tab>
         <Tab eventKey="catering-facilities" title="Заведения">
-          Catering Facilities
+          <CateringFacilityForm />
         </Tab>
         <Tab eventKey="categories" title="Категории блюд">
           Categories
@@ -29,9 +30,6 @@ export default class HomePage extends Component {
         </Tab>
         <Tab eventKey="complaints" title="Жалобы">
           Complaints
-        </Tab>
-        <Tab eventKey="users" title="Пользователи">
-          Users
         </Tab>
       </Tabs>
     );
