@@ -12,14 +12,9 @@ export default class TagsService {
     return HttpRequest.Get(`api/tags/${id}`);
   }
 
-  static checkTagIsAssigned(id) {
-    return HttpRequest.Get(`api/tags/${id}/isAssigned`);
-  }
-
-  static createTag(tagName, tagIcon = null) {
+  static createTag(tagName) {
     const data = {
       tagName: tagName,
-      tagIcon: tagIcon
     };
     return HttpRequest.Post(`api/tags`, JSON.stringify(data)).then(_ => Emitter.emit(TAG_LIST_UPDATED, {}));
   }

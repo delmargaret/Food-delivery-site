@@ -13,14 +13,12 @@ namespace EzhaBy.Business.Tags
     {
         public class Command : IRequest<Unit>
         {
-            public Command(string tagName, byte[] tagIcon = null)
+            public Command(string tagName)
             {
                 TagName = tagName;
-                TagIcon = tagIcon;
             }
 
             public string TagName { get; set; }
-            public byte[] TagIcon { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Unit>
@@ -46,7 +44,7 @@ namespace EzhaBy.Business.Tags
                 {
                     Id = Guid.NewGuid(),
                     TagName = request.TagName,
-                    TagIcon = request.TagIcon
+                    TagIcon = null
                 };
 
                 context.Tags.Add(tag);

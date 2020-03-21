@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import TagsItem from './tags-item';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import TagsService from '../../services/tags-service';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
@@ -98,6 +97,7 @@ export default class TagsList extends Component {
                 afterSaveCell: this.onAfterSaveTag,
                 autoSelectText: true
               })}
+              noDataIndication="Тэги не найдены"
             />
           </div>
         )}

@@ -20,12 +20,14 @@ export default class AddTagForm extends Component {
       <div>
         <br />
         <Form>
+          <Form.Label>Новый тэг</Form.Label>
           <Form.Group as={Row} controlId="tagName">
-            <Form.Label column sm="1">
-              Новый тэг
-            </Form.Label>
-            <Col sm="4">
-              <Form.Control ref={this.tagNameInput} type="text" placeholder="Название тэга" />
+            <Col sm="3">
+              <Form.Control
+                ref={this.tagNameInput}
+                type="text"
+                placeholder="Название тэга"
+              />
             </Col>
             <Button onClick={this.onTagAddHandler}>Добавить</Button>
           </Form.Group>

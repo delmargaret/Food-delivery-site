@@ -140,7 +140,6 @@
     <Compile Include="Tags\Dto\TagDto.cs" />
     <Compile Include="Tags\GetTag.cs" />
     <Compile Include="Tags\GetTags.cs" />
-    <Compile Include="Tags\IsTagAssigned.cs" />
     <Compile Include="Tags\UpdateTagIcon.cs" />
     <Compile Include="Tags\UpdateTagName.cs" />
   </ItemGroup>
