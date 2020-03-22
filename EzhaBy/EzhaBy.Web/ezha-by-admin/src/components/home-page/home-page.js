@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import TagsPage from '../tags/tags';
-import CateringFacilityForm from '../catering-facilities/catering-facility-form';
+import CateringFacilitiesPage from '../catering-facilities/catering-facilities';
+import AddCateringFacility from '../catering-facilities/add-catering-facility';
 
 export default class HomePage extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class HomePage extends Component {
           <TagsPage />
         </Tab>
         <Tab eventKey="catering-facilities" title="Заведения">
-          <CateringFacilityForm />
+          <CateringFacilitiesPage />
         </Tab>
         <Tab eventKey="categories" title="Категории блюд">
           Categories

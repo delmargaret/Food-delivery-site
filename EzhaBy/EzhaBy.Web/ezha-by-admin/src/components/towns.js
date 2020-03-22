@@ -29,6 +29,12 @@ const TOWNS = [
 ];
 
 export default class Towns extends Component {
+  constructor(props) {
+    super(props);
+
+    this.town = React.createRef();
+  }
+
   renderOptions() {
     return TOWNS.map(town => <option key={town.id} value={town.id}>{town.name}</option>);
   }
@@ -38,7 +44,7 @@ export default class Towns extends Component {
       <div>
         <Form.Group>
           <Form.Label>Город</Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" ref={this.town}>
             {this.renderOptions()}
           </Form.Control>
         </Form.Group>

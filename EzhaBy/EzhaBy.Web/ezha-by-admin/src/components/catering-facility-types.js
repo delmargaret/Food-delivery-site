@@ -17,6 +17,12 @@ const TYPES = [
 ];
 
 export default class CateringFacilityTypes extends Component {
+  constructor(props) {
+    super(props);
+
+    this.type = React.createRef();
+  }
+
   renderOptions() {
     return TYPES.map(type => <option key={type.id} value={type.id}>{type.name}</option>);
   }
@@ -26,7 +32,7 @@ export default class CateringFacilityTypes extends Component {
       <div>
         <Form.Group>
           <Form.Label>Тип заведения</Form.Label>
-          <Form.Control as="select">
+          <Form.Control as="select" ref={this.type}>
             {this.renderOptions()}
           </Form.Control>
         </Form.Group>

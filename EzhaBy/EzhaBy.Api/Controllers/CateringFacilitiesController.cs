@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using EzhaBy.Business.CateringFacilities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,20 +21,28 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetCateringFacilities(GetCateringFacilities.Query query) =>
-        //    Ok(await mediator.Send(query));
+        [HttpGet]
+        public async Task<IActionResult> GetCateringFacilities() => Ok(await mediator.Send(new GetCateringFacilities.Query()));
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetCateringFacility(GetCateringFacility.Query query) =>
-        //    Ok(await mediator.Send(query));
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCateringFacility(string id) =>
+            Ok(await mediator.Send(new GetCateringFacility.Query(Guid.Parse(id))));
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Update([FromBody] UpdateCateringFacility.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] UpdateCateringFacility.Command command)
+        {
+            command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> SetStatus(string id, [FromBody] SetStatus.Command command)
+        {
+            command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
 
         //[HttpPut("{id}/icon")]
         //public async Task<IActionResult> UpdateIcon([FromBody] UpdateCateringFacilityIcon.Command command)
@@ -44,31 +53,6 @@ namespace EzhaBy.Api.Controllers
 
         //[HttpDelete("{id}/icon")]
         //public async Task<IActionResult> DeleteIcon(DeleteCateringFacilityIcon.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
-
-        //[HttpPut("{id}/tag")]
-        //public async Task<IActionResult> AddTag([FromBody] AddTag.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
-
-        //[HttpDelete("{id}/tag")]
-        //public async Task<IActionResult> DeleteTag(DeleteTag.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
-
-        //[HttpGet("{id}/tags")]
-        //public async Task<IActionResult> GetTags(GetTags.Query query) =>
-        //    Ok(await mediator.Send(query));
-
-        //[HttpPut("{id}/status")]
-        //public async Task<IActionResult> SetStatus([FromBody] SetStatus.Command command)
         //{
         //    await mediator.Send(command);
         //    return Ok();

@@ -135,6 +135,10 @@
   <ItemGroup>
     <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
     <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />
+    <Compile Include="CateringFacilities\GetCateringFacilities.cs" />
+    <Compile Include="CateringFacilities\GetCateringFacility.cs" />
+    <Compile Include="CateringFacilities\SetStatus.cs" />
+    <Compile Include="CateringFacilities\UpdateCateringFacility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tags\CreateTag.cs" />
     <Compile Include="Tags\DeleteTag.cs" />
