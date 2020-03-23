@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import CateringFacilityForm from './catering-facility-form';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import CateringFacilityForm from "./catering-facility-form";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
 
 export default class UpdateCateringFacility extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tags: []
-    }
+    };
 
     this.formResults = React.createRef();
     this.onCateringFacilityUpdate = this.onCateringFacilityUpdate.bind(this);
@@ -26,7 +26,7 @@ export default class UpdateCateringFacility extends Component {
         workingHoursInput,
         townInput,
         streetInput,
-        houseInput,
+        houseInput
       } = this.formResults.current;
 
       nameInput.current.value = result.data.cateringFacilityName;
@@ -38,7 +38,7 @@ export default class UpdateCateringFacility extends Component {
       streetInput.current.value = result.data.street;
       houseInput.current.value = result.data.houseNumber;
 
-      this.setState({tags: result.data.cateringFacilityTags})
+      this.setState({ tags: result.data.cateringFacilityTags });
     });
   }
 

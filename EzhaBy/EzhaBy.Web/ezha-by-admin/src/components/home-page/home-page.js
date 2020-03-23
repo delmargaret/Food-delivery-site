@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
-import TagsPage from '../tags/tags';
-import CateringFacilitiesPage from '../catering-facilities/catering-facilities';
-import AddCateringFacility from '../catering-facilities/add-catering-facility';
-import CategoriesPage from '../categories/categories';
+import React, { Component } from "react";
+import { Tabs, Tab } from "react-bootstrap";
+import TagsPage from "../tags/tags";
+import CateringFacilitiesPage from "../catering-facilities/catering-facilities";
+import CategoriesPage from "../categories/categories";
 
 export default class HomePage extends Component {
   render() {
     return (
-      <Tabs defaultActiveKey="catering-facilities" id="uncontrolled-tab-example">
+      <Tabs
+        defaultActiveKey="catering-facilities"
+        id="uncontrolled-tab-example"
+      >
         <Tab eventKey="tags" title="Тэги">
           <TagsPage />
         </Tab>

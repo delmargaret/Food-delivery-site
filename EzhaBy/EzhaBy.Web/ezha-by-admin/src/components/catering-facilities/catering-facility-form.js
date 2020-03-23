@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import TagsService from '../../services/tags-service';
-import Towns from '../towns';
-import CateringFacilityTypes from '../catering-facility-types';
-import './catering-facilities.css';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import TagsService from "../../services/tags-service";
+import Towns from "../towns";
+import CateringFacilityTypes from "../catering-facility-types";
+import "./catering-facilities.css";
 
 export default class CateringFacilityForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      tags: [],
-      cateringFacilityTags: []
+      cateringFacilityTags: [...props.tags]
     };
+
+    this.tags = [];
 
     this.nameInput = React.createRef();
     this.typeInput = React.createRef();
@@ -25,40 +27,56 @@ export default class CateringFacilityForm extends Component {
 
     this.onTagAdd = this.onTagAdd.bind(this);
     this.onTagDelete = this.onTagDelete.bind(this);
+
+    this.shouldDisableTagSelector = this.shouldDisableTagSelector.bind(this);
   }
 
   componentDidMount() {
     TagsService.getTags().then(result => {
+      this.tags = result.data;
+
       this.setState({
-        tags: result.data,
-        cateringFacilityTags: this.props.tags
+        cateringFacilityTags: [...this.props.tags]
       });
     });
   }
 
-  renderTagsOptions() {
-    let tags = this.state.tags;
+  shouldDisableTagSelector() {
+    let tagsToShow = [...this.tags];
+
     if (
       this.state.cateringFacilityTags &&
       this.state.cateringFacilityTags.length > 0
     ) {
-      const currentTagIds = this.state.cateringFacilityTags.map(tag => tag.id);
-
-      tags.forEach(tag => {
-        if (currentTagIds.includes(tag.id)) {
-          tags.splice(
-            tags.findIndex(i => i.id === tag.id),
-            1
-          );
-        }
-      });
+      tagsToShow = this.tags.filter(
+        tag =>
+          !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
+      );
     }
 
-    return tags.map(tag => (
-      <option key={tag.id} value={tag.id}>
-        {tag.tagName}
-      </option>
-    ));
+    return tagsToShow.length === 0;
+  }
+
+  renderTagsOptions() {
+    let tagsToShow = [...this.tags];
+
+    if (
+      this.state.cateringFacilityTags &&
+      this.state.cateringFacilityTags.length > 0
+    ) {
+      tagsToShow = this.tags.filter(
+        tag =>
+          !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
+      );
+    }
+
+    return tagsToShow.map(tag => {
+      return (
+        <option key={tag.id} value={tag.id}>
+          {tag.tagName}
+        </option>
+      );
+    });
   }
 
   renderTagsPreview() {
@@ -78,36 +96,27 @@ export default class CateringFacilityForm extends Component {
   }
 
   onTagDelete(tagId) {
-    let cateringFacilityTags = this.state.cateringFacilityTags;
-    let freeTags = this.state.tags;
+    let cateringFacilityTags = [...this.state.cateringFacilityTags];
 
-    freeTags.push(cateringFacilityTags.find(tag => tag.id === tagId));
     cateringFacilityTags.splice(
       cateringFacilityTags.findIndex(tag => tag.id === tagId),
       1
     );
 
     this.setState({
-      cateringFacilityTags: cateringFacilityTags,
-      tags: freeTags
+      cateringFacilityTags: cateringFacilityTags
     });
   }
 
   onTagAdd() {
     const tagIdToAdd = this.tagInput.current.value;
 
-    let cateringFacilityTags = this.state.cateringFacilityTags;
-    let freeTags = this.state.tags;
+    let cateringFacilityTags = [...this.state.cateringFacilityTags];
 
-    cateringFacilityTags.push(freeTags.find(tag => tag.id === tagIdToAdd));
-    freeTags.splice(
-      freeTags.findIndex(tag => tag.id === tagIdToAdd),
-      1
-    );
+    cateringFacilityTags.push(this.tags.find(tag => tag.id === tagIdToAdd));
 
     this.setState({
-      cateringFacilityTags: cateringFacilityTags,
-      tags: freeTags
+      cateringFacilityTags: cateringFacilityTags
     });
   }
 
@@ -172,7 +181,7 @@ export default class CateringFacilityForm extends Component {
             <Col sm="3">
               <Form.Control
                 as="select"
-                disabled={this.state.tags.length === 0}
+                disabled={this.shouldDisableTagSelector()}
                 ref={this.tagInput}
               >
                 {this.renderTagsOptions()}

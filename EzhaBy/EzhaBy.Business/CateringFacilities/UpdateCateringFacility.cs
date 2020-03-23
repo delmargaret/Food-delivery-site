@@ -4,7 +4,6 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -63,7 +62,7 @@ namespace EzhaBy.Business.CateringFacilities
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var cateringFacility = context.CateringFacilities.Find(request.Id);
+                var cateringFacility = await context.CateringFacilities.FindAsync(request.Id);
                 if (cateringFacility == null)
                 {
                     throw new Exception("cateringFacility isn't exists");
@@ -78,18 +77,19 @@ namespace EzhaBy.Business.CateringFacilities
                 cateringFacility.Street = request.Street;
                 cateringFacility.HouseNumber = request.HouseNumber;
 
-                cateringFacility.CateringFacilityTags = null;
+                context.CateringFacilityTags.RemoveRange(context.CateringFacilityTags.Where(x => x.CateringFacilityId == cateringFacility.Id));
+
                 var tagIds = request.CateringFacilityTagIds;
                 if (tagIds != null && tagIds.Count > 0)
                 {
                     foreach (var tagId in tagIds)
                     {
-                        context.CateringFacilityTags.Add(new CateringFacilityTag
+                        await context.CateringFacilityTags.AddAsync(new CateringFacilityTag
                         {
                             Id = Guid.NewGuid(),
                             CateringFacilityId = request.Id,
                             TagId = tagId
-                        });
+                        }, cancellationToken);
                     }
                 }
                 await context.SaveChangesAsync();
