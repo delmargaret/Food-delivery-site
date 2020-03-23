@@ -49,10 +49,10 @@ namespace EzhaBy.Api.Controllers
         public async Task<IActionResult> GetCategories(string id) =>
            Ok(await mediator.Send(new GetCategories.Query(Guid.Parse(id))));
 
-        [HttpPut("{id}/categories")]
-        public async Task<IActionResult> CreateCategory(string id, [FromBody] CreateCategory.Command command)
+        [HttpPut("{cateringFacilityId}/categories")]
+        public async Task<IActionResult> CreateCategory(string cateringFacilityId, [FromBody] CreateCategory.Command command)
         {
-            command.CateringFacilityId = Guid.Parse(id);
+            command.CateringFacilityId = Guid.Parse(cateringFacilityId);
             await mediator.Send(command);
             return Ok();
         }
