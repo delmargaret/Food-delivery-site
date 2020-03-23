@@ -133,6 +133,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categories\CreateCategory.cs" />
+    <Compile Include="Categories\Dto\CategoryDto.cs" />
+    <Compile Include="Categories\GetCategories.cs" />
     <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
     <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />
     <Compile Include="CateringFacilities\GetCateringFacilities.cs" />
@@ -163,6 +166,7 @@
       <Name>EzhaBy.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

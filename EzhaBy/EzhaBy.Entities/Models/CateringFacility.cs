@@ -17,6 +17,6 @@ namespace EzhaBy.Entities
         public string HouseNumber { get; set; }
         public CateringFacilityStatuses CateringFacilityStatus { get; set; }
         public virtual IList<CateringFacilityTag> CateringFacilityTags { get; set; }
-        public virtual IList<CafeSection> Sections { get; set; }
+        public virtual IList<CateringFacilityCategory> CateringFacilityCategories { get; set; }
     }
 }

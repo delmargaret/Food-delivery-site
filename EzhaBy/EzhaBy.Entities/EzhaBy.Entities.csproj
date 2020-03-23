@@ -45,8 +45,9 @@
     <Compile Include="Enums\CateringFacilityTypes.cs" />
     <Compile Include="Enums\RequestStatuses.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\CafeSection.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CateringFacility.cs" />
+    <Compile Include="Models\CateringFacilityCategory.cs" />
     <Compile Include="Models\CateringFacilityTag.cs" />
     <Compile Include="Models\Complaint.cs" />
     <Compile Include="Enums\ComplaintCategories.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Enums\OrderStatuses.cs" />
     <Compile Include="Models\PartnerRequest.cs" />
     <Compile Include="Enums\PaymentTypes.cs" />
-    <Compile Include="Models\Section.cs" />
     <Compile Include="Enums\Towns.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />

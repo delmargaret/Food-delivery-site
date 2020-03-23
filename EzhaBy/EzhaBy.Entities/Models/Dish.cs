@@ -8,6 +8,6 @@
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string CafeSectionId { get; set; }
-        public virtual CafeSection CafeSection { get; set; }
+        public virtual CateringFacilityCategory CateringFacilityCategory { get; set; }
     }
 }

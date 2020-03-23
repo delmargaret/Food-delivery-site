@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EzhaBy.Business.Categories;
 using EzhaBy.Business.CateringFacilities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,18 @@ namespace EzhaBy.Api.Controllers
         public async Task<IActionResult> SetStatus(string id, [FromBody] SetStatus.Command command)
         {
             command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpGet("{id}/categories")]
+        public async Task<IActionResult> GetCategories(string id) =>
+           Ok(await mediator.Send(new GetCategories.Query(Guid.Parse(id))));
+
+        [HttpPut("{id}/categories")]
+        public async Task<IActionResult> CreateCategory(string id, [FromBody] CreateCategory.Command command)
+        {
+            command.CateringFacilityId = Guid.Parse(id);
             await mediator.Send(command);
             return Ok();
         }

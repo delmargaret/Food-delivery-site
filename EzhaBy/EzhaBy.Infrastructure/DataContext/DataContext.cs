@@ -10,7 +10,7 @@ namespace EzhaBy.Infrastructure
         public DbSet<Address> Addresses { get; set; }
         public DbSet<CateringFacility> CateringFacilities { get; set; }
         public DbSet<CateringFacilityTag> CateringFacilityTags { get; set; }
-        public DbSet<CafeSection> CafeSections { get; set; }
+        public DbSet<CateringFacilityCategory> CateringFacilityCategories { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<CourierRequest> CourierRequests { get; set; }
@@ -19,7 +19,7 @@ namespace EzhaBy.Infrastructure
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<PartnerRequest> PartnerRequests { get; set; }
-        public DbSet<Section> Sections { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
 
         public Task<int> SaveChangesAsync() => base.SaveChangesAsync();

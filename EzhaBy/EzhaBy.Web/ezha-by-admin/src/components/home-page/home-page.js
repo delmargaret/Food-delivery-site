@@ -3,6 +3,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import TagsPage from '../tags/tags';
 import CateringFacilitiesPage from '../catering-facilities/catering-facilities';
 import AddCateringFacility from '../catering-facilities/add-catering-facility';
+import CategoriesPage from '../categories/categories';
 
 export default class HomePage extends Component {
   render() {
@@ -15,7 +16,7 @@ export default class HomePage extends Component {
           <CateringFacilitiesPage />
         </Tab>
         <Tab eventKey="categories" title="Категории блюд">
-          Categories
+          <CategoriesPage />
         </Tab>
         <Tab eventKey="dishes" title="Блюда">
           Dishes
