@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import CateringFacilitiesService from '../../services/catering-facilities-service';
 import AddCategoryForm from './add-category';
-import CategoriesList from './categories-list'
+import CategoriesList from './categories-list';
 import Emitter from '../../services/event-emitter';
 import { Form } from 'react-bootstrap';
-import CategoriesService, { CATEGORIES_LIST_UPDATED } from '../../services/categories-service';
+import CategoriesService, {
+  CATEGORIES_LIST_UPDATED
+} from '../../services/categories-service';
 
 export default class CategoriesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cateringFacilities: [],
-      categories: []
+      categories: [],
+      cateringFacilityId: '-1'
     };
 
-    this.cateringFacilityId = React.createRef();
     this.getCateringFacilities = this.getCateringFacilities.bind(this);
     this.getCategories = this.getCategories.bind(this);
   }
@@ -29,9 +31,11 @@ export default class CategoriesPage extends Component {
   }
 
   getCategories(id) {
-    CategoriesService.getCategories(id).then(res =>
-      this.setState({ categories: res.data })
-    );
+    if (id && id !== '-1') {
+      CategoriesService.getCategories(id).then(res => {
+        this.setState({ categories: res.data });
+      });
+    }
   }
 
   renderCateringFacilityOptions() {
@@ -44,9 +48,10 @@ export default class CategoriesPage extends Component {
 
   componentDidMount() {
     this.getCateringFacilities();
-    console.log(JSON.stringify(this.cateringFacilityId.current.value) );
-    this.getCategories(this.cateringFacilityId.current.value);
-    Emitter.on(CATEGORIES_LIST_UPDATED, _ => this.getCategories(this.cateringFacilityId.current.value));
+    this.getCategories(this.state.cateringFacilityId);
+    Emitter.on(CATEGORIES_LIST_UPDATED, _ =>
+      this.getCategories(this.state.cateringFacilityId)
+    );
   }
 
   componentWillUnmount() {
@@ -54,15 +59,22 @@ export default class CategoriesPage extends Component {
   }
 
   renderCategoriesForm() {
-    return this.state.cateringFacilities.length > 0 ? (
-      <div>
-        <AddCategoryForm cateringFacilityId={this.cateringFacilityId.current.value}/>
-        <br />
-        <CategoriesList categories={this.state.categories}/>
-      </div>
-    ) : (
-      <div>Заведения отсутствуют</div>
-    );
+    let id = this.state.cateringFacilityId;
+    console.log(id);
+
+    if (id && id !== '-1') {
+      return (
+        <div>
+          <AddCategoryForm cateringFacilityId={this.state.cateringFacilityId} />
+          <br />
+          <CategoriesList cateringFacilityId={this.state.cateringFacilityId} categories={this.state.categories} />
+        </div>
+      );
+    }
+    if (this.state.cateringFacilities.length === 0) {
+      return <div>Заведения отсутствуют</div>;
+    }
+    return <div>Заведение не выбрано</div>;
   }
 
   render() {
@@ -72,18 +84,19 @@ export default class CategoriesPage extends Component {
           <Form.Label>Заведение</Form.Label>
           <Form.Control
             as="select"
-            ref={this.cateringFacilityId}
-            onChange={this.onCateringFacilitySelect}
+            disabled={this.state.cateringFacilities.length === 0}
+            onChange={e => {
+              this.setState({ cateringFacilityId: e.target.value });
+              this.getCategories(e.target.value);
+            }}
           >
+            <option key={-1} value={-1}>
+              Выберите заведение
+            </option>
             {this.renderCateringFacilityOptions()}
           </Form.Control>
         </Form.Group>
         {this.renderCategoriesForm()}
-
-        {/* <AddTagForm />
-        <div id='tags-list'>
-          <TagsList tags={this.state.tags} />
-        </div> */}
       </div>
     );
   }

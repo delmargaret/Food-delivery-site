@@ -8,7 +8,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <Tabs
-        defaultActiveKey="catering-facilities"
+        defaultActiveKey="categories"
         id="uncontrolled-tab-example"
       >
         <Tab eventKey="tags" title="Тэги">

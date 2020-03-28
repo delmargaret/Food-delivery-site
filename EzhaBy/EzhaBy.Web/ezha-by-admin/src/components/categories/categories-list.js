@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import TagsService from '../../services/tags-service';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import CategoriesService from '../../services/categories-service';
 
 const { SearchBar, ClearSearchButton } = Search;
 
 export default class CategoriesList extends Component {
-  onDeleteCategory(tagId) {
-    //TagsService.deleteTag(tagId);
+  constructor(props) {
+    super(props);
+
+    this.onAfterSaveCategory = this.onAfterSaveCategory.bind(this);
+  }
+
+  onDeleteCategory(categoryId) {
+    CategoriesService.deleteCategory(this.props.cateringFacilityId, categoryId);
   }
 
   onAfterSaveCategory(oldValue, newValue, row, column) {
-    //TagsService.updateTagName(row.id, newValue);
+    CategoriesService.updateCategoryName(this.props.cateringFacilityId, row.id, newValue);
   }
 
   renderRemoveButton(category) {
@@ -21,7 +27,7 @@ export default class CategoriesList extends Component {
       <OverlayTrigger
         key="right"
         placement="right"
-        overlay={<Tooltip id={`tooltip-right`}>Тэг назначен заведению</Tooltip>}
+        overlay={<Tooltip id={`tooltip-right`}>Категория назначена блюду</Tooltip>}
       >
         <span>
           <Button

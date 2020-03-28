@@ -45,18 +45,6 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}/categories")]
-        public async Task<IActionResult> GetCategories(string id) =>
-           Ok(await mediator.Send(new GetCategories.Query(Guid.Parse(id))));
-
-        [HttpPut("{cateringFacilityId}/categories")]
-        public async Task<IActionResult> CreateCategory(string cateringFacilityId, [FromBody] CreateCategory.Command command)
-        {
-            command.CateringFacilityId = Guid.Parse(cateringFacilityId);
-            await mediator.Send(command);
-            return Ok();
-        }
-
         //[HttpPut("{id}/icon")]
         //public async Task<IActionResult> UpdateIcon([FromBody] UpdateCateringFacilityIcon.Command command)
         //{

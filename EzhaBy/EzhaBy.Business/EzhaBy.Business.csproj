@@ -134,8 +134,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categories\CreateCategory.cs" />
+    <Compile Include="Categories\DeleteCategory.cs" />
     <Compile Include="Categories\Dto\CategoryDto.cs" />
     <Compile Include="Categories\GetCategories.cs" />
+    <Compile Include="Categories\UpdateCategoryName.cs" />
     <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
     <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />
     <Compile Include="CateringFacilities\GetCateringFacilities.cs" />
