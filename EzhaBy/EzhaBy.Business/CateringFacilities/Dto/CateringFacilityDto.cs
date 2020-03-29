@@ -19,6 +19,5 @@ namespace EzhaBy.Business.CateringFacilities.Dto
         public string HouseNumber { get; set; }
         public CateringFacilityStatuses CateringFacilityStatus { get; set; }
         public virtual IList<TagDto> CateringFacilityTags { get; set; }
-        public virtual IList<CateringFacilityCategory> CateringFacilityCategories { get; set; }
     }
 }

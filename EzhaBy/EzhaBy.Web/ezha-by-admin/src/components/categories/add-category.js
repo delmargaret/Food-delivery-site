@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
-import TagsService from '../../services/tags-service';
 import CategoriesService from '../../services/categories-service';
 
 export default class AddCategoryForm extends Component {

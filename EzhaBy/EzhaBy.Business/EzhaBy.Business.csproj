@@ -144,6 +144,12 @@
     <Compile Include="CateringFacilities\GetCateringFacility.cs" />
     <Compile Include="CateringFacilities\SetStatus.cs" />
     <Compile Include="CateringFacilities\UpdateCateringFacility.cs" />
+    <Compile Include="Dishes\CreateDish.cs" />
+    <Compile Include="Dishes\Dto\DishDto.cs" />
+    <Compile Include="Dishes\GetDish.cs" />
+    <Compile Include="Dishes\GetDishes.cs" />
+    <Compile Include="Dishes\SetDishStatus.cs" />
+    <Compile Include="Dishes\UpdateDish.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tags\CreateTag.cs" />
     <Compile Include="Tags\DeleteTag.cs" />

@@ -1,4 +1,4 @@
-﻿
+
 
 using EzhaBy.Business.Categories.Dto;
 using EzhaBy.Business.CateringFacilities.Dto;
@@ -38,7 +38,8 @@ namespace EzhaBy.Business.Categories
                 var categories = context.CateringFacilities.Find(request.CateringFacilityId).CateringFacilityCategories
                     .Select(category => new CategoryDto
                     {
-                        Id = category.CategoryId,
+                        Id = category.Id,
+                        CategoryId = category.CategoryId,
                         CategoryName = category.Category.CategoryName,
                         isAssigned = category.Dishes.Any()
                     });

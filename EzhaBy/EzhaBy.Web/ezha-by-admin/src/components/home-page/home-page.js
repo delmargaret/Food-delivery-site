@@ -3,12 +3,13 @@ import { Tabs, Tab } from "react-bootstrap";
 import TagsPage from "../tags/tags";
 import CateringFacilitiesPage from "../catering-facilities/catering-facilities";
 import CategoriesPage from "../categories/categories";
+import DishesPage from "../dishes/dishes";
 
 export default class HomePage extends Component {
   render() {
     return (
       <Tabs
-        defaultActiveKey="categories"
+        defaultActiveKey="dishes"
         id="uncontrolled-tab-example"
       >
         <Tab eventKey="tags" title="Тэги">
@@ -21,7 +22,7 @@ export default class HomePage extends Component {
           <CategoriesPage />
         </Tab>
         <Tab eventKey="dishes" title="Блюда">
-          Dishes
+          <DishesPage />
         </Tab>
         <Tab eventKey="partners" title="Партнеры">
           Partners

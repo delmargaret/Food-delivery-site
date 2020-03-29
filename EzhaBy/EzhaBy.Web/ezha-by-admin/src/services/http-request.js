@@ -1,28 +1,33 @@
-import axios from 'axios';
-import ConfigService from './config-service';
+import axios from "axios";
+import ConfigService from "./config-service";
 
 export default class HttpRequest {
   static Get(endpoint) {
     const url = ConfigService.addBaseAddress(endpoint);
     const options = {
       url: url,
-      method: 'GET',
-      type: 'json',
+      method: "GET",
+      type: "json",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
-    return axios(options);
+    return axios(options).catch(error => {
+      if (error.response) {
+        console.log(error.response.data);
+        return null;
+      }
+    });
   }
 
   static Post(endpoint, data) {
     const url = ConfigService.addBaseAddress(endpoint);
     const options = {
       url: url,
-      method: 'POST',
+      method: "POST",
       data: data,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
     return axios(options).catch(error => {
@@ -37,9 +42,9 @@ export default class HttpRequest {
     const url = ConfigService.addBaseAddress(endpoint);
     const options = {
       url: url,
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
 
@@ -55,10 +60,10 @@ export default class HttpRequest {
     const url = ConfigService.addBaseAddress(endpoint);
     const options = {
       url: url,
-      method: 'PUT',
+      method: "PUT",
       data: data,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
 

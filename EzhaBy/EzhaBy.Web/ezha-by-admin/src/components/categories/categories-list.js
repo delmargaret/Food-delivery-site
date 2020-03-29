@@ -19,7 +19,7 @@ export default class CategoriesList extends Component {
   }
 
   onAfterSaveCategory(oldValue, newValue, row, column) {
-    CategoriesService.updateCategoryName(this.props.cateringFacilityId, row.id, newValue);
+    CategoriesService.updateCategoryName(this.props.cateringFacilityId, row.categoryId, newValue);
   }
 
   renderRemoveButton(category) {
@@ -40,7 +40,7 @@ export default class CategoriesList extends Component {
         </span>
       </OverlayTrigger>
     ) : (
-      <Button onClick={() => this.onDeleteCategory(category.id)} variant="outline-danger">
+      <Button onClick={() => this.onDeleteCategory(category.categoryId)} variant="outline-danger">
         Удалить
       </Button>
     );
@@ -49,7 +49,7 @@ export default class CategoriesList extends Component {
   render() {
     const columns = [
       {
-        dataField: 'id',
+        dataField: 'categoryId',
         text: 'ID',
         hidden: true
       },
@@ -81,7 +81,7 @@ export default class CategoriesList extends Component {
 
     return (
       <ToolkitProvider
-        keyField="id"
+        keyField="categoryId"
         data={this.props.categories}
         columns={columns}
         search

@@ -60,7 +60,6 @@ export default class CategoriesPage extends Component {
 
   renderCategoriesForm() {
     let id = this.state.cateringFacilityId;
-    console.log(id);
 
     if (id && id !== '-1') {
       return (

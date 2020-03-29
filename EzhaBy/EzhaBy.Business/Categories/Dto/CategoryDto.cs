@@ -9,6 +9,7 @@ namespace EzhaBy.Business.Categories.Dto
     public class CategoryDto
     {
         public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
         public bool isAssigned { get; set; }
     }
