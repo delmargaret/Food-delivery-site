@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\DataContext.cs" />
+    <Compile Include="EmailDto.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="Extensions\ModelBuilderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

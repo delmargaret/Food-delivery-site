@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-const TYPES = [
+export const TYPES = [
   {
     id: 0,
     name: 'Кафе'

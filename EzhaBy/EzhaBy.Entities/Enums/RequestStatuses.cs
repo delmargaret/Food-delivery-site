@@ -2,5 +2,8 @@
 {
     public enum RequestStatuses
     {
+        New,
+        Accepted,
+        Rejected
     }
 }

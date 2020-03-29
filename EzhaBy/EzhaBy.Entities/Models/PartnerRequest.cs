@@ -1,17 +1,17 @@
-﻿namespace EzhaBy.Entities
+﻿using System;
+
+namespace EzhaBy.Entities
 {
     public class PartnerRequest
     {
-        public string Id { get; set; }
-        public string CafeName { get; set; }
-        public string AddressId { get; set; }
-        public virtual Address Address { get; set; }
+        public Guid Id { get; set; }
+        public string CateringFacilityName { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public CateringFacilityTypes CafeType { get; set; }
+        public CateringFacilityTypes CateringFacilityType { get; set; }
         public RequestStatuses RequestStatus { get; set; } 
     }
 }

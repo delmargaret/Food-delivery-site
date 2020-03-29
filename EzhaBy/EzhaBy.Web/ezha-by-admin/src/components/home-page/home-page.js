@@ -4,12 +4,13 @@ import TagsPage from "../tags/tags";
 import CateringFacilitiesPage from "../catering-facilities/catering-facilities";
 import CategoriesPage from "../categories/categories";
 import DishesPage from "../dishes/dishes";
+import PartnerRequestsPage from "../partner-requests/partner-requests";
 
 export default class HomePage extends Component {
   render() {
     return (
       <Tabs
-        defaultActiveKey="dishes"
+        defaultActiveKey="partners"
         id="uncontrolled-tab-example"
       >
         <Tab eventKey="tags" title="Тэги">
@@ -24,14 +25,14 @@ export default class HomePage extends Component {
         <Tab eventKey="dishes" title="Блюда">
           <DishesPage />
         </Tab>
+        <Tab eventKey="orders" title="Заказы">
+          Orders
+        </Tab>
         <Tab eventKey="partners" title="Партнеры">
-          Partners
+          <PartnerRequestsPage />
         </Tab>
         <Tab eventKey="couriers" title="Курьеры">
           Couriers
-        </Tab>
-        <Tab eventKey="orders" title="Заказы">
-          Orders
         </Tab>
         <Tab eventKey="complaints" title="Жалобы">
           Complaints
