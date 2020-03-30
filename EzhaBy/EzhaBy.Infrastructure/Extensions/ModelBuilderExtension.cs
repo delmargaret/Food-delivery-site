@@ -43,6 +43,34 @@ namespace EzhaBy.Infrastructure.Extensions
                     },
                 }
             );
+
+            modelBuilder.Entity<CourierRequest>().HasData(
+                new CourierRequest[]
+                {
+                    new CourierRequest{
+                        Id = Guid.NewGuid(),
+                        Name = "Margo",
+                        Surname = "Del",
+                        Patronymic = "Mih",
+                        VehicleType = VehicleTypes.Motorcycle,
+                        FuelConsumption = 7,
+                        Email = "ri.tysik@mail.ru",
+                        Phone = "80534271657",
+                        RequestStatus = RequestStatuses.New
+                    },
+                    new CourierRequest{
+                        Id = Guid.NewGuid(),
+                        Name = "Margo",
+                        Surname = "Delikat",
+                        Patronymic = "Mihail",
+                        VehicleType = VehicleTypes.Bike,
+                        FuelConsumption = 0,
+                        Email = "ri.tysik@mail.ru",
+                        Phone = "80534271657",
+                        RequestStatus = RequestStatuses.New
+                    },
+                }
+            );
         }
     }
 }

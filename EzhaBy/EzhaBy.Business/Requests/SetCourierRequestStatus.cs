@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EzhaBy.Business.Requests
 {
-    public static class SetPartnerRequestStatus
+    public static class SetCourierRequestStatus
     {
         public class Command : IRequest<Unit>
         {
@@ -33,13 +33,13 @@ namespace EzhaBy.Business.Requests
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var partnerRequest = context.PartnerRequests.Find(request.Id);
-                if (partnerRequest == null)
+                var courierRequest = context.CourierRequests.Find(request.Id);
+                if (courierRequest == null)
                 {
                     throw new Exception("request isn't exists");
                 }
 
-                partnerRequest.RequestStatus = request.RequestStatus;
+                courierRequest.RequestStatus = request.RequestStatus;
                 await context.SaveChangesAsync();
                 return Unit.Value;
             }

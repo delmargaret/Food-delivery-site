@@ -2,5 +2,8 @@
 {
     public enum VehicleTypes
     {
+        Car,
+        Motorcycle,
+        Bike
     }
 }

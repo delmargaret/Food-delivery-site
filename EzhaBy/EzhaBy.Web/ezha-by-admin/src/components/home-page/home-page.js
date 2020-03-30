@@ -4,7 +4,8 @@ import TagsPage from "../tags/tags";
 import CateringFacilitiesPage from "../catering-facilities/catering-facilities";
 import CategoriesPage from "../categories/categories";
 import DishesPage from "../dishes/dishes";
-import PartnerRequestsPage from "../partner-requests/partner-requests";
+import PartnerRequestsPage from "../requests/partner-requests";
+import CourierRequestsPage from "../requests/courier-requests";
 
 export default class HomePage extends Component {
   render() {
@@ -25,14 +26,14 @@ export default class HomePage extends Component {
         <Tab eventKey="dishes" title="Блюда">
           <DishesPage />
         </Tab>
-        <Tab eventKey="orders" title="Заказы">
+        {/* <Tab eventKey="orders" title="Заказы">
           Orders
-        </Tab>
+        </Tab> */}
         <Tab eventKey="partners" title="Партнеры">
           <PartnerRequestsPage />
         </Tab>
         <Tab eventKey="couriers" title="Курьеры">
-          Couriers
+          <CourierRequestsPage />
         </Tab>
         <Tab eventKey="complaints" title="Жалобы">
           Complaints

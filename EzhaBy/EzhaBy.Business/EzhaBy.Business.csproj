@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -151,7 +151,9 @@
     <Compile Include="Dishes\SetDishStatus.cs" />
     <Compile Include="Dishes\UpdateDish.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\GetCourierRequests.cs" />
     <Compile Include="Requests\GetPartnerRequests.cs" />
+    <Compile Include="Requests\SetCourierRequestStatus.cs" />
     <Compile Include="Requests\SetPartnerRequestStatus.cs" />
     <Compile Include="Tags\CreateTag.cs" />
     <Compile Include="Tags\DeleteTag.cs" />

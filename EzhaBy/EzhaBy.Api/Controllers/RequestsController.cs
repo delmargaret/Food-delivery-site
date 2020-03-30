@@ -30,6 +30,18 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
+        [HttpGet("couriers")]
+        public async Task<IActionResult> GetCourierRequests() =>
+            Ok(await mediator.Send(new GetCourierRequests.Query()));
+
+        [HttpPut("couriers/{id}/status")]
+        public async Task<IActionResult> SetCourierRequestStatus(string id, [FromBody] SetCourierRequestStatus.Command command)
+        {
+            command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
+
         [HttpPut("email")]
         public IActionResult SendEmail([FromBody] EmailDto email)
         {

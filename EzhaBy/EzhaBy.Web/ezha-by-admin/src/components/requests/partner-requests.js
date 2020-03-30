@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { REQUEST_STATUSES } from "./../request-statuses";
+import { REQUEST_STATUSES } from "../request-statuses";
 import { TYPES } from "../catering-facility-types";
 import RequestsService, {
   PARTNER_LIST_UPDATED
