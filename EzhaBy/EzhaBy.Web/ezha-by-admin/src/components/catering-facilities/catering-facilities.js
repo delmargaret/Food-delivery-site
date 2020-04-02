@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import CateringFacilitiesList from './catering-facilities-list';
+import React, { Component } from "react";
+import { Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+
+import CateringFacilitiesList from "./catering-facilities-list";
 import CateringFacilitiesService, {
   CF_LIST_UPDATED
-} from '../../services/catering-facilities-service';
-import { Button } from 'react-bootstrap';
-import Emitter from '../../services/event-emitter';
-import AddCateringFacility from './add-catering-facility';
-import UpdateCateringFacility from './update-catering-facility';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+} from "../../services/catering-facilities-service";
+import Emitter from "../../services/event-emitter";
 
 export default class CateringFacilitiesPage extends Component {
   constructor(props) {
@@ -36,26 +35,18 @@ export default class CateringFacilitiesPage extends Component {
 
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route path="/add">
-            <AddCateringFacility />
-          </Route>
-          <Route path="/update/:id" component={UpdateCateringFacility}></Route>
-          <Route path="/">
-            <div>
-              <br />
-              <Button href="/add">Добавить заведение</Button>
-              <br />
-              <div id="catering-facilities-list">
-                <CateringFacilitiesList
-                  cateringFacilities={this.state.cateringFacilities}
-                />
-              </div>
-            </div>
-          </Route>
-        </Switch>
-      </Router>
+      <React.Fragment>
+        <br />
+        <LinkContainer to="/catering-facilities/new">
+          <Button>Добавить заведение</Button>
+        </LinkContainer>
+        <br />
+        <div id="catering-facilities-list">
+          <CateringFacilitiesList
+            cateringFacilities={this.state.cateringFacilities}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }

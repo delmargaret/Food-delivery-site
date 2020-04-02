@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
-import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { STATUSES } from './catering-facilities-statuses';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
+import React, { Component } from "react";
+import { Form } from "react-bootstrap";
+import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { STATUSES } from "./catering-facilities-statuses";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
 
 const { SearchBar, ClearSearchButton } = Search;
 
@@ -38,23 +38,25 @@ export default class CateringFacilitiesList extends Component {
   render() {
     const columns = [
       {
-        dataField: 'id',
-        text: 'ID',
+        dataField: "id",
+        text: "ID",
         hidden: true
       },
       {
-        dataField: 'cateringFacilityName',
-        text: 'Заведения',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "cateringFacilityName",
+        text: "Заведения",
+        align: "left",
+        headerAlign: "left",
         sort: true,
         formatter: (cellContent, row) => {
-          return <a href={`/update/${row.id}`}>{cellContent}</a>;
+          return (
+            <a href={`/catering-facilities/edit/${row.id}`}>{cellContent}</a>
+          );
         }
       },
       {
-        dataField: 'cateringFacilityStatus',
-        text: 'Статус',
+        dataField: "cateringFacilityStatus",
+        text: "Статус",
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderDisableButton(row);

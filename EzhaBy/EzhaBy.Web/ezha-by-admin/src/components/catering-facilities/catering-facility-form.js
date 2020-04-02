@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
-import TagsService from "../../services/tags-service";
+
 import Towns from "../towns";
 import CateringFacilityTypes from "../catering-facility-types";
+
 import "./catering-facilities.css";
 
 export default class CateringFacilityForm extends Component {
@@ -10,10 +11,9 @@ export default class CateringFacilityForm extends Component {
     super(props);
 
     this.state = {
-      cateringFacilityTags: [...props.tags]
+      tags: [...props.tags],
+      cateringFacilityTags: [...props.cateringFacilityTags]
     };
-
-    this.tags = [];
 
     this.nameInput = React.createRef();
     this.typeInput = React.createRef();
@@ -31,80 +31,54 @@ export default class CateringFacilityForm extends Component {
     this.shouldDisableTagSelector = this.shouldDisableTagSelector.bind(this);
   }
 
-  componentDidMount() {
-    TagsService.getTags().then(result => {
-      this.tags = result.data;
+  componentDidUpdate(prevProps) {
+    if (prevProps === this.props) return;
 
-      this.setState({
-        cateringFacilityTags: [...this.props.tags]
-      });
+    this.setState({
+      tags: [...this.props.tags],
+      cateringFacilityTags: [...this.props.cateringFacilityTags]
     });
   }
 
   shouldDisableTagSelector() {
-    let tagsToShow = [...this.tags];
-
-    if (
-      this.state.cateringFacilityTags &&
-      this.state.cateringFacilityTags.length > 0
-    ) {
-      tagsToShow = this.tags.filter(
-        tag =>
-          !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
-      );
-    }
+    let tagsToShow = this.state.tags.filter(
+      tag => !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
+    );
 
     return tagsToShow.length === 0;
   }
 
   renderTagsOptions() {
-    let tagsToShow = [...this.tags];
-
-    if (
-      this.state.cateringFacilityTags &&
-      this.state.cateringFacilityTags.length > 0
-    ) {
-      tagsToShow = this.tags.filter(
+    return this.state.tags
+      .filter(
         tag =>
           !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
-      );
-    }
-
-    return tagsToShow.map(tag => {
-      return (
-        <option key={tag.id} value={tag.id}>
-          {tag.tagName}
-        </option>
-      );
-    });
+      )
+      .map(tag => {
+        return (
+          <option key={tag.id} value={tag.id}>
+            {tag.tagName}
+          </option>
+        );
+      });
   }
 
   renderTagsPreview() {
-    if (
-      this.state.cateringFacilityTags &&
-      this.state.cateringFacilityTags.length > 0
-    ) {
-      return this.state.cateringFacilityTags.map(tag => (
-        <div className="preview" key={tag.id}>
-          {tag.tagName}
-          <span className="close" onClick={() => this.onTagDelete(tag.id)}>
-            x
-          </span>
-        </div>
-      ));
-    }
+    return this.state.cateringFacilityTags.map(tag => (
+      <div className="preview" key={tag.id}>
+        {tag.tagName}
+        <span className="close" onClick={() => this.onTagDelete(tag.id)}>
+          x
+        </span>
+      </div>
+    ));
   }
 
   onTagDelete(tagId) {
-    let cateringFacilityTags = [...this.state.cateringFacilityTags];
-
-    cateringFacilityTags.splice(
-      cateringFacilityTags.findIndex(tag => tag.id === tagId),
-      1
-    );
-
     this.setState({
-      cateringFacilityTags: cateringFacilityTags
+      cateringFacilityTags: this.state.cateringFacilityTags.filter(
+        cfTag => cfTag.id !== tagId
+      )
     });
   }
 
@@ -113,7 +87,9 @@ export default class CateringFacilityForm extends Component {
 
     let cateringFacilityTags = [...this.state.cateringFacilityTags];
 
-    cateringFacilityTags.push(this.tags.find(tag => tag.id === tagIdToAdd));
+    cateringFacilityTags.push(
+      this.state.tags.find(tag => tag.id === tagIdToAdd)
+    );
 
     this.setState({
       cateringFacilityTags: cateringFacilityTags

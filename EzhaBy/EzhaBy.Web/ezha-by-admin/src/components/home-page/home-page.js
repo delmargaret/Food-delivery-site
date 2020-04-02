@@ -10,10 +10,7 @@ import CourierRequestsPage from "../requests/courier-requests";
 export default class HomePage extends Component {
   render() {
     return (
-      <Tabs
-        defaultActiveKey="partners"
-        id="uncontrolled-tab-example"
-      >
+      <Tabs defaultActiveKey="partners" id="uncontrolled-tab-example">
         <Tab eventKey="tags" title="Тэги">
           <TagsPage />
         </Tab>

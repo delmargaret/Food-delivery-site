@@ -1,15 +1,32 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import CateringFacilityForm from './catering-facility-form';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+
+import CateringFacilityForm from "./catering-facility-form";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
+import TagsService from "../../services/tags-service";
 
 export default class AddCateringFacility extends Component {
   constructor(props) {
     super(props);
 
-    this.formResults = React.createRef();
+    this.state = {
+      tags: [],
+      needRedirect: false
+    };
+
+    this.editorForm = React.createRef();
     this.onCateringFacilitySubmit = this.onCateringFacilitySubmit.bind(this);
+  }
+
+  async componentDidMount() {
+    const tags = await TagsService.getTags();
+
+    this.setState({
+      tags: [...tags.data],
+      needRedirect: false
+    });
   }
 
   onCateringFacilitySubmit() {
@@ -23,7 +40,8 @@ export default class AddCateringFacility extends Component {
       streetInput,
       houseInput,
       state
-    } = this.formResults.current;
+    } = this.editorForm.current;
+
     const name = nameInput.current.value;
     const deliveryTime = deliveryTimeInput.current.value;
     const deliveryPrice = deliveryPriceInput.current.value;
@@ -45,23 +63,41 @@ export default class AddCateringFacility extends Component {
       house,
       tagIds
     );
+
+    this.setState({
+      needRedirect: true
+    });
   }
 
   render() {
-    return (
-      <div>
+    const { tags, needRedirect } = this.state;
+
+    const cateringFacilitiesRootPath = "/catering-facilities";
+
+    const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
+
+    const formElement = (
+      <React.Fragment>
         <br />
-        <Button href="/">Назад</Button>
+        <LinkContainer to={cateringFacilitiesRootPath}>
+          <Button>Назад</Button>
+        </LinkContainer>
         <br />
-        <Form >
-          <CateringFacilityForm tags={[]} ref={this.formResults} />
+        <Form>
+          <CateringFacilityForm
+            cateringFacilityTags={[]}
+            tags={tags}
+            ref={this.editorForm}
+          />
           <Row>
             <Col sm="4">
-              <Button onClick={this.onCateringFacilitySubmit} >Создать</Button>
+              <Button onClick={this.onCateringFacilitySubmit}>Создать</Button>
             </Col>
           </Row>
         </Form>
-      </div>
+      </React.Fragment>
     );
+
+    return needRedirect ? redirectElement : formElement;
   }
 }
