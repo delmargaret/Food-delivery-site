@@ -7,6 +7,7 @@ import NavTabs from "./components/nav-tabs/nav-tabs";
 import TagsPage from "./components/tags/tags";
 import CateringFacilitiesRouter from "./components/catering-facilities/catering-facilities-router";
 import CategoriesPage from "./components/categories/categories";
+import DishesRouter from "./components/dishes/dishes-router";
 
 import "./App.css";
 // import HomePage from "./components/home-page/home-page";
@@ -36,7 +37,7 @@ function App() {
             <CategoriesPage />
           </Route>
           <Route path="/dishes">
-            <div>Блюда</div>
+            <DishesRouter />
           </Route>
           <Route path="/orders">
             <div>Заказы</div>

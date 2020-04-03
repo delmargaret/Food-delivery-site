@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+
 import DishesService from "../../services/dishes-service";
 import DishForm from "./dish-form";
 import CategoriesService from "../../services/categories-service";
@@ -9,20 +12,15 @@ export default class AddDish extends Component {
     super(props);
 
     this.state = {
-        categories: [],
-      };
+      categories: [],
+      needRedirect: false
+    };
+
     this.formResults = React.createRef();
     this.onDishSubmit = this.onDishSubmit.bind(this);
   }
 
-  componentDidMount(){
-      const cateringFacilityId = this.props.match.params.cateringFacilityId;
-      CategoriesService.getCategories(cateringFacilityId).then(res => {
-        this.setState({ categories: res.data });
-      });
-  }
-
-  onDishSubmit() {
+  async onDishSubmit() {
     const {
       nameInput,
       descritionInput,
@@ -34,27 +32,49 @@ export default class AddDish extends Component {
     const price = priceInput.current.value;
     const categoryId = state.categoryId;
 
-    DishesService.createDish(name, description, price, categoryId);
+    await DishesService.createDish(name, description, price, categoryId);
+
+    this.setState({
+      needRedirect: true
+    });
+  }
+
+  componentDidMount() {
+    const { cateringFacilityId } = this.props.match.params;
+
+    CategoriesService.getCategories(cateringFacilityId).then(res => {
+      this.setState({
+        categories: res.data,
+        needRedirect: false
+      });
+    });
   }
 
   render() {
-    return (
-      <div>
+    const { categories, needRedirect } = this.state;
+
+    const dishesRootPath = "/dishes";
+
+    const redirectElement = <Redirect to={dishesRootPath} />;
+
+    const formElement = (
+      <React.Fragment>
         <br />
-        <Button href="/">Назад</Button>
+        <LinkContainer to="/dishes">
+          <Button>Назад</Button>
+        </LinkContainer>
         <br />
         <Form>
-          <DishForm
-            categories={this.state.categories}
-            ref={this.formResults}
-          />
+          <DishForm categories={categories} ref={this.formResults} />
           <Row>
             <Col sm="4">
               <Button onClick={this.onDishSubmit}>Создать</Button>
             </Col>
           </Row>
         </Form>
-      </div>
+      </React.Fragment>
     );
+
+    return needRedirect ? redirectElement : formElement;
   }
 }

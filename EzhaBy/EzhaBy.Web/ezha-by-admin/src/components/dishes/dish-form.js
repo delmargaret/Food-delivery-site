@@ -6,13 +6,19 @@ export default class DishForm extends Component {
     super(props);
 
     this.state = {
-        categoryId: '-1'
+      categoryId: "-1"
     };
 
     this.nameInput = React.createRef();
     this.descritionInput = React.createRef();
     this.priceInput = React.createRef();
     this.categoryInput = React.createRef();
+
+    this.onCategoryChange = this.onCategoryChange.bind(this);
+  }
+
+  onCategoryChange(event) {
+    this.setState({ categoryId: event.target.value });
   }
 
   renderCategoriesOptions() {
@@ -56,9 +62,7 @@ export default class DishForm extends Component {
               <Form.Label>Категория</Form.Label>
               <Form.Control
                 as="select"
-                onChange={e => {
-                  this.setState({ categoryId: e.target.value });
-                }}
+                onChange={this.onCategoryChange}
                 ref={this.categoryInput}
               >
                 <option key={-1} value={-1}>

@@ -29,7 +29,7 @@ export default class AddCateringFacility extends Component {
     });
   }
 
-  onCateringFacilitySubmit() {
+  async onCateringFacilitySubmit() {
     const {
       nameInput,
       deliveryTimeInput,
@@ -52,7 +52,7 @@ export default class AddCateringFacility extends Component {
     const house = houseInput.current.value;
     const tagIds = state.cateringFacilityTags.map(tag => tag.id);
 
-    CateringFacilitiesService.createCateringFacility(
+    await CateringFacilitiesService.createCateringFacility(
       name,
       deliveryTime,
       deliveryPrice,

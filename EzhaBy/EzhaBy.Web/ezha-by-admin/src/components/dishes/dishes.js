@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { Form, Button } from "react-bootstrap";
+
 import CateringFacilitiesService from "../../services/catering-facilities-service";
 import Emitter from "../../services/event-emitter";
-import { Form, Button } from "react-bootstrap";
 import DishesService, {
   DISHES_LIST_UPDATED
 } from "../../services/dishes-service";
 import CategoriesService from "../../services/categories-service";
-import AddDish from "./add-dish";
+
 import DishesList from "./dishes-list";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UpdateDish from "./update-dish";
 
 export default class DishesPage extends Component {
   constructor(props) {
@@ -23,39 +22,43 @@ export default class DishesPage extends Component {
 
     this.getCateringFacilities = this.getCateringFacilities.bind(this);
     this.getCategories = this.getCategories.bind(this);
+    this.onCateringFacilitiesUpdate = this.onCateringFacilitiesUpdate.bind(
+      this
+    );
   }
 
-  getCateringFacilities() {
-    CateringFacilitiesService.getCateringFacilities().then(result => {
-      let cateringFacilities = result.data.map(res => {
+  async getCateringFacilities() {
+    const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
+
+    this.setState({
+      cateringFacilities: cateringFacilitiesList.data.map(res => {
         return { id: res.id, name: res.cateringFacilityName };
-      });
-      this.setState({ cateringFacilities: cateringFacilities });
+      })
     });
   }
 
-  getCategories(cateringFacilityId) {
+  async getCategories(cateringFacilityId) {
     if (cateringFacilityId && cateringFacilityId !== "-1") {
-      CategoriesService.getCategories(cateringFacilityId).then(res => {
-        this.setState({ categories: res.data });
-      });
+      const categoriesData = await CategoriesService.getCategories(
+        cateringFacilityId
+      );
+
+      this.setState({ categories: categoriesData.data });
     }
   }
 
-  getDishes(cateringFacilityId) {
+  async getDishes(cateringFacilityId) {
     if (cateringFacilityId && cateringFacilityId !== "-1") {
-      DishesService.getDishes(cateringFacilityId).then(res => {
-        this.setState({ dishes: res.data });
-      });
+      const dishesData = await DishesService.getDishes(cateringFacilityId);
+
+      this.setState({ dishes: dishesData.data });
     }
   }
 
-  renderCateringFacilityOptions() {
-    return this.state.cateringFacilities.map(it => (
-      <option key={it.id} value={it.id}>
-        {it.name}
-      </option>
-    ));
+  onCateringFacilitiesUpdate(event) {
+    this.setState({ cateringFacilityId: event.target.value });
+    this.getDishes(event.target.value);
+    this.getCategories(event.target.value);
   }
 
   componentDidMount() {
@@ -69,43 +72,50 @@ export default class DishesPage extends Component {
     Emitter.off(DISHES_LIST_UPDATED);
   }
 
+  renderCateringFacilityOptions() {
+    return this.state.cateringFacilities.map(it => (
+      <option key={it.id} value={it.id}>
+        {it.name}
+      </option>
+    ));
+  }
+
   renderDishesForm() {
     let id = this.state.cateringFacilityId;
 
     if (id && id !== "-1") {
       if (this.state.categories.length === 0) {
-        return <div>Категории отсутствуют</div>;
+        return <React.Fragment>Категории отсутствуют</React.Fragment>;
       }
+
       return (
-        <div>
+        <React.Fragment>
           <br />
-          <Button href={`/addDish/${id}`}>Добавить блюдо</Button>
+          <Button href={`/dishes/new/${id}`}>Добавить блюдо</Button>
           <br />
           <div id="dishes-list">
-            <DishesList dishes={this.state.dishes} cateringFacilityId={id}/>
+            <DishesList dishes={this.state.dishes} cateringFacilityId={id} />
           </div>
-        </div>
+        </React.Fragment>
       );
     }
+
     if (this.state.cateringFacilities.length === 0) {
-      return <div>Заведения отсутствуют</div>;
+      return <React.Fragment>Заведения отсутствуют</React.Fragment>;
     }
-    return <div>Заведение не выбрано</div>;
+
+    return <React.Fragment>Заведение не выбрано</React.Fragment>;
   }
 
-  renderDishesPage() {
+  render() {
     return (
-      <div>
+      <React.Fragment>
         <Form.Group>
           <Form.Label>Заведение</Form.Label>
           <Form.Control
             as="select"
             disabled={this.state.cateringFacilities.length === 0}
-            onChange={e => {
-              this.setState({ cateringFacilityId: e.target.value });
-              this.getDishes(e.target.value);
-              this.getCategories(e.target.value);
-            }}
+            onChange={this.onCateringFacilitiesUpdate}
           >
             <option key={-1} value={-1}>
               Выберите заведение
@@ -114,26 +124,7 @@ export default class DishesPage extends Component {
           </Form.Control>
         </Form.Group>
         {this.renderDishesForm()}
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        <Router>
-          <Switch>
-            <Route path="/addDish/:cateringFacilityId" component={AddDish}>
-              {/* <AddDish categories={this.state.categories} /> */}
-            </Route>
-            <Route
-              path="/updateDish/:id/:cateringFacilityId"
-              component={UpdateDish}
-            ></Route>
-            <Route path="/">{this.renderDishesPage()}</Route>
-          </Switch>
-        </Router>
-      </div>
+      </React.Fragment>
     );
   }
 }
