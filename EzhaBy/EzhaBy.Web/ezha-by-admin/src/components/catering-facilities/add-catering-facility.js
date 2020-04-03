@@ -29,7 +29,9 @@ export default class AddCateringFacility extends Component {
     });
   }
 
-  async onCateringFacilitySubmit() {
+  async onCateringFacilitySubmit(event) {
+    event.preventDefault();
+
     const {
       nameInput,
       deliveryTimeInput,

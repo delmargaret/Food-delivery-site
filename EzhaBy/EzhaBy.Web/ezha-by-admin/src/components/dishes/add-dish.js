@@ -20,7 +20,9 @@ export default class AddDish extends Component {
     this.onDishSubmit = this.onDishSubmit.bind(this);
   }
 
-  async onDishSubmit() {
+  async onDishSubmit(event) {
+    event.preventDefault();
+
     const {
       nameInput,
       descritionInput,

@@ -46,7 +46,9 @@ export default class UpdateDish extends Component {
     categoryInput.current.value = dishDetails.data.cateringFacilityCategory.id;
   }
 
-  async onDishUpdate() {
+  async onDishUpdate(event) {
+    event.preventDefault();
+
     const { id } = this.props.match.params;
 
     const {
