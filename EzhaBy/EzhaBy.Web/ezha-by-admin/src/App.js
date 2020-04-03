@@ -6,6 +6,7 @@ import NavTabs from "./components/nav-tabs/nav-tabs";
 
 import TagsPage from "./components/tags/tags";
 import CateringFacilitiesRouter from "./components/catering-facilities/catering-facilities-router";
+import CategoriesPage from "./components/categories/categories";
 
 import "./App.css";
 // import HomePage from "./components/home-page/home-page";
@@ -32,7 +33,7 @@ function App() {
             <CateringFacilitiesRouter />
           </Route>
           <Route path="/categories">
-            <div>Категории блюд</div>
+            <CategoriesPage />
           </Route>
           <Route path="/dishes">
             <div>Блюда</div>
