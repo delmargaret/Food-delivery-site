@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { Row, Col, Button, Form, Modal } from "react-bootstrap";
+
 import { REQUEST_STATUSES } from "../request-statuses";
 import { TYPES } from "../catering-facility-types";
 import RequestsService, {
   PARTNER_LIST_UPDATED
 } from "../../services/requests-service";
-import { Row, Col, Button, Form, Modal } from "react-bootstrap";
 import Emitter from "../../services/event-emitter";
 
 const { SearchBar, ClearSearchButton } = Search;

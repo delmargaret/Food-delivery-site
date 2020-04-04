@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 import NavbarComponent from "./components/nav-bar/nav-bar";
 import NavTabs from "./components/nav-tabs/nav-tabs";
@@ -8,9 +13,10 @@ import TagsPage from "./components/tags/tags";
 import CateringFacilitiesRouter from "./components/catering-facilities/catering-facilities-router";
 import CategoriesPage from "./components/categories/categories";
 import DishesRouter from "./components/dishes/dishes-router";
+import PartnerRequestsPage from "./components/requests/partner-requests";
+import CourierRequestsPage from "./components/requests/courier-requests";
 
 import "./App.css";
-// import HomePage from "./components/home-page/home-page";
 
 import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./../node_modules/react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
@@ -21,11 +27,10 @@ function App() {
     <Router>
       <div className="App">
         <NavbarComponent />
-        {/* <HomePage /> */}
         <NavTabs activeKey="partners" />
         <Switch>
           <Route exact path="/">
-            <div>Default Home</div>
+            <Redirect to="/partners" />
           </Route>
           <Route path="/tags">
             <TagsPage />
@@ -39,14 +44,11 @@ function App() {
           <Route path="/dishes">
             <DishesRouter />
           </Route>
-          <Route path="/orders">
-            <div>Заказы</div>
-          </Route>
           <Route path="/partners">
-            <div>Партнеры</div>
+            <PartnerRequestsPage />
           </Route>
           <Route path="/couriers">
-            <div>Курьеры</div>
+            <CourierRequestsPage />
           </Route>
           <Route path="/complaints">
             <div>Жалобы</div>

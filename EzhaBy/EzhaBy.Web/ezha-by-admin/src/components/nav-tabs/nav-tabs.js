@@ -26,13 +26,6 @@ export default function(props) {
         </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-        <LinkContainer to="/orders">
-          <Nav.Link eventKey="orders" disabled>
-            Заказы
-          </Nav.Link>
-        </LinkContainer>
-      </Nav.Item>
-      <Nav.Item>
         <LinkContainer to="/partners">
           <Nav.Link eventKey="partners">Партнеры</Nav.Link>
         </LinkContainer>
