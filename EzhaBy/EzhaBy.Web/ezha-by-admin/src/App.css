@@ -6,3 +6,44 @@
   text-align: center;
   margin: auto;
 }
+
+.leaves-left {
+  border-width: 0px;
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  width: 245px;
+  height: 545px;
+}
+
+.leaves-right {
+  border-width: 0px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  width: 245px;
+  height: 545px;
+  transform: rotate(180deg);
+}
+
+.App .btn-red {
+  color: black;
+  background-color: rgba(235, 95, 95, 0.6);
+  border-color: rgba(235, 95, 95, 0.6);
+}
+
+.App .btn-red:hover {
+  color: black;
+  background-color: rgb(235, 95, 95);
+  border-color: rgb(235, 95, 95);
+}
+
+.App input:focus {
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}
+
+.App .table-hover tbody tr:hover {
+  color: #212529;
+  background-color: rgba(235, 95, 95, 0.075);
+}

@@ -59,7 +59,7 @@ export default class DishesList extends Component {
             hidden={true}
             type="file"
             id="file"
-            accept="image/*"
+            accept=".png, .jpg, .jpeg"
             onChange={e => this.handleImageChange(e, id)}
           />
           <img height="150px" alt="" src={iconUrl} />

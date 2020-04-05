@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import TagsService, { TAG_LIST_UPDATED } from '../../services/tags-service';
-import TagsList from './tags-list';
-import AddTagForm from './add-tag-form';
-import Emitter from '../../services/event-emitter';
-import './tags.css';
+import React, { Component } from "react";
+import TagsService, { TAG_LIST_UPDATED } from "../../services/tags-service";
+import TagsList from "./tags-list";
+import AddTagForm from "./add-tag-form";
+import Emitter from "../../services/event-emitter";
+import "./tags.css";
+import leaves from "./../../leaves.png";
+import { Row, Col } from "react-bootstrap";
 
 export default class TagsPage extends Component {
   constructor(props) {
@@ -33,10 +35,21 @@ export default class TagsPage extends Component {
   render() {
     return (
       <div>
-        <AddTagForm />
-        <div id='tags-list'>
-          <TagsList tags={this.state.tags} />
-        </div>
+        <Row>
+          <Col>
+            {" "}
+            <img alt="" src={leaves} className="leaves-left" />
+          </Col>
+          <Col xs={8}>
+            <AddTagForm />
+            <div id="tags-list">
+              <TagsList tags={this.state.tags} />
+            </div>
+          </Col>
+          <Col>
+            <img alt="" src={leaves} className="leaves-right" />
+          </Col>
+        </Row>
       </div>
     );
   }

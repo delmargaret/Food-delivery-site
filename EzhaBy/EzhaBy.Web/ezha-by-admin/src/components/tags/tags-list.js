@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import TagsService from '../../services/tags-service';
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import React, { Component } from "react";
+import { Button, OverlayTrigger, Tooltip, Row, Col } from "react-bootstrap";
+import TagsService from "../../services/tags-service";
+import BootstrapTable from "react-bootstrap-table-next";
+import cellEditFactory from "react-bootstrap-table2-editor";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class TagsList extends Component {
   onDeleteTag(tagId) {
@@ -27,7 +27,7 @@ export default class TagsList extends Component {
           <Button
             variant="outline-danger"
             disabled
-            style={{ pointerEvents: 'none' }}
+            style={{ pointerEvents: "none" }}
           >
             Удалить
           </Button>
@@ -43,30 +43,30 @@ export default class TagsList extends Component {
   render() {
     const columns = [
       {
-        dataField: 'id',
-        text: 'ID',
+        dataField: "id",
+        text: "ID",
         hidden: true
       },
       {
-        dataField: 'tagName',
-        text: 'Тэги',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "tagName",
+        text: "Тэги",
+        align: "left",
+        headerAlign: "left",
         sort: true,
         validator: (newValue, row, column) => {
           if (newValue.length === 0) {
             return {
               valid: false,
-              message: 'Введите название'
+              message: "Введите название"
             };
           }
           return true;
         }
       },
       {
-        dataField: 'remove',
+        dataField: "remove",
         isDummyField: true,
-        text: '',
+        text: "",
         formatter: (cellContent, row) => {
           return this.renderRemoveButton(row);
         }
@@ -82,18 +82,23 @@ export default class TagsList extends Component {
       >
         {props => (
           <div>
-            <SearchBar {...props.searchProps} />
-            <ClearSearchButton
-              {...props.searchProps}
-              className="clear-search-btn"
-            />
             <hr />
+            <br />
+            <Row>
+              <Col xs="4">
+                {" "}
+                <SearchBar
+                  {...props.searchProps}
+                  placeholder="Поиск"
+                />
+              </Col>
+            </Row>
             <BootstrapTable
               {...props.baseProps}
               bootstrap4
               hover={true}
               cellEdit={cellEditFactory({
-                mode: 'dbclick',
+                mode: "dbclick",
                 afterSaveCell: this.onAfterSaveTag,
                 autoSelectText: true
               })}

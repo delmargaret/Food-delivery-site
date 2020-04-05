@@ -36,7 +36,9 @@ export default class FeedbacksPage extends Component {
 
   getFeedbacks() {
     FeedbacksService.getFeedbacks().then(result => {
-      this.setState({ feedbacks: result.data });
+      if (result) {
+        this.setState({ feedbacks: result.data });
+      }
     });
   }
 
