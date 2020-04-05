@@ -10,8 +10,6 @@ namespace EzhaBy.Entities
 
         public string TagName { get; set; }
 
-        public byte[] TagIcon { get; set; }
-
         public virtual IList<CateringFacilityTag> CateringFacilityTags { get; set; }
 
     }

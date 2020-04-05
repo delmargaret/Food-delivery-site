@@ -44,7 +44,6 @@ namespace EzhaBy.Business.Tags
                 {
                     Id = Guid.NewGuid(),
                     TagName = request.TagName,
-                    TagIcon = null
                 };
 
                 context.Tags.Add(tag);

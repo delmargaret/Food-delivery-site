@@ -26,17 +26,6 @@ export default class TagsService {
     return HttpRequest.Put(`api/tags/${id}`, JSON.stringify(data)).then(_ => Emitter.emit(TAG_LIST_UPDATED, {}));
   }
 
-  static updateTagIcon(id, tagIcon) {
-    const data = {
-      tagIcon: tagIcon
-    };
-    return HttpRequest.Put(`api/tags/${id}/icon`, JSON.stringify(data));
-  }
-
-  static deleteTagIcon(id) {
-    return HttpRequest.Delete(`api/tags/${id}/icon`);
-  }
-
   static deleteTag(id) {
     return HttpRequest.Delete(`api/tags/${id}`).then(_ => Emitter.emit(TAG_LIST_UPDATED, {}));
   }

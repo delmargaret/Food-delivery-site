@@ -37,7 +37,6 @@ namespace EzhaBy.Business.Tags
                 {
                     Id = tag.Id,
                     TagName = tag.TagName,
-                    TagIcon = tag.TagIcon
                 });
             }
         }

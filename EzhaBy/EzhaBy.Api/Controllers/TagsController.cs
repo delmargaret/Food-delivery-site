@@ -35,21 +35,6 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/icon")]
-        public async Task<IActionResult> UpdateTagIcon(string id, [FromBody] UpdateTagIcon.Command command)
-        {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
-        }
-
-        [HttpDelete("{id}/icon")]
-        public async Task<IActionResult> DeleteTagIcon(string id)
-        {
-            await mediator.Send(new DeleteTagIcon.Command(Guid.Parse(id)));
-            return Ok();
-        }
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTag(string id)
         {

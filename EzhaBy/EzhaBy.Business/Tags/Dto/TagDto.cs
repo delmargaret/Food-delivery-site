@@ -8,8 +8,6 @@ namespace EzhaBy.Business.Tags.Dto
 
         public string TagName { get; set; }
 
-        public byte[] TagIcon { get; set; }
-
         public bool isAssigned { get; set; }
     }
 }
