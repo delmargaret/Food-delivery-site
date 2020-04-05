@@ -44,7 +44,7 @@ namespace EzhaBy.Business.CateringFacilities
                     DeliveryTime = cateringFacility.DeliveryTime,
                     DeliveryPrice = cateringFacility.DeliveryPrice,
                     WorkingHours = cateringFacility.WorkingHours,
-                    CateringFacilityIcon = cateringFacility.CateringFacilityIcon,
+                    CateringFacilityIconUrl = cateringFacility.CateringFacilityIconUrl,
                     CateringFacilityStatus = cateringFacility.CateringFacilityStatus,
                     CateringFacilityType = cateringFacility.CateringFacilityType,
                     Town = cateringFacility.Town,

@@ -84,4 +84,14 @@ export default class CateringFacilitiesService {
       Emitter.emit(CF_LIST_UPDATED, {})
     );
   }
+
+  static updateIcon(id, url) {
+    const data = {
+      url: url
+    };
+
+    return HttpRequest.Put(`api/catering-facilities/${id}/icon`, data).then(_ =>
+      Emitter.emit(CF_LIST_UPDATED, {})
+    );
+  }
 }

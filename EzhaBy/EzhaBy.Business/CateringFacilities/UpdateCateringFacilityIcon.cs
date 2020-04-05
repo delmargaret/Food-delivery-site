@@ -4,18 +4,22 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EzhaBy.Business.Tags
+namespace EzhaBy.Business.CateringFacilities
 {
-    public static class DeleteTagIcon
+    public static class UpdateCateringFacilityIcon
     {
         public class Command : IRequest<Unit>
         {
-            public Command(Guid id)
+            public Command(
+                Guid id,
+                string url)
             {
                 Id = id;
+                Url = url;
             }
 
             public Guid Id { get; set; }
+            public string Url { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Unit>
@@ -29,13 +33,14 @@ namespace EzhaBy.Business.Tags
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var tag = context.Tags.Find(request.Id);
-                if (tag == null)
+                var cateringFacility = await context.CateringFacilities.FindAsync(request.Id);
+                if (cateringFacility == null)
                 {
-                    throw new Exception("tag isn't exists");
+                    throw new Exception("cateringFacility isn't exists");
                 }
 
-                tag.TagIcon = null;
+                cateringFacility.CateringFacilityIconUrl = request.Url;
+
                 await context.SaveChangesAsync();
                 return Unit.Value;
             }

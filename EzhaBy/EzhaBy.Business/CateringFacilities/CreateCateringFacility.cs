@@ -31,7 +31,7 @@ namespace EzhaBy.Business.CateringFacilities
                 Town = town;
                 Street = street;
                 HouseNumber = houseNumber;
-                CateringFacilityTagIds = CateringFacilityTagIds;
+                CateringFacilityTagIds = tagIds;
             }
 
             public string CateringFacilityName { get; set; }
@@ -62,7 +62,7 @@ namespace EzhaBy.Business.CateringFacilities
                 {
                     Id = cateringFacilityId,
                     CateringFacilityName = request.CateringFacilityName,
-                    CateringFacilityIcon = null,
+                    CateringFacilityIconUrl = "",
                     DeliveryTime = request.DeliveryTime,
                     DeliveryPrice = request.DeliveryPrice,
                     CateringFacilityType = request.CateringFacilityType,

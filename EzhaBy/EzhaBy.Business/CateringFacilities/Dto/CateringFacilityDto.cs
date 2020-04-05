@@ -9,7 +9,7 @@ namespace EzhaBy.Business.CateringFacilities.Dto
     {
         public Guid Id { get; set; }
         public string CateringFacilityName { get; set; }
-        public byte[] CateringFacilityIcon { get; set; }
+        public string CateringFacilityIconUrl { get; set; }
         public string DeliveryTime { get; set; }
         public decimal DeliveryPrice { get; set; }
         public CateringFacilityTypes CateringFacilityType { get; set; }

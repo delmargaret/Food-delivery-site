@@ -4,6 +4,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { STATUSES } from "./catering-facilities-statuses";
 import CateringFacilitiesService from "../../services/catering-facilities-service";
+import emptyIcon from "./../../empty.png";
 
 const { SearchBar, ClearSearchButton } = Search;
 
@@ -12,6 +13,7 @@ export default class CateringFacilitiesList extends Component {
     super(props);
 
     this.changeStatus = this.changeStatus.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
   }
 
   changeStatus(e, id) {
@@ -35,6 +37,45 @@ export default class CateringFacilitiesList extends Component {
     );
   }
 
+  handleImageChange(e, id) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      CateringFacilitiesService.updateIcon(id, reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  renderIcon(url, id) {
+    const iconUrl = url === "" ? emptyIcon : url;
+    return (
+      <div>
+        <label>
+          <input
+            hidden={true}
+            type="file"
+            id="file"
+            accept="image/*"
+            onChange={e => this.handleImageChange(e, id)}
+          />
+          <img height="150px" alt="" src={iconUrl} />
+        </label>
+        <span
+          className="close"
+          onClick={() => {
+            CateringFacilitiesService.updateIcon(id, "");
+          }}
+        >
+          x
+        </span>
+      </div>
+    );
+  }
+
   render() {
     const columns = [
       {
@@ -52,6 +93,14 @@ export default class CateringFacilitiesList extends Component {
           return (
             <a href={`/catering-facilities/edit/${row.id}`}>{cellContent}</a>
           );
+        }
+      },
+      {
+        dataField: "cateringFacilityIconUrl",
+        text: "Иконка",
+        sort: true,
+        formatter: (cellContent, row) => {
+          return this.renderIcon(cellContent, row.id);
         }
       },
       {

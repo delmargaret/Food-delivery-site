@@ -34,7 +34,7 @@ namespace EzhaBy.Business.CateringFacilities
                 Town = town;
                 Street = street;
                 HouseNumber = houseNumber;
-                CateringFacilityTagIds = CateringFacilityTagIds;
+                CateringFacilityTagIds = tagIds;
             }
 
             public Guid Id { get; set; }

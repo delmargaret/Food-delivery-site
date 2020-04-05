@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using EzhaBy.Business.Categories;
 using EzhaBy.Business.CateringFacilities;
@@ -45,18 +46,12 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
-        //[HttpPut("{id}/icon")]
-        //public async Task<IActionResult> UpdateIcon([FromBody] UpdateCateringFacilityIcon.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
-
-        //[HttpDelete("{id}/icon")]
-        //public async Task<IActionResult> DeleteIcon(DeleteCateringFacilityIcon.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
+        [HttpPut("{id}/icon")]
+        public async Task<IActionResult> UpdateIcon(string id, [FromBody] UpdateCateringFacilityIcon.Command command)
+        {
+            command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
     }
 }
