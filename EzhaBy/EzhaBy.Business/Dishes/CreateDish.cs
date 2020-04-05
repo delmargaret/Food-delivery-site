@@ -46,7 +46,7 @@ namespace EzhaBy.Business.Dishes
                 {
                     Id = dishId,
                     DishName = request.DishName,
-                    DishIcon = null,
+                    DishIconUrl = string.Empty,
                     Description = request.Description,
                     Price = request.Price,
                     DishStatus = DishStatuses.InStock,

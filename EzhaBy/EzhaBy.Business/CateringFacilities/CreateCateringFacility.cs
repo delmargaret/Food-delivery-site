@@ -62,7 +62,7 @@ namespace EzhaBy.Business.CateringFacilities
                 {
                     Id = cateringFacilityId,
                     CateringFacilityName = request.CateringFacilityName,
-                    CateringFacilityIconUrl = "",
+                    CateringFacilityIconUrl = string.Empty,
                     DeliveryTime = request.DeliveryTime,
                     DeliveryPrice = request.DeliveryPrice,
                     CateringFacilityType = request.CateringFacilityType,

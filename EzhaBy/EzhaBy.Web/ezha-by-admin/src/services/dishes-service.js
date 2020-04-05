@@ -49,4 +49,14 @@ export default class DishesService {
       Emitter.emit(DISHES_LIST_UPDATED, {})
     );
   }
+
+  static updateIcon(id, url) {
+    const data = {
+      url: url
+    };
+
+    return HttpRequest.Put(`api/dishes/${id}/icon`, data).then(_ =>
+      Emitter.emit(DISHES_LIST_UPDATED, {})
+    );
+  }
 }

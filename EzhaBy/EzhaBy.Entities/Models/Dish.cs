@@ -6,7 +6,7 @@ namespace EzhaBy.Entities
     {
         public Guid Id { get; set; }
         public string DishName { get; set; }
-        public byte[] DishIcon { get; set; }
+        public string DishIconUrl { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public DishStatuses DishStatus { get; set; }

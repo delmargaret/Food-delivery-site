@@ -151,6 +151,7 @@
     <Compile Include="Dishes\GetDishes.cs" />
     <Compile Include="Dishes\SetDishStatus.cs" />
     <Compile Include="Dishes\UpdateDish.cs" />
+    <Compile Include="Dishes\UpdateDishIcon.cs" />
     <Compile Include="Feedbacks\GetFeedbacks.cs" />
     <Compile Include="Feedbacks\SetFeedbackStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

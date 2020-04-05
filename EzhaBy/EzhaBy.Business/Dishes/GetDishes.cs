@@ -40,7 +40,7 @@ namespace EzhaBy.Business.Dishes
                     {
                         Id = dish.Id,
                         DishName = dish.DishName,
-                        DishIcon = dish.DishIcon,
+                        DishIconUrl = dish.DishIconUrl,
                         Description = dish.Description,
                         Price = dish.Price,
                         DishStatus = dish.DishStatus,

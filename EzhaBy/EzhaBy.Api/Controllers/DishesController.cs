@@ -48,18 +48,12 @@ namespace EzhaBy.Api.Controllers
             return Ok();
         }
 
-        //[HttpPut("{id}/icon")]
-        //public async Task<IActionResult> UpdateDishIcon([FromBody] UpdateDishIcon.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
-
-        //[HttpDelete("{id}/icon")]
-        //public async Task<IActionResult> DeleteDishIcon(DeleteDishIcon.Command command)
-        //{
-        //    await mediator.Send(command);
-        //    return Ok();
-        //}
+        [HttpPut("{id}/icon")]
+        public async Task<IActionResult> UpdateDishIcon(string id, [FromBody] UpdateDishIcon.Command command)
+        {
+            command.Id = Guid.Parse(id);
+            await mediator.Send(command);
+            return Ok();
+        }
     }
 }
