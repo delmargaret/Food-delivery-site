@@ -50,9 +50,9 @@
     <Compile Include="Models\CateringFacility.cs" />
     <Compile Include="Models\CateringFacilityCategory.cs" />
     <Compile Include="Models\CateringFacilityTag.cs" />
-    <Compile Include="Models\Complaint.cs" />
-    <Compile Include="Enums\ComplaintCategories.cs" />
-    <Compile Include="Enums\ComplaintStatuses.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Enums\FeedbackCategories.cs" />
+    <Compile Include="Enums\FeedbackStatuses.cs" />
     <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierRequest.cs" />
     <Compile Include="Enums\CourierStatuses.cs" />

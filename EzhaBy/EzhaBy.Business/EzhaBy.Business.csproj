@@ -150,6 +150,8 @@
     <Compile Include="Dishes\GetDishes.cs" />
     <Compile Include="Dishes\SetDishStatus.cs" />
     <Compile Include="Dishes\UpdateDish.cs" />
+    <Compile Include="Feedbacks\GetFeedbacks.cs" />
+    <Compile Include="Feedbacks\SetFeedbackStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\GetCourierRequests.cs" />
     <Compile Include="Requests\GetPartnerRequests.cs" />

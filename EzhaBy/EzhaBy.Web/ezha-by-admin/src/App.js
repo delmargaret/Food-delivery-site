@@ -15,6 +15,7 @@ import CategoriesPage from "./components/categories/categories";
 import DishesRouter from "./components/dishes/dishes-router";
 import PartnerRequestsPage from "./components/requests/partner-requests";
 import CourierRequestsPage from "./components/requests/courier-requests";
+import FeedbacksPage from "./components/feedbacks/feedbacks";
 
 import "./App.css";
 
@@ -50,8 +51,8 @@ function App() {
           <Route path="/couriers">
             <CourierRequestsPage />
           </Route>
-          <Route path="/complaints">
-            <div>Жалобы</div>
+          <Route path="/feedbacks">
+            <FeedbacksPage />
           </Route>
         </Switch>
       </div>

@@ -11,7 +11,7 @@ namespace EzhaBy.Infrastructure
         public DbSet<CateringFacility> CateringFacilities { get; set; }
         public DbSet<CateringFacilityTag> CateringFacilityTags { get; set; }
         public DbSet<CateringFacilityCategory> CateringFacilityCategories { get; set; }
-        public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Courier> Couriers { get; set; }
         public DbSet<CourierRequest> CourierRequests { get; set; }
         public DbSet<Tag> Tags { get; set; }

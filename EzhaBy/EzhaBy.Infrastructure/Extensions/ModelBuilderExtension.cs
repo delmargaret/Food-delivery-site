@@ -16,6 +16,58 @@ namespace EzhaBy.Infrastructure.Extensions
                 }
             );
 
+            var cateringFacilityId = Guid.NewGuid();
+
+            modelBuilder.Entity<CateringFacility>().HasData(
+                new CateringFacility[]
+                {
+                    new CateringFacility
+                    {
+                        Id = cateringFacilityId,
+                        CateringFacilityName = "KFC",
+                        CateringFacilityStatus = CateringFacilityStatuses.Active,
+                        CateringFacilityType = CateringFacilityTypes.Cafe,
+                        DeliveryPrice = 2,
+                        DeliveryTime = "30-45 минут",
+                        WorkingHours = "10.00 - 20.00"
+                    }               
+                }
+            );
+
+            modelBuilder.Entity<Feedback>().HasData(
+                new Feedback[]
+                {
+                    new Feedback
+                    {
+                        Id = Guid.NewGuid(),
+                        CateringFacilityId = cateringFacilityId,
+                        FeedbackCategory = FeedbackCategories.Complaint,
+                        Name = "Margo",
+                        Surname = "Del",
+                        Patronymic = "Mih",
+                        Email = "ri.tysik@mail.ru",
+                        FeedbackStatus = FeedbackStatuses.New,
+                        Text = "Жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба " +
+                        "жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба " +
+                        "жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба "
+                    },
+                    new Feedback
+                    {
+                        Id = Guid.NewGuid(),
+                        CateringFacilityId = cateringFacilityId,
+                        FeedbackCategory = FeedbackCategories.Review,
+                        Name = "Margo",
+                        Surname = "Del",
+                        Patronymic = "Mih",
+                        Email = "ri.tysik@mail.ru",
+                        FeedbackStatus = FeedbackStatuses.New,
+                        Text = "Отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв " +
+                        "отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв " +
+                        "отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв "
+                    }
+                }
+            );
+
             modelBuilder.Entity<PartnerRequest>().HasData(
                 new PartnerRequest[]
                 {

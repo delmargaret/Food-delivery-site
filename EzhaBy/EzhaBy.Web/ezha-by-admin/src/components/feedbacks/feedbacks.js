@@ -2,27 +2,26 @@ import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { Row, Col, Button, Form, Modal } from "react-bootstrap";
-
-import { REQUEST_STATUSES } from "./request-statuses";
-import { TYPES } from "../catering-facility-types";
-import RequestsService, {
-  PARTNER_LIST_UPDATED
-} from "../../services/requests-service";
 import Emitter from "../../services/event-emitter";
+import FeedbacksService, {
+  FEEDBACK_LIST_UPDATED
+} from "../../services/feedbacks-service";
+import { FEEDBACK_STATUSES } from "./feedback-statuses";
+import { FEEDBACK_CATEGORIES } from "./feedback-categories";
 
 const { SearchBar, ClearSearchButton } = Search;
 
-export default class PartnerRequestsPage extends Component {
+export default class FeedbacksPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requests: [],
+      feedbacks: [],
       show: false,
-      currentPartner: {},
+      currentFeedback: {},
       currentStatus: null
     };
 
-    this.getPartnerRequests = this.getPartnerRequests.bind(this);
+    this.getFeedbacks = this.getFeedbacks.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
     this.setShow = this.setShow.bind(this);
@@ -31,13 +30,13 @@ export default class PartnerRequestsPage extends Component {
   }
 
   componentDidMount() {
-    this.getPartnerRequests();
-    Emitter.on(PARTNER_LIST_UPDATED, _ => this.getPartnerRequests());
+    this.getFeedbacks();
+    Emitter.on(FEEDBACK_LIST_UPDATED, _ => this.getFeedbacks());
   }
 
-  getPartnerRequests() {
-    RequestsService.getPartnerRequests().then(result => {
-      this.setState({ requests: result.data });
+  getFeedbacks() {
+    FeedbacksService.getFeedbacks().then(result => {
+      this.setState({ feedbacks: result.data });
     });
   }
 
@@ -45,63 +44,47 @@ export default class PartnerRequestsPage extends Component {
     this.setState({ show: show });
   }
 
-  changeStatus(partner, status) {
-    this.setState({ currentPartner: partner, currentStatus: status });
+  changeStatus(feedback, status) {
+    this.setState({ currentFeedback: feedback, currentStatus: status });
     this.setShow(true);
   }
 
   sendEmail(id, status, email) {
-    RequestsService.sendEmail(
+    FeedbacksService.sendEmail(
       email,
       this.subjectInput.current.value,
       this.bodyInput.current.value
     );
-    RequestsService.changePartnerStatus(id, status);
+    FeedbacksService.changeFeedbackStatus(id, status);
     this.setShow(false);
   }
 
-  renderRequestButton(partner) {
-    switch (partner.requestStatus) {
-      case REQUEST_STATUSES.New:
+  renderFeedbackButton(feedback) {
+    switch (feedback.feedbackStatus) {
+      case FEEDBACK_STATUSES.New:
         return (
           <div>
-            <Row>
-              <Col sm="2">
-                <Button
-                  onClick={() =>
-                    this.changeStatus(partner, REQUEST_STATUSES.Accepted)
-                  }
-                >
-                  Принять
-                </Button>
-              </Col>
-              <Col sm="2">
-                <Button
-                  onClick={() =>
-                    this.changeStatus(partner, REQUEST_STATUSES.Rejected)
-                  }
-                >
-                  Отклонить
-                </Button>
-              </Col>
-            </Row>
+            <Button
+              onClick={() =>
+                this.changeStatus(feedback, FEEDBACK_STATUSES.Processed)
+              }
+            >
+              Обработать
+            </Button>
           </div>
         );
-      case REQUEST_STATUSES.Accepted:
-        return <div>Принят</div>;
-      case REQUEST_STATUSES.Rejected:
-        return <div>Отклонен</div>;
+      case FEEDBACK_STATUSES.Processed:
+        return <div>Обработан</div>;
       default:
         return "";
     }
   }
 
   render() {
-    const requestStatus =
-      this.state.currentStatus === REQUEST_STATUSES.Accepted
-        ? "Принять"
-        : "Отклонить";
-    const partner = this.state.currentPartner;
+    const feedback = this.state.currentFeedback;
+    let type = FEEDBACK_CATEGORIES.find(
+      type => type.id === feedback.feedbackCategory
+    );
 
     const columns = [
       {
@@ -110,37 +93,30 @@ export default class PartnerRequestsPage extends Component {
         hidden: true
       },
       {
-        dataField: "cateringFacilityName",
+        dataField: "feedbackCategory",
+        text: "Тип",
+        align: "left",
+        headerAlign: "left",
+        sort: true,
+        formatter: (cellContent, row) => {
+          return FEEDBACK_CATEGORIES.find(type => type.id === cellContent).name;
+        }
+      },
+      {
+        dataField: "cateringFacility.cateringFacilityName",
         text: "Заведение",
         align: "left",
         headerAlign: "left",
         sort: true
       },
       {
-        dataField: "cateringFacilityType",
-        text: "Тип",
-        align: "left",
-        headerAlign: "left",
-        sort: true,
-        formatter: (cellContent, row) => {
-          return TYPES.find(type => type.id === cellContent).name;
-        }
-      },
-      {
-        dataField: "partnerName",
+        dataField: "userName",
         isDummyField: true,
-        text: "Имя партнера",
+        text: "Имя пользователя",
         sort: true,
         formatter: (cellContent, row) => {
           return `${row.surname} ${row.name} ${row.patronymic}`;
         }
-      },
-      {
-        dataField: "phone",
-        text: "Телефон",
-        align: "left",
-        headerAlign: "left",
-        sort: true
       },
       {
         dataField: "email",
@@ -150,11 +126,18 @@ export default class PartnerRequestsPage extends Component {
         sort: true
       },
       {
-        dataField: "requestStatus",
+        dataField: "text",
+        text: "Содержание",
+        align: "left",
+        headerAlign: "left",
+        sort: true
+      },
+      {
+        dataField: "feedbackStatus",
         text: "Статус",
         sort: true,
         formatter: (cellContent, row) => {
-          return this.renderRequestButton(row);
+          return this.renderFeedbackButton(row);
         }
       }
     ];
@@ -163,7 +146,7 @@ export default class PartnerRequestsPage extends Component {
       <div>
         <ToolkitProvider
           keyField="id"
-          data={this.state.requests}
+          data={this.state.feedbacks}
           columns={columns}
           search
         >
@@ -179,7 +162,7 @@ export default class PartnerRequestsPage extends Component {
                 {...props.baseProps}
                 bootstrap4
                 hover={true}
-                noDataIndication="Заведения не найдены"
+                noDataIndication="Запросы не найдены"
               />
             </div>
           )}
@@ -187,13 +170,13 @@ export default class PartnerRequestsPage extends Component {
 
         <Modal show={this.state.show} onHide={() => this.setShow(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>{requestStatus}</Modal.Title>
+            <Modal.Title>Обратная связь</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
             <div>
-              <p>Заведение: {partner.cateringFacilityName}</p>
-              <p>Email: {partner.email}</p>
+              <p>Тип: {type ? type.name : ""}</p>
+              <p>Email: {feedback.email}</p>
               <Row>
                 <Col sm="2">Subject:</Col>
                 <Col>
@@ -208,7 +191,7 @@ export default class PartnerRequestsPage extends Component {
                     <Form.Control
                       ref={this.bodyInput}
                       as="textarea"
-                      defaultValue={`Здравствуйте, ${partner.name} ${partner.patronymic}! \n`}
+                      defaultValue={`Здравствуйте, ${feedback.name} ${feedback.patronymic}! \n`}
                     />
                   </Form.Group>
                 </Col>
@@ -221,9 +204,9 @@ export default class PartnerRequestsPage extends Component {
               variant="primary"
               onClick={() =>
                 this.sendEmail(
-                  partner.id,
+                  feedback.id,
                   this.state.currentStatus,
-                  partner.email
+                  feedback.email
                 )
               }
             >

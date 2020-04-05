@@ -36,8 +36,8 @@ export default function(props) {
         </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-        <LinkContainer to="/complaints">
-          <Nav.Link eventKey="complaints">Жалобы</Nav.Link>
+        <LinkContainer to="/feedbacks">
+          <Nav.Link eventKey="feedbacks">Обратная связь</Nav.Link>
         </LinkContainer>
       </Nav.Item>
     </Nav>
