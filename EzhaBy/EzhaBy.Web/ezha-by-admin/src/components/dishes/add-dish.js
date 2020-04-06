@@ -13,7 +13,7 @@ export default class AddDish extends Component {
 
     this.state = {
       categories: [],
-      needRedirect: false
+      needRedirect: false,
     };
 
     this.formResults = React.createRef();
@@ -27,27 +27,27 @@ export default class AddDish extends Component {
       nameInput,
       descritionInput,
       priceInput,
-      state
+      categoryInput,
     } = this.formResults.current;
     const name = nameInput.current.value;
     const description = descritionInput.current.value;
     const price = priceInput.current.value;
-    const categoryId = state.categoryId;
+    const categoryId = categoryInput.current.value;
 
     await DishesService.createDish(name, description, price, categoryId);
 
     this.setState({
-      needRedirect: true
+      needRedirect: true,
     });
   }
 
   componentDidMount() {
     const { cateringFacilityId } = this.props.match.params;
 
-    CategoriesService.getCategories(cateringFacilityId).then(res => {
+    CategoriesService.getCategories(cateringFacilityId).then((res) => {
       this.setState({
         categories: res.data,
-        needRedirect: false
+        needRedirect: false,
       });
     });
   }
@@ -67,7 +67,11 @@ export default class AddDish extends Component {
         </LinkContainer>
         <br />
         <Form>
-          <DishForm categories={categories} ref={this.formResults} />
+          <DishForm
+            categories={categories}
+            ref={this.formResults}
+            categoryId={-1}
+          />
           <Row>
             <Col sm="4">
               <Button onClick={this.onDishSubmit}>Создать</Button>

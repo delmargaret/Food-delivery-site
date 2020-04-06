@@ -12,7 +12,7 @@ export default class CateringFacilityForm extends Component {
 
     this.state = {
       tags: [...props.tags],
-      cateringFacilityTags: [...props.cateringFacilityTags]
+      cateringFacilityTags: [...props.cateringFacilityTags],
     };
 
     this.nameInput = React.createRef();
@@ -36,13 +36,14 @@ export default class CateringFacilityForm extends Component {
 
     this.setState({
       tags: [...this.props.tags],
-      cateringFacilityTags: [...this.props.cateringFacilityTags]
+      cateringFacilityTags: [...this.props.cateringFacilityTags],
     });
   }
 
   shouldDisableTagSelector() {
     let tagsToShow = this.state.tags.filter(
-      tag => !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
+      (tag) =>
+        !this.state.cateringFacilityTags.some((cfTag) => tag.id === cfTag.id)
     );
 
     return tagsToShow.length === 0;
@@ -51,10 +52,10 @@ export default class CateringFacilityForm extends Component {
   renderTagsOptions() {
     return this.state.tags
       .filter(
-        tag =>
-          !this.state.cateringFacilityTags.some(cfTag => tag.id === cfTag.id)
+        (tag) =>
+          !this.state.cateringFacilityTags.some((cfTag) => tag.id === cfTag.id)
       )
-      .map(tag => {
+      .map((tag) => {
         return (
           <option key={tag.id} value={tag.id}>
             {tag.tagName}
@@ -64,7 +65,7 @@ export default class CateringFacilityForm extends Component {
   }
 
   renderTagsPreview() {
-    return this.state.cateringFacilityTags.map(tag => (
+    return this.state.cateringFacilityTags.map((tag) => (
       <div className="preview" key={tag.id}>
         {tag.tagName}
         <span className="close" onClick={() => this.onTagDelete(tag.id)}>
@@ -77,8 +78,8 @@ export default class CateringFacilityForm extends Component {
   onTagDelete(tagId) {
     this.setState({
       cateringFacilityTags: this.state.cateringFacilityTags.filter(
-        cfTag => cfTag.id !== tagId
-      )
+        (cfTag) => cfTag.id !== tagId
+      ),
     });
   }
 
@@ -88,11 +89,11 @@ export default class CateringFacilityForm extends Component {
     let cateringFacilityTags = [...this.state.cateringFacilityTags];
 
     cateringFacilityTags.push(
-      this.state.tags.find(tag => tag.id === tagIdToAdd)
+      this.state.tags.find((tag) => tag.id === tagIdToAdd)
     );
 
     this.setState({
-      cateringFacilityTags: cateringFacilityTags
+      cateringFacilityTags: cateringFacilityTags,
     });
   }
 
@@ -122,7 +123,11 @@ export default class CateringFacilityForm extends Component {
           <Col sm="2">
             <Form.Group>
               <Form.Label>Стоимость доставки</Form.Label>
-              <Form.Control ref={this.deliveryPriceInput} type="text" />
+              <Form.Control
+                ref={this.deliveryPriceInput}
+                type="number"
+                required
+              />
             </Form.Group>
           </Col>
           <Col sm="2">

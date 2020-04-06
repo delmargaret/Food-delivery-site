@@ -14,7 +14,7 @@ export default class UpdateCateringFacility extends Component {
     this.state = {
       cateringFacilityTags: [],
       tags: [],
-      needRedirect: false
+      needRedirect: false,
     };
 
     this.editorForm = React.createRef();
@@ -36,7 +36,7 @@ export default class UpdateCateringFacility extends Component {
       workingHoursInput,
       townInput,
       streetInput,
-      houseInput
+      houseInput,
     } = this.editorForm.current;
 
     nameInput.current.value = facility.data.cateringFacilityName;
@@ -53,7 +53,7 @@ export default class UpdateCateringFacility extends Component {
     this.setState({
       cateringFacilityTags: [...facility.data.cateringFacilityTags],
       tags: [...tags.data],
-      needRedirect: false
+      needRedirect: false,
     });
   }
 
@@ -69,7 +69,7 @@ export default class UpdateCateringFacility extends Component {
       townInput,
       streetInput,
       houseInput,
-      state
+      state,
     } = this.editorForm.current;
 
     const name = nameInput.current.value;
@@ -80,7 +80,9 @@ export default class UpdateCateringFacility extends Component {
     const town = townInput.current.town.current.value;
     const street = streetInput.current.value;
     const house = houseInput.current.value;
-    const tagIds = state.cateringFacilityTags.map(tag => tag.id);
+    const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+
+    console.log(town, type);
 
     CateringFacilitiesService.updateCateringFacility(
       this.props.match.params.id,
@@ -96,7 +98,7 @@ export default class UpdateCateringFacility extends Component {
     );
 
     this.setState({
-      needRedirect: true
+      needRedirect: true,
     });
   }
 

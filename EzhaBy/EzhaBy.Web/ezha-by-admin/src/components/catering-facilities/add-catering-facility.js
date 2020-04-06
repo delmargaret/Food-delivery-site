@@ -13,7 +13,7 @@ export default class AddCateringFacility extends Component {
 
     this.state = {
       tags: [],
-      needRedirect: false
+      needRedirect: false,
     };
 
     this.editorForm = React.createRef();
@@ -25,7 +25,7 @@ export default class AddCateringFacility extends Component {
 
     this.setState({
       tags: [...tags.data],
-      needRedirect: false
+      needRedirect: false,
     });
   }
 
@@ -41,7 +41,7 @@ export default class AddCateringFacility extends Component {
       townInput,
       streetInput,
       houseInput,
-      state
+      state,
     } = this.editorForm.current;
 
     const name = nameInput.current.value;
@@ -52,7 +52,9 @@ export default class AddCateringFacility extends Component {
     const town = townInput.current.town.current.value;
     const street = streetInput.current.value;
     const house = houseInput.current.value;
-    const tagIds = state.cateringFacilityTags.map(tag => tag.id);
+    const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+
+    console.log(town, type);
 
     await CateringFacilitiesService.createCateringFacility(
       name,
@@ -67,7 +69,7 @@ export default class AddCateringFacility extends Component {
     );
 
     this.setState({
-      needRedirect: true
+      needRedirect: true,
     });
   }
 

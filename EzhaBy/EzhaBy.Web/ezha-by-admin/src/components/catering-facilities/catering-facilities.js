@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import CateringFacilitiesList from "./catering-facilities-list";
 import CateringFacilitiesService, {
-  CF_LIST_UPDATED
+  CF_LIST_UPDATED,
 } from "../../services/catering-facilities-service";
 import Emitter from "../../services/event-emitter";
 
@@ -12,21 +12,21 @@ export default class CateringFacilitiesPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cateringFacilities: []
+      cateringFacilities: [],
     };
 
     this.getCateringFacilities = this.getCateringFacilities.bind(this);
   }
 
-  getCateringFacilities() {
-    CateringFacilitiesService.getCateringFacilities().then(result => {
-      this.setState({ cateringFacilities: result.data });
-    });
+  async getCateringFacilities() {
+    const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
+
+    this.setState({ cateringFacilities: cateringFacilitiesList.data });
   }
 
   componentDidMount() {
     this.getCateringFacilities();
-    Emitter.on(CF_LIST_UPDATED, _ => this.getCateringFacilities());
+    Emitter.on(CF_LIST_UPDATED, (_) => this.getCateringFacilities());
   }
 
   componentWillUnmount() {

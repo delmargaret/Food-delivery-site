@@ -12,7 +12,7 @@ export default class UpdateDish extends Component {
     super(props);
     this.state = {
       categories: [],
-      needRedirect: false
+      needRedirect: false,
     };
 
     this.formResults = React.createRef();
@@ -26,18 +26,18 @@ export default class UpdateDish extends Component {
       cateringFacilityId
     );
 
+    const dishDetails = await DishesService.getDish(id);
+
     this.setState({
       categories: categoriesList.data,
-      needRedirect: false
+      needRedirect: false,
     });
-
-    const dishDetails = await DishesService.getDish(id);
 
     const {
       nameInput,
       descritionInput,
       priceInput,
-      categoryInput
+      categoryInput,
     } = this.formResults.current;
 
     nameInput.current.value = dishDetails.data.dishName;
@@ -55,20 +55,18 @@ export default class UpdateDish extends Component {
       nameInput,
       descritionInput,
       priceInput,
-      state
+      categoryInput,
     } = this.formResults.current;
 
     const name = nameInput.current.value;
     const description = descritionInput.current.value;
     const price = priceInput.current.value;
-    const categoryId = state.categoryId;
-
-    console.log(name, description, price, categoryId);
+    const categoryId = categoryInput.current.value; //state.categoryId;
 
     await DishesService.updateDish(id, name, description, price, categoryId);
 
     this.setState({
-      needRedirect: true
+      needRedirect: true,
     });
   }
 

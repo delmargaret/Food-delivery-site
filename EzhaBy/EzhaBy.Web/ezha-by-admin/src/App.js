@@ -3,8 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 
 import NavbarComponent from "./components/nav-bar/nav-bar";
 import NavTabs from "./components/nav-tabs/nav-tabs";
@@ -23,38 +24,51 @@ import "./../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./../node_modules/react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
 import "./../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
+import leaves from "./leaves.png";
+
 function App() {
   return (
     <Router>
       <div className="App">
         <NavbarComponent />
         <NavTabs activeKey="partners" />
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/partners" />
-          </Route>
-          <Route path="/tags">
-            <TagsPage />
-          </Route>
-          <Route path="/catering-facilities">
-            <CateringFacilitiesRouter />
-          </Route>
-          <Route path="/categories">
-            <CategoriesPage />
-          </Route>
-          <Route path="/dishes">
-            <DishesRouter />
-          </Route>
-          <Route path="/partners">
-            <PartnerRequestsPage />
-          </Route>
-          <Route path="/couriers">
-            <CourierRequestsPage />
-          </Route>
-          <Route path="/feedbacks">
-            <FeedbacksPage />
-          </Route>
-        </Switch>
+        <Row>
+          <Col>
+            {" "}
+            <img alt="" src={leaves} className="leaves-left" />
+          </Col>
+          <Col xs={8}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/partners" />
+              </Route>
+              <Route path="/tags">
+                <TagsPage />
+              </Route>
+              <Route path="/catering-facilities">
+                <CateringFacilitiesRouter />
+              </Route>
+              <Route path="/categories">
+                <CategoriesPage />
+              </Route>
+              <Route path="/dishes">
+                <DishesRouter />
+              </Route>
+              <Route path="/partners">
+                <PartnerRequestsPage />
+              </Route>
+              <Route path="/couriers">
+                <CourierRequestsPage />
+              </Route>
+              <Route path="/feedbacks">
+                <FeedbacksPage />
+              </Route>
+            </Switch>
+          </Col>
+          <Col>
+            <img alt="" src={leaves} className="leaves-right" />
+          </Col>
+        </Row>
       </div>
     </Router>
   );
