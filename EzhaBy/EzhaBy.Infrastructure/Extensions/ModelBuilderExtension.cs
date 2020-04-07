@@ -29,7 +29,8 @@ namespace EzhaBy.Infrastructure.Extensions
                         CateringFacilityType = CateringFacilityTypes.Cafe,
                         DeliveryPrice = 2,
                         DeliveryTime = "30-45 минут",
-                        WorkingHours = "10.00 - 20.00"
+                        WorkingHours = "10.00 - 20.00",
+                        CateringFacilityIconUrl = string.Empty
                     }               
                 }
             );

@@ -69,7 +69,8 @@ export default class TagsList extends Component {
         text: "",
         formatter: (cellContent, row) => {
           return this.renderRemoveButton(row);
-        }
+        },
+        editable: false
       }
     ];
 

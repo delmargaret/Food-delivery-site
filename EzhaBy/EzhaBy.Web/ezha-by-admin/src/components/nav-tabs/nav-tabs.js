@@ -1,10 +1,11 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import './nav-tabs.css'
 
 export default function(props) {
   return (
-    <Nav fill variant="tabs" defaultActiveKey={props.activeKey}>
+    <Nav fill variant="tabs" defaultActiveKey={props.activeKey} id="app-nav-tabs">
       <Nav.Item>
         <LinkContainer to="/tags">
           <Nav.Link eventKey="tags">Тэги</Nav.Link>
