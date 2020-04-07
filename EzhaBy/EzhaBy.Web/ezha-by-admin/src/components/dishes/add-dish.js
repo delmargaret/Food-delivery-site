@@ -54,15 +54,16 @@ export default class AddDish extends Component {
 
   render() {
     const { categories, needRedirect } = this.state;
+    const { cateringFacilityId } = this.props.match.params;
 
-    const dishesRootPath = "/dishes";
+    const dishesCateringFacilityPage = `/dishes/catering-facility/${cateringFacilityId}`;
 
-    const redirectElement = <Redirect to={dishesRootPath} />;
+    const redirectElement = <Redirect to={dishesCateringFacilityPage} />;
 
     const formElement = (
       <React.Fragment>
         <br />
-        <LinkContainer to="/dishes">
+        <LinkContainer to={dishesCateringFacilityPage}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />

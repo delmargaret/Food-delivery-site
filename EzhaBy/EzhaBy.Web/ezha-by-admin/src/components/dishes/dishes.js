@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 import CateringFacilitiesService from "../../services/catering-facilities-service";
 import Emitter from "../../services/event-emitter";
 import DishesService, {
-  DISHES_LIST_UPDATED
+  DISHES_LIST_UPDATED,
 } from "../../services/dishes-service";
 import CategoriesService from "../../services/categories-service";
 
@@ -13,11 +14,15 @@ import DishesList from "./dishes-list";
 export default class DishesPage extends Component {
   constructor(props) {
     super(props);
+
+    const { cateringFacilityId } = props.match.params;
+
     this.state = {
       cateringFacilities: [],
       categories: [],
       dishes: [],
-      cateringFacilityId: "-1"
+      cateringFacilityId: cateringFacilityId ? cateringFacilityId : "-1",
+      needRedirect: false,
     };
 
     this.getCateringFacilities = this.getCateringFacilities.bind(this);
@@ -31,9 +36,9 @@ export default class DishesPage extends Component {
     const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
 
     this.setState({
-      cateringFacilities: cateringFacilitiesList.data.map(res => {
+      cateringFacilities: cateringFacilitiesList.data.map((res) => {
         return { id: res.id, name: res.cateringFacilityName };
-      })
+      }),
     });
   }
 
@@ -56,16 +61,27 @@ export default class DishesPage extends Component {
   }
 
   onCateringFacilitiesUpdate(event) {
-    this.setState({ cateringFacilityId: event.target.value });
-    this.getDishes(event.target.value);
-    this.getCategories(event.target.value);
+    this.setState({
+      cateringFacilityId: event.target.value,
+      needRedirect: true,
+    });
   }
 
   componentDidMount() {
+    const { cateringFacilityId } = this.state;
+
     this.getCateringFacilities();
-    Emitter.on(DISHES_LIST_UPDATED, _ =>
+
+    this.getDishes(cateringFacilityId);
+    this.getCategories(cateringFacilityId);
+
+    Emitter.on(DISHES_LIST_UPDATED, (_) =>
       this.getDishes(this.state.cateringFacilityId)
     );
+
+    this.setState({
+      needRedirect: false,
+    });
   }
 
   componentWillUnmount() {
@@ -73,7 +89,7 @@ export default class DishesPage extends Component {
   }
 
   renderCateringFacilityOptions() {
-    return this.state.cateringFacilities.map(it => (
+    return this.state.cateringFacilities.map((it) => (
       <option key={it.id} value={it.id}>
         {it.name}
       </option>
@@ -108,12 +124,19 @@ export default class DishesPage extends Component {
   }
 
   render() {
-    return (
+    const { cateringFacilityId, needRedirect } = this.state;
+
+    const dishesCateringFacilityPage = `/dishes/catering-facility/${cateringFacilityId}`;
+
+    const redirectElement = <Redirect to={dishesCateringFacilityPage} />;
+
+    const pageElement = (
       <React.Fragment>
         <Form.Group>
           <Form.Label>Заведение</Form.Label>
           <Form.Control
             as="select"
+            value={cateringFacilityId}
             disabled={this.state.cateringFacilities.length === 0}
             onChange={this.onCateringFacilitiesUpdate}
           >
@@ -126,5 +149,7 @@ export default class DishesPage extends Component {
         {this.renderDishesForm()}
       </React.Fragment>
     );
+
+    return needRedirect ? redirectElement : pageElement;
   }
 }

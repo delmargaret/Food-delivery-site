@@ -21,43 +21,53 @@ export default class DishForm extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Row>
-          <Col sm="4">
-            <Form.Group>
-              <Form.Label>Название блюда</Form.Label>
-              <Form.Control ref={this.nameInput} type="text" />
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} md="6" controlId="nameValidationGroup">
+            <Form.Label>Название блюда</Form.Label>
+            <Form.Control ref={this.nameInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите название блюда
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Row>
-          <Col sm="4">
-            <Form.Group>
-              <Form.Label>Описание</Form.Label>
-              <Form.Control ref={this.descritionInput} type="text" />
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} md="6" controlId="descriptionValidationGroup">
+            <Form.Label>Описание</Form.Label>
+            <Form.Control
+              ref={this.descritionInput}
+              as="textarea"
+              type="text"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Введите описание блюда
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Row>
-          <Col sm="4">
-            <Form.Group>
-              <Form.Label>Цена</Form.Label>
-              <Form.Control ref={this.priceInput} type="text" />
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} md="6" controlId="priceValidationGroup">
+            <Form.Label>Цена</Form.Label>
+            <Form.Control
+              ref={this.priceInput}
+              type="number"
+              min="0"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Введите цену блюда
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Row>
-          <Col sm="4">
-            <Form.Group>
-              <Form.Label>Категория</Form.Label>
-              <Form.Control as="select" ref={this.categoryInput}>
-                {this.renderCategoriesOptions()}
-              </Form.Control>
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} md="6" controlId="categoryValidationGroup">
+            <Form.Label>Категория</Form.Label>
+            <Form.Control as="select" ref={this.categoryInput}>
+              {this.renderCategoriesOptions()}
+            </Form.Control>
+          </Form.Group>
         </Row>
-        <br />
-      </div>
+      </React.Fragment>
     );
   }
 }

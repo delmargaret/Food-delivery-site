@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -13,6 +13,7 @@ export default class UpdateDish extends Component {
     this.state = {
       categories: [],
       needRedirect: false,
+      validated: false,
     };
 
     this.formResults = React.createRef();
@@ -31,6 +32,7 @@ export default class UpdateDish extends Component {
     this.setState({
       categories: categoriesList.data,
       needRedirect: false,
+      validated: false,
     });
 
     const {
@@ -48,49 +50,55 @@ export default class UpdateDish extends Component {
 
   async onDishUpdate(event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    const { id } = this.props.match.params;
+    const form = event.currentTarget;
+    let needRedirect = false;
 
-    const {
-      nameInput,
-      descritionInput,
-      priceInput,
-      categoryInput,
-    } = this.formResults.current;
+    if (form.checkValidity()) {
+      needRedirect = true;
 
-    const name = nameInput.current.value;
-    const description = descritionInput.current.value;
-    const price = priceInput.current.value;
-    const categoryId = categoryInput.current.value; //state.categoryId;
+      const { id } = this.props.match.params;
 
-    await DishesService.updateDish(id, name, description, price, categoryId);
+      const {
+        nameInput,
+        descritionInput,
+        priceInput,
+        categoryInput,
+      } = this.formResults.current;
+
+      const name = nameInput.current.value;
+      const description = descritionInput.current.value;
+      const price = priceInput.current.value;
+      const categoryId = categoryInput.current.value;
+
+      await DishesService.updateDish(id, name, description, price, categoryId);
+    }
 
     this.setState({
-      needRedirect: true,
+      needRedirect: needRedirect,
+      validated: true,
     });
   }
 
   render() {
-    const { categories, needRedirect } = this.state;
+    const { categories, needRedirect, validated } = this.state;
+    const { cateringFacilityId } = this.props.match.params;
 
-    const dishesRootPath = "/dishes";
+    const dishesCateringFacilityPage = `/dishes/catering-facility/${cateringFacilityId}`;
 
-    const redirectElement = <Redirect to={dishesRootPath} />;
+    const redirectElement = <Redirect to={dishesCateringFacilityPage} />;
 
     const formElement = (
       <React.Fragment>
         <br />
-        <LinkContainer to="/dishes">
+        <LinkContainer to={dishesCateringFacilityPage}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />
-        <Form onSubmit={this.onDishUpdate}>
+        <Form noValidate validated={validated} onSubmit={this.onDishUpdate}>
           <DishForm categories={categories} ref={this.formResults} />
-          <Row>
-            <Col sm="4">
-              <Button type="submit">Изменить</Button>
-            </Col>
-          </Row>
+          <Button type="submit">Изменить</Button>
         </Form>
       </React.Fragment>
     );
