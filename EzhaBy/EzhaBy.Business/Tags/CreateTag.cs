@@ -23,12 +23,10 @@ namespace EzhaBy.Business.Tags
 
         public class Handler : IRequestHandler<Command, Unit>
         {
-            //private readonly IValidator<string> tagValidator;
             private readonly DataContext context;
 
             public Handler(DataContext context)
             {
-                //this.tagValidator = tagValidator;
                 this.context = context;
             }
 
@@ -50,12 +48,6 @@ namespace EzhaBy.Business.Tags
                 await context.SaveChangesAsync();
                 return Unit.Value;
             }
-
-            //public async Task<Unit> Handle(Command request, CancellationToken cancellationToken, RequestHandlerDelegate<Unit> next)
-            //{
-            //    await tagValidator.ValidateAndThrowAsync(request.TagName, cancellationToken: cancellationToken);
-            //    return await next();
-            //}
         }
     }
 }

@@ -17,29 +17,70 @@ namespace EzhaBy.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTag.Command command)
         {
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTags() => Ok(await mediator.Send(new GetTags.Query()));
+        public async Task<IActionResult> GetTags()
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetTags.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTag(string id) => Ok(await mediator.Send(new GetTag.Query(Guid.Parse(id))));
+        public async Task<IActionResult> GetTag(string id)
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetTag.Query(Guid.Parse(id))));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTagName(string id, [FromBody] UpdateTagName.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTag(string id)
         {
-            await mediator.Send(new DeleteTag.Command(Guid.Parse(id)));
-            return Ok();
+            try
+            {
+                await mediator.Send(new DeleteTag.Command(Guid.Parse(id)));
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

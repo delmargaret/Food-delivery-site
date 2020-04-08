@@ -1,6 +1,10 @@
 import axios from "axios";
 import ConfigService from "./config-service";
 
+function HandleException(ex){
+  console.log(`Exception: ${ex.Message}`);
+}
+
 export default class HttpRequest {
   static Get(endpoint) {
     const url = ConfigService.addBaseAddress(endpoint);
@@ -14,8 +18,7 @@ export default class HttpRequest {
     };
     return axios(options).catch(error => {
       if (error.response) {
-        console.log(error.response.data);
-        return null;
+        HandleException(error.response.data);
       }
     });
   }
@@ -32,8 +35,7 @@ export default class HttpRequest {
     };
     return axios(options).catch(error => {
       if (error.response) {
-        console.log(error.response.data);
-        return null;
+        HandleException(error.response.data);
       }
     });
   }
@@ -50,8 +52,7 @@ export default class HttpRequest {
 
     return axios(options).catch(error => {
       if (error.response) {
-        console.log(error.response.data);
-        return null;
+        HandleException(error.response.data);
       }
     });
   }
@@ -69,8 +70,7 @@ export default class HttpRequest {
 
     return axios(options).catch(error => {
       if (error.response) {
-        console.log(error.response.data);
-        return null;
+        HandleException(error.response.data);
       }
     });
   }

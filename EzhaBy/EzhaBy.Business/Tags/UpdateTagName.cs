@@ -23,12 +23,10 @@ namespace EzhaBy.Business.Tags
 
         public class Handler : IRequestHandler<Command, Unit>
         {
-            //private readonly IValidator<string> tagValidator;
             private readonly DataContext context;
 
             public Handler(DataContext context)
             {
-                //this.tagValidator = tagValidator;
                 this.context = context;
             }
 
