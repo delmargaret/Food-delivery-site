@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 import CateringFacilitiesService from "../../services/catering-facilities-service";
 import Emitter from "../../services/event-emitter";
@@ -107,7 +108,9 @@ export default class DishesPage extends Component {
       return (
         <React.Fragment>
           <br />
-          <Button href={`/dishes/new/${id}`}>Добавить блюдо</Button>
+          <LinkContainer to={`/dishes/new/${id}`} isActive={() => false}>
+            <Button>Добавить блюдо</Button>
+          </LinkContainer>
           <br />
           <div id="dishes-list">
             <DishesList dishes={this.state.dishes} cateringFacilityId={id} />

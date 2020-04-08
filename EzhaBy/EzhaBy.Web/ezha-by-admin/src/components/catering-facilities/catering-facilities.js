@@ -37,7 +37,7 @@ export default class CateringFacilitiesPage extends Component {
     return (
       <React.Fragment>
         <br />
-        <LinkContainer to="/catering-facilities/new">
+        <LinkContainer to="/catering-facilities/new" isActive={() => false}>
           <Button>Добавить заведение</Button>
         </LinkContainer>
         <br />
