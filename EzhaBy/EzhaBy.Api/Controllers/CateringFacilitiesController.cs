@@ -19,39 +19,87 @@ namespace EzhaBy.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCateringFacility.Command command)
         {
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCateringFacilities() => Ok(await mediator.Send(new GetCateringFacilities.Query()));
+        public async Task<IActionResult> GetCateringFacilities()
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetCateringFacilities.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCateringFacility(string id) =>
-            Ok(await mediator.Send(new GetCateringFacility.Query(Guid.Parse(id))));
+        public async Task<IActionResult> GetCateringFacility(string id)
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetCateringFacility.Query(Guid.Parse(id))));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+            
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, [FromBody] UpdateCateringFacility.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPut("{id}/status")]
         public async Task<IActionResult> SetStatus(string id, [FromBody] SetStatus.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPut("{id}/icon")]
         public async Task<IActionResult> UpdateIcon(string id, [FromBody] UpdateCateringFacilityIcon.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

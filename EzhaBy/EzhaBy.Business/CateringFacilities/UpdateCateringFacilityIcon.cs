@@ -36,7 +36,7 @@ namespace EzhaBy.Business.CateringFacilities
                 var cateringFacility = await context.CateringFacilities.FindAsync(request.Id);
                 if (cateringFacility == null)
                 {
-                    throw new Exception("cateringFacility isn't exists");
+                    throw new Exception("catering facility isn't exists");
                 }
 
                 cateringFacility.CateringFacilityIconUrl = request.Url;

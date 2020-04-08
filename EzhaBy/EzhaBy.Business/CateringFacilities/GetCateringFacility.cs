@@ -34,7 +34,7 @@ namespace EzhaBy.Business.CateringFacilities
                 var cateringFacility = context.CateringFacilities.Find(request.Id);
                 if (cateringFacility == null)
                 {
-                    throw new Exception("cateringFacility isn't exists");
+                    throw new Exception("catering facility isn't exists");
                 }
 
                 return Task.FromResult(new CateringFacilityDto

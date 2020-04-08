@@ -51,7 +51,7 @@ namespace EzhaBy.Business.CateringFacilities
 
                 if (cateringFacilities == null)
                 {
-                    throw new Exception("tags not found");
+                    throw new Exception("catering facilities not found");
                 }
 
                 return Task.FromResult(cateringFacilities);

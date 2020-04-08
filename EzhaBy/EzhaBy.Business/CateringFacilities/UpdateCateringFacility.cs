@@ -51,12 +51,10 @@ namespace EzhaBy.Business.CateringFacilities
 
         public class Handler : IRequestHandler<Command, Unit>
         {
-            //private readonly IValidator<string> tagValidator;
             private readonly DataContext context;
 
             public Handler(DataContext context)
             {
-                //this.tagValidator = tagValidator;
                 this.context = context;
             }
 
@@ -65,7 +63,7 @@ namespace EzhaBy.Business.CateringFacilities
                 var cateringFacility = await context.CateringFacilities.FindAsync(request.Id);
                 if (cateringFacility == null)
                 {
-                    throw new Exception("cateringFacility isn't exists");
+                    throw new Exception("catering facility isn't exists");
                 }
 
                 cateringFacility.CateringFacilityName = request.CateringFacilityName;
