@@ -113,39 +113,33 @@ export default class CateringFacilityForm extends Component {
           <Col>
             <CateringFacilityTypes ref={this.typeInput} />
           </Col>
-          <Col>
-            <Form.Group>
-              <Form.Label>Время работы</Form.Label>
-              <Form.Control ref={this.workingHoursInput} type="text" required />
-              <Form.Control.Feedback type="invalid">
-                Введите время работы
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} controlId="workingHoursValidationGroup">
+            <Form.Label>Время работы</Form.Label>
+            <Form.Control ref={this.workingHoursInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите время работы
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Стоимость доставки</Form.Label>
-              <Form.Control
-                ref={this.deliveryPriceInput}
-                type="number"
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Введите стоимость доставки
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group>
-              <Form.Label>Время доставки</Form.Label>
-              <Form.Control ref={this.deliveryTimeInput} type="text" required />
-              <Form.Control.Feedback type="invalid">
-                Введите время доставки
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} controlId="deliveryPriceValidationGroup">
+            <Form.Label>Стоимость доставки</Form.Label>
+            <Form.Control
+              ref={this.deliveryPriceInput}
+              type="number"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Введите стоимость доставки
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} controlId="deliveryTimeValidationGroup">
+            <Form.Label>Время доставки</Form.Label>
+            <Form.Control ref={this.deliveryTimeInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите время доставки
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Row>
           <Col>
@@ -153,24 +147,20 @@ export default class CateringFacilityForm extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Form.Group>
-              <Form.Label>Улица</Form.Label>
-              <Form.Control ref={this.streetInput} type="text" required />
-              <Form.Control.Feedback type="invalid">
-                Введите улицу
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group>
-              <Form.Label>Дом</Form.Label>
-              <Form.Control ref={this.houseInput} type="text" required />
-              <Form.Control.Feedback type="invalid">
-                Введите дом
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
+          <Form.Group as={Col} controlId="streetValidationGroup">
+            <Form.Label>Улица</Form.Label>
+            <Form.Control ref={this.streetInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите улицу
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} controlId="houseValidationGroup">
+            <Form.Label>Дом</Form.Label>
+            <Form.Control ref={this.houseInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите дом
+            </Form.Control.Feedback>
+          </Form.Group>
         </Row>
         <Form.Group>
           <Form.Label>Тэги</Form.Label>
