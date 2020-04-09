@@ -98,7 +98,9 @@ export default class UpdateDish extends Component {
         <br />
         <Form noValidate validated={validated} onSubmit={this.onDishUpdate}>
           <DishForm categories={categories} ref={this.formResults} />
-          <Button type="submit">Изменить</Button>
+          <Button type="submit" className="btn-red">
+            Изменить
+          </Button>
         </Form>
       </React.Fragment>
     );
