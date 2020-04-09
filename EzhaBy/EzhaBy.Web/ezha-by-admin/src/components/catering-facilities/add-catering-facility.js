@@ -14,6 +14,7 @@ export default class AddCateringFacility extends Component {
     this.state = {
       tags: [],
       needRedirect: false,
+      validated: false,
     };
 
     this.editorForm = React.createRef();
@@ -26,55 +27,65 @@ export default class AddCateringFacility extends Component {
     this.setState({
       tags: [...tags.data],
       needRedirect: false,
+      validated: false,
     });
   }
 
   async onCateringFacilitySubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    const {
-      nameInput,
-      deliveryTimeInput,
-      deliveryPriceInput,
-      typeInput,
-      workingHoursInput,
-      townInput,
-      streetInput,
-      houseInput,
-      state,
-    } = this.editorForm.current;
+    const form = event.currentTarget;
+    let needRedirect = false;
 
-    const name = nameInput.current.value;
-    const deliveryTime = deliveryTimeInput.current.value;
-    const deliveryPrice = deliveryPriceInput.current.value;
-    const type = typeInput.current.type.current.value;
-    const workingHours = workingHoursInput.current.value;
-    const town = townInput.current.town.current.value;
-    const street = streetInput.current.value;
-    const house = houseInput.current.value;
-    const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+    if (form.checkValidity()) {
+      needRedirect = true;
 
-    console.log(town, type);
+      const {
+        nameInput,
+        deliveryTimeInput,
+        deliveryPriceInput,
+        typeInput,
+        workingHoursInput,
+        townInput,
+        streetInput,
+        houseInput,
+        state,
+      } = this.editorForm.current;
 
-    await CateringFacilitiesService.createCateringFacility(
-      name,
-      deliveryTime,
-      deliveryPrice,
-      type,
-      workingHours,
-      town,
-      street,
-      house,
-      tagIds
-    );
+      const name = nameInput.current.value;
+      const deliveryTime = deliveryTimeInput.current.value;
+      const deliveryPrice = deliveryPriceInput.current.value;
+      const type = typeInput.current.type.current.value;
+      const workingHours = workingHoursInput.current.value;
+      const town = townInput.current.town.current.value;
+      const street = streetInput.current.value;
+      const house = houseInput.current.value;
+      const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+
+      console.log(town, type);
+
+      await CateringFacilitiesService.createCateringFacility(
+        name,
+        deliveryTime,
+        deliveryPrice,
+        type,
+        workingHours,
+        town,
+        street,
+        house,
+        tagIds
+      );
+    }
 
     this.setState({
-      needRedirect: true,
+      needRedirect: needRedirect,
+      validated: true,
     });
   }
 
   render() {
-    const { tags, needRedirect } = this.state;
+    const { tags, needRedirect, validated } = this.state;
 
     const cateringFacilitiesRootPath = "/catering-facilities";
 
@@ -87,17 +98,19 @@ export default class AddCateringFacility extends Component {
           <Button>Назад</Button>
         </LinkContainer>
         <br />
-        <Form>
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={this.onCateringFacilitySubmit}
+        >
           <CateringFacilityForm
             cateringFacilityTags={[]}
             tags={tags}
             ref={this.editorForm}
           />
-          <Row>
-            <Col sm="4">
-              <Button onClick={this.onCateringFacilitySubmit}>Создать</Button>
-            </Col>
-          </Row>
+          <Button type="submit" className="btn-red">
+            Создать
+          </Button>
         </Form>
       </React.Fragment>
     );

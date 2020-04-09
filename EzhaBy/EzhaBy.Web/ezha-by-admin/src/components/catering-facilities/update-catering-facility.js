@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
-import CateringFacilityForm from './catering-facility-form';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
-import TagsService from '../../services/tags-service';
+import CateringFacilityForm from "./catering-facility-form";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
+import TagsService from "../../services/tags-service";
 
 export default class UpdateCateringFacility extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class UpdateCateringFacility extends Component {
       cateringFacilityTags: [],
       tags: [],
       needRedirect: false,
+      validated: false,
     };
 
     this.editorForm = React.createRef();
@@ -54,85 +55,92 @@ export default class UpdateCateringFacility extends Component {
       cateringFacilityTags: [...facility.data.cateringFacilityTags],
       tags: [...tags.data],
       needRedirect: false,
+      validated: false,
     });
   }
 
   onCateringFacilityUpdate(event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    const {
-      nameInput,
-      deliveryTimeInput,
-      deliveryPriceInput,
-      typeInput,
-      workingHoursInput,
-      townInput,
-      streetInput,
-      houseInput,
-      state,
-    } = this.editorForm.current;
+    const form = event.currentTarget;
+    let needRedirect = false;
 
-    const name = nameInput.current.value;
-    const deliveryTime = deliveryTimeInput.current.value;
-    const deliveryPrice = deliveryPriceInput.current.value;
-    const type = typeInput.current.type.current.value;
-    const workingHours = workingHoursInput.current.value;
-    const town = townInput.current.town.current.value;
-    const street = streetInput.current.value;
-    const house = houseInput.current.value;
-    const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+    if (form.checkValidity()) {
+      needRedirect = true;
 
-    console.log(town, type);
+      const {
+        nameInput,
+        deliveryTimeInput,
+        deliveryPriceInput,
+        typeInput,
+        workingHoursInput,
+        townInput,
+        streetInput,
+        houseInput,
+        state,
+      } = this.editorForm.current;
 
-    CateringFacilitiesService.updateCateringFacility(
-      this.props.match.params.id,
-      name,
-      deliveryTime,
-      deliveryPrice,
-      type,
-      workingHours,
-      town,
-      street,
-      house,
-      tagIds
-    );
+      const name = nameInput.current.value;
+      const deliveryTime = deliveryTimeInput.current.value;
+      const deliveryPrice = deliveryPriceInput.current.value;
+      const type = typeInput.current.type.current.value;
+      const workingHours = workingHoursInput.current.value;
+      const town = townInput.current.town.current.value;
+      const street = streetInput.current.value;
+      const house = houseInput.current.value;
+      const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
+
+      console.log(town, type);
+
+      CateringFacilitiesService.updateCateringFacility(
+        this.props.match.params.id,
+        name,
+        deliveryTime,
+        deliveryPrice,
+        type,
+        workingHours,
+        town,
+        street,
+        house,
+        tagIds
+      );
+    }
 
     this.setState({
-      needRedirect: true,
+      needRedirect: needRedirect,
+      validated: true,
     });
   }
 
   render() {
-    const { cateringFacilityTags, tags, needRedirect } = this.state;
+    const { cateringFacilityTags, tags, needRedirect, validated } = this.state;
 
-    const cateringFacilitiesRootPath = '/catering-facilities';
+    const cateringFacilitiesRootPath = "/catering-facilities";
 
     const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
 
     const formElement = (
       <React.Fragment>
         <br />
-        <br />
         <LinkContainer to="/catering-facilities" isActive={() => false}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />
-        <Row>
-          <Col></Col>
-          <Col sm="5">
-            <Form onSubmit={this.onCateringFacilityUpdate}>
-              <CateringFacilityForm
-                cateringFacilityTags={cateringFacilityTags}
-                tags={tags}
-                ref={this.editorForm}
-              />
-              <Button type="submit" className="btn-red">
-                Изменить
-              </Button>
-            </Form>
-          </Col>
-          <Col></Col>
-        </Row>
+        <Form
+          noValidate
+          validated={validated}
+          onSubmit={this.onCateringFacilityUpdate}
+        >
+          <CateringFacilityForm
+            cateringFacilityTags={cateringFacilityTags}
+            tags={tags}
+            ref={this.editorForm}
+          />
+          <Button type="submit" className="btn-red">
+            Изменить
+          </Button>
+        </Form>
       </React.Fragment>
     );
 

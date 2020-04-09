@@ -99,11 +99,16 @@ export default class CateringFacilityForm extends Component {
 
   render() {
     return (
-      <div>
-        <Form.Group>
-              <Form.Label>Название заведения</Form.Label>
-              <Form.Control ref={this.nameInput} type="text" />
-            </Form.Group>
+      <React.Fragment>
+        <Row>
+          <Form.Group as={Col} controlId="nameValidationGroup">
+            <Form.Label>Название заведения</Form.Label>
+            <Form.Control ref={this.nameInput} type="text" required />
+            <Form.Control.Feedback type="invalid">
+              Введите название заведения
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
         <Row>
           <Col>
             <CateringFacilityTypes ref={this.typeInput} />
@@ -111,7 +116,10 @@ export default class CateringFacilityForm extends Component {
           <Col>
             <Form.Group>
               <Form.Label>Время работы</Form.Label>
-              <Form.Control ref={this.workingHoursInput} type="text" />
+              <Form.Control ref={this.workingHoursInput} type="text" required />
+              <Form.Control.Feedback type="invalid">
+                Введите время работы
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -124,12 +132,18 @@ export default class CateringFacilityForm extends Component {
                 type="number"
                 required
               />
+              <Form.Control.Feedback type="invalid">
+                Введите стоимость доставки
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
               <Form.Label>Время доставки</Form.Label>
-              <Form.Control ref={this.deliveryTimeInput} type="text" />
+              <Form.Control ref={this.deliveryTimeInput} type="text" required />
+              <Form.Control.Feedback type="invalid">
+                Введите время доставки
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -142,13 +156,19 @@ export default class CateringFacilityForm extends Component {
           <Col>
             <Form.Group>
               <Form.Label>Улица</Form.Label>
-              <Form.Control ref={this.streetInput} type="text" />
+              <Form.Control ref={this.streetInput} type="text" required />
+              <Form.Control.Feedback type="invalid">
+                Введите улицу
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
               <Form.Label>Дом</Form.Label>
-              <Form.Control ref={this.houseInput} type="text" />
+              <Form.Control ref={this.houseInput} type="text" required />
+              <Form.Control.Feedback type="invalid">
+                Введите дом
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
         </Row>
@@ -165,7 +185,9 @@ export default class CateringFacilityForm extends Component {
               </Form.Control>
             </Col>
             <Col sm="3">
-              <Button onClick={this.onTagAdd} className="btn-red">Добавить</Button>
+              <Button onClick={this.onTagAdd} className="btn-red">
+                Добавить
+              </Button>
             </Col>
           </Row>
         </Form.Group>
@@ -173,7 +195,7 @@ export default class CateringFacilityForm extends Component {
           <div ref={this.previewTag}>{this.renderTagsPreview()}</div>
         </Col>
         <br />
-      </div>
+      </React.Fragment>
     );
   }
 }
