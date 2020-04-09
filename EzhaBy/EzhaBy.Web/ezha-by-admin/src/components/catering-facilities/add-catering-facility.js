@@ -83,7 +83,7 @@ export default class AddCateringFacility extends Component {
     const formElement = (
       <React.Fragment>
         <br />
-        <LinkContainer to={cateringFacilitiesRootPath}>
+        <LinkContainer to={cateringFacilitiesRootPath} isActive={() => false}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />

@@ -112,7 +112,7 @@ export default class UpdateCateringFacility extends Component {
     const formElement = (
       <React.Fragment>
         <br />
-        <LinkContainer to="/catering-facilities">
+        <LinkContainer to="/catering-facilities" isActive={() => false}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />
