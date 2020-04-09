@@ -14,6 +14,7 @@ export default class AddDish extends Component {
     this.state = {
       categories: [],
       needRedirect: false,
+      validated: false,
     };
 
     this.formResults = React.createRef();
@@ -22,22 +23,31 @@ export default class AddDish extends Component {
 
   async onDishSubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
 
-    const {
-      nameInput,
-      descritionInput,
-      priceInput,
-      categoryInput,
-    } = this.formResults.current;
-    const name = nameInput.current.value;
-    const description = descritionInput.current.value;
-    const price = priceInput.current.value;
-    const categoryId = categoryInput.current.value;
+    const form = event.currentTarget;
+    let needRedirect = false;
 
-    await DishesService.createDish(name, description, price, categoryId);
+    if (form.checkValidity()) {
+      needRedirect = true;
+
+      const {
+        nameInput,
+        descritionInput,
+        priceInput,
+        categoryInput,
+      } = this.formResults.current;
+      const name = nameInput.current.value;
+      const description = descritionInput.current.value;
+      const price = priceInput.current.value;
+      const categoryId = categoryInput.current.value;
+
+      await DishesService.createDish(name, description, price, categoryId);
+    }
 
     this.setState({
-      needRedirect: true,
+      needRedirect: needRedirect,
+      validated: true,
     });
   }
 
@@ -48,12 +58,13 @@ export default class AddDish extends Component {
       this.setState({
         categories: res.data,
         needRedirect: false,
+        validated: false,
       });
     });
   }
 
   render() {
-    const { categories, needRedirect } = this.state;
+    const { categories, needRedirect, validated } = this.state;
     const { cateringFacilityId } = this.props.match.params;
 
     const dishesCateringFacilityPage = `/dishes/catering-facility/${cateringFacilityId}`;
@@ -67,17 +78,15 @@ export default class AddDish extends Component {
           <Button>Назад</Button>
         </LinkContainer>
         <br />
-        <Form>
+        <Form noValidate validated={validated} onSubmit={this.onDishSubmit}>
           <DishForm
             categories={categories}
             ref={this.formResults}
             categoryId={-1}
           />
-          <Row>
-            <Col sm="4">
-              <Button onClick={this.onDishSubmit}>Создать</Button>
-            </Col>
-          </Row>
+          <Button type="submit" className="btn-red">
+            Создать
+          </Button>
         </Form>
       </React.Fragment>
     );
