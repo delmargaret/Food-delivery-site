@@ -68,7 +68,6 @@ export default class CategoriesPage extends Component {
       return (
         <div>
           <AddCategoryForm cateringFacilityId={this.state.cateringFacilityId} />
-          <br />
           <CategoriesList
             cateringFacilityId={this.state.cateringFacilityId}
             categories={this.state.categories}
@@ -90,6 +89,7 @@ export default class CategoriesPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <br />
         <Form.Group>
           <Form.Label>Заведение</Form.Label>
           <Form.Control
@@ -103,6 +103,7 @@ export default class CategoriesPage extends Component {
             {this.renderCateringFacilityOptions()}
           </Form.Control>
         </Form.Group>
+        <hr />
         {this.renderCategoriesForm()}
       </React.Fragment>
     );

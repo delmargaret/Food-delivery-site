@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip, Row, Col } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import CategoriesService from '../../services/categories-service';
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class CategoriesList extends Component {
   constructor(props) {
@@ -75,7 +75,8 @@ export default class CategoriesList extends Component {
         text: '',
         formatter: (cellContent, row) => {
           return this.renderRemoveButton(row);
-        }
+        },
+        editable: false
       }
     ];
 
@@ -87,13 +88,18 @@ export default class CategoriesList extends Component {
         search
       >
         {props => (
-          <div>
-            <SearchBar {...props.searchProps} />
-            <ClearSearchButton
-              {...props.searchProps}
-              className="clear-search-btn"
-            />
+          <React.Fragment>
             <hr />
+            <br />
+            <Row>
+              <Col xs="4">
+                {" "}
+                <SearchBar
+                  {...props.searchProps}
+                  placeholder="Поиск"
+                />
+              </Col>
+            </Row>
             <BootstrapTable
               {...props.baseProps}
               bootstrap4
@@ -105,7 +111,7 @@ export default class CategoriesList extends Component {
               })}
               noDataIndication="Категории не найдены"
             />
-          </div>
+          </React.Fragment>
         )}
       </ToolkitProvider>
     );

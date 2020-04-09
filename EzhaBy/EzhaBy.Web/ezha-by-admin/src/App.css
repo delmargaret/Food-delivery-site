@@ -56,6 +56,11 @@
   box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
 }
 
+.App select:focus {
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}
+
 .App .table-hover tbody tr:hover {
   color: #212529;
   background-color: rgba(235, 95, 95, 0.075);

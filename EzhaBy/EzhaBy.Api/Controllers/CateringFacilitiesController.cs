@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
-using EzhaBy.Business.Categories;
 using EzhaBy.Business.CateringFacilities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

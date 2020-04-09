@@ -7,7 +7,7 @@ import CateringFacilitiesService from "../../services/catering-facilities-servic
 import emptyIcon from "./../../empty.png";
 import { Col } from "react-bootstrap";
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class CateringFacilitiesList extends Component {
   constructor(props) {
