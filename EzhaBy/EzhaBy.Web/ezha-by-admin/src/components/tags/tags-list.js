@@ -82,7 +82,7 @@ export default class TagsList extends Component {
         search
       >
         {props => (
-          <div>
+          <React.Fragment>
             <hr />
             <br />
             <Row>
@@ -105,7 +105,7 @@ export default class TagsList extends Component {
               })}
               noDataIndication="Тэги не найдены"
             />
-          </div>
+          </React.Fragment>
         )}
       </ToolkitProvider>
     );

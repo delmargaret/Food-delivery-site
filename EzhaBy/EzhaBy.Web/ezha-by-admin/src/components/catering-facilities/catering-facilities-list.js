@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Row } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { STATUSES } from "./catering-facilities-statuses";
 import CateringFacilitiesService from "../../services/catering-facilities-service";
 import emptyIcon from "./../../empty.png";
+import { Col } from "react-bootstrap";
 
 const { SearchBar, ClearSearchButton } = Search;
 
@@ -27,6 +28,7 @@ export default class CateringFacilitiesList extends Component {
         <Form.Check
           type="switch"
           label="Активно"
+          className="app-switch"
           id={cateringFacility.id}
           onChange={e => this.changeStatus(e, cateringFacility.id)}
           defaultChecked={
@@ -62,7 +64,7 @@ export default class CateringFacilitiesList extends Component {
             accept=".png, .jpg, .jpeg"
             onChange={e => this.handleImageChange(e, id)}
           />
-          <img height="150px" alt="" src={iconUrl} />
+          <img height="150px" alt="" src={iconUrl}/>
         </label>
         <span
           className="close"
@@ -91,14 +93,13 @@ export default class CateringFacilitiesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return (
-            <a href={`/catering-facilities/edit/${row.id}`}>{cellContent}</a>
+            <a className="app-link" href={`/catering-facilities/edit/${row.id}`}>{cellContent}</a>
           );
         }
       },
       {
         dataField: "cateringFacilityIconUrl",
         text: "Иконка",
-        sort: true,
         formatter: (cellContent, row) => {
           return this.renderIcon(cellContent, row.id);
         }
@@ -121,20 +122,25 @@ export default class CateringFacilitiesList extends Component {
         search
       >
         {props => (
-          <div>
-            <SearchBar {...props.searchProps} />
-            <ClearSearchButton
-              {...props.searchProps}
-              className="clear-search-btn"
-            />
+          <React.Fragment>
             <hr />
+            <br />
+            <Row>
+              <Col xs="4">
+                {" "}
+                <SearchBar
+                  {...props.searchProps}
+                  placeholder="Поиск"
+                />
+              </Col>
+            </Row>
             <BootstrapTable
               {...props.baseProps}
               bootstrap4
               hover={true}
               noDataIndication="Заведения не найдены"
             />
-          </div>
+          </React.Fragment>
         )}
       </ToolkitProvider>
     );

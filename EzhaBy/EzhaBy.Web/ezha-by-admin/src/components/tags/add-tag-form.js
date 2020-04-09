@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import TagsService from "../../services/tags-service";
+import React, { Component } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import TagsService from '../../services/tags-service';
 
 export default class AddTagForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      validated: false
+      validated: false,
     };
 
     this.tagNameInput = React.createRef();
@@ -23,7 +23,7 @@ export default class AddTagForm extends Component {
     }
 
     this.setState({
-      validated: true
+      validated: true,
     });
   }
 
@@ -34,9 +34,7 @@ export default class AddTagForm extends Component {
       <React.Fragment>
         <br />
         <Form noValidate validated={validated} onSubmit={this.onTagAdd}>
-          <Form.Label>
-            <b>Новый тэг</b>
-          </Form.Label>
+          <Form.Label>Новый тэг</Form.Label>
           <Row>
             <Col sm="4">
               <Form.Group controlId="tagName">

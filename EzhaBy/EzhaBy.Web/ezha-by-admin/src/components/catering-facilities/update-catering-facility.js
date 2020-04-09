@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { Component } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import CateringFacilityForm from "./catering-facility-form";
-import CateringFacilitiesService from "../../services/catering-facilities-service";
-import TagsService from "../../services/tags-service";
+import CateringFacilityForm from './catering-facility-form';
+import CateringFacilitiesService from '../../services/catering-facilities-service';
+import TagsService from '../../services/tags-service';
 
 export default class UpdateCateringFacility extends Component {
   constructor(props) {
@@ -105,29 +105,34 @@ export default class UpdateCateringFacility extends Component {
   render() {
     const { cateringFacilityTags, tags, needRedirect } = this.state;
 
-    const cateringFacilitiesRootPath = "/catering-facilities";
+    const cateringFacilitiesRootPath = '/catering-facilities';
 
     const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
 
     const formElement = (
       <React.Fragment>
         <br />
+        <br />
         <LinkContainer to="/catering-facilities" isActive={() => false}>
           <Button>Назад</Button>
         </LinkContainer>
         <br />
-        <Form onSubmit={this.onCateringFacilityUpdate}>
-          <CateringFacilityForm
-            cateringFacilityTags={cateringFacilityTags}
-            tags={tags}
-            ref={this.editorForm}
-          />
-          <Row>
-            <Col sm="4">
-              <Button type="submit">Изменить</Button>
-            </Col>
-          </Row>
-        </Form>
+        <Row>
+          <Col></Col>
+          <Col sm="5">
+            <Form onSubmit={this.onCateringFacilityUpdate}>
+              <CateringFacilityForm
+                cateringFacilityTags={cateringFacilityTags}
+                tags={tags}
+                ref={this.editorForm}
+              />
+              <Button type="submit" className="btn-red">
+                Изменить
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
 

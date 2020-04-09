@@ -100,19 +100,15 @@ export default class CateringFacilityForm extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col sm="4">
-            <Form.Group>
+        <Form.Group>
               <Form.Label>Название заведения</Form.Label>
               <Form.Control ref={this.nameInput} type="text" />
             </Form.Group>
-          </Col>
-        </Row>
         <Row>
-          <Col sm="2">
+          <Col>
             <CateringFacilityTypes ref={this.typeInput} />
           </Col>
-          <Col sm="2">
+          <Col>
             <Form.Group>
               <Form.Label>Время работы</Form.Label>
               <Form.Control ref={this.workingHoursInput} type="text" />
@@ -120,7 +116,7 @@ export default class CateringFacilityForm extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm="2">
+          <Col>
             <Form.Group>
               <Form.Label>Стоимость доставки</Form.Label>
               <Form.Control
@@ -130,7 +126,7 @@ export default class CateringFacilityForm extends Component {
               />
             </Form.Group>
           </Col>
-          <Col sm="2">
+          <Col>
             <Form.Group>
               <Form.Label>Время доставки</Form.Label>
               <Form.Control ref={this.deliveryTimeInput} type="text" />
@@ -138,18 +134,18 @@ export default class CateringFacilityForm extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm="4">
+          <Col>
             <Towns ref={this.townInput} />
           </Col>
         </Row>
         <Row>
-          <Col sm="2">
+          <Col>
             <Form.Group>
               <Form.Label>Улица</Form.Label>
               <Form.Control ref={this.streetInput} type="text" />
             </Form.Group>
           </Col>
-          <Col sm="2">
+          <Col>
             <Form.Group>
               <Form.Label>Дом</Form.Label>
               <Form.Control ref={this.houseInput} type="text" />
@@ -159,7 +155,7 @@ export default class CateringFacilityForm extends Component {
         <Form.Group>
           <Form.Label>Тэги</Form.Label>
           <Row>
-            <Col sm="3">
+            <Col>
               <Form.Control
                 as="select"
                 disabled={this.shouldDisableTagSelector()}
@@ -168,12 +164,12 @@ export default class CateringFacilityForm extends Component {
                 {this.renderTagsOptions()}
               </Form.Control>
             </Col>
-            <Col sm="1">
-              <Button onClick={this.onTagAdd}>Добавить</Button>
+            <Col sm="3">
+              <Button onClick={this.onTagAdd} className="btn-red">Добавить</Button>
             </Col>
           </Row>
         </Form.Group>
-        <Col sm="4">
+        <Col>
           <div ref={this.previewTag}>{this.renderTagsPreview()}</div>
         </Col>
         <br />
