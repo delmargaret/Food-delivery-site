@@ -23,7 +23,7 @@ export default class DishForm extends Component {
     return (
       <React.Fragment>
         <Row>
-          <Form.Group as={Col} md="6" controlId="nameValidationGroup">
+          <Form.Group as={Col} controlId="nameValidationGroup">
             <Form.Label>Название блюда</Form.Label>
             <Form.Control ref={this.nameInput} type="text" required />
             <Form.Control.Feedback type="invalid">
@@ -32,7 +32,7 @@ export default class DishForm extends Component {
           </Form.Group>
         </Row>
         <Row>
-          <Form.Group as={Col} md="6" controlId="descriptionValidationGroup">
+          <Form.Group as={Col} controlId="descriptionValidationGroup">
             <Form.Label>Описание</Form.Label>
             <Form.Control
               ref={this.descritionInput}
@@ -46,7 +46,7 @@ export default class DishForm extends Component {
           </Form.Group>
         </Row>
         <Row>
-          <Form.Group as={Col} md="6" controlId="priceValidationGroup">
+          <Form.Group as={Col} controlId="priceValidationGroup">
             <Form.Label>Цена</Form.Label>
             <Form.Control
               ref={this.priceInput}
@@ -60,7 +60,7 @@ export default class DishForm extends Component {
           </Form.Group>
         </Row>
         <Row>
-          <Form.Group as={Col} md="6" controlId="categoryValidationGroup">
+          <Form.Group as={Col} controlId="categoryValidationGroup">
             <Form.Label>Категория</Form.Label>
             <Form.Control as="select" ref={this.categoryInput}>
               {this.renderCategoriesOptions()}
