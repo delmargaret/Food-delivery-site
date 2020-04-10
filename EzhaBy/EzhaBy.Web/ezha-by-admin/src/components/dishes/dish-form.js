@@ -52,6 +52,7 @@ export default class DishForm extends Component {
               ref={this.priceInput}
               type="number"
               min="0"
+              step='0.01'
               required
             />
             <Form.Control.Feedback type="invalid">

@@ -125,6 +125,8 @@ export default class CateringFacilityForm extends Component {
             <Form.Control
               ref={this.deliveryPriceInput}
               type="number"
+              min='0'
+              step='0.01'
               required
             />
             <Form.Control.Feedback type="invalid">
