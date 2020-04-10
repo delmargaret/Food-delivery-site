@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { Component } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import CateringFacilityForm from "./catering-facility-form";
-import CateringFacilitiesService from "../../services/catering-facilities-service";
-import TagsService from "../../services/tags-service";
+import CateringFacilityForm from './catering-facility-form';
+import CateringFacilitiesService from '../../services/catering-facilities-service';
+import TagsService from '../../services/tags-service';
+import arrowLeft from './../../arrow-left.png'
 
 export default class AddCateringFacility extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ export default class AddCateringFacility extends Component {
   render() {
     const { tags, needRedirect, validated } = this.state;
 
-    const cateringFacilitiesRootPath = "/catering-facilities";
+    const cateringFacilitiesRootPath = '/catering-facilities';
 
     const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
 
@@ -96,7 +97,7 @@ export default class AddCateringFacility extends Component {
         <br />
         <br />
         <LinkContainer to={cateringFacilitiesRootPath} isActive={() => false}>
-          <Button className="btn-red">Назад</Button>
+          <img className="back-btn" alt="" width="35px" src={arrowLeft} />
         </LinkContainer>
         <br />
         <br />

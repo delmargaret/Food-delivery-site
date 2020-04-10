@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { Button, Form, Col, Row } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
+import React, { Component } from 'react';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import DishesService from "../../services/dishes-service";
-import DishForm from "./dish-form";
-import CategoriesService from "../../services/categories-service";
+import DishesService from '../../services/dishes-service';
+import DishForm from './dish-form';
+import CategoriesService from '../../services/categories-service';
+import arrowLeft from './../../arrow-left.png';
 
 export default class AddDish extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ export default class AddDish extends Component {
         <br />
         <br />
         <LinkContainer to={dishesCateringFacilityPage} isActive={() => false}>
-          <Button className="btn-red">Назад</Button>
+          <img className="back-btn" alt="" width="35px" src={arrowLeft} />
         </LinkContainer>
         <br />
         <br />
