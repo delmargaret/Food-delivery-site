@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import { Row, Col, Button, Form, Modal, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { Component } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Modal,
+  ButtonGroup,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 
-import { REQUEST_STATUSES } from './request-statuses';
+import { REQUEST_STATUSES } from "./request-statuses";
 import RequestsService, {
   COURIER_LIST_UPDATED,
-} from '../../services/requests-service';
-import Emitter from '../../services/event-emitter';
-import { VEHICLE_TYPES } from './vehicle-types';
-import checkmark from './../../checkmark.png';
-import cross from './../../cross.png';
+} from "../../services/requests-service";
+import Emitter from "../../services/event-emitter";
+import { VEHICLE_TYPES } from "./vehicle-types";
+
+import checkmark from "./../../checkmark.png";
+import cross from "./../../cross.png";
 
 const { SearchBar } = Search;
 
 export default class CourierRequestsPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       requests: [],
       show: false,
@@ -37,10 +48,10 @@ export default class CourierRequestsPage extends Component {
     Emitter.on(COURIER_LIST_UPDATED, (_) => this.getCourierRequests());
   }
 
-  getCourierRequests() {
-    RequestsService.getCourierRequests().then((result) => {
-      this.setState({ requests: result.data });
-    });
+  async getCourierRequests() {
+    const requestList = await RequestsService.getCourierRequests();
+
+    this.setState({ requests: requestList.data });
   }
 
   setShow(show) {
@@ -48,8 +59,11 @@ export default class CourierRequestsPage extends Component {
   }
 
   changeStatus(courier, status) {
-    this.setState({ currentCourier: courier, currentStatus: status });
-    this.setShow(true);
+    this.setState({
+      currentCourier: courier,
+      currentStatus: status,
+      show: true,
+    });
   }
 
   sendEmail(id, status, email) {
@@ -105,70 +119,73 @@ export default class CourierRequestsPage extends Component {
       case REQUEST_STATUSES.Rejected:
         return <div>Отклонен</div>;
       default:
-        return '';
+        return "";
     }
   }
 
   render() {
     const requestStatus =
       this.state.currentStatus === REQUEST_STATUSES.Accepted
-        ? 'Принять'
-        : 'Отклонить';
+        ? "Принять"
+        : "Отклонить";
+
     const courier = this.state.currentCourier;
 
     const columns = [
       {
-        dataField: 'id',
-        text: 'ID',
+        dataField: "id",
+        text: "ID",
         hidden: true,
       },
       {
-        dataField: 'courierName',
+        dataField: "courierName",
         isDummyField: true,
-        text: 'Имя курьера',
+        text: "Имя курьера",
         sort: true,
         formatter: (cellContent, row) => {
           return `${row.surname} ${row.name} ${row.patronymic}`;
         },
       },
       {
-        dataField: 'vehicleType',
-        text: 'Тип транспорта',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "vehicleType",
+        text: "Тип транспорта",
+        align: "left",
+        headerAlign: "left",
         sort: true,
         formatter: (cellContent, row) => {
           return VEHICLE_TYPES.find((type) => type.id === cellContent).name;
         },
       },
       {
-        dataField: 'fuelConsumption',
-        text: 'Расход топлива',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "fuelConsumption",
+        text: "Расход топлива",
+        align: "left",
+        headerAlign: "left",
         sort: true,
       },
       {
-        dataField: 'phone',
-        text: 'Телефон',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "phone",
+        text: "Телефон",
+        align: "left",
+        headerAlign: "left",
       },
       {
-        dataField: 'email',
-        text: 'Почта',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "email",
+        text: "Почта",
+        align: "left",
+        headerAlign: "left",
       },
       {
-        dataField: 'requestStatus',
-        text: 'Статус',
+        dataField: "requestStatus",
+        text: "Статус",
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderRequestButton(row);
         },
       },
     ];
+
+    const { show } = this.state;
 
     return (
       <React.Fragment>
@@ -184,7 +201,7 @@ export default class CourierRequestsPage extends Component {
             <React.Fragment>
               <Row>
                 <Col xs="4">
-                  {' '}
+                  {" "}
                   <SearchBar {...props.searchProps} placeholder="Поиск" />
                 </Col>
               </Row>
@@ -198,7 +215,7 @@ export default class CourierRequestsPage extends Component {
           )}
         </ToolkitProvider>
 
-        <Modal show={this.state.show} onHide={() => this.setShow(false)}>
+        <Modal show={show} onHide={() => this.setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>{requestStatus}</Modal.Title>
           </Modal.Header>
@@ -213,7 +230,7 @@ export default class CourierRequestsPage extends Component {
                     <Form.Control
                       ref={this.subjectInput}
                       defaultValue={`Ваша заявка ${
-                        requestStatus === 'Принять' ? 'принята' : 'отклонена'
+                        requestStatus === "Принять" ? "принята" : "отклонена"
                       }`}
                       type="text"
                     />

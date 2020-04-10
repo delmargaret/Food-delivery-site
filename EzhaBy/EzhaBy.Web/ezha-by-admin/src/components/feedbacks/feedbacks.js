@@ -1,26 +1,38 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { Row, Col, Button, Form, Modal, ButtonGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Modal,
+  ButtonGroup,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
+
 import Emitter from "../../services/event-emitter";
 import FeedbacksService, {
-  FEEDBACK_LIST_UPDATED
+  FEEDBACK_LIST_UPDATED,
 } from "../../services/feedbacks-service";
 import { FEEDBACK_STATUSES } from "./feedback-statuses";
 import { FEEDBACK_CATEGORIES } from "./feedback-categories";
-import checkmark from './../../checkmark.png';
-import mail from './../../mail.png';
+
+import checkmark from "./../../checkmark.png";
+import mail from "./../../mail.png";
 
 const { SearchBar } = Search;
 
 export default class FeedbacksPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       feedbacks: [],
       show: false,
       currentFeedback: {},
-      currentStatus: null
+      currentStatus: null,
     };
 
     this.getFeedbacks = this.getFeedbacks.bind(this);
@@ -33,15 +45,15 @@ export default class FeedbacksPage extends Component {
 
   componentDidMount() {
     this.getFeedbacks();
-    Emitter.on(FEEDBACK_LIST_UPDATED, _ => this.getFeedbacks());
+    Emitter.on(FEEDBACK_LIST_UPDATED, (_) => this.getFeedbacks());
   }
 
-  getFeedbacks() {
-    FeedbacksService.getFeedbacks().then(result => {
-      if (result) {
-        this.setState({ feedbacks: result.data });
-      }
-    });
+  async getFeedbacks() {
+    const feedbackList = await FeedbacksService.getFeedbacks();
+
+    if (feedbackList) {
+      this.setState({ feedbacks: feedbackList.data });
+    }
   }
 
   setShow(show) {
@@ -49,8 +61,11 @@ export default class FeedbacksPage extends Component {
   }
 
   changeStatus(feedback, status) {
-    this.setState({ currentFeedback: feedback, currentStatus: status });
-    this.setShow(true);
+    this.setState({
+      currentFeedback: feedback,
+      currentStatus: status,
+      show: true,
+    });
   }
 
   sendEmail(id, status, email) {
@@ -77,7 +92,10 @@ export default class FeedbacksPage extends Component {
                   variant="outline-success"
                   className="accept"
                   onClick={() =>
-                    FeedbacksService.changeFeedbackStatus(feedback.id, FEEDBACK_STATUSES.Processed)
+                    FeedbacksService.changeFeedbackStatus(
+                      feedback.id,
+                      FEEDBACK_STATUSES.Processed
+                    )
                   }
                 >
                   <img alt="" width="24px" src={checkmark} />
@@ -111,14 +129,14 @@ export default class FeedbacksPage extends Component {
   render() {
     const feedback = this.state.currentFeedback;
     let type = FEEDBACK_CATEGORIES.find(
-      type => type.id === feedback.feedbackCategory
+      (type) => type.id === feedback.feedbackCategory
     );
 
     const columns = [
       {
         dataField: "id",
         text: "ID",
-        hidden: true
+        hidden: true,
       },
       {
         dataField: "feedbackCategory",
@@ -127,15 +145,16 @@ export default class FeedbacksPage extends Component {
         headerAlign: "left",
         sort: true,
         formatter: (cellContent, row) => {
-          return FEEDBACK_CATEGORIES.find(type => type.id === cellContent).name;
-        }
+          return FEEDBACK_CATEGORIES.find((type) => type.id === cellContent)
+            .name;
+        },
       },
       {
         dataField: "cateringFacility.cateringFacilityName",
         text: "Заведение",
         align: "left",
         headerAlign: "left",
-        sort: true
+        sort: true,
       },
       {
         dataField: "userName",
@@ -144,7 +163,7 @@ export default class FeedbacksPage extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return `${row.surname} ${row.name} ${row.patronymic}`;
-        }
+        },
       },
       {
         dataField: "email",
@@ -155,8 +174,7 @@ export default class FeedbacksPage extends Component {
       {
         dataField: "text",
         text: "Содержание",
-        hidden: true
-
+        hidden: true,
       },
       {
         dataField: "feedbackStatus",
@@ -164,16 +182,16 @@ export default class FeedbacksPage extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderFeedbackButton(row);
-        }
-      }
+        },
+      },
     ];
 
     const expandRow = {
       onlyOneExpanding: true,
-      renderer: row => (
-        <React.Fragment>{row.text}</React.Fragment>
-      )
+      renderer: (row) => <React.Fragment>{row.text}</React.Fragment>,
     };
+
+    const { show } = this.state;
 
     return (
       <React.Fragment>
@@ -185,11 +203,11 @@ export default class FeedbacksPage extends Component {
           columns={columns}
           search
         >
-          {props => (
+          {(props) => (
             <React.Fragment>
               <Row>
                 <Col xs="4">
-                  {' '}
+                  {" "}
                   <SearchBar {...props.searchProps} placeholder="Поиск" />
                 </Col>
               </Row>
@@ -198,13 +216,13 @@ export default class FeedbacksPage extends Component {
                 bootstrap4
                 hover={true}
                 noDataIndication="Запросы не найдены"
-                expandRow={ expandRow }
+                expandRow={expandRow}
               />
             </React.Fragment>
           )}
         </ToolkitProvider>
 
-        <Modal show={this.state.show} onHide={() => this.setShow(false)}>
+        <Modal show={show} onHide={() => this.setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Обратная связь</Modal.Title>
           </Modal.Header>

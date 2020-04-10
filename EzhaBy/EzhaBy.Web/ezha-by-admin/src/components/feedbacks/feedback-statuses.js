@@ -1,4 +1,4 @@
 export const FEEDBACK_STATUSES = {
-    New: 0,
-    Processed: 1,
-  };
+  New: 0,
+  Processed: 1,
+};

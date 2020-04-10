@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import React, { Component } from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+
 import {
   Row,
   Col,
@@ -10,16 +11,17 @@ import {
   ButtonGroup,
   OverlayTrigger,
   Tooltip,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
-import { REQUEST_STATUSES } from './request-statuses';
-import { TYPES } from '../catering-facility-types';
+import { REQUEST_STATUSES } from "./request-statuses";
+import { TYPES } from "../catering-facility-types";
 import RequestsService, {
   PARTNER_LIST_UPDATED,
-} from '../../services/requests-service';
-import Emitter from '../../services/event-emitter';
-import checkmark from './../../checkmark.png';
-import cross from './../../cross.png';
+} from "../../services/requests-service";
+import Emitter from "../../services/event-emitter";
+
+import checkmark from "./../../checkmark.png";
+import cross from "./../../cross.png";
 
 const { SearchBar } = Search;
 
@@ -46,10 +48,10 @@ export default class PartnerRequestsPage extends Component {
     Emitter.on(PARTNER_LIST_UPDATED, (_) => this.getPartnerRequests());
   }
 
-  getPartnerRequests() {
-    RequestsService.getPartnerRequests().then((result) => {
-      this.setState({ requests: result.data });
-    });
+  async getPartnerRequests() {
+    const requestList = await RequestsService.getPartnerRequests();
+
+    this.setState({ requests: requestList.data });
   }
 
   setShow(show) {
@@ -57,8 +59,11 @@ export default class PartnerRequestsPage extends Component {
   }
 
   changeStatus(partner, status) {
-    this.setState({ currentPartner: partner, currentStatus: status });
-    this.setShow(true);
+    this.setState({
+      currentPartner: partner,
+      currentStatus: status,
+      show: true,
+    });
   }
 
   sendEmail(id, status, email) {
@@ -114,70 +119,72 @@ export default class PartnerRequestsPage extends Component {
       case REQUEST_STATUSES.Rejected:
         return <div>Отклонен</div>;
       default:
-        return '';
+        return "";
     }
   }
 
   render() {
     const requestStatus =
       this.state.currentStatus === REQUEST_STATUSES.Accepted
-        ? 'Принять'
-        : 'Отклонить';
+        ? "Принять"
+        : "Отклонить";
     const partner = this.state.currentPartner;
 
     const columns = [
       {
-        dataField: 'id',
-        text: 'ID',
+        dataField: "id",
+        text: "ID",
         hidden: true,
       },
       {
-        dataField: 'cateringFacilityName',
-        text: 'Заведение',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "cateringFacilityName",
+        text: "Заведение",
+        align: "left",
+        headerAlign: "left",
         sort: true,
       },
       {
-        dataField: 'cateringFacilityType',
-        text: 'Тип',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "cateringFacilityType",
+        text: "Тип",
+        align: "left",
+        headerAlign: "left",
         sort: true,
         formatter: (cellContent, row) => {
           return TYPES.find((type) => type.id === cellContent).name;
         },
       },
       {
-        dataField: 'partnerName',
+        dataField: "partnerName",
         isDummyField: true,
-        text: 'Имя партнера',
+        text: "Имя партнера",
         sort: true,
         formatter: (cellContent, row) => {
           return `${row.surname} ${row.name} ${row.patronymic}`;
         },
       },
       {
-        dataField: 'phone',
-        text: 'Телефон',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "phone",
+        text: "Телефон",
+        align: "left",
+        headerAlign: "left",
       },
       {
-        dataField: 'email',
-        text: 'Почта',
-        align: 'left',
-        headerAlign: 'left',
+        dataField: "email",
+        text: "Почта",
+        align: "left",
+        headerAlign: "left",
       },
       {
-        dataField: 'requestStatus',
-        text: 'Статус',
+        dataField: "requestStatus",
+        text: "Статус",
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderRequestButton(row);
         },
       },
     ];
+
+    const { show } = this.state;
 
     return (
       <React.Fragment>
@@ -193,7 +200,7 @@ export default class PartnerRequestsPage extends Component {
             <React.Fragment>
               <Row>
                 <Col xs="4">
-                  {' '}
+                  {" "}
                   <SearchBar {...props.searchProps} placeholder="Поиск" />
                 </Col>
               </Row>
@@ -207,7 +214,7 @@ export default class PartnerRequestsPage extends Component {
           )}
         </ToolkitProvider>
 
-        <Modal show={this.state.show} onHide={() => this.setShow(false)}>
+        <Modal show={show} onHide={() => this.setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>{requestStatus}</Modal.Title>
           </Modal.Header>
@@ -223,7 +230,7 @@ export default class PartnerRequestsPage extends Component {
                     <Form.Control
                       ref={this.subjectInput}
                       defaultValue={`Ваша заявка ${
-                        requestStatus === 'Принять' ? 'принята' : 'отклонена'
+                        requestStatus === "Принять" ? "принята" : "отклонена"
                       }`}
                       type="text"
                     />
