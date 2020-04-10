@@ -16,35 +16,73 @@ namespace EzhaBy.Api.Controllers
         public RequestsController(IMediator mediator) => this.mediator = mediator;
 
         [HttpGet("partners")]
-        public async Task<IActionResult> GetPartnerRequests() =>
-            Ok(await mediator.Send(new GetPartnerRequests.Query()));
+        public async Task<IActionResult> GetPartnerRequests()
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetPartnerRequests.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpPut("partners/{id}/status")]
         public async Task<IActionResult> SetPartnerRequestStatus(string id, [FromBody] SetPartnerRequestStatus.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("couriers")]
-        public async Task<IActionResult> GetCourierRequests() =>
-            Ok(await mediator.Send(new GetCourierRequests.Query()));
+        public async Task<IActionResult> GetCourierRequests()
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetCourierRequests.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpPut("couriers/{id}/status")]
         public async Task<IActionResult> SetCourierRequestStatus(string id, [FromBody] SetCourierRequestStatus.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPut("email")]
         public IActionResult SendEmail([FromBody] EmailDto email)
         {
-            EmailService.SendMail(email.Email, email.Subject, email.Body);
-            return Ok();
+            try
+            {
+                EmailService.SendMail(email.Email, email.Subject, email.Body);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
-
     }
 }

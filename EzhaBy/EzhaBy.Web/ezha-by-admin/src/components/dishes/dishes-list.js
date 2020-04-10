@@ -6,7 +6,7 @@ import { DISH_STATUSES } from "./dishes-statuses";
 import DishesService from "../../services/dishes-service";
 import emptyIcon from "./../../empty.png";
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class DishesList extends Component {
   constructor(props) {

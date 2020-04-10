@@ -1,16 +1,27 @@
-import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { Row, Col, Button, Form, Modal } from "react-bootstrap";
+import React, { Component } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Modal,
+  ButtonGroup,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 
-import { REQUEST_STATUSES } from "./request-statuses";
-import { TYPES } from "../catering-facility-types";
+import { REQUEST_STATUSES } from './request-statuses';
+import { TYPES } from '../catering-facility-types';
 import RequestsService, {
-  PARTNER_LIST_UPDATED
-} from "../../services/requests-service";
-import Emitter from "../../services/event-emitter";
+  PARTNER_LIST_UPDATED,
+} from '../../services/requests-service';
+import Emitter from '../../services/event-emitter';
+import checkmark from './../../checkmark.png';
+import cross from './../../cross.png';
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class PartnerRequestsPage extends Component {
   constructor(props) {
@@ -19,7 +30,7 @@ export default class PartnerRequestsPage extends Component {
       requests: [],
       show: false,
       currentPartner: {},
-      currentStatus: null
+      currentStatus: null,
     };
 
     this.getPartnerRequests = this.getPartnerRequests.bind(this);
@@ -32,11 +43,11 @@ export default class PartnerRequestsPage extends Component {
 
   componentDidMount() {
     this.getPartnerRequests();
-    Emitter.on(PARTNER_LIST_UPDATED, _ => this.getPartnerRequests());
+    Emitter.on(PARTNER_LIST_UPDATED, (_) => this.getPartnerRequests());
   }
 
   getPartnerRequests() {
-    RequestsService.getPartnerRequests().then(result => {
+    RequestsService.getPartnerRequests().then((result) => {
       this.setState({ requests: result.data });
     });
   }
@@ -64,124 +75,135 @@ export default class PartnerRequestsPage extends Component {
     switch (partner.requestStatus) {
       case REQUEST_STATUSES.New:
         return (
-          <div>
-            <Row>
-              <Col sm="2">
+          <React.Fragment>
+            <ButtonGroup>
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>Принять</Tooltip>}
+              >
                 <Button
+                  variant="outline-success"
+                  className="accept"
                   onClick={() =>
                     this.changeStatus(partner, REQUEST_STATUSES.Accepted)
                   }
                 >
-                  Принять
+                  <img alt="" width="24px" src={checkmark} />
                 </Button>
-              </Col>
-              <Col sm="2">
+              </OverlayTrigger>
+
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>Отклонить</Tooltip>}
+              >
                 <Button
+                  variant="outline-danger"
+                  className="reject"
                   onClick={() =>
                     this.changeStatus(partner, REQUEST_STATUSES.Rejected)
                   }
                 >
-                  Отклонить
+                  <img alt="" width="24px" src={cross} />
                 </Button>
-              </Col>
-            </Row>
-          </div>
+              </OverlayTrigger>
+            </ButtonGroup>
+          </React.Fragment>
         );
       case REQUEST_STATUSES.Accepted:
         return <div>Принят</div>;
       case REQUEST_STATUSES.Rejected:
         return <div>Отклонен</div>;
       default:
-        return "";
+        return '';
     }
   }
 
   render() {
     const requestStatus =
       this.state.currentStatus === REQUEST_STATUSES.Accepted
-        ? "Принять"
-        : "Отклонить";
+        ? 'Принять'
+        : 'Отклонить';
     const partner = this.state.currentPartner;
 
     const columns = [
       {
-        dataField: "id",
-        text: "ID",
-        hidden: true
+        dataField: 'id',
+        text: 'ID',
+        hidden: true,
       },
       {
-        dataField: "cateringFacilityName",
-        text: "Заведение",
-        align: "left",
-        headerAlign: "left",
-        sort: true
+        dataField: 'cateringFacilityName',
+        text: 'Заведение',
+        align: 'left',
+        headerAlign: 'left',
+        sort: true,
       },
       {
-        dataField: "cateringFacilityType",
-        text: "Тип",
-        align: "left",
-        headerAlign: "left",
+        dataField: 'cateringFacilityType',
+        text: 'Тип',
+        align: 'left',
+        headerAlign: 'left',
         sort: true,
         formatter: (cellContent, row) => {
-          return TYPES.find(type => type.id === cellContent).name;
-        }
+          return TYPES.find((type) => type.id === cellContent).name;
+        },
       },
       {
-        dataField: "partnerName",
+        dataField: 'partnerName',
         isDummyField: true,
-        text: "Имя партнера",
+        text: 'Имя партнера',
         sort: true,
         formatter: (cellContent, row) => {
           return `${row.surname} ${row.name} ${row.patronymic}`;
-        }
+        },
       },
       {
-        dataField: "phone",
-        text: "Телефон",
-        align: "left",
-        headerAlign: "left",
-        sort: true
+        dataField: 'phone',
+        text: 'Телефон',
+        align: 'left',
+        headerAlign: 'left',
       },
       {
-        dataField: "email",
-        text: "Почта",
-        align: "left",
-        headerAlign: "left",
-        sort: true
+        dataField: 'email',
+        text: 'Почта',
+        align: 'left',
+        headerAlign: 'left',
       },
       {
-        dataField: "requestStatus",
-        text: "Статус",
+        dataField: 'requestStatus',
+        text: 'Статус',
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderRequestButton(row);
-        }
-      }
+        },
+      },
     ];
 
     return (
-      <div>
+      <React.Fragment>
+        <br />
+        <br />
         <ToolkitProvider
           keyField="id"
           data={this.state.requests}
           columns={columns}
           search
         >
-          {props => (
-            <div>
-              <SearchBar {...props.searchProps} />
-              <ClearSearchButton
-                {...props.searchProps}
-                className="clear-search-btn"
-              />
-              <hr />
+          {(props) => (
+            <React.Fragment>
+              <Row>
+                <Col xs="4">
+                  {' '}
+                  <SearchBar {...props.searchProps} placeholder="Поиск" />
+                </Col>
+              </Row>
               <BootstrapTable
                 {...props.baseProps}
                 bootstrap4
                 hover={true}
                 noDataIndication="Заведения не найдены"
               />
-            </div>
+            </React.Fragment>
           )}
         </ToolkitProvider>
 
@@ -198,13 +220,19 @@ export default class PartnerRequestsPage extends Component {
                 <Col sm="2">Subject:</Col>
                 <Col>
                   <Form.Group>
-                    <Form.Control ref={this.subjectInput} type="text" />
+                    <Form.Control
+                      ref={this.subjectInput}
+                      defaultValue={`Ваша заявка ${
+                        requestStatus === 'Принять' ? 'принята' : 'отклонена'
+                      }`}
+                      type="text"
+                    />
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <Form.Group>
+                  <Form.Group className="app-form">
                     <Form.Control
                       ref={this.bodyInput}
                       as="textarea"
@@ -218,7 +246,7 @@ export default class PartnerRequestsPage extends Component {
 
           <Modal.Footer>
             <Button
-              variant="primary"
+              className="btn-red"
               onClick={() =>
                 this.sendEmail(
                   partner.id,
@@ -231,7 +259,7 @@ export default class PartnerRequestsPage extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }
