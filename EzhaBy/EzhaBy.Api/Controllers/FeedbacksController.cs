@@ -16,22 +16,45 @@ namespace EzhaBy.Api.Controllers
         public FeedbacksController(IMediator mediator) => this.mediator = mediator;
 
         [HttpGet]
-        public async Task<IActionResult> GetFeedbacks() =>
-            Ok(await mediator.Send(new GetFeedbacks.Query()));
+        public async Task<IActionResult> GetFeedbacks()
+        {
+            try
+            {
+                return Ok(await mediator.Send(new GetFeedbacks.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         [HttpPut("{id}/status")]
         public async Task<IActionResult> SetFeedbackStatus(string id, [FromBody] SetFeedbackStatus.Command command)
         {
-            command.Id = Guid.Parse(id);
-            await mediator.Send(command);
-            return Ok();
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPut("email")]
         public IActionResult SendEmail([FromBody] EmailDto email)
         {
-            EmailService.SendMail(email.Email, email.Subject, email.Body);
-            return Ok();
+            try
+            {
+                EmailService.SendMail(email.Email, email.Subject, email.Body);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

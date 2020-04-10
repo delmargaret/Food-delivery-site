@@ -192,7 +192,7 @@ export default class CourierRequestsPage extends Component {
                 {...props.baseProps}
                 bootstrap4
                 hover={true}
-                noDataIndication="Заведения не найдены"
+                noDataIndication="Заявки не найдены"
               />
             </React.Fragment>
           )}

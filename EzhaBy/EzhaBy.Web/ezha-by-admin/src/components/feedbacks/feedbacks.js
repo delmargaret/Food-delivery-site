@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { Row, Col, Button, Form, Modal } from "react-bootstrap";
+import { Row, Col, Button, Form, Modal, ButtonGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Emitter from "../../services/event-emitter";
 import FeedbacksService, {
   FEEDBACK_LIST_UPDATED
 } from "../../services/feedbacks-service";
 import { FEEDBACK_STATUSES } from "./feedback-statuses";
 import { FEEDBACK_CATEGORIES } from "./feedback-categories";
+import checkmark from './../../checkmark.png';
+import mail from './../../mail.png';
 
-const { SearchBar, ClearSearchButton } = Search;
+const { SearchBar } = Search;
 
 export default class FeedbacksPage extends Component {
   constructor(props) {
@@ -65,15 +67,39 @@ export default class FeedbacksPage extends Component {
     switch (feedback.feedbackStatus) {
       case FEEDBACK_STATUSES.New:
         return (
-          <div>
-            <Button
-              onClick={() =>
-                this.changeStatus(feedback, FEEDBACK_STATUSES.Processed)
-              }
-            >
-              Обработать
-            </Button>
-          </div>
+          <React.Fragment>
+            <ButtonGroup>
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>Принять</Tooltip>}
+              >
+                <Button
+                  variant="outline-success"
+                  className="accept"
+                  onClick={() =>
+                    FeedbacksService.changeFeedbackStatus(feedback.id, FEEDBACK_STATUSES.Processed)
+                  }
+                >
+                  <img alt="" width="24px" src={checkmark} />
+                </Button>
+              </OverlayTrigger>
+
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>Ответить</Tooltip>}
+              >
+                <Button
+                  variant="outline-danger"
+                  className="reject"
+                  onClick={() =>
+                    this.changeStatus(feedback, FEEDBACK_STATUSES.Processed)
+                  }
+                >
+                  <img alt="" width="24px" src={mail} />
+                </Button>
+              </OverlayTrigger>
+            </ButtonGroup>
+          </React.Fragment>
         );
       case FEEDBACK_STATUSES.Processed:
         return <div>Обработан</div>;
@@ -125,14 +151,12 @@ export default class FeedbacksPage extends Component {
         text: "Почта",
         align: "left",
         headerAlign: "left",
-        sort: true
       },
       {
         dataField: "text",
         text: "Содержание",
-        align: "left",
-        headerAlign: "left",
-        sort: true
+        hidden: true
+
       },
       {
         dataField: "feedbackStatus",
@@ -144,8 +168,17 @@ export default class FeedbacksPage extends Component {
       }
     ];
 
+    const expandRow = {
+      onlyOneExpanding: true,
+      renderer: row => (
+        <React.Fragment>{row.text}</React.Fragment>
+      )
+    };
+
     return (
-      <div>
+      <React.Fragment>
+        <br />
+        <br />
         <ToolkitProvider
           keyField="id"
           data={this.state.feedbacks}
@@ -153,20 +186,21 @@ export default class FeedbacksPage extends Component {
           search
         >
           {props => (
-            <div>
-              <SearchBar {...props.searchProps} />
-              <ClearSearchButton
-                {...props.searchProps}
-                className="clear-search-btn"
-              />
-              <hr />
+            <React.Fragment>
+              <Row>
+                <Col xs="4">
+                  {' '}
+                  <SearchBar {...props.searchProps} placeholder="Поиск" />
+                </Col>
+              </Row>
               <BootstrapTable
                 {...props.baseProps}
                 bootstrap4
                 hover={true}
                 noDataIndication="Запросы не найдены"
+                expandRow={ expandRow }
               />
-            </div>
+            </React.Fragment>
           )}
         </ToolkitProvider>
 
@@ -189,7 +223,7 @@ export default class FeedbacksPage extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Form.Group>
+                  <Form.Group className="app-form">
                     <Form.Control
                       ref={this.bodyInput}
                       as="textarea"
@@ -203,7 +237,7 @@ export default class FeedbacksPage extends Component {
 
           <Modal.Footer>
             <Button
-              variant="primary"
+              className="btn-red"
               onClick={() =>
                 this.sendEmail(
                   feedback.id,
@@ -216,7 +250,7 @@ export default class FeedbacksPage extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }
