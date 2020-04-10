@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,52 +26,52 @@ import "./../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2
 
 import leaves from "./leaves.png";
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <NavbarComponent />
-        <NavTabs activeKey="tags" />
-        <Row id='main-row'>
-          <Col>
-            {" "}
-            <img alt="" src={leaves} className="leaves-left" />
-          </Col>
-          <Col xs={8}>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/tags" />
-              </Route>
-              <Route path="/tags">
-                <TagsPage />
-              </Route>
-              <Route path="/catering-facilities">
-                <CateringFacilitiesRouter />
-              </Route>
-              <Route path="/categories">
-                <CategoriesPage />
-              </Route>
-              <Route path="/dishes">
-                <DishesRouter />
-              </Route>
-              <Route path="/partners">
-                <PartnerRequestsPage />
-              </Route>
-              <Route path="/couriers">
-                <CourierRequestsPage />
-              </Route>
-              <Route path="/feedbacks">
-                <FeedbacksPage />
-              </Route>
-            </Switch>
-          </Col>
-          <Col>
-            <img alt="" src={leaves} className="leaves-right" />
-          </Col>
-        </Row>
-      </div>
-    </Router>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <NavbarComponent />
+          <NavTabs activeKey={window.location.pathname.slice(1) || 'tags'} />
+          <Row id="main-row">
+            <Col>
+              {' '}
+              <img alt="" src={leaves} className="leaves-left" />
+            </Col>
+            <Col xs={8}>
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/tags" />
+                </Route>
+                <Route path="/tags">
+                  <TagsPage />
+                </Route>
+                <Route path="/catering-facilities">
+                  <CateringFacilitiesRouter />
+                </Route>
+                <Route path="/categories">
+                  <CategoriesPage />
+                </Route>
+                <Route path="/dishes">
+                  <DishesRouter />
+                </Route>
+                <Route path="/partners">
+                  <PartnerRequestsPage />
+                </Route>
+                <Route path="/couriers">
+                  <CourierRequestsPage />
+                </Route>
+                <Route path="/feedbacks">
+                  <FeedbacksPage />
+                </Route>
+              </Switch>
+            </Col>
+            <Col>
+              <img alt="" src={leaves} className="leaves-right" />
+            </Col>
+          </Row>
+        </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
