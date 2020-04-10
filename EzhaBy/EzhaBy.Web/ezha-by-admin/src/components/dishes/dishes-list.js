@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { DISH_STATUSES } from "./dishes-statuses";
@@ -30,6 +30,7 @@ export default class DishesList extends Component {
           type="switch"
           label="В наличии"
           id={dish.id}
+          className="app-switch"
           onChange={e => this.changeStatus(e, dish.id)}
           defaultChecked={dish.dishStatus === DISH_STATUSES.InStock}
         />
@@ -91,7 +92,7 @@ export default class DishesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return (
-            <a href={`/dishes/edit/${row.id}/${this.props.cateringFacilityId}`}>
+            <a className="app-link" href={`/dishes/edit/${row.id}/${this.props.cateringFacilityId}`}>
               {cellContent}
             </a>
           );
@@ -100,14 +101,13 @@ export default class DishesList extends Component {
       {
         dataField: "dishIconUrl",
         text: "Иконка",
-        sort: true,
         formatter: (cellContent, row) => {
           return this.renderIcon(cellContent, row.id);
         }
       },
       {
         dataField: "cateringFacilityCategory.categoryName",
-        text: "Категории",
+        text: "Категория",
         align: "left",
         headerAlign: "left",
         sort: true
@@ -131,12 +131,15 @@ export default class DishesList extends Component {
       >
         {props => (
           <React.Fragment>
-            <SearchBar {...props.searchProps} />
-            <ClearSearchButton
-              {...props.searchProps}
-              className="clear-search-btn"
-            />
-            <hr />
+            <Row>
+              <Col xs="4">
+                {" "}
+                <SearchBar
+                  {...props.searchProps}
+                  placeholder="Поиск"
+                />
+              </Col>
+            </Row>
             <BootstrapTable
               {...props.baseProps}
               bootstrap4

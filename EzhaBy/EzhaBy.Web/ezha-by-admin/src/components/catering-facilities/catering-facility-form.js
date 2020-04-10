@@ -4,8 +4,6 @@ import { Button, Form, Col, Row } from "react-bootstrap";
 import Towns from "../towns";
 import CateringFacilityTypes from "../catering-facility-types";
 
-import "./catering-facilities.css";
-
 export default class CateringFacilityForm extends Component {
   constructor(props) {
     super(props);

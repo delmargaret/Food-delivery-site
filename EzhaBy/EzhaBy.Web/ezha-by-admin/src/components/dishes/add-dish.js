@@ -74,20 +74,33 @@ export default class AddDish extends Component {
     const formElement = (
       <React.Fragment>
         <br />
+        <br />
         <LinkContainer to={dishesCateringFacilityPage} isActive={() => false}>
-          <Button>Назад</Button>
+          <Button className="btn-red">Назад</Button>
         </LinkContainer>
         <br />
-        <Form noValidate validated={validated} onSubmit={this.onDishSubmit}>
-          <DishForm
-            categories={categories}
-            ref={this.formResults}
-            categoryId={-1}
-          />
-          <Button type="submit" className="btn-red">
-            Создать
-          </Button>
-        </Form>
+        <br />
+        <Row>
+          <Col></Col>
+          <Col sm="7">
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={this.onDishSubmit}
+              className="app-form"
+            >
+              <DishForm
+                categories={categories}
+                ref={this.formResults}
+                categoryId={-1}
+              />
+              <Button type="submit" className="btn-red">
+                Создать
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
 

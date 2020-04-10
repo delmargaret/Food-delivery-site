@@ -36,7 +36,7 @@ namespace EzhaBy.Business.Dishes
                 var dish = await context.Dishes.FindAsync(request.Id);
                 if (dish == null)
                 {
-                    throw new Exception("dishy isn't exists");
+                    throw new Exception("dish isn't exists");
                 }
 
                 dish.DishIconUrl = request.Url;

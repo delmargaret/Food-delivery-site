@@ -92,3 +92,11 @@
 .close:hover {
   color: rgb(235, 95, 95) !important;
 }
+
+.app-form .btn-red {
+  width: 100%;
+}
+
+.app-form textarea {
+  height: 10em !important;
+}

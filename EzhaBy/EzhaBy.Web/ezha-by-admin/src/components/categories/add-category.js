@@ -47,7 +47,7 @@ export default class AddCategoryForm extends Component {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Введите название тэга
+                  Введите название категории
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>

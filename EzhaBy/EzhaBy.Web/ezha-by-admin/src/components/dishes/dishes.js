@@ -107,10 +107,10 @@ export default class DishesPage extends Component {
 
       return (
         <React.Fragment>
-          <br />
           <LinkContainer to={`/dishes/new/${id}`} isActive={() => false}>
-            <Button>Добавить блюдо</Button>
+            <Button className="btn-red">Добавить блюдо</Button>
           </LinkContainer>
+          <hr />
           <br />
           <div id="dishes-list">
             <DishesList dishes={this.state.dishes} cateringFacilityId={id} />
@@ -135,6 +135,7 @@ export default class DishesPage extends Component {
 
     const pageElement = (
       <React.Fragment>
+        <br />
         <Form.Group>
           <Form.Label>Заведение</Form.Label>
           <Form.Control
@@ -149,6 +150,7 @@ export default class DishesPage extends Component {
             {this.renderCateringFacilityOptions()}
           </Form.Control>
         </Form.Group>
+        <hr />
         {this.renderDishesForm()}
       </React.Fragment>
     );

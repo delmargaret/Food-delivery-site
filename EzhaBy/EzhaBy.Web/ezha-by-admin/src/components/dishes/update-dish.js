@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -92,16 +92,29 @@ export default class UpdateDish extends Component {
     const formElement = (
       <React.Fragment>
         <br />
+        <br />
         <LinkContainer to={dishesCateringFacilityPage} isActive={() => false}>
-          <Button>Назад</Button>
+          <Button className="btn-red">Назад</Button>
         </LinkContainer>
         <br />
-        <Form noValidate validated={validated} onSubmit={this.onDishUpdate}>
-          <DishForm categories={categories} ref={this.formResults} />
-          <Button type="submit" className="btn-red">
-            Изменить
-          </Button>
-        </Form>
+        <br />
+        <Row>
+          <Col></Col>
+          <Col sm="7">
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={this.onDishUpdate}
+              className="app-form"
+            >
+              <DishForm categories={categories} ref={this.formResults} />
+              <Button type="submit" className="btn-red">
+                Изменить
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
 

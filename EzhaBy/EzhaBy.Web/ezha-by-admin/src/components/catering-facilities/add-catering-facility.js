@@ -107,7 +107,7 @@ export default class AddCateringFacility extends Component {
               noValidate
               validated={validated}
               onSubmit={this.onCateringFacilitySubmit}
-              className="catering-facility-form"
+              className="app-form"
             >
               <CateringFacilityForm
                 cateringFacilityTags={[]}
