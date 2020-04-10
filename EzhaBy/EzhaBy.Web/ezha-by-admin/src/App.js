@@ -32,7 +32,7 @@ function App() {
       <div className="App">
         <NavbarComponent />
         <NavTabs activeKey="tags" />
-        <Row>
+        <Row id='main-row'>
           <Col>
             {" "}
             <img alt="" src={leaves} className="leaves-left" />

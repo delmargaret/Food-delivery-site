@@ -22,6 +22,10 @@
   transform: rotate(180deg);
 }
 
+#main-row {
+  margin: 0;
+}
+
 .App .btn-red {
   color: black;
   background-color: rgba(235, 95, 95, 0.6);
