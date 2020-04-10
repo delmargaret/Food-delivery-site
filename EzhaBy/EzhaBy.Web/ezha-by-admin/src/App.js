@@ -31,7 +31,7 @@ function App() {
     <Router>
       <div className="App">
         <NavbarComponent />
-        <NavTabs activeKey="partners" />
+        <NavTabs activeKey="tags" />
         <Row>
           <Col>
             {" "}
@@ -40,7 +40,7 @@ function App() {
           <Col xs={8}>
             <Switch>
               <Route exact path="/">
-                <Redirect to="/partners" />
+                <Redirect to="/tags" />
               </Route>
               <Route path="/tags">
                 <TagsPage />
