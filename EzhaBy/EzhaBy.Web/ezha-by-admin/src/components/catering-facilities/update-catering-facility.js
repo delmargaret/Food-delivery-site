@@ -123,24 +123,33 @@ export default class UpdateCateringFacility extends Component {
     const formElement = (
       <React.Fragment>
         <br />
+        <br />
         <LinkContainer to="/catering-facilities" isActive={() => false}>
-          <Button>Назад</Button>
+          <Button className="btn-red">Назад</Button>
         </LinkContainer>
         <br />
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={this.onCateringFacilityUpdate}
-        >
-          <CateringFacilityForm
-            cateringFacilityTags={cateringFacilityTags}
-            tags={tags}
-            ref={this.editorForm}
-          />
-          <Button type="submit" className="btn-red">
-            Изменить
-          </Button>
-        </Form>
+        <br />
+        <Row>
+          <Col></Col>
+          <Col sm="7">
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={this.onCateringFacilityUpdate}
+              className="catering-facility-form"
+            >
+              <CateringFacilityForm
+                cateringFacilityTags={cateringFacilityTags}
+                tags={tags}
+                ref={this.editorForm}
+              />
+              <Button type="submit" className="btn-red">
+                Изменить
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
 

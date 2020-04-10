@@ -83,3 +83,12 @@
 .form-label {
   font-weight: bold;
 }
+
+.close {
+  cursor: pointer;
+  line-height: 0.2 !important;
+}
+
+.close:hover {
+  color: rgb(235, 95, 95) !important;
+}

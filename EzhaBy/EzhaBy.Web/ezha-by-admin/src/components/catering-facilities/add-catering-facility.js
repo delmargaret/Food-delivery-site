@@ -94,24 +94,33 @@ export default class AddCateringFacility extends Component {
     const formElement = (
       <React.Fragment>
         <br />
+        <br />
         <LinkContainer to={cateringFacilitiesRootPath} isActive={() => false}>
-          <Button>Назад</Button>
+          <Button className="btn-red">Назад</Button>
         </LinkContainer>
         <br />
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={this.onCateringFacilitySubmit}
-        >
-          <CateringFacilityForm
-            cateringFacilityTags={[]}
-            tags={tags}
-            ref={this.editorForm}
-          />
-          <Button type="submit" className="btn-red">
-            Создать
-          </Button>
-        </Form>
+        <br />
+        <Row>
+          <Col></Col>
+          <Col sm="7">
+            <Form
+              noValidate
+              validated={validated}
+              onSubmit={this.onCateringFacilitySubmit}
+              className="catering-facility-form"
+            >
+              <CateringFacilityForm
+                cateringFacilityTags={[]}
+                tags={tags}
+                ref={this.editorForm}
+              />
+              <Button type="submit" className="btn-red">
+                Создать
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
       </React.Fragment>
     );
 
