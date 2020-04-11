@@ -145,6 +145,7 @@
     <Compile Include="EmailService.cs" />
     <Compile Include="Extensions\ModelBuilderExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenParams.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

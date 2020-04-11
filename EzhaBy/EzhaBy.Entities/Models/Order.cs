@@ -10,8 +10,10 @@ namespace EzhaBy.Entities
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string Phone { get; set; }
-        public string AddressId { get; set; }
-        public virtual Address Address { get; set; }
+        public Towns Town { get; set; }
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public string FlatNumber { get; set; }
         public PaymentTypes PaymentType { get; set; }
         public string Comment { get; set; }
         public OrderStatuses OrderStatus { get; set; }

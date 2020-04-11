@@ -8,6 +8,19 @@ namespace EzhaBy.Infrastructure.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasData(
+                new User[]
+                {
+                    new User
+                    {
+                        Id = Guid.NewGuid(),
+                        Email = "admin@admin.com",
+                        Password = "admin",
+                        UserRole = UserRoles.Admin
+                    }
+                }
+            );
+
             modelBuilder.Entity<Tag>().HasData(
                 new Tag[]
                 {

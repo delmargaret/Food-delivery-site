@@ -165,6 +165,7 @@
     <Compile Include="Tags\GetTag.cs" />
     <Compile Include="Tags\GetTags.cs" />
     <Compile Include="Tags\UpdateTagName.cs" />
+    <Compile Include="Users\GetToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

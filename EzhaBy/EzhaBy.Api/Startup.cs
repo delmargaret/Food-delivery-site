@@ -1,12 +1,15 @@
 ﻿using EzhaBy.Business.Tags;
 using EzhaBy.Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace EzhaBy.Api
 {
@@ -29,6 +32,22 @@ namespace EzhaBy.Api
             .UseSqlServer(Configuration.GetConnectionString("Db")));
 
             services.AddMediatR(typeof(CreateTag.Handler).Assembly);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidIssuer = TokenParams.Issuer,
+                            ValidateAudience = true,
+                            ValidAudience = TokenParams.Audience,
+                            ValidateLifetime = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenParams.Key)),
+                            ValidateIssuerSigningKey = true,
+                        };
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +69,8 @@ namespace EzhaBy.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseAuthentication();
         }
     }
 }
