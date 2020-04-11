@@ -3,6 +3,10 @@
   margin: auto;
 }
 
+#main-row {
+  min-height: 650px;
+}
+
 .leaves-left {
   border-width: 0px;
   position: absolute;
@@ -105,14 +109,14 @@
 }
 
 .App .app-link {
-  color:rgb(235, 85, 85);
+  color: rgb(235, 85, 85);
 }
 
 .App .app-link:hover {
-  color:rgb(235, 10, 10);
+  color: rgb(235, 10, 10);
 }
 
-.App .app-switch .custom-control-input:checked~.custom-control-label::before {
+.App .app-switch .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
   background-color: rgba(235, 95, 95, 0.6);
   border-color: rgba(235, 95, 95, 0.6);

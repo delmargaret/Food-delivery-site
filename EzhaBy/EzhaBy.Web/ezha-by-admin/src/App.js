@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +25,7 @@ import "./../node_modules/react-bootstrap-table2-toolkit/dist/react-bootstrap-ta
 import "./../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 import leaves from "./leaves.png";
+import FooterComponent from "./components/footer/footer";
 
 export default class App extends Component {
   render() {
@@ -32,10 +33,10 @@ export default class App extends Component {
       <Router>
         <div className="App">
           <NavbarComponent />
-          <NavTabs activeKey={window.location.pathname.slice(1) || 'tags'} />
+          <NavTabs activeKey={window.location.pathname.slice(1) || "tags"} />
           <Row id="main-row">
             <Col>
-              {' '}
+              {" "}
               <img alt="" src={leaves} className="leaves-left" />
             </Col>
             <Col xs={8}>
@@ -70,6 +71,8 @@ export default class App extends Component {
               <img alt="" src={leaves} className="leaves-right" />
             </Col>
           </Row>
+          <br />
+          <FooterComponent />
         </div>
       </Router>
     );
