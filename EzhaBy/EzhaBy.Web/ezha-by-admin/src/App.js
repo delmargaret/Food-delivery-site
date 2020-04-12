@@ -26,13 +26,51 @@ import "./../node_modules/react-bootstrap-table-next/dist/react-bootstrap-table2
 
 import leaves from "./leaves.png";
 import FooterComponent from "./components/footer/footer";
+import LoginService from "./services/login-service";
+import LoginPage from "./components/login-page/login-page";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isAuthorized: false, role: null };
+
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
+  }
+
+  componentDidMount() {
+    var user = LoginService.getUser();
+    if (user) {
+      if (user.token && !this.state.isAuthorized) {
+        this.setState({
+          isAuthorized: true,
+          role: user.role,
+        });
+      } else if (!user.token && this.state.isAuthorized) {
+        this.setState({ isAuthorized: false });
+      }
+    }
+  }
+
+  logOut() {
+    this.setState({ isAuthorized: false });
+    LoginService.removeUser();
+  }
+
+  logIn() {
+    this.setState({ isAuthorized: true });
+    return <Redirect to="/" />;
+  }
+
   render() {
+    const { isAuthorized } = this.state;
+    //console.log(isAuthorized, this.state.role);
+    //LoginService.removeUser()
+
     return (
       <Router>
         <div className="App">
-          <NavbarComponent />
+          <NavbarComponent isAuthorized={isAuthorized} logOut={this.logOut} />
           <NavTabs activeKey={window.location.pathname.slice(1) || "tags"} />
           <Row id="main-row">
             <Col>
@@ -42,10 +80,14 @@ export default class App extends Component {
             <Col xs={8}>
               <Switch>
                 <Route exact path="/">
-                  <Redirect to="/tags" />
+                  {isAuthorized ? (
+                    <Redirect to="/tags" />
+                  ) : (
+                    <Redirect to="/login" />
+                  )}
                 </Route>
                 <Route path="/tags">
-                  <TagsPage />
+                  {isAuthorized ? <TagsPage /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/catering-facilities">
                   <CateringFacilitiesRouter />
@@ -64,6 +106,13 @@ export default class App extends Component {
                 </Route>
                 <Route path="/feedbacks">
                   <FeedbacksPage />
+                </Route>
+                <Route path="/login">
+                  {isAuthorized ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <LoginPage logIn={this.logIn} />
+                  )}
                 </Route>
               </Switch>
             </Col>

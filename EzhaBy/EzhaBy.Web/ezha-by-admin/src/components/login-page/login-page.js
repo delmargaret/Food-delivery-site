@@ -30,6 +30,7 @@ export default class LoginPage extends Component {
         this.emailInput.current.value,
         this.passwordInput.current.value
       );
+      this.props.logIn();
     }
 
     this.setState({

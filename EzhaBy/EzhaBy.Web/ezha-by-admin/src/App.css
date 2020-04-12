@@ -1,6 +1,7 @@
 #logo-img {
   text-align: center;
-  margin: auto;
+  margin-left: calc(50% - 60px);
+  margin-right: auto;
 }
 
 #main-row {
