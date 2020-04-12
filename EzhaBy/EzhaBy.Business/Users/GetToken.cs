@@ -49,16 +49,12 @@ namespace EzhaBy.Business.Users
                 if (user != null)
                 {
                     var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.UserRole.ToString())
-                };
-                    ClaimsIdentity claimsIdentity =
-                    new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                        ClaimsIdentity.DefaultRoleClaimType);
-                    return claimsIdentity;
+                    {
+                        new Claim("userId", user.Id.ToString()),
+                        new Claim("role", user.UserRole.ToString())
+                    };
+                    return new ClaimsIdentity(claims);
                 }
-
                 return null;
             }
         }

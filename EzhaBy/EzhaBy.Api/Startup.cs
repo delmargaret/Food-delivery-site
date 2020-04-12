@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using System;
 
 namespace EzhaBy.Api
 {
@@ -39,12 +39,10 @@ namespace EzhaBy.Api
                         options.RequireHttpsMetadata = false;
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
-                            ValidateIssuer = true,
-                            ValidIssuer = TokenParams.Issuer,
-                            ValidateAudience = true,
-                            ValidAudience = TokenParams.Audience,
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
                             ValidateLifetime = true,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenParams.Key)),
+                            IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)),
                             ValidateIssuerSigningKey = true,
                         };
                     });
@@ -68,9 +66,9 @@ namespace EzhaBy.Api
                 .AllowAnyHeader());
 
             app.UseHttpsRedirection();
-            app.UseMvc();
-
             app.UseAuthentication();
+
+            app.UseMvc();
         }
     }
 }

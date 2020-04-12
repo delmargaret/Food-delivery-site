@@ -27,12 +27,10 @@ namespace EzhaBy.Api.Controllers
 
                 var now = DateTime.UtcNow;
                 var jwt = new JwtSecurityToken(
-                        issuer: TokenParams.Issuer,
-                        audience: TokenParams.Audience,
                         notBefore: now,
                         claims: identity.Claims,
                         expires: now.Add(TimeSpan.FromMinutes(TokenParams.Lifetime)),
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenParams.Key)), SecurityAlgorithms.HmacSha256Signature));
+                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)), SecurityAlgorithms.HmacSha256Signature));
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
 
