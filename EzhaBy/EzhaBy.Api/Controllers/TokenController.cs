@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
 using EzhaBy.Business.Users;
+using EzhaBy.Business.Users.Dto;
 using EzhaBy.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +20,26 @@ namespace EzhaBy.Api.Controllers
         public TokenController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> GetTokenAsync([FromBody] GetToken.Query query)
+        public async Task<IActionResult> SetTokenAsync([FromBody] GetToken.Query query)
         {
             try
             {
-                var identity = await mediator.Send(query);
+                var result = await mediator.Send(query);
 
                 var now = DateTime.UtcNow;
                 var jwt = new JwtSecurityToken(
                         notBefore: now,
-                        claims: identity.Claims,
+                        claims: result.identity.Claims,
                         expires: now.Add(TimeSpan.FromMinutes(TokenParams.Lifetime)),
                         signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)), SecurityAlgorithms.HmacSha256Signature));
+                
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-
-                return Ok(encodedJwt);
+                
+                return Ok(new LoginDto {
+                    Token = encodedJwt,
+                    UserId = result.userId,
+                    Role = result.role
+                });
             }
             catch (Exception ex)
             {

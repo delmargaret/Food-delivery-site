@@ -12,7 +12,7 @@ namespace EzhaBy.Business.Users
 {
     public static class GetToken
     {
-        public class Query : IRequest<ClaimsIdentity>
+        public class Query : IRequest<(ClaimsIdentity identity, Guid userId, string role)>
         {
             public Query(string email, string password)
             {
@@ -25,13 +25,13 @@ namespace EzhaBy.Business.Users
 
         }
 
-        public class Handler : IRequestHandler<Query, ClaimsIdentity>
+        public class Handler : IRequestHandler<Query, (ClaimsIdentity identity, Guid userId, string role)>
         {
             private readonly DataContext context;
 
             public Handler(DataContext context) => this.context = context;
 
-            public Task<ClaimsIdentity> Handle(Query request, CancellationToken cancellationToken)
+            public Task<(ClaimsIdentity identity, Guid userId, string role)> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = context.Users.FirstOrDefault(x => x.Email == request.Email && x.Password == request.Password);
 
@@ -41,7 +41,7 @@ namespace EzhaBy.Business.Users
                     throw new Exception("Invalid username or password.");
                 }
 
-                return Task.FromResult(identity);
+                return Task.FromResult((identity, user.Id, user.UserRole.ToString()));
             }
 
             private ClaimsIdentity GetIdentity(User user)
