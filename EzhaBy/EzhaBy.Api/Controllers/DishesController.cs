@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using EzhaBy.Business.Dishes;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EzhaBy.Api.Controllers
@@ -15,6 +16,7 @@ namespace EzhaBy.Api.Controllers
         public DishesController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateDish.Command command)
         {
             try
@@ -29,6 +31,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetDishes(string cateringFacilityId)
         {
             try
@@ -42,6 +45,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetDish(string id)
         {
             try
@@ -55,6 +59,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateDish(string id, [FromBody] UpdateDish.Command command)
         {
             try
@@ -70,6 +75,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}/status")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetStatus(string id, [FromBody] SetDishStatus.Command command)
         {
             try
@@ -85,6 +91,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}/icon")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateDishIcon(string id, [FromBody] UpdateDishIcon.Command command)
         {
             try

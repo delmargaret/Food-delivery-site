@@ -158,9 +158,6 @@ export default class App extends Component {
               <Route path="/login">
                 <Redirect to="/" />
               </Route>
-              <Route path="*">
-                <Redirect to="/" />
-              </Route>
             </Switch>
           </Col>
           <Col>

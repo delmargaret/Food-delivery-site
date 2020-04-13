@@ -1,22 +1,38 @@
 import axios from "axios";
 import ConfigService from "./config-service";
 
-function HandleException(ex){
+function HandleException(ex) {
   console.log(`Exception: ${ex.Message}`);
 }
 
 export default class HttpRequest {
+  static makeAuthorizationHeaderValue(token) {
+    return `Bearer ${token}`;
+  }
+
+  static makeHeaders() {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      headers.Authorization = this.makeAuthorizationHeaderValue(token);
+    }
+
+    return headers;
+  }
+
   static Get(endpoint) {
     const url = ConfigService.addBaseAddress(endpoint);
     const options = {
       url: url,
       method: "GET",
       type: "json",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: this.makeHeaders(),
     };
-    return axios(options).catch(error => {
+    return axios(options).catch((error) => {
       if (error.response) {
         HandleException(error.response.data);
       }
@@ -29,11 +45,9 @@ export default class HttpRequest {
       url: url,
       method: "POST",
       data: data,
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: this.makeHeaders(),
     };
-    return axios(options).catch(error => {
+    return axios(options).catch((error) => {
       if (error.response) {
         HandleException(error.response.data);
       }
@@ -45,12 +59,10 @@ export default class HttpRequest {
     const options = {
       url: url,
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: this.makeHeaders(),
     };
 
-    return axios(options).catch(error => {
+    return axios(options).catch((error) => {
       if (error.response) {
         HandleException(error.response.data);
       }
@@ -63,12 +75,10 @@ export default class HttpRequest {
       url: url,
       method: "PUT",
       data: data,
-      headers: {
-        "Content-Type": "application/json"
-      }
+      headers: this.makeHeaders(),
     };
 
-    return axios(options).catch(error => {
+    return axios(options).catch((error) => {
       if (error.response) {
         HandleException(error.response.data);
       }

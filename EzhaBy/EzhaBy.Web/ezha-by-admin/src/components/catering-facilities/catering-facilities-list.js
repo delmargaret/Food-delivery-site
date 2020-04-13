@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Form, Row } from "react-bootstrap";
+import { Form, Row, Col, Nav } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { LinkContainer } from "react-router-bootstrap";
+
 import { STATUSES } from "./catering-facilities-statuses";
 import CateringFacilitiesService from "../../services/catering-facilities-service";
+
 import emptyIcon from "./../../empty.png";
-import { Col } from "react-bootstrap";
 
 const { SearchBar } = Search;
 
@@ -30,7 +32,7 @@ export default class CateringFacilitiesList extends Component {
           label="Активно"
           className="app-switch"
           id={cateringFacility.id}
-          onChange={e => this.changeStatus(e, cateringFacility.id)}
+          onChange={(e) => this.changeStatus(e, cateringFacility.id)}
           defaultChecked={
             cateringFacility.cateringFacilityStatus === STATUSES.Active
           }
@@ -62,9 +64,9 @@ export default class CateringFacilitiesList extends Component {
             type="file"
             id="file"
             accept=".png, .jpg, .jpeg"
-            onChange={e => this.handleImageChange(e, id)}
+            onChange={(e) => this.handleImageChange(e, id)}
           />
-          <img height="150px" alt="" src={iconUrl}/>
+          <img height="150px" alt="" src={iconUrl} />
         </label>
         <span
           className="close"
@@ -83,7 +85,7 @@ export default class CateringFacilitiesList extends Component {
       {
         dataField: "id",
         text: "ID",
-        hidden: true
+        hidden: true,
       },
       {
         dataField: "cateringFacilityName",
@@ -93,16 +95,18 @@ export default class CateringFacilitiesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return (
-            <a className="app-link" href={`/catering-facilities/edit/${row.id}`}>{cellContent}</a>
+            <LinkContainer to={`/catering-facilities/edit/${row.id}`}>
+              <Nav.Link className="app-link">{cellContent}</Nav.Link>
+            </LinkContainer>
           );
-        }
+        },
       },
       {
         dataField: "cateringFacilityIconUrl",
         text: "Иконка",
         formatter: (cellContent, row) => {
           return this.renderIcon(cellContent, row.id);
-        }
+        },
       },
       {
         dataField: "cateringFacilityStatus",
@@ -110,8 +114,8 @@ export default class CateringFacilitiesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderDisableButton(row);
-        }
-      }
+        },
+      },
     ];
 
     return (
@@ -121,17 +125,14 @@ export default class CateringFacilitiesList extends Component {
         columns={columns}
         search
       >
-        {props => (
+        {(props) => (
           <React.Fragment>
             <hr />
             <br />
             <Row>
               <Col xs="4">
                 {" "}
-                <SearchBar
-                  {...props.searchProps}
-                  placeholder="Поиск"
-                />
+                <SearchBar {...props.searchProps} placeholder="Поиск" />
               </Col>
             </Row>
             <BootstrapTable

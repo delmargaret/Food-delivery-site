@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Nav } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { LinkContainer } from "react-router-bootstrap";
+
 import { DISH_STATUSES } from "./dishes-statuses";
 import DishesService from "../../services/dishes-service";
+
 import emptyIcon from "./../../empty.png";
 
 const { SearchBar } = Search;
@@ -31,7 +34,7 @@ export default class DishesList extends Component {
           label="В наличии"
           id={dish.id}
           className="app-switch"
-          onChange={e => this.changeStatus(e, dish.id)}
+          onChange={(e) => this.changeStatus(e, dish.id)}
           defaultChecked={dish.dishStatus === DISH_STATUSES.InStock}
         />
       </div>
@@ -61,7 +64,7 @@ export default class DishesList extends Component {
             type="file"
             id="file"
             accept=".png, .jpg, .jpeg"
-            onChange={e => this.handleImageChange(e, id)}
+            onChange={(e) => this.handleImageChange(e, id)}
           />
           <img height="150px" alt="" src={iconUrl} />
         </label>
@@ -82,7 +85,7 @@ export default class DishesList extends Component {
       {
         dataField: "id",
         text: "ID",
-        hidden: true
+        hidden: true,
       },
       {
         dataField: "dishName",
@@ -92,25 +95,27 @@ export default class DishesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return (
-            <a className="app-link" href={`/dishes/edit/${row.id}/${this.props.cateringFacilityId}`}>
-              {cellContent}
-            </a>
+            <LinkContainer
+              to={`/dishes/edit/${row.id}/${this.props.cateringFacilityId}`}
+            >
+              <Nav.Link className="app-link">{cellContent}</Nav.Link>
+            </LinkContainer>
           );
-        }
+        },
       },
       {
         dataField: "dishIconUrl",
         text: "Иконка",
         formatter: (cellContent, row) => {
           return this.renderIcon(cellContent, row.id);
-        }
+        },
       },
       {
         dataField: "cateringFacilityCategory.categoryName",
         text: "Категория",
         align: "left",
         headerAlign: "left",
-        sort: true
+        sort: true,
       },
       {
         dataField: "dishStatus",
@@ -118,8 +123,8 @@ export default class DishesList extends Component {
         sort: true,
         formatter: (cellContent, row) => {
           return this.renderDisableButton(row);
-        }
-      }
+        },
+      },
     ];
 
     return (
@@ -129,15 +134,12 @@ export default class DishesList extends Component {
         columns={columns}
         search
       >
-        {props => (
+        {(props) => (
           <React.Fragment>
             <Row>
               <Col xs="4">
                 {" "}
-                <SearchBar
-                  {...props.searchProps}
-                  placeholder="Поиск"
-                />
+                <SearchBar {...props.searchProps} placeholder="Поиск" />
               </Col>
             </Row>
             <BootstrapTable
