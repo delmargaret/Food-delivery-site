@@ -1,50 +1,59 @@
 import React, { Component } from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
+
+import Emitter from "../../services/event-emitter";
 import LoginService from "../../services/login-service";
-import { Redirect } from "react-router-dom";
+import { USER_LOGGED } from "../../services/login-service";
 
 export default class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       validated: false,
-      needRedirect: false,
     };
 
     this.emailInput = React.createRef();
     this.passwordInput = React.createRef();
+
+    this.formIsValid = false;
+
     this.onLogin = this.onLogin.bind(this);
   }
 
-  async onLogin(event) {
+  onLogin(event) {
     event.preventDefault();
     event.stopPropagation();
 
     const form = event.currentTarget;
-    let needRedirect = false;
+
+    this.formIsValid = false;
 
     if (form.checkValidity()) {
-      needRedirect = true;
-
-      await LoginService.setUser(
-        this.emailInput.current.value,
-        this.passwordInput.current.value
-      );
-      this.props.logIn();
+      this.formIsValid = true;
     }
 
     this.setState({
       validated: true,
-      needRedirect: needRedirect,
     });
   }
 
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.formIsValid) {
+      const isAuthenticated = await LoginService.setUser(
+        this.emailInput.current.value,
+        this.passwordInput.current.value
+      );
+
+      if (!isAuthenticated) return;
+
+      Emitter.emit(USER_LOGGED, {});
+    }
+  }
+
   render() {
-    const { validated, needRedirect } = this.state;
+    const { validated } = this.state;
 
-    const redirectElement = <Redirect to='/' />;
-
-    const formElement = (
+    return (
       <React.Fragment>
         <br />
         <br />
@@ -88,7 +97,5 @@ export default class LoginPage extends Component {
         </Row>
       </React.Fragment>
     );
-
-    return needRedirect ? redirectElement : formElement;
   }
 }

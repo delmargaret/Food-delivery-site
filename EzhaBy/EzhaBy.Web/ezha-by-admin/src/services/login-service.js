@@ -1,5 +1,8 @@
 import HttpRequest from "./http-request";
 
+export const USER_LOGGED = "USER_LOGGED";
+export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
+
 export default class LoginService {
   static tokenKey = "token";
   static roleKey = "role";
@@ -23,16 +26,20 @@ export default class LoginService {
     localStorage.removeItem(this.userId);
   }
 
-  static setUser(email, password) {
+  static async setUser(email, password) {
     const data = {
       email: email,
       password: password,
     };
 
-    return HttpRequest.Post("api/token", data).then((result) => {
-      localStorage.setItem(this.tokenKey, result.data.token);
-      localStorage.setItem(this.roleKey, result.data.role);
-      localStorage.setItem(this.userId, result.data.userId);
-    });
+    const result = await HttpRequest.Post("api/token", data);
+
+    if (!result) return false;
+
+    localStorage.setItem(this.tokenKey, result.data.token);
+    localStorage.setItem(this.roleKey, result.data.role);
+    localStorage.setItem(this.userId, result.data.userId);
+
+    return true;
   }
 }

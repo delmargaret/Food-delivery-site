@@ -4,6 +4,7 @@ import TagsService, { TAG_LIST_UPDATED } from "../../services/tags-service";
 import TagsList from "./tags-list";
 import AddTagForm from "./add-tag-form";
 import Emitter from "../../services/event-emitter";
+
 import "./tags.css";
 
 export default class TagsPage extends Component {
@@ -24,7 +25,7 @@ export default class TagsPage extends Component {
 
   componentDidMount() {
     this.getTags();
-    Emitter.on(TAG_LIST_UPDATED, (_) => this.getTags());
+    Emitter.on(TAG_LIST_UPDATED, () => this.getTags());
   }
 
   componentWillUnmount() {

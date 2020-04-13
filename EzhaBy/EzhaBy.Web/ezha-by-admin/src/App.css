@@ -115,6 +115,12 @@
 
 .App .app-link:hover {
   color: rgb(235, 10, 10);
+  text-decoration: underline !important;
+}
+
+.App .app-link:focus {
+  color: rgb(235, 10, 10);
+  text-decoration: underline !important;
 }
 
 .App .app-switch .custom-control-input:checked ~ .custom-control-label::before {
