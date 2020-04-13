@@ -4,8 +4,14 @@
   margin-right: auto;
 }
 
-#main-row {
-  min-height: 650px;
+.App {
+  min-height: 100vh;
+}
+
+.App .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .leaves-left {
