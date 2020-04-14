@@ -35,27 +35,25 @@ namespace EzhaBy.Business.Users
             {
                 var user = context.Users.FirstOrDefault(x => x.Email == request.Email && x.Password == request.Password);
 
-                var identity = GetIdentity(user);
-                if (identity == null)
+                if (user == null)
                 {
                     throw new Exception("Invalid username or password.");
                 }
 
-                return Task.FromResult((identity, user.Id, user.UserRole.ToString()));
+                return Task.FromResult(
+                    (GetIdentity(user), user.Id, user.UserRole.ToString())
+                );
             }
 
             private ClaimsIdentity GetIdentity(User user)
             {
-                if (user != null)
-                {
-                    var claims = new List<Claim>
+                return new ClaimsIdentity(
+                    new List<Claim>
                     {
                         new Claim("userId", user.Id.ToString()),
                         new Claim("role", user.UserRole.ToString())
-                    };
-                    return new ClaimsIdentity(claims);
-                }
-                return null;
+                    }
+                );
             }
         }
     }

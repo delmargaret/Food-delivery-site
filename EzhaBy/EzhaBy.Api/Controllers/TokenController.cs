@@ -24,21 +24,25 @@ namespace EzhaBy.Api.Controllers
         {
             try
             {
-                var result = await mediator.Send(query);
+                var (identity, userId, role) = await mediator.Send(query);
 
                 var now = DateTime.UtcNow;
                 var jwt = new JwtSecurityToken(
                         notBefore: now,
-                        claims: result.identity.Claims,
+                        claims: identity.Claims,
                         expires: now.Add(TimeSpan.FromMinutes(TokenParams.Lifetime)),
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)), SecurityAlgorithms.HmacSha256Signature));
+                        signingCredentials: new SigningCredentials(
+                            new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)), 
+                            SecurityAlgorithms.HmacSha256Signature
+                        )
+                );
                 
                 var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
                 
                 return Ok(new LoginDto {
                     Token = encodedJwt,
-                    UserId = result.userId,
-                    Role = result.role
+                    UserId = userId,
+                    Role = role
                 });
             }
             catch (Exception ex)
