@@ -8,6 +8,7 @@ import {
   CREDENTIALS_NOT_FOUND,
   WRONG_ROLE,
   CREDENTIALS_OK,
+  CREDENTIALS_NOT_CHECKED
 } from "../../services/login-service";
 
 const ALLOWED_ROLE = "Admin";
@@ -17,7 +18,7 @@ export default class LoginPage extends Component {
     super(props);
     this.state = {
       validated: false,
-      authResult: CREDENTIALS_OK,
+      authResult: CREDENTIALS_NOT_CHECKED,
     };
 
     this.emailInput = React.createRef();
@@ -62,10 +63,8 @@ export default class LoginPage extends Component {
         <Col></Col>
         <Col sm="7">
           <Alert variant="secondary">
-            <Alert.Heading>Вход не получился</Alert.Heading>
             <p>
-              К сожалению, пользователь с такой комбинацией адреса электронной
-              почты и пароля не обнаружен в системе. Пожалуйста, проверьте
+              К сожалению, пользователь не обнаружен в системе. Пожалуйста, проверьте
               вводимые данные и попробуйте ещё раз.
             </p>
           </Alert>
@@ -79,7 +78,6 @@ export default class LoginPage extends Component {
         <Col></Col>
         <Col sm="7">
           <Alert variant="secondary">
-            <Alert.Heading>Вход не получился</Alert.Heading>
             <p>
               К сожалению, Ваша роль в системе не позволяет воспользоваться
               данным функционалом. Обратитесь к администратору, пожалуйста.

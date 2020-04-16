@@ -6,6 +6,7 @@ export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
 export const CREDENTIALS_NOT_FOUND = "CREDENTIALS_NOT_FOUND";
 export const WRONG_ROLE = "WRONG_ROLE";
 export const CREDENTIALS_OK = "CREDENTIALS_OK";
+export const CREDENTIALS_NOT_CHECKED = "CREDENTIALS_NOT_CHECKED";
 
 export default class LoginService {
   static tokenKey = "token";
