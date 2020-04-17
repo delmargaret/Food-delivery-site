@@ -6,6 +6,8 @@ import { USER_LOGGED_OUT } from "./login-service";
 function HandleException(ex) {
   const response = ex.response;
 
+  if (!response) return;
+  
   if (response.status === 401 || response.status === 403) {
     Emitter.emit(USER_LOGGED_OUT, {});
   }

@@ -36,11 +36,13 @@ export default class DishesPage extends Component {
   async getCateringFacilities() {
     const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
 
-    this.setState({
-      cateringFacilities: cateringFacilitiesList.data.map((res) => {
-        return { id: res.id, name: res.cateringFacilityName };
-      }),
-    });
+    if (cateringFacilitiesList) {
+      this.setState({
+        cateringFacilities: cateringFacilitiesList.data.map((res) => {
+          return { id: res.id, name: res.cateringFacilityName };
+        }),
+      });
+    }
   }
 
   async getCategories(cateringFacilityId) {
@@ -49,7 +51,9 @@ export default class DishesPage extends Component {
         cateringFacilityId
       );
 
-      this.setState({ categories: categoriesData.data });
+      if (categoriesData) {
+        this.setState({ categories: categoriesData.data });
+      }
     }
   }
 
@@ -57,7 +61,9 @@ export default class DishesPage extends Component {
     if (cateringFacilityId && cateringFacilityId !== "-1") {
       const dishesData = await DishesService.getDishes(cateringFacilityId);
 
-      this.setState({ dishes: dishesData.data });
+      if (dishesData) {
+        this.setState({ dishes: dishesData.data });
+      }
     }
   }
 

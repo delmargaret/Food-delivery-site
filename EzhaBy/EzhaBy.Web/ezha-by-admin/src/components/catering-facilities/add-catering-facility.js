@@ -25,11 +25,13 @@ export default class AddCateringFacility extends Component {
   async componentDidMount() {
     const tags = await TagsService.getTags();
 
-    this.setState({
-      tags: [...tags.data],
-      needRedirect: false,
-      validated: false,
-    });
+    if (tags) {
+      this.setState({
+        tags: [...tags.data],
+        needRedirect: false,
+        validated: false,
+      });
+    }
   }
 
   async onCateringFacilitySubmit(event) {

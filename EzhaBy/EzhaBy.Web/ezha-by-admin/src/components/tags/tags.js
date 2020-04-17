@@ -17,10 +17,12 @@ export default class TagsPage extends Component {
     this.getTags = this.getTags.bind(this);
   }
 
-  getTags() {
-    TagsService.getTags().then((result) => {
-      this.setState({ tags: result.data });
-    });
+  async getTags() {
+    const tags = await TagsService.getTags();
+
+    if (tags) {
+      this.setState({ tags: tags.data });
+    }
   }
 
   componentDidMount() {

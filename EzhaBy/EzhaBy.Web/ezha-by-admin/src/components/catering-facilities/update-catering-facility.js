@@ -24,40 +24,40 @@ export default class UpdateCateringFacility extends Component {
   }
 
   async componentDidMount() {
-    const { match } = this.props;
+    const { id } = this.props.match.params;
 
-    const facility = await CateringFacilitiesService.getCateringFacility(
-      match.params.id
-    );
+    const facility = await CateringFacilitiesService.getCateringFacility(id);
 
-    const {
-      nameInput,
-      deliveryTimeInput,
-      deliveryPriceInput,
-      typeInput,
-      workingHoursInput,
-      townInput,
-      streetInput,
-      houseInput,
-    } = this.editorForm.current;
-
-    nameInput.current.value = facility.data.cateringFacilityName;
-    deliveryTimeInput.current.value = facility.data.deliveryTime;
-    deliveryPriceInput.current.value = facility.data.deliveryPrice;
-    typeInput.current.type.current.value = facility.data.cateringFacilityType;
-    workingHoursInput.current.value = facility.data.workingHours;
-    townInput.current.town.current.value = facility.data.town;
-    streetInput.current.value = facility.data.street;
-    houseInput.current.value = facility.data.houseNumber;
-
-    const tags = await TagsService.getTags();
-
-    this.setState({
-      cateringFacilityTags: [...facility.data.cateringFacilityTags],
-      tags: [...tags.data],
-      needRedirect: false,
-      validated: false,
-    });
+    if (facility) {
+      const {
+        nameInput,
+        deliveryTimeInput,
+        deliveryPriceInput,
+        typeInput,
+        workingHoursInput,
+        townInput,
+        streetInput,
+        houseInput,
+      } = this.editorForm.current;
+  
+      nameInput.current.value = facility.data.cateringFacilityName;
+      deliveryTimeInput.current.value = facility.data.deliveryTime;
+      deliveryPriceInput.current.value = facility.data.deliveryPrice;
+      typeInput.current.type.current.value = facility.data.cateringFacilityType;
+      workingHoursInput.current.value = facility.data.workingHours;
+      townInput.current.town.current.value = facility.data.town;
+      streetInput.current.value = facility.data.street;
+      houseInput.current.value = facility.data.houseNumber;
+  
+      const tags = await TagsService.getTags();
+  
+      this.setState({
+        cateringFacilityTags: [...facility.data.cateringFacilityTags],
+        tags: tags ? [...tags.data] : [],
+        needRedirect: false,
+        validated: false,
+      });
+    }
   }
 
   onCateringFacilityUpdate(event) {

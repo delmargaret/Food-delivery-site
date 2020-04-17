@@ -30,11 +30,13 @@ export default class UpdateDish extends Component {
 
     const dishDetails = await DishesService.getDish(id);
 
-    this.setState({
-      categories: categoriesList.data,
-      needRedirect: false,
-      validated: false,
-    });
+    if (categoriesList) {
+      this.setState({
+        categories: categoriesList.data,
+        needRedirect: false,
+        validated: false,
+      });
+    }
 
     const {
       nameInput,
@@ -43,10 +45,12 @@ export default class UpdateDish extends Component {
       categoryInput,
     } = this.formResults.current;
 
-    nameInput.current.value = dishDetails.data.dishName;
-    descritionInput.current.value = dishDetails.data.description;
-    priceInput.current.value = dishDetails.data.price;
-    categoryInput.current.value = dishDetails.data.cateringFacilityCategory.id;
+    if (dishDetails) {
+      nameInput.current.value = dishDetails.data.dishName;
+      descritionInput.current.value = dishDetails.data.description;
+      priceInput.current.value = dishDetails.data.price;
+      categoryInput.current.value = dishDetails.data.cateringFacilityCategory.id;
+    }
   }
 
   async onDishUpdate(event) {
