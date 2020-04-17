@@ -1,8 +1,20 @@
 import axios from "axios";
 import ConfigService from "./config-service";
+import Emitter from "./event-emitter";
+import { USER_LOGGED_OUT } from "./login-service";
 
 function HandleException(ex) {
-  console.log(`Exception: ${ex.Message}`);
+  const response = ex.response;
+
+  if (response.status === 401 || response.status === 403) {
+    Emitter.emit(USER_LOGGED_OUT, {});
+  }
+  
+  if (response.data) {
+    console.log(`Exception: ${response.data.Message}`);
+  } else {
+    console.log(`Status code: ${response.status}`);
+  }
 }
 
 export default class HttpRequest {
@@ -32,11 +44,7 @@ export default class HttpRequest {
       type: "json",
       headers: this.makeHeaders(),
     };
-    return axios(options).catch((error) => {
-      if (error.response) {
-        HandleException(error.response.data);
-      }
-    });
+    return axios(options).catch((error) => HandleException(error));
   }
 
   static Post(endpoint, data) {
@@ -47,11 +55,7 @@ export default class HttpRequest {
       data: data,
       headers: this.makeHeaders(),
     };
-    return axios(options).catch((error) => {
-      if (error.response) {
-        HandleException(error.response.data);
-      }
-    });
+    return axios(options).catch((error) => HandleException(error));
   }
 
   static Delete(endpoint) {
@@ -62,11 +66,7 @@ export default class HttpRequest {
       headers: this.makeHeaders(),
     };
 
-    return axios(options).catch((error) => {
-      if (error.response) {
-        HandleException(error.response.data);
-      }
-    });
+    return axios(options).catch((error) => HandleException(error));
   }
 
   static Put(endpoint, data) {
@@ -78,10 +78,6 @@ export default class HttpRequest {
       headers: this.makeHeaders(),
     };
 
-    return axios(options).catch((error) => {
-      if (error.response) {
-        HandleException(error.response.data);
-      }
-    });
+    return axios(options).catch((error) => HandleException(error));
   }
 }
