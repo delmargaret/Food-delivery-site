@@ -188,3 +188,7 @@
 .back-btn:hover {
   cursor: pointer;
 }
+
+.preview:hover {
+  background-color: rgba(235, 95, 95, 0.075);
+}
