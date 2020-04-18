@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzhaBy.Api", "EzhaBy.Api\Ez
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzhaBy.Business", "EzhaBy.Business\EzhaBy.Business.csproj", "{EEFAD11E-938D-4360-A9CF-4516712DCA9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzhaBy.UnitTests", "EzhaBy.UnitTests\EzhaBy.UnitTests.csproj", "{C0B083E7-ADC1-4A65-A01A-F44004F08985}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
