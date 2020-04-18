@@ -32,7 +32,7 @@ namespace EzhaBy.Business.Tags
                         isAssigned = tag.CateringFacilityTags.Any()
                     });
 
-                if (tags == null)
+                if (tags.Count() == 0)
                 {
                     throw new Exception("tags not found");
                 }

@@ -25,7 +25,7 @@ namespace EzhaBy.Business.Requests
             {
                 var requests = context.PartnerRequests.AsNoTracking();
 
-                if (requests == null)
+                if (requests.Count() == 0)
                 {
                     throw new Exception("parner requests not found");
                 }

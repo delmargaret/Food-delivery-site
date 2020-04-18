@@ -42,7 +42,7 @@ namespace EzhaBy.Business.Feedbacks
                         FeedbackStatus = feedback.FeedbackStatus
                     });
 
-                if (feedbacks == null)
+                if (feedbacks.Count() == 0)
                 {
                     throw new Exception("feedbacks not found");
                 }
