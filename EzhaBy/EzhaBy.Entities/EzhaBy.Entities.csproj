@@ -52,12 +52,9 @@
     <Compile Include="Models\Feedback.cs" />
     <Compile Include="Enums\FeedbackCategories.cs" />
     <Compile Include="Enums\FeedbackStatuses.cs" />
-    <Compile Include="Models\Courier.cs" />
     <Compile Include="Models\CourierRequest.cs" />
     <Compile Include="Enums\CourierStatuses.cs" />
     <Compile Include="Models\Dish.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Enums\OrderStatuses.cs" />
     <Compile Include="Models\PartnerRequest.cs" />
     <Compile Include="Enums\PaymentTypes.cs" />

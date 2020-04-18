@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.902
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzhaBy.Entities", "EzhaBy.Entities\EzhaBy.Entities.csproj", "{A358A259-A9B0-482A-BBC6-E0DFCC580D72}"
 EndProject
@@ -9,8 +9,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzhaBy.Api", "EzhaBy.Api\EzhaBy.Api.csproj", "{EB27BA68-2375-4279-A3D6-05B573C45C53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzhaBy.Business", "EzhaBy.Business\EzhaBy.Business.csproj", "{EEFAD11E-938D-4360-A9CF-4516712DCA9B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EzhaBy.UnitTests", "EzhaBy.UnitTests\EzhaBy.UnitTests.csproj", "{C0B083E7-ADC1-4A65-A01A-F44004F08985}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +32,6 @@ Global
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEFAD11E-938D-4360-A9CF-4516712DCA9B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0B083E7-ADC1-4A65-A01A-F44004F08985}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
