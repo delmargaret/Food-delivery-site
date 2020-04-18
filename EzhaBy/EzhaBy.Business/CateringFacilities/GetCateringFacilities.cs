@@ -49,7 +49,7 @@ namespace EzhaBy.Business.CateringFacilities
                         }).ToList()
                     });
 
-                if (cateringFacilities == null)
+                if (cateringFacilities.Count() == 0)
                 {
                     throw new Exception("catering facilities not found");
                 }

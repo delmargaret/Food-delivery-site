@@ -40,7 +40,7 @@ namespace EzhaBy.Business.Categories
                         isAssigned = category.Dishes.Any()
                     });
 
-                if (categories == null)
+                if (categories.Count() == 0)
                 {
                     throw new Exception("categories not found");
                 }

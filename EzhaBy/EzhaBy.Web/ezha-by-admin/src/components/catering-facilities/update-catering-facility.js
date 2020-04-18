@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
-import CateringFacilityForm from './catering-facility-form';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
-import TagsService from '../../services/tags-service';
-import arrowLeft from './../../arrow-left.png';
+import CateringFacilityForm from "./catering-facility-form";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
+import TagsService from "../../services/tags-service";
+import arrowLeft from "./../../arrow-left.png";
 
 export default class UpdateCateringFacility extends Component {
   constructor(props) {
@@ -24,40 +24,40 @@ export default class UpdateCateringFacility extends Component {
   }
 
   async componentDidMount() {
-    const { match } = this.props;
+    const { id } = this.props.match.params;
 
-    const facility = await CateringFacilitiesService.getCateringFacility(
-      match.params.id
-    );
+    const facility = await CateringFacilitiesService.getCateringFacility(id);
 
-    const {
-      nameInput,
-      deliveryTimeInput,
-      deliveryPriceInput,
-      typeInput,
-      workingHoursInput,
-      townInput,
-      streetInput,
-      houseInput,
-    } = this.editorForm.current;
-
-    nameInput.current.value = facility.data.cateringFacilityName;
-    deliveryTimeInput.current.value = facility.data.deliveryTime;
-    deliveryPriceInput.current.value = facility.data.deliveryPrice;
-    typeInput.current.type.current.value = facility.data.cateringFacilityType;
-    workingHoursInput.current.value = facility.data.workingHours;
-    townInput.current.town.current.value = facility.data.town;
-    streetInput.current.value = facility.data.street;
-    houseInput.current.value = facility.data.houseNumber;
-
-    const tags = await TagsService.getTags();
-
-    this.setState({
-      cateringFacilityTags: [...facility.data.cateringFacilityTags],
-      tags: [...tags.data],
-      needRedirect: false,
-      validated: false,
-    });
+    if (facility) {
+      const {
+        nameInput,
+        deliveryTimeInput,
+        deliveryPriceInput,
+        typeInput,
+        workingHoursInput,
+        townInput,
+        streetInput,
+        houseInput,
+      } = this.editorForm.current;
+  
+      nameInput.current.value = facility.data.cateringFacilityName;
+      deliveryTimeInput.current.value = facility.data.deliveryTime;
+      deliveryPriceInput.current.value = facility.data.deliveryPrice;
+      typeInput.current.type.current.value = facility.data.cateringFacilityType;
+      workingHoursInput.current.value = facility.data.workingHours;
+      townInput.current.town.current.value = facility.data.town;
+      streetInput.current.value = facility.data.street;
+      houseInput.current.value = facility.data.houseNumber;
+  
+      const tags = await TagsService.getTags();
+  
+      this.setState({
+        cateringFacilityTags: [...facility.data.cateringFacilityTags],
+        tags: tags ? [...tags.data] : [],
+        needRedirect: false,
+        validated: false,
+      });
+    }
   }
 
   onCateringFacilityUpdate(event) {
@@ -92,8 +92,6 @@ export default class UpdateCateringFacility extends Component {
       const house = houseInput.current.value;
       const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
 
-      console.log(town, type);
-
       CateringFacilitiesService.updateCateringFacility(
         this.props.match.params.id,
         name,
@@ -117,7 +115,7 @@ export default class UpdateCateringFacility extends Component {
   render() {
     const { cateringFacilityTags, tags, needRedirect, validated } = this.state;
 
-    const cateringFacilitiesRootPath = '/catering-facilities';
+    const cateringFacilitiesRootPath = "/catering-facilities";
 
     const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
 

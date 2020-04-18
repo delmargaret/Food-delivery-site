@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, { Component } from "react";
+import { Button, Form, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
-import CateringFacilityForm from './catering-facility-form';
-import CateringFacilitiesService from '../../services/catering-facilities-service';
-import TagsService from '../../services/tags-service';
-import arrowLeft from './../../arrow-left.png'
+import CateringFacilityForm from "./catering-facility-form";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
+import TagsService from "../../services/tags-service";
+import arrowLeft from "./../../arrow-left.png";
 
 export default class AddCateringFacility extends Component {
   constructor(props) {
@@ -25,11 +25,13 @@ export default class AddCateringFacility extends Component {
   async componentDidMount() {
     const tags = await TagsService.getTags();
 
-    this.setState({
-      tags: [...tags.data],
-      needRedirect: false,
-      validated: false,
-    });
+    if (tags) {
+      this.setState({
+        tags: [...tags.data],
+        needRedirect: false,
+        validated: false,
+      });
+    }
   }
 
   async onCateringFacilitySubmit(event) {
@@ -64,8 +66,6 @@ export default class AddCateringFacility extends Component {
       const house = houseInput.current.value;
       const tagIds = state.cateringFacilityTags.map((tag) => tag.id);
 
-      console.log(town, type);
-
       await CateringFacilitiesService.createCateringFacility(
         name,
         deliveryTime,
@@ -88,7 +88,7 @@ export default class AddCateringFacility extends Component {
   render() {
     const { tags, needRedirect, validated } = this.state;
 
-    const cateringFacilitiesRootPath = '/catering-facilities';
+    const cateringFacilitiesRootPath = "/catering-facilities";
 
     const redirectElement = <Redirect to={cateringFacilitiesRootPath} />;
 

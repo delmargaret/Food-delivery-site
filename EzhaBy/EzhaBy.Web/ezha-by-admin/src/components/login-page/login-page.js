@@ -1,18 +1,29 @@
 import React, { Component } from "react";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert } from "react-bootstrap";
+
+import Emitter from "../../services/event-emitter";
 import LoginService from "../../services/login-service";
-import { Redirect } from "react-router-dom";
+import {
+  USER_LOGGED,
+  CREDENTIALS_NOT_FOUND,
+  WRONG_ROLE,
+  CREDENTIALS_OK,
+  CREDENTIALS_NOT_CHECKED
+} from "../../services/login-service";
+
+const ALLOWED_ROLE = "Admin";
 
 export default class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       validated: false,
-      needRedirect: false,
+      authResult: CREDENTIALS_NOT_CHECKED,
     };
 
     this.emailInput = React.createRef();
     this.passwordInput = React.createRef();
+
     this.onLogin = this.onLogin.bind(this);
   }
 
@@ -21,32 +32,73 @@ export default class LoginPage extends Component {
     event.stopPropagation();
 
     const form = event.currentTarget;
-    let needRedirect = false;
+
+    let result = CREDENTIALS_NOT_FOUND;
 
     if (form.checkValidity()) {
-      needRedirect = true;
-
-      await LoginService.setUser(
+      result = await LoginService.setUserInRole(
         this.emailInput.current.value,
-        this.passwordInput.current.value
+        this.passwordInput.current.value,
+        ALLOWED_ROLE
       );
     }
 
     this.setState({
       validated: true,
-      needRedirect: needRedirect,
+      authResult: result,
     });
   }
 
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    const { authResult } = this.state;
+
+    if (authResult === CREDENTIALS_OK) Emitter.emit(USER_LOGGED, {});
+  }
+
   render() {
-    const { validated, needRedirect } = this.state;
+    const { validated, authResult } = this.state;
 
-    const redirectElement = <Redirect to='/' />;
+    const credentialsNotFoundElement = (
+      <Row>
+        <Col></Col>
+        <Col sm="7">
+          <Alert variant="secondary">
+            <p>
+              К сожалению, пользователь не обнаружен в системе. Пожалуйста, проверьте
+              вводимые данные и попробуйте ещё раз.
+            </p>
+          </Alert>
+        </Col>
+        <Col></Col>
+      </Row>
+    );
 
-    const formElement = (
+    const wrongRoleElement = (
+      <Row>
+        <Col></Col>
+        <Col sm="7">
+          <Alert variant="secondary">
+            <p>
+              К сожалению, Ваша роль в системе не позволяет воспользоваться
+              данным функционалом. Обратитесь к администратору, пожалуйста.
+            </p>
+          </Alert>
+        </Col>
+        <Col></Col>
+      </Row>
+    );
+
+    const infoPanels = {
+      [CREDENTIALS_NOT_FOUND]: credentialsNotFoundElement,
+      [WRONG_ROLE]: wrongRoleElement,
+      [CREDENTIALS_OK]: null,
+    };
+
+    return (
       <React.Fragment>
         <br />
         <br />
+        {infoPanels[authResult]}
         <Row>
           <Col></Col>
           <Col sm="7">
@@ -87,7 +139,5 @@ export default class LoginPage extends Component {
         </Row>
       </React.Fragment>
     );
-
-    return needRedirect ? redirectElement : formElement;
   }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using EzhaBy.Business.Tags;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EzhaBy.Api.Controllers
 {
@@ -15,6 +16,7 @@ namespace EzhaBy.Api.Controllers
         public TagsController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] CreateTag.Command command)
         {
             try
@@ -29,6 +31,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTags()
         {
             try
@@ -42,6 +45,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTag(string id)
         {
             try
@@ -55,6 +59,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateTagName(string id, [FromBody] UpdateTagName.Command command)
         {
             try
@@ -70,6 +75,7 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTag(string id)
         {
             try

@@ -52,16 +52,18 @@ export default class AddDish extends Component {
     });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { cateringFacilityId } = this.props.match.params;
 
-    CategoriesService.getCategories(cateringFacilityId).then((res) => {
+    const categoriesData = await CategoriesService.getCategories(cateringFacilityId);
+
+    if (categoriesData) {
       this.setState({
-        categories: res.data,
+        categories: categoriesData.data,
         needRedirect: false,
         validated: false,
       });
-    });
+    }
   }
 
   render() {

@@ -52,7 +52,7 @@ namespace EzhaBy.Business.Dishes
                         }
                     });
 
-                if (dishes == null)
+                if (dishes.Count() == 0)
                 {
                     throw new Exception("dishes not found");
                 }

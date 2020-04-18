@@ -26,18 +26,22 @@ export default class CategoriesPage extends Component {
   async getCateringFacilities() {
     const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
 
-    this.setState({
-      cateringFacilities: cateringFacilitiesList.data.map(res => {
-        return { id: res.id, name: res.cateringFacilityName };
-      })
-    });
+    if (cateringFacilitiesList) {
+      this.setState({
+        cateringFacilities: cateringFacilitiesList.data.map(res => {
+          return { id: res.id, name: res.cateringFacilityName };
+        })
+      });
+    }
   }
 
   async getCategories(id) {
     if (id && id !== "-1") {
       const categoriesData = await CategoriesService.getCategories(id);
 
-      this.setState({ categories: categoriesData.data });
+      if (categoriesData) {
+        this.setState({ categories: categoriesData.data });
+      }
     }
   }
 

@@ -25,7 +25,7 @@ namespace EzhaBy.Business.Requests
             {
                 var requests = context.CourierRequests.AsNoTracking();
 
-                if (requests == null)
+                if (requests.Count() == 0)
                 {
                     throw new Exception("courier requests not found");
                 }

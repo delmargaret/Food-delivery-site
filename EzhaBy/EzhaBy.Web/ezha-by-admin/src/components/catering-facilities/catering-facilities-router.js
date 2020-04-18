@@ -5,7 +5,7 @@ import CateringFacilitiesPage from "./catering-facilities";
 import AddCateringFacility from "./add-catering-facility";
 import UpdateCateringFacility from "./update-catering-facility";
 
-export default function() {
+export default function () {
   let { path } = useRouteMatch();
 
   const UpdateCateringFacilityWithRouter = withRouter(UpdateCateringFacility);
