@@ -8,12 +8,6 @@
   min-height: 100vh;
 }
 
-.App .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
 .leaves-left {
   border-width: 0px;
   position: absolute;
@@ -35,6 +29,7 @@
 
 #main-row {
   margin: 0;
+  min-height: 570px;
 }
 
 .App .btn-red {
