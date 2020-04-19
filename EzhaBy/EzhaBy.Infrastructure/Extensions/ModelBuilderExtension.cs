@@ -24,8 +24,8 @@ namespace EzhaBy.Infrastructure.Extensions
             modelBuilder.Entity<Tag>().HasData(
                 new Tag[]
                 {
-                    new Tag{ Id = Guid.NewGuid(), TagName = "First" },
-                    new Tag{ Id = Guid.NewGuid(), TagName = "Second" },
+                    new Tag{ Id = Guid.NewGuid(), TagName = "Выпечка" },
+                    new Tag{ Id = Guid.NewGuid(), TagName = "Кофе" },
                 }
             );
 
@@ -43,6 +43,9 @@ namespace EzhaBy.Infrastructure.Extensions
                         DeliveryPrice = 2,
                         DeliveryTime = "30-45 минут",
                         WorkingHours = "10.00 - 20.00",
+                        Town = Towns.Minsk,
+                        Street = "Белорусская",
+                        HouseNumber = "21",
                         CateringFacilityIconUrl = string.Empty
                     }               
                 }
@@ -56,9 +59,9 @@ namespace EzhaBy.Infrastructure.Extensions
                         Id = Guid.NewGuid(),
                         CateringFacilityId = cateringFacilityId,
                         FeedbackCategory = FeedbackCategories.Complaint,
-                        Name = "Margo",
-                        Surname = "Del",
-                        Patronymic = "Mih",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "",
                         Email = "ri.tysik@mail.ru",
                         FeedbackStatus = FeedbackStatuses.New,
                         Text = "Жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба жалоба " +
@@ -70,9 +73,9 @@ namespace EzhaBy.Infrastructure.Extensions
                         Id = Guid.NewGuid(),
                         CateringFacilityId = cateringFacilityId,
                         FeedbackCategory = FeedbackCategories.Review,
-                        Name = "Margo",
-                        Surname = "Del",
-                        Patronymic = "Mih",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "Михайловна",
                         Email = "ri.tysik@mail.ru",
                         FeedbackStatus = FeedbackStatuses.New,
                         Text = "Отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв " +
@@ -89,9 +92,9 @@ namespace EzhaBy.Infrastructure.Extensions
                         Id = Guid.NewGuid(),
                         CateringFacilityName = "New KFC",
                         CateringFacilityType = CateringFacilityTypes.Cafe,
-                        Name = "Margo",
-                        Surname = "Del",
-                        Patronymic = "Mih",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "Михайловна",
                         Email = "ri.tysik@mail.ru",
                         Phone = "80534271657",
                         RequestStatus = RequestStatuses.New
@@ -100,9 +103,9 @@ namespace EzhaBy.Infrastructure.Extensions
                         Id = Guid.NewGuid(),
                         CateringFacilityName = "New BK",
                         CateringFacilityType = CateringFacilityTypes.Restaurant,
-                        Name = "Margo",
-                        Surname = "Delikat",
-                        Patronymic = "Mihail",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "",
                         Email = "ri.tysik@mail.ru",
                         Phone = "80094856257",
                         RequestStatus = RequestStatuses.New
@@ -115,9 +118,9 @@ namespace EzhaBy.Infrastructure.Extensions
                 {
                     new CourierRequest{
                         Id = Guid.NewGuid(),
-                        Name = "Margo",
-                        Surname = "Del",
-                        Patronymic = "Mih",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "",
                         VehicleType = VehicleTypes.Motorcycle,
                         FuelConsumption = 7,
                         Email = "ri.tysik@mail.ru",
@@ -126,9 +129,9 @@ namespace EzhaBy.Infrastructure.Extensions
                     },
                     new CourierRequest{
                         Id = Guid.NewGuid(),
-                        Name = "Margo",
-                        Surname = "Delikat",
-                        Patronymic = "Mihail",
+                        Name = "Марго",
+                        Surname = "Деликатная",
+                        Patronymic = "",
                         VehicleType = VehicleTypes.Bike,
                         FuelConsumption = 0,
                         Email = "ri.tysik@mail.ru",
