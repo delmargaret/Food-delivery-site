@@ -51,9 +51,7 @@ export default class PartnerRequestsPage extends Component {
   async getPartnerRequests() {
     const requestList = await RequestsService.getPartnerRequests();
 
-    if (requestList) {
-      this.setState({ requests: requestList.data });
-    }
+    this.setState({ requests: requestList ? requestList.data : []});
   }
 
   setShow(show) {

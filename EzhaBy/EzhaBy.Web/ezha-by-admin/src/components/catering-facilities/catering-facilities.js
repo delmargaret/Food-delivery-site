@@ -21,9 +21,7 @@ export default class CateringFacilitiesPage extends Component {
   async getCateringFacilities() {
     const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
 
-    if (cateringFacilitiesList) {
-      this.setState({ cateringFacilities: cateringFacilitiesList.data });
-    }
+    this.setState({ cateringFacilities: cateringFacilitiesList ? cateringFacilitiesList.data : []});
   }
 
   componentDidMount() {

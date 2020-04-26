@@ -30,13 +30,11 @@ export default class UpdateDish extends Component {
 
     const dishDetails = await DishesService.getDish(id);
 
-    if (categoriesList) {
-      this.setState({
-        categories: categoriesList.data,
-        needRedirect: false,
-        validated: false,
-      });
-    }
+    this.setState({
+      categories: categoriesList ? categoriesList.data : [],
+      needRedirect: false,
+      validated: false,
+    });
 
     const {
       nameInput,

@@ -51,9 +51,7 @@ export default class CourierRequestsPage extends Component {
   async getCourierRequests() {
     const requestList = await RequestsService.getCourierRequests();
 
-    if (requestList) {
-      this.setState({ requests: requestList.data });
-    }
+    this.setState({ requests: requestList ? requestList.data : []});
   }
 
   setShow(show) {

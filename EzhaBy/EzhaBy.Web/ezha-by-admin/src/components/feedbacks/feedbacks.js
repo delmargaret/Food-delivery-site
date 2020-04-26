@@ -51,9 +51,7 @@ export default class FeedbacksPage extends Component {
   async getFeedbacks() {
     const feedbackList = await FeedbacksService.getFeedbacks();
 
-    if (feedbackList) {
-      this.setState({ feedbacks: feedbackList.data });
-    }
+    this.setState({ feedbacks: feedbackList ? feedbackList.data : []});
   }
 
   setShow(show) {

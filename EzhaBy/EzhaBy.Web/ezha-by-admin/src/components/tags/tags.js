@@ -20,9 +20,7 @@ export default class TagsPage extends Component {
   async getTags() {
     const tags = await TagsService.getTags();
 
-    if (tags) {
-      this.setState({ tags: tags.data });
-    }
+    this.setState({ tags: tags ? tags.data : [] });
   }
 
   componentDidMount() {

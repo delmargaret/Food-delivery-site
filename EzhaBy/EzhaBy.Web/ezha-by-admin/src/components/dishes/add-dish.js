@@ -56,14 +56,12 @@ export default class AddDish extends Component {
     const { cateringFacilityId } = this.props.match.params;
 
     const categoriesData = await CategoriesService.getCategories(cateringFacilityId);
-
-    if (categoriesData) {
-      this.setState({
-        categories: categoriesData.data,
-        needRedirect: false,
-        validated: false,
-      });
-    }
+    
+    this.setState({
+      categories: categoriesData ? categoriesData.data : [],
+      needRedirect: false,
+      validated: false,
+    });
   }
 
   render() {
