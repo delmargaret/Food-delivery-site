@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EzhaBy.Business.Categories;
+using EzhaBy.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EzhaBy.Api.Controllers
 {
     [Route("api/catering-facilities/{cateringFacilityId}/categories")]
+    [Authorize(Roles = AuthorizationRoles.Admin)]
     [ApiController]
     public class CateringFacilityCategoriesController : ControllerBase
     {
@@ -16,7 +18,6 @@ namespace EzhaBy.Api.Controllers
         public CateringFacilityCategoriesController(IMediator mediator) => this.mediator = mediator;
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(string cateringFacilityId, [FromBody] CreateCategory.Command command)
         {
             try
@@ -32,7 +33,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCategories(string cateringFacilityId)
         {
             try
@@ -46,7 +46,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCategoryName(string id, [FromBody] UpdateCategoryName.Command command)
         {
             try
@@ -62,7 +61,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
             try

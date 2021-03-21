@@ -9,13 +9,17 @@ namespace EzhaBy.Infrastructure
         {
             MailAddress from = new MailAddress("appprojectmanagement@gmail.com");
             MailAddress to = new MailAddress(email);
-            MailMessage m = new MailMessage(from, to);
-            m.Subject = subject;
-            m.Body = body;
-            m.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new NetworkCredential("appprojectmanagement@gmail.com", "zsvspsosnyhmtwln");
-            smtp.EnableSsl = true;
+            MailMessage m = new MailMessage(from, to)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            };
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("appprojectmanagement@gmail.com", "zsvspsosnyhmtwln"),
+                EnableSsl = true
+            };
             smtp.Send(m);
         }
     }

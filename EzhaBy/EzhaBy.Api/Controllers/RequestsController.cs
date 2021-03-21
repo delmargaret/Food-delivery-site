@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EzhaBy.Business.Requests;
+using EzhaBy.Entities;
 using EzhaBy.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EzhaBy.Api.Controllers
 {
     [Route("api/requests")]
+    [Authorize(Roles = AuthorizationRoles.Admin)]
     [ApiController]
     public class RequestsController : ControllerBase
     {
@@ -17,7 +19,6 @@ namespace EzhaBy.Api.Controllers
         public RequestsController(IMediator mediator) => this.mediator = mediator;
 
         [HttpGet("partners")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetPartnerRequests()
         {
             try
@@ -31,7 +32,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("partners/{id}/status")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetPartnerRequestStatus(string id, [FromBody] SetPartnerRequestStatus.Command command)
         {
             try
@@ -47,7 +47,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpGet("couriers")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCourierRequests()
         {
             try
@@ -61,7 +60,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("couriers/{id}/status")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetCourierRequestStatus(string id, [FromBody] SetCourierRequestStatus.Command command)
         {
             try
@@ -77,7 +75,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("email")]
-        [Authorize(Roles = "Admin")]
         public IActionResult SendEmail([FromBody] EmailDto email)
         {
             try

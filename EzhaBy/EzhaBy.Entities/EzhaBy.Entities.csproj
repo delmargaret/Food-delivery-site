@@ -45,6 +45,7 @@
     <Compile Include="Enums\CateringFacilityTypes.cs" />
     <Compile Include="Enums\DishStatuses.cs" />
     <Compile Include="Enums\RequestStatuses.cs" />
+    <Compile Include="Enums\UserRoles.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CateringFacility.cs" />
     <Compile Include="Models\CateringFacilityCategory.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="Enums\Towns.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Constants\AuthorizationRoles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enums\VehicleTypes.cs" />
   </ItemGroup>

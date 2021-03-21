@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EzhaBy.Business.Feedbacks;
+using EzhaBy.Entities;
 using EzhaBy.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EzhaBy.Api.Controllers
 {
     [Route("api/feedbacks")]
+    [Authorize(Roles = AuthorizationRoles.Admin)]
     [ApiController]
     public class FeedbacksController : ControllerBase
     {
@@ -17,7 +19,6 @@ namespace EzhaBy.Api.Controllers
         public FeedbacksController(IMediator mediator) => this.mediator = mediator;
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetFeedbacks()
         {
             try
@@ -31,7 +32,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("{id}/status")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetFeedbackStatus(string id, [FromBody] SetFeedbackStatus.Command command)
         {
             try
@@ -47,7 +47,6 @@ namespace EzhaBy.Api.Controllers
         }
 
         [HttpPut("email")]
-        [Authorize(Roles = "Admin")]
         public IActionResult SendEmail([FromBody] EmailDto email)
         {
             try
