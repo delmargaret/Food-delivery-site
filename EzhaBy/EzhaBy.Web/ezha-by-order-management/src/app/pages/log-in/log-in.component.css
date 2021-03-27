@@ -1,0 +1,68 @@
+.leaves-left {
+  border-width: 0px;
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  width: 245px;
+  height: 545px;
+}
+
+.leaves-right {
+  border-width: 0px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  width: 245px;
+  height: 545px;
+  transform: rotate(180deg);
+}
+
+.app-form label {
+  font-weight: bold;
+}
+
+#main-row {
+  margin: 0;
+  margin-bottom: 60px;
+  min-height: 600px;
+}
+
+.btn-red {
+  color: black;
+  background-color: rgba(235, 95, 95, 0.6);
+  border-color: rgba(235, 95, 95, 0.6);
+  width: 100%;
+}
+
+.btn-red:hover {
+  color: black;
+  background-color: rgb(235, 95, 95);
+  border-color: rgb(235, 95, 95);
+}
+
+.btn-red:active {
+  color: black !important;
+  background-color: rgb(235, 95, 95) !important;
+  border-color: rgb(235, 95, 95) !important;
+}
+
+.btn-red:focus {
+  color: black;
+  background-color: rgb(235, 95, 95);
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}
+
+.btn-red:active:focus {
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25) !important;
+}
+
+input:focus {
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}
+
+input:focus {
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}

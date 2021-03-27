@@ -1,21 +1,16 @@
 .navbar {
   background-color: #f8f9fa !important;
-  padding: 0.5rem 1rem;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: inline-flex;
+  padding: .5rem 1rem;
+  display: flex;
 }
 
 .brand {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
   font-size: 1.25rem;
   margin-left: calc(50% - 60px);
   margin-right: auto;
+  display: inline-block;
 }
 
 .app-link {
