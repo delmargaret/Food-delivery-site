@@ -1,0 +1,36 @@
+.navbar {
+  background-color: #f8f9fa !important;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: inline-flex;
+}
+
+.brand {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: 1.25rem;
+  margin-left: calc(50% - 60px);
+  margin-right: auto;
+}
+
+.app-link {
+  color: rgb(235, 85, 85);
+  display: block;
+  padding: 0.5rem 2rem;
+  margin-right: 1rem;
+}
+
+.app-link:hover {
+  color: rgb(235, 10, 10);
+  text-decoration: underline !important;
+}
+
+.app-link:focus {
+  color: rgb(235, 10, 10);
+  text-decoration: underline !important;
+}
