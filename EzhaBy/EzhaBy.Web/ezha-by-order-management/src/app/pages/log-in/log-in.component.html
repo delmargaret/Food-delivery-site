@@ -6,11 +6,26 @@
     <div class="col-8">
       <br />
       <br />
-      
+      <div *ngIf="info" class="row">
+        <div class="col"></div>
+        <div class="col-7">
+          <div class="alert alert-secondary" role="alert">
+            <p>
+              {{info}}
+            </p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
       <div class="row">
         <div class="col"></div>
         <div class="col-7">
-          <form novalidate class="app-form">
+          <form
+            novalidate
+            (ngSubmit)="onSubmit($event)"
+            [formGroup]="loginForm"
+            class="app-form"
+          >
             <div class="form-row">
               <div class="col">
                 <div class="form-group">
@@ -20,8 +35,18 @@
                     class="form-control"
                     id="emailInput"
                     required
+                    formControlName="email"
+                    autocomplete="off"
                   />
-                  <div class="invalid-feedback">Введите e-mail</div>
+                  <div
+                    *ngIf="
+                      email && email.invalid && (email.dirty || email.touched)
+                    "
+                    style="display: block;"
+                    class="invalid-feedback"
+                  >
+                    Введите e-mail
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,8 +59,20 @@
                     class="form-control"
                     id="passwordInput"
                     required
+                    formControlName="password"
+                    autocomplete="off"
                   />
-                  <div class="invalid-feedback">Введите e-mail</div>
+                  <div
+                    *ngIf="
+                      password &&
+                      password.invalid &&
+                      (password.dirty || password.touched)
+                    "
+                    style="display: block;"
+                    class="invalid-feedback"
+                  >
+                    Введите пароль
+                  </div>
                 </div>
               </div>
             </div>

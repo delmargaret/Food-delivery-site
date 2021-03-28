@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from '../models/token';
+import { CredentialsStatus } from '../models/credentialsStatus';
 import { ConfigService } from '../services/config.service';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class AuthService {
   private tokenKey = 'token';
   private roleKey = 'role';
   private userId = 'userId';
+  private allowedRoles = ['Courier', 'CafeAdmin'];
   private tokenHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -42,32 +44,27 @@ export class AuthService {
     sessionStorage.removeItem(this.userId);
   }
 
-  public async Authorize(email: string, password: string, role: string) {
+  public authorize(email: string, password: string) {
     const data = {
       email: email,
       password: password,
     };
 
-    const res = this.http.post<Token>(ConfigService.addBaseAddress('api/token'), data)
-        .subscribe((token) => {
-            if (!token)
-                return CREDENTIALS_NOT_FOUND;
+    return this.http.post<Token>(
+      ConfigService.addBaseAddress('api/token'),
+      data
+    );
+  }
 
-            if (token.role !== role)
-                return WRONG_ROLE;
+  public saveUser(token: Token) {
+    if (!token) return CredentialsStatus.CREDENTIALS_NOT_FOUND;
 
-            sessionStorage.setItem(this.tokenKey, token.token);
-            sessionStorage.setItem(this.roleKey, token.role);
-            sessionStorage.setItem(this.userId, token.userId);
-            return CREDENTIALS_OK;
-        });
+    if (!this.allowedRoles.includes(token.role))
+      return CredentialsStatus.WRONG_ROLE;
+
+    sessionStorage.setItem(this.tokenKey, token.token);
+    sessionStorage.setItem(this.roleKey, token.role);
+    sessionStorage.setItem(this.userId, token.userId);
+    return CredentialsStatus.CREDENTIALS_OK;
   }
 }
-
-export const USER_LOGGED = 'USER_LOGGED';
-export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
-
-export const CREDENTIALS_NOT_FOUND = 'CREDENTIALS_NOT_FOUND';
-export const WRONG_ROLE = 'WRONG_ROLE';
-export const CREDENTIALS_OK = 'CREDENTIALS_OK';
-export const CREDENTIALS_NOT_CHECKED = 'CREDENTIALS_NOT_CHECKED';

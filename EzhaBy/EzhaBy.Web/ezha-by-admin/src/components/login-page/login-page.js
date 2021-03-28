@@ -33,7 +33,7 @@ export default class LoginPage extends Component {
 
     const form = event.currentTarget;
 
-    let result = CREDENTIALS_NOT_FOUND;
+    let result = CREDENTIALS_NOT_CHECKED;
 
     if (form.checkValidity()) {
       result = await LoginService.setUserInRole(
