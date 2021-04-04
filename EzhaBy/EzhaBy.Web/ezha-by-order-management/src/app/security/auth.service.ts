@@ -67,4 +67,8 @@ export class AuthService {
     sessionStorage.setItem(this.userId, token.userId);
     return CredentialsStatus.CREDENTIALS_OK;
   }
+
+  public getUserRole() : string | null {
+    return sessionStorage.getItem(this.roleKey);
+  }
 }

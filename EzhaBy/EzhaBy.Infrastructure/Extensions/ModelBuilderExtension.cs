@@ -8,6 +8,24 @@ namespace EzhaBy.Infrastructure.Extensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            var courierUserId = Guid.NewGuid();
+            var cafeUserId = Guid.NewGuid();
+
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Email = "user@user.com",
+                Password = "user",
+                UserRole = UserRoles.User,
+                Name = "Иван",
+                Surname = "Иванов",
+                Phone = "+375333333333",
+                Town = Towns.Minsk,
+                Street = "Свердлова",
+                HouseNumber = "13",
+                FlatNumber = "24"
+            };
+
             modelBuilder.Entity<User>().HasData(
                 new User[]
                 {
@@ -17,7 +35,30 @@ namespace EzhaBy.Infrastructure.Extensions
                         Email = "admin@admin.com",
                         Password = "admin",
                         UserRole = UserRoles.Admin
-                    }
+                    },
+                    new User
+                    {
+                        Id = cafeUserId,
+                        Email = "cafe@cafe.com",
+                        Password = "cafe",
+                        UserRole = UserRoles.CafeAdmin,
+                        Name = "CafeName",
+                        Surname = "CafeSurname",
+                        Patronymic = "CafePatronymic",
+                        Phone = "+375291111111"
+                    },
+                    new User
+                    {
+                        Id = courierUserId,
+                        Email = "courier@courier.com",
+                        Password = "courier",
+                        UserRole = UserRoles.Courier,
+                        Name = "CourierName",
+                        Surname = "CourierSurname",
+                        Patronymic = "CourierPatronymic",
+                        Phone = "+375292222222"
+                    },
+                    user
                 }
             );
 
@@ -50,6 +91,132 @@ namespace EzhaBy.Infrastructure.Extensions
                     }               
                 }
             );
+
+            var categoryId = Guid.NewGuid();
+
+            modelBuilder.Entity<Category>().HasData(
+               new Category[]
+               {
+                    new Category
+                    {
+                        Id = categoryId,
+                        CategoryName = "Бургеры",          
+                    }
+               }
+           );
+
+            var cateringFacilityCategoryId = Guid.NewGuid();
+
+            modelBuilder.Entity<CateringFacilityCategory>().HasData(
+               new CateringFacilityCategory[]
+               {
+                    new CateringFacilityCategory
+                    {
+                        Id = cateringFacilityCategoryId,
+                        CategoryId = categoryId,
+                        CateringFacilityId = cateringFacilityId
+                    }
+               }
+           );
+
+            var firstDishId = Guid.NewGuid();
+            var secondDishId = Guid.NewGuid();
+            modelBuilder.Entity<Dish>().HasData(
+               new Dish[]
+               {
+                    new Dish
+                    {
+                        Id = firstDishId,
+                        DishName = "Бургер 1",
+                        DishIconUrl = string.Empty,
+                        Description = "Бургер 1 описание",
+                        Price = 4,
+                        DishStatus = DishStatuses.InStock,
+                        CateringFacilityCategoryId = cateringFacilityCategoryId
+                    },
+                    new Dish
+                    {
+                        Id = secondDishId,
+                        DishName = "Бургер 2",
+                        DishIconUrl = string.Empty,
+                        Description = "Бургер 2 описание",
+                        Price = 2,
+                        DishStatus = DishStatuses.InStock,
+                        CateringFacilityCategoryId = cateringFacilityCategoryId
+                    }
+               }
+           );
+
+            var courierId = Guid.NewGuid();
+            modelBuilder.Entity<Courier>().HasData(
+               new Courier[]
+               {
+                    new Courier
+                    {
+                        Id = courierId,
+                        UserId = courierUserId,
+                        Status = CourierStatuses.Away
+
+                    }
+               }
+           );
+
+            modelBuilder.Entity<CafeUser>().HasData(
+               new CafeUser[]
+               {
+                    new CafeUser
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = cafeUserId,
+                        CateringFacilityId = cateringFacilityId
+
+                    }
+               }
+           );
+
+            var orderId = Guid.NewGuid();
+            modelBuilder.Entity<Order>().HasData(
+               new Order[]
+               {
+                    new Order
+                    {
+                        Id = orderId,
+                        CourierId = courierId,
+                        IsOrderAccepted = false,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        UserId = user.Id,
+                        Town = user.Town,
+                        Street = user.Street,
+                        HouseNumber = user.HouseNumber,
+                        FlatNumber = user.FlatNumber,
+                        Phone = user.Phone,
+                        PaymentType = PaymentTypes.Cash,
+                        OrderDateTime = DateTimeOffset.Now,
+                        OrderStatus = OrderStatuses.New
+                    }
+               }
+           );
+
+            modelBuilder.Entity<OrderLine>().HasData(
+               new OrderLine[]
+               {
+                    new OrderLine
+                    {
+                        Id = Guid.NewGuid(),
+                        OrderId = orderId,
+                        DishId = firstDishId,
+                        NumberOfDishes = 2
+                    },
+                    new OrderLine
+                    {
+                        Id = Guid.NewGuid(),
+                        OrderId = orderId,
+                        DishId = secondDishId,
+                        NumberOfDishes = 1
+                    }
+               }
+           );
 
             modelBuilder.Entity<Feedback>().HasData(
                 new Feedback[]

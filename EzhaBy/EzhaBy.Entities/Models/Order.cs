@@ -5,7 +5,7 @@ namespace EzhaBy.Entities
 {
     public class Order
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
@@ -18,10 +18,11 @@ namespace EzhaBy.Entities
         public string Comment { get; set; }
         public OrderStatuses OrderStatus { get; set; }
         public DateTimeOffset OrderDateTime { get; set; }
-        public string UserId { get; set; }
+        public Guid? UserId { get; set; }
         public virtual User User { get; set; }
-        public string CourierId { get; set; }
+        public Guid CourierId { get; set; }
         public virtual Courier Courier { get; set; }
+        public bool IsOrderAccepted { get; set; }
         public virtual List<OrderLine> OrderDishes { get; set; }
     }
 }

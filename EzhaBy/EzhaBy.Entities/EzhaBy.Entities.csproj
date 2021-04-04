@@ -49,6 +49,7 @@
     <Compile Include="Enums\PaymentTypes.cs" />
     <Compile Include="Enums\RequestStatuses.cs" />
     <Compile Include="Enums\UserRoles.cs" />
+    <Compile Include="Models\CafeUser.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CateringFacility.cs" />
     <Compile Include="Models\CateringFacilityCategory.cs" />

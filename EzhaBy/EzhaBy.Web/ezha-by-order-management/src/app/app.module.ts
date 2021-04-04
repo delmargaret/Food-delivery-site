@@ -9,6 +9,7 @@ import { ComponentsModule } from './components/components.module';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AuthModule } from './security/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AuthModule } from './security/auth.module';
     ComponentsModule,
     AuthModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

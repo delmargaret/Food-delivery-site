@@ -1,0 +1,23 @@
+<div class="cafe">
+  <br />
+  <h4>Заказы</h4>
+  <div class="cafeOrders">
+    <mat-button-toggle-group name="orders" aria-label="orders" value="active">
+      <mat-button-toggle
+        class="btn-red"
+        (click)="getActive($event)"
+        value="active"
+        >Активные</mat-button-toggle
+      >
+      <mat-button-toggle
+        class="btn-red"
+        (click)="getClosed($event)"
+        value="closed"
+        >Завершенные</mat-button-toggle
+      >
+      <mat-button-toggle class="btn-red" (click)="getAll($event)" value="all"
+        >Все</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
+</div>
