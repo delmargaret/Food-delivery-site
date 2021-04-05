@@ -5,6 +5,9 @@ import { FooterComponent } from './footer/footer.component';
 import { CafePageComponent } from './cafe-page/cafe-page.component';
 import { CourierPageComponent } from './courier-page/courier-page.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { OrdersService } from '../services/orders.service';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,12 +16,18 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     CafePageComponent,
     CourierPageComponent,
   ],
-  imports: [CommonModule, MatButtonToggleModule],
+  imports: [
+    CommonModule,
+    MatButtonToggleModule,
+    MatExpansionModule,
+    FormsModule,
+  ],
   exports: [
     NavBarComponent,
     FooterComponent,
     CafePageComponent,
     CourierPageComponent,
   ],
+  providers: [OrdersService],
 })
 export class ComponentsModule {}

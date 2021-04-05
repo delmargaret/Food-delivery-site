@@ -50,8 +50,8 @@ namespace EzhaBy.Business.Users
                 return new ClaimsIdentity(
                     new List<Claim>
                     {
-                        new Claim("userId", user.Id.ToString()),
-                        new Claim("role", user.UserRole.ToString())
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, user.UserRole.ToString())
                     }
                 );
             }

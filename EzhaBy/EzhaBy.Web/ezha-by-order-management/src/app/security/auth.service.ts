@@ -16,10 +16,10 @@ export class AuthService {
   private allowedRoles = ['Courier', 'CafeAdmin'];
   private tokenHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   public hasValidToken(): boolean {
-    const token = sessionStorage.getItem(this.tokenKey);
+    const token = localStorage.getItem(this.tokenKey);
     if (token) {
       return !this.tokenHelper.isTokenExpired(token);
     }
@@ -27,9 +27,9 @@ export class AuthService {
   }
 
   public getUser() {
-    const token = sessionStorage.getItem(this.tokenKey);
-    const role = sessionStorage.getItem(this.roleKey);
-    const userId = sessionStorage.getItem(this.userId);
+    const token = localStorage.getItem(this.tokenKey);
+    const role = localStorage.getItem(this.roleKey);
+    const userId = localStorage.getItem(this.userId);
 
     return {
       token: token,
@@ -39,9 +39,9 @@ export class AuthService {
   }
 
   public removeUser() {
-    sessionStorage.removeItem(this.tokenKey);
-    sessionStorage.removeItem(this.roleKey);
-    sessionStorage.removeItem(this.userId);
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.roleKey);
+    localStorage.removeItem(this.userId);
   }
 
   public authorize(email: string, password: string) {
@@ -62,13 +62,13 @@ export class AuthService {
     if (!this.allowedRoles.includes(token.role))
       return CredentialsStatus.WRONG_ROLE;
 
-    sessionStorage.setItem(this.tokenKey, token.token);
-    sessionStorage.setItem(this.roleKey, token.role);
-    sessionStorage.setItem(this.userId, token.userId);
+    localStorage.setItem(this.tokenKey, token.token);
+    localStorage.setItem(this.roleKey, token.role);
+    localStorage.setItem(this.userId, token.userId);
     return CredentialsStatus.CREDENTIALS_OK;
   }
 
   public getUserRole() : string | null {
-    return sessionStorage.getItem(this.roleKey);
+    return localStorage.getItem(this.roleKey);
   }
 }

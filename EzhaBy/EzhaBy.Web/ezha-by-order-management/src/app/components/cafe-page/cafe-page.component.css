@@ -6,7 +6,8 @@
   color: rgb(235, 85, 85);
 }
 
-.cafeOrders, h4 {
+.button-group,
+h4 {
   justify-content: center;
   display: flex;
 }
@@ -44,4 +45,35 @@
   color: black;
   background-color: rgb(235, 95, 95);
   border-color: rgb(235, 95, 95);
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.form-group {
+  margin-top: 16px;
+}
+
+.form-control {
+  cursor: pointer;
+}
+
+.mat-expansion-panel {
+  background-color: rgba(235, 95, 95, 0.15);
+}
+
+.mat-expansion-panel-header {
+  background-color: rgba(235, 95, 95, 0.25);
+}
+
+.orders .mat-expansion-panel .mat-expansion-panel-header:hover {
+  background-color: rgba(235, 95, 95, 0.35);
 }

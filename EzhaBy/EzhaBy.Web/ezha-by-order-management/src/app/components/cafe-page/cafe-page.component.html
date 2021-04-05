@@ -1,7 +1,7 @@
 <div class="cafe">
   <br />
   <h4>Заказы</h4>
-  <div class="cafeOrders">
+  <div class="button-group">
     <mat-button-toggle-group name="orders" aria-label="orders" value="active">
       <mat-button-toggle
         class="btn-red"
@@ -20,4 +20,55 @@
       >
     </mat-button-toggle-group>
   </div>
+  <br />
+  <mat-accordion class="orders" *ngFor="let order of orders">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ order.name + " " + order.surname }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ order.phone }}
+          <div class="orderDate">
+            {{ order.orderDateTime | date: "d/M/yy, H:mm" }}
+          </div>
+          <div class="form-group">
+            <select
+              class="form-control"
+              id="orderStatus"
+              [ngModel]="order.orderStatus"
+              #orderStatus
+              (change)="onChangeStatus(orderStatus.value)"
+              (click)="$event.stopPropagation()"
+              [ngStyle]="
+                selected
+                  ? dropdownStyles[selected]
+                  : dropdownStyles[order.orderStatus]
+              "
+            >
+              <option
+                [value]="statuses.New"
+                [ngStyle]="dropdownStyles[statuses.New]"
+              >
+                Новый
+              </option>
+              <option
+                [value]="statuses.InProgress"
+                [ngStyle]="dropdownStyles[statuses.InProgress]"
+              >
+                Принят в обработку
+              </option>
+              <option
+                [value]="statuses.AcceptedByCourier"
+                [ngStyle]="dropdownStyles[statuses.AcceptedByCourier]"
+              >
+                Передан курьеру
+              </option>
+            </select>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>This is the primary content of the panel.</p>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

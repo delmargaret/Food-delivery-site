@@ -11,15 +11,16 @@ namespace EzhaBy.Infrastructure
         public DbSet<CateringFacilityTag> CateringFacilityTags { get; set; }
         public DbSet<CateringFacilityCategory> CateringFacilityCategories { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
-        //public DbSet<Courier> Couriers { get; set; }
+        public DbSet<Courier> Couriers { get; set; }
         public DbSet<CourierRequest> CourierRequests { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        //public DbSet<Order> Orders { get; set; }
-        //public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<PartnerRequest> PartnerRequests { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CafeUser> CafeUsers { get; set; }
 
         public Task<int> SaveChangesAsync() => base.SaveChangesAsync();
 
