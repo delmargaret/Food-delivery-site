@@ -33,6 +33,21 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [HttpGet("courier-orders")]
+        [Authorize(Roles = AuthorizationRoles.Courier)]
+        public async Task<IActionResult> GetCourierOrders()
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                return Ok(await mediator.Send(new GetCourierOrders.Query(Guid.Parse(userId))));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPut("{id}/status")]
         [Authorize(Roles = AuthorizationRoles.CafeAdminAndCourier)]
         public async Task<IActionResult> SetOrderStatus(string id, [FromBody] SetOrderStatus.Command command)

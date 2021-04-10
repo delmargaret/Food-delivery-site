@@ -5,4 +5,5 @@ export interface OrderDish {
   description: string;
   price: number;
   numberOfDishes: number;
+  cateringFacilityName: string
 }

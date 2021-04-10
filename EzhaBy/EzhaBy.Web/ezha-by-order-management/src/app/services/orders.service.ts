@@ -14,6 +14,12 @@ export class OrdersService {
     );
   }
 
+  GetCourierOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      ConfigService.addBaseAddress('api/orders/courier-orders')
+    );
+  }
+
   SetOrderStatus(id: string, status: number): Observable<Object> {
     const data = {
       orderStatus: status

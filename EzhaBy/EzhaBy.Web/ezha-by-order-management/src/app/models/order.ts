@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+import { CourierDish } from './courierDish';
 import { OrderDish } from './orderDish';
 
 export interface Order {
@@ -17,4 +19,5 @@ export interface Order {
   isOrderAccepted: boolean;
   totalPrice: number;
   orderDishes: OrderDish[];
+  courierDishes?: CourierDish[]
 }
