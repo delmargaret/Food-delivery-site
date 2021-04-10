@@ -115,5 +115,37 @@ namespace EzhaBy.Api.Controllers
                 return BadRequest(ex);
             }
         }
+
+        [HttpGet("courier-status")]
+        [Authorize(Roles = AuthorizationRoles.Courier)]
+        public async Task<IActionResult> GetCourierStatus()
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                return Ok(await mediator.Send(new GetCourierStatus.Query(Guid.Parse(userId))));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("courier-status")]
+        [Authorize(Roles = AuthorizationRoles.Courier)]
+        public async Task<IActionResult> SetCourierStatus([FromBody] SetCourierStatus.Command command)
+        {
+            try
+            {
+                var id = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

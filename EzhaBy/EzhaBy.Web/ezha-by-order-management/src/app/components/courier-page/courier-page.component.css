@@ -156,31 +156,6 @@ select:active:focus {
   width: 196px;
 }
 
-.not-responded {
-  display: flex;
-}
-
-.not-responded .mat-icon {
-  color: red;
-}
-
-.not-responded-disabled {
-  display: flex;
-  cursor: default;
-}
-
-.not-responded-disabled .mat-icon {
-  color: rgb(151, 89, 89);
-}
-
-.responded {
-  display: flex;
-}
-
-.responded .mat-icon {
-  color: rgb(0, 177, 0);
-}
-
 .closed-order {
   display: block;
   width: 196px;
@@ -204,4 +179,15 @@ select:active:focus {
 
 .btn-group .btn .mat-icon {
   vertical-align: middle;
+}
+
+.courier-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.courier-status .form-control {
+  width: 196px;
+  margin-left: 25px;
 }

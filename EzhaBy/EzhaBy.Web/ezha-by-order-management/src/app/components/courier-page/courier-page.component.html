@@ -1,5 +1,26 @@
 <div class="courier">
   <br />
+  <div class="courier-status" *ngIf="courierStatus">
+    <h5><b>Статус:</b></h5>
+    <div>
+      <select
+        class="form-control"
+        id="courier-status"
+        [ngModel]="courierStatus"
+        #status
+        (change)="onChangeCourierStatus(status.value)"
+        (click)="$event.stopPropagation()"
+        [ngStyle]="
+          selected ? dropdownStyles[selected] : dropdownStyles[courierStatus]
+        "
+      >
+        <option [value]="statuses.Active" class="green">Активный</option>
+        <option [value]="statuses.Busy" class="orange">Занят</option>
+        <option [value]="statuses.Away" class="blue">Нет на месте</option>
+      </select>
+    </div>
+  </div>
+  <br />
   <h4>Заказы</h4>
   <div class="button-group">
     <mat-button-toggle-group

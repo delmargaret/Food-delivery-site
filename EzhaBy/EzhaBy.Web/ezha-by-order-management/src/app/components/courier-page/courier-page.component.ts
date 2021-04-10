@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
-import { OrderStatuses } from 'src/app/models/orderStatuses';
 import { PaymentTypes } from 'src/app/models/paymentTypes';
 import { Towns } from 'src/app/models/towns';
 import { OrdersService } from 'src/app/services/orders.service';
 import * as _ from 'lodash';
 import { CourierDish } from 'src/app/models/courierDish';
+import { CourierStatuses } from 'src/app/models/courierStatuses';
+import { OrderStatuses } from 'src/app/models/orderStatuses';
 
 @Component({
   selector: 'app-courier-page',
@@ -18,7 +19,8 @@ export class CourierPageComponent implements OnInit {
   orders: Order[] = [];
   towns = Towns;
   paymentTypes = PaymentTypes;
-  statuses = OrderStatuses;
+  statuses = CourierStatuses;
+  orderStatuses = OrderStatuses;
   dropdownStyles: any = {
     0: { 'background-color': 'rgb(176, 207, 167)' },
     1: { 'background-color': 'rgb(250, 207, 127)' },
@@ -31,11 +33,12 @@ export class CourierPageComponent implements OnInit {
   };
   selectedFilter: string = this.orderFilters[0];
   selected: string | null = null;
-  isCourierButtonAvailable = true;
+  courierStatus: CourierStatuses | null = null;
 
   constructor(private ordersService: OrdersService) {}
 
   ngOnInit(): void {
+    this.getCourierStatus();
     this.getOrders();
     this.interval = setInterval(() => {
       this.getOrders();
@@ -97,8 +100,19 @@ export class CourierPageComponent implements OnInit {
   onChangeStatus(event: Event, orderId: string) {
     event.preventDefault();
     event.stopPropagation();
-    this.ordersService.SetOrderStatus(orderId, this.statuses.Done).subscribe(
-      () => this.getOrders(),
+    this.ordersService
+      .SetOrderStatus(orderId, this.orderStatuses.Done)
+      .subscribe(
+        () => this.getOrders(),
+        () => {}
+      );
+  }
+
+  onChangeCourierStatus(value: string) {
+    this.selected = value;
+
+    this.ordersService.SetCourierStatus(Number(value)).subscribe(
+      () => (this.getCourierStatus()),
       () => {}
     );
   }
@@ -144,6 +158,13 @@ export class CourierPageComponent implements OnInit {
         this.interval ? clearInterval(this.interval) : null;
         this.allOrders = [];
       }
+    );
+  }
+
+  getCourierStatus() {
+    this.ordersService.GetCourierStatus().subscribe(
+      (status: CourierStatuses) => (this.courierStatus = status),
+      () => {}
     );
   }
 
