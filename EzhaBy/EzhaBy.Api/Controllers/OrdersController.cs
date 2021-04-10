@@ -48,5 +48,21 @@ namespace EzhaBy.Api.Controllers
                 return BadRequest(ex);
             }
         }
+
+        [HttpPut("{id}/courier")]
+        [Authorize(Roles = AuthorizationRoles.CafeAdmin)]
+        public async Task<IActionResult> SetOrderCourier(string id, [FromBody] SetOrderCourier.Command command)
+        {
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

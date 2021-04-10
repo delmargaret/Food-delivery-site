@@ -29,6 +29,7 @@ export class CafePageComponent implements OnInit {
   };
   selectedFilter: string = this.orderFilters[0];
   selected: string | null = null;
+  isCourierButtonAvailable = true;
 
   constructor(private ordersService: OrdersService) {}
 
@@ -75,22 +76,43 @@ export class CafePageComponent implements OnInit {
 
   onChangeStatus(value: string, orderId: string) {
     this.selected = value;
-    this.ordersService
-      .SetOrderStatus(orderId, Number(value))
-      .toPromise()
-      .then((_) => this.getOrders());
+    this.ordersService.SetOrderStatus(orderId, Number(value)).subscribe(
+      () => this.getOrders(),
+      () => {}
+    );
+  }
+
+  onChangeCourier(event: Event, orderId: string) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.isCourierButtonAvailable) {
+      return;
+    }
+
+    this.isCourierButtonAvailable = false;
+
+    this.ordersService.SetOrderCourier(orderId).subscribe(
+      () =>
+        setTimeout(() => {
+          this.isCourierButtonAvailable = true;
+        }, 60 * 3 * 1000),
+      () =>
+        setTimeout(() => {
+          this.isCourierButtonAvailable = true;
+        }, 60 * 3 * 1000)
+    );
   }
 
   getOrders() {
     this.ordersService.GetCafeOrders().subscribe(
       (orders: Order[]) => {
         this.allOrders = orders;
-        var a = Object.assign({}, this.allOrders[0]);
-        a.orderStatus = 3;
-        a.isOrderAccepted = true;
-        a.orderDateTime = Date.now().toString();
-        this.allOrders.push(a);
-        this.allOrders.push(Object.assign({}, this.allOrders[0]));
+        // var a = Object.assign({}, this.allOrders[0]);
+        // a.orderStatus = 3;
+        // a.isOrderAccepted = true;
+        // a.orderDateTime = Date.now().toString();
+        // this.allOrders.push(a);
+        // this.allOrders.push(Object.assign({}, this.allOrders[0]));
         switch (this.selectedFilter) {
           case this.orderFilters[0]:
             this.getActive();

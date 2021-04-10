@@ -22,4 +22,10 @@ export class OrdersService {
       ConfigService.addBaseAddress(`api/orders/${id}/status`), data
     );
   }
+
+  SetOrderCourier(id: string): Observable<Object> {
+    return this.http.put(
+      ConfigService.addBaseAddress(`api/orders/${id}/courier`), {}
+    );
+  }
 }

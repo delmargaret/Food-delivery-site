@@ -81,9 +81,10 @@
             </div>
             <ng-template #notResponded>
               <div
-                class="not-responded"
                 matTooltip="Курьер ещё не принял этот заказ. Нажмите, чтобы перенаправить заказ другому курьеру. Функция доступна раз в 3 минуты."
                 matTooltipPosition="above"
+                [ngClass]="isCourierButtonAvailable ? 'not-responded' : 'not-responded-disabled'"
+                (click)="onChangeCourier($event, order.id)"
               >
                 <mat-icon aria-hidden="false" aria-label="Waiting"
                   >schedule</mat-icon

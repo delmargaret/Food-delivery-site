@@ -202,6 +202,7 @@
     <Compile Include="Orders\Dto\CafeOrderDto.cs" />
     <Compile Include="Orders\Dto\OrderDishDto.cs" />
     <Compile Include="Orders\GetCafeOrders.cs" />
+    <Compile Include="Orders\SetOrderCourier.cs" />
     <Compile Include="Orders\SetOrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\GetCourierRequests.cs" />

@@ -156,6 +156,15 @@ select:active:focus {
   color: red;
 }
 
+.not-responded-disabled {
+  display: flex;
+  cursor: default;
+}
+
+.not-responded-disabled .mat-icon {
+  color: rgb(151, 89, 89);
+}
+
 .responded {
   display: flex;
 }
