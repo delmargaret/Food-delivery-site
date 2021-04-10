@@ -6,5 +6,6 @@
         public const string User = "User";
         public const string Courier = "Courier";
         public const string CafeAdmin = "CafeAdmin";
+        public const string CafeAdminAndCourier = "CafeAdmin,Courier";
     }
 }

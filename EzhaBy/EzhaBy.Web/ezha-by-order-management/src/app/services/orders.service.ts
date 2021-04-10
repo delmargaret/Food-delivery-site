@@ -13,4 +13,13 @@ export class OrdersService {
       ConfigService.addBaseAddress('api/orders/cafe-orders')
     );
   }
+
+  SetOrderStatus(id: string, status: number): Observable<Object> {
+    const data = {
+      orderStatus: status
+    };
+    return this.http.put(
+      ConfigService.addBaseAddress(`api/orders/${id}/status`), data
+    );
+  }
 }

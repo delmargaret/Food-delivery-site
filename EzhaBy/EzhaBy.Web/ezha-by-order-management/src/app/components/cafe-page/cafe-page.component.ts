@@ -36,7 +36,7 @@ export class CafePageComponent implements OnInit {
     this.getOrders();
     this.interval = setInterval(() => {
       this.getOrders();
-    }, 60 * 2 * 1000);
+    }, 60 * 3 * 1000);
   }
 
   getActive(event?: Event) {
@@ -73,15 +73,24 @@ export class CafePageComponent implements OnInit {
     );
   }
 
-  onChangeStatus(value: string) {
-    console.log(value);
+  onChangeStatus(value: string, orderId: string) {
     this.selected = value;
+    this.ordersService
+      .SetOrderStatus(orderId, Number(value))
+      .toPromise()
+      .then((_) => this.getOrders());
   }
 
   getOrders() {
     this.ordersService.GetCafeOrders().subscribe(
       (orders: Order[]) => {
         this.allOrders = orders;
+        var a = Object.assign({}, this.allOrders[0]);
+        a.orderStatus = 3;
+        a.isOrderAccepted = true;
+        a.orderDateTime = Date.now().toString();
+        this.allOrders.push(a);
+        this.allOrders.push(Object.assign({}, this.allOrders[0]));
         switch (this.selectedFilter) {
           case this.orderFilters[0]:
             this.getActive();

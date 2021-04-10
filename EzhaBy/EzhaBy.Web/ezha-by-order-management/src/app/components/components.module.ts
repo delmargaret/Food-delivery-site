@@ -8,6 +8,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { OrdersService } from '../services/orders.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonToggleModule,
     MatExpansionModule,
     FormsModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [
     NavBarComponent,

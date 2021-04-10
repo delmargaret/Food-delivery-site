@@ -58,9 +58,10 @@ h4 {
   margin-left: 8px;
 }
 
-.mat-expansion-panel {
+.orders .mat-expansion-panel {
   background-color: rgba(235, 95, 95, 0.15);
   color: black;
+  margin-bottom: 15px;
 }
 
 .orders .mat-expansion-panel .mat-expansion-panel-header {
@@ -77,6 +78,7 @@ h4 {
 
 .form-group {
   margin-top: 16px;
+  margin-right: 10px;
 }
 
 .form-control {
@@ -111,7 +113,7 @@ h4 {
   object-fit: cover;
   background-size: contain;
   margin-right: 10px;
-  background-image: url('../../../assets/empty.png');
+  background-image: url("../../../assets/empty.png");
 }
 
 .total-price {
@@ -139,4 +141,46 @@ select:focus {
 
 select:active:focus {
   box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25) !important;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.not-responded {
+  display: flex;
+}
+
+.not-responded .mat-icon {
+  color: red;
+}
+
+.responded {
+  display: flex;
+}
+
+.responded .mat-icon {
+  color: rgb(0, 177, 0);
+}
+
+.closed-order {
+  display: block;
+  width: 196px;
+  text-align-last: center;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: rgb(235, 95, 95);
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  cursor: pointer;
+  margin-top: 16px;
+  margin-right: 10px;
+  margin-bottom: 1rem;
 }
