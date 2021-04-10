@@ -2,20 +2,27 @@
   <br />
   <h4>Заказы</h4>
   <div class="button-group">
-    <mat-button-toggle-group name="orders" aria-label="orders" value="active">
+    <mat-button-toggle-group
+      name="orders"
+      aria-label="orders"
+      [value]="selectedFilter"
+    >
       <mat-button-toggle
         class="btn-red"
         (click)="getActive($event)"
-        value="active"
+        [value]="orderFilters[0]"
         >Активные</mat-button-toggle
       >
       <mat-button-toggle
         class="btn-red"
         (click)="getClosed($event)"
-        value="closed"
+        [value]="orderFilters[1]"
         >Завершенные</mat-button-toggle
       >
-      <mat-button-toggle class="btn-red" (click)="getAll($event)" value="all"
+      <mat-button-toggle
+        class="btn-red"
+        (click)="getAll($event)"
+        [value]="orderFilters[2]"
         >Все</mat-button-toggle
       >
     </mat-button-toggle-group>
@@ -46,22 +53,11 @@
                   : dropdownStyles[order.orderStatus]
               "
             >
-              <option
-                [value]="statuses.New"
-                [ngStyle]="dropdownStyles[statuses.New]"
-              >
-                Новый
-              </option>
-              <option
-                [value]="statuses.InProgress"
-                [ngStyle]="dropdownStyles[statuses.InProgress]"
-              >
+              <option [value]="statuses.New" class="green">Новый</option>
+              <option [value]="statuses.InProgress" class="orange">
                 Принят в обработку
               </option>
-              <option
-                [value]="statuses.AcceptedByCourier"
-                [ngStyle]="dropdownStyles[statuses.AcceptedByCourier]"
-              >
+              <option [value]="statuses.AcceptedByCourier" class="blue">
                 Передан курьеру
               </option>
             </select>

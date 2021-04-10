@@ -12,16 +12,22 @@ import { OrdersService } from 'src/app/services/orders.service';
 })
 export class CafePageComponent implements OnInit {
   interval: any;
+  allOrders: Order[] = [];
   orders: Order[] = [];
   towns = Towns;
   paymentTypes = PaymentTypes;
   statuses = OrderStatuses;
   dropdownStyles: any = {
-    0: {'background-color': "rgba(125, 235, 95, 0.35)"},
-    1: {'background-color': "rgba(255, 145, 0, 0.5)"},
-    2: {'background-color': "rgba(0, 45, 255, 0.5)"},
-    3: {'background-color': "rgba(235, 95, 95, 0.25)"}
-  }
+    0: { 'background-color': 'rgb(176, 207, 167)' },
+    1: { 'background-color': 'rgb(250, 207, 127)' },
+    2: { 'background-color': 'rgb(161, 194, 255)' },
+  };
+  orderFilters: any = {
+    0: 'active',
+    1: 'closed',
+    2: 'all',
+  };
+  selectedFilter: string = this.orderFilters[0];
   selected: string | null = null;
 
   constructor(private ordersService: OrdersService) {}
@@ -33,16 +39,38 @@ export class CafePageComponent implements OnInit {
     }, 60 * 2 * 1000);
   }
 
-  getActive(event: Event) {
-    event.preventDefault();
+  getActive(event?: Event) {
+    event ? event.preventDefault() : null;
+    this.selectedFilter = this.orderFilters[0];
+    this.orders = this.allOrders
+      .filter((order) => order.orderStatus !== 3)
+      .sort(
+        (a, b) =>
+          new Date(a.orderDateTime).valueOf() -
+          new Date(b.orderDateTime).valueOf()
+      );
   }
 
-  getClosed(event: Event) {
-    event.preventDefault();
+  getClosed(event?: Event) {
+    event ? event.preventDefault() : null;
+    this.selectedFilter = this.orderFilters[1];
+    this.orders = this.allOrders
+      .filter((order) => order.orderStatus === 3)
+      .sort(
+        (a, b) =>
+          new Date(a.orderDateTime).valueOf() -
+          new Date(b.orderDateTime).valueOf()
+      );
   }
 
-  getAll(event: Event) {
-    event.preventDefault();
+  getAll(event?: Event) {
+    event ? event.preventDefault() : null;
+    this.selectedFilter = this.orderFilters[2];
+    this.orders = this.allOrders.sort(
+      (a, b) =>
+        new Date(a.orderDateTime).valueOf() -
+        new Date(b.orderDateTime).valueOf()
+    );
   }
 
   onChangeStatus(value: string) {
@@ -51,9 +79,23 @@ export class CafePageComponent implements OnInit {
   }
 
   getOrders() {
-    this.ordersService
-      .GetCafeOrders()
-      .subscribe((orders: Order[]) => (this.orders = orders));
+    this.ordersService.GetCafeOrders().subscribe(
+      (orders: Order[]) => {
+        this.allOrders = orders;
+        switch (this.selectedFilter) {
+          case this.orderFilters[0]:
+            this.getActive();
+            break;
+          case this.orderFilters[1]:
+            this.getClosed();
+            break;
+          case this.orderFilters[2]:
+            this.getAll();
+            break;
+        }
+      },
+      () => (this.interval ? clearInterval(this.interval) : null)
+    );
   }
 
   ngOnDestroy() {

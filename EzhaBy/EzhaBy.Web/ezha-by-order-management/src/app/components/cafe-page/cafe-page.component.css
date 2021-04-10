@@ -117,3 +117,26 @@ h4 {
 .total-price {
   margin-top: 25px;
 }
+
+.green {
+  background-color: rgb(176, 207, 167);
+}
+
+.orange {
+  background-color: rgb(250, 207, 127);
+}
+
+.blue {
+  background-color: rgb(161, 194, 255);
+}
+
+select:focus {
+  color: black;
+  background-color: rgb(235, 95, 95);
+  border-color: rgb(235, 95, 95);
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25);
+}
+
+select:active:focus {
+  box-shadow: 0 0 0 0.2rem rgba(235, 95, 95, 0.25) !important;
+}
