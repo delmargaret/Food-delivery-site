@@ -79,5 +79,41 @@ namespace EzhaBy.Api.Controllers
                 return BadRequest(ex);
             }
         }
+
+        [HttpPut("{id}/accept")]
+        [Authorize(Roles = AuthorizationRoles.Courier)]
+        public async Task<IActionResult> AcceptOrder(string id, [FromBody] AcceptOrder.Command command)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                command.OrderId = Guid.Parse(id);
+                command.UserId = Guid.Parse(userId);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("{id}/reject")]
+        [Authorize(Roles = AuthorizationRoles.Courier)]
+        public async Task<IActionResult> RejectOrder(string id, [FromBody] RejectOrder.Command command)
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                command.OrderId = Guid.Parse(id);
+                command.UserId = Guid.Parse(userId);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

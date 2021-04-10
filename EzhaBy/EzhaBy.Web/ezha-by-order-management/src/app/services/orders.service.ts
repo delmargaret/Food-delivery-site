@@ -34,4 +34,16 @@ export class OrdersService {
       ConfigService.addBaseAddress(`api/orders/${id}/courier`), {}
     );
   }
+
+  AcceptOrder(id: string): Observable<Object> {
+    return this.http.put(
+      ConfigService.addBaseAddress(`api/orders/${id}/accept`), {}
+    );
+  }
+
+  RejectOrder(id: string): Observable<Object> {
+    return this.http.put(
+      ConfigService.addBaseAddress(`api/orders/${id}/reject`), {}
+    );
+  }
 }

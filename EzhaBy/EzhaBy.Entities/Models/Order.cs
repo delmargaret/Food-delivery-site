@@ -21,7 +21,7 @@ namespace EzhaBy.Entities
         public decimal TotalPrice { get; set; }
         public Guid? UserId { get; set; }
         public virtual User User { get; set; }
-        public Guid CourierId { get; set; }
+        public Guid? CourierId { get; set; }
         public virtual Courier Courier { get; set; }
         public bool IsOrderAccepted { get; set; }
         public virtual List<OrderLine> OrderDishes { get; set; }

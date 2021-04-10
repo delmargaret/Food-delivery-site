@@ -34,7 +34,7 @@ namespace EzhaBy.Business.Orders
                 var courier = context.Couriers.FirstOrDefault(user => user.UserId == request.UserId);
                 if (courier == null)
                 {
-                    throw new Exception("unknown cafe user");
+                    throw new Exception("unknown courier");
                 }
 
                 var orders = courier.Orders.AsQueryable()

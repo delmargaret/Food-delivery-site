@@ -76,6 +76,24 @@ export class CourierPageComponent implements OnInit {
     );
   }
 
+  acceptOrder(event: Event, orderId: string) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.ordersService.AcceptOrder(orderId).subscribe(
+      () => this.getOrders(),
+      () => this.getOrders()
+    );
+  }
+
+  rejectOrder(event: Event, orderId: string) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.ordersService.RejectOrder(orderId).subscribe(
+      () => this.getOrders(),
+      () => this.getOrders()
+    );
+  }
+
   onChangeStatus(value: string, orderId: string) {
     this.selected = value;
     this.ordersService.SetOrderStatus(orderId, Number(value)).subscribe(
@@ -124,7 +142,6 @@ export class CourierPageComponent implements OnInit {
             })
             .value();
         });
-        console.log(this.allOrders);
         // var a = Object.assign({}, this.allOrders[0]);
         // a.orderStatus = 3;
         // a.isOrderAccepted = true;
@@ -143,7 +160,10 @@ export class CourierPageComponent implements OnInit {
             break;
         }
       },
-      () => (this.interval ? clearInterval(this.interval) : null)
+      () => {
+        this.interval ? clearInterval(this.interval) : null;
+        this.allOrders = [];
+      }
     );
   }
 

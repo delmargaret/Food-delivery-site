@@ -199,10 +199,12 @@
     <Compile Include="Feedbacks\Dto\FeedbackDto.cs" />
     <Compile Include="Feedbacks\GetFeedbacks.cs" />
     <Compile Include="Feedbacks\SetFeedbackStatus.cs" />
+    <Compile Include="Orders\AcceptOrder.cs" />
     <Compile Include="Orders\Dto\CafeOrderDto.cs" />
     <Compile Include="Orders\Dto\OrderDishDto.cs" />
     <Compile Include="Orders\GetCafeOrders.cs" />
     <Compile Include="Orders\GetCourierOrders.cs" />
+    <Compile Include="Orders\RejectOrder.cs" />
     <Compile Include="Orders\SetOrderCourier.cs" />
     <Compile Include="Orders\SetOrderStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

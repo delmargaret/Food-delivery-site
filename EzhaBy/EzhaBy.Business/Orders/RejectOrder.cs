@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace EzhaBy.Business.Orders
 {
-    public static class SetOrderCourier
+    public static class RejectOrder
     {
         public class Command : IRequest<Unit>
         {
-            public Command(Guid id)
+            public Command(Guid orderId, Guid userId)
             {
-                Id = id;
+                OrderId = orderId;
+                UserId = userId;
             }
 
-            public Guid Id { get; set; }
+            public Guid OrderId { get; set; }
+
+            public Guid UserId { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Unit>
@@ -31,7 +34,13 @@ namespace EzhaBy.Business.Orders
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var order = context.Orders.Find(request.Id);
+                var oldCourier = context.Couriers.FirstOrDefault(user => user.UserId == request.UserId);
+                if (oldCourier == null)
+                {
+                    throw new Exception("unknown courier");
+                }
+
+                var order = context.Orders.Find(request.OrderId);
                 if (order == null)
                 {
                     throw new Exception("order isn't exists");
@@ -43,8 +52,9 @@ namespace EzhaBy.Business.Orders
 
                 var newCourier = context.Couriers.FirstOrDefault(courier
                     => courier.Status == CourierStatuses.Active &&
-                    courier.Id != order.CourierId);
+                    courier.Id != oldCourier.Id);
 
+                order.IsOrderAccepted = false;
                 order.CourierId = newCourier?.Id;
                 await context.SaveChangesAsync();
                 return Unit.Value;

@@ -197,3 +197,7 @@ select:active:focus {
   margin-right: 10px;
   margin-bottom: 1rem;
 }
+
+.btn-group .btn .mat-icon {
+  vertical-align: middle;
+}
