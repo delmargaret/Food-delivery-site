@@ -58,6 +58,23 @@ h4 {
   margin-left: 8px;
 }
 
+.mat-expansion-panel {
+  background-color: rgba(235, 95, 95, 0.15);
+  color: black;
+}
+
+.orders .mat-expansion-panel .mat-expansion-panel-header {
+  background-color: rgba(235, 95, 95, 0.25);
+}
+
+.orders .mat-expansion-panel .mat-expansion-panel-header:hover {
+  background-color: rgba(235, 95, 95, 0.35);
+}
+
+.orders .order-info {
+  padding-top: 16px;
+}
+
 .form-group {
   margin-top: 16px;
 }
@@ -66,14 +83,37 @@ h4 {
   cursor: pointer;
 }
 
-.mat-expansion-panel {
-  background-color: rgba(235, 95, 95, 0.15);
+.dish {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
 }
 
-.mat-expansion-panel-header {
-  background-color: rgba(235, 95, 95, 0.25);
+.number-of-dishes {
+  margin-left: 25px;
 }
 
-.orders .mat-expansion-panel .mat-expansion-panel-header:hover {
-  background-color: rgba(235, 95, 95, 0.35);
+.dish-icon {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  margin-right: 10px;
+  background-size: contain;
+}
+
+.empty-image {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-size: contain;
+  margin-right: 10px;
+  background-image: url('../../../assets/empty.png');
+}
+
+.total-price {
+  margin-top: 25px;
 }

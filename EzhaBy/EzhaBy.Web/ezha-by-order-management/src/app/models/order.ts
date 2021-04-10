@@ -15,5 +15,6 @@ export interface Order {
   orderStatus: number;
   orderDateTime: string;
   isOrderAccepted: boolean;
+  totalPrice: number;
   orderDishes: OrderDish[];
 }

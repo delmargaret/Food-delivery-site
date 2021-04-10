@@ -193,7 +193,8 @@ namespace EzhaBy.Infrastructure.Extensions
                         Phone = user.Phone,
                         PaymentType = PaymentTypes.Cash,
                         OrderDateTime = DateTimeOffset.Now,
-                        OrderStatus = OrderStatuses.New
+                        OrderStatus = OrderStatuses.New,
+                        TotalPrice = 10.99m
                     }
                }
            );

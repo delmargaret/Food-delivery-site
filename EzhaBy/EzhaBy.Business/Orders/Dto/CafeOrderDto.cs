@@ -19,6 +19,7 @@ namespace EzhaBy.Business.Orders.Dto
         public string Comment { get; set; }
         public OrderStatuses OrderStatus { get; set; }
         public DateTimeOffset OrderDateTime { get; set; }
+        public decimal TotalPrice { get; set; }
         public bool IsOrderAccepted { get; set; }
         public virtual List<OrderDishDto> OrderDishes { get; set; }
     }

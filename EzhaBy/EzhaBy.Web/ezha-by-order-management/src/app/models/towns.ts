@@ -1,26 +1,12 @@
-export const Towns = [
-  {
-    id: 0,
-    name: 'Минск',
-  },
-  {
-    id: 1,
-    name: 'Гродно',
-  },
-  {
-    id: 2,
-    name: 'Гомель',
-  },
-  {
-    id: 3,
-    name: 'Брест',
-  },
-  {
-    id: 4,
-    name: 'Могилёв',
-  },
-  {
-    id: 5,
-    name: 'Витебск',
-  },
-];
+interface Town {
+  [index: number]: string;
+}
+
+export const Towns: Town = {
+  0: 'Минск',
+  1: 'Гродно',
+  2: 'Гомель',
+  3: 'Брест',
+  4: 'Могилёв',
+  5: 'Витебск',
+};

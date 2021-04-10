@@ -18,6 +18,7 @@ namespace EzhaBy.Entities
         public string Comment { get; set; }
         public OrderStatuses OrderStatus { get; set; }
         public DateTimeOffset OrderDateTime { get; set; }
+        public decimal TotalPrice { get; set; }
         public Guid? UserId { get; set; }
         public virtual User User { get; set; }
         public Guid CourierId { get; set; }

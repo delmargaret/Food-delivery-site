@@ -68,7 +68,33 @@
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <div class="order-info">
+        <div>
+          <b>Адрес:</b> г. {{ towns[order.town] }}, ул. {{ order.street }}, д.
+          {{ order.houseNumber
+          }}{{ order.flatNumber ? ", " + order.flatNumber : null }}
+        </div>
+        <div><b>Способ оплаты:</b> {{ paymentTypes[order.paymentType] }}</div>
+        <div *ngIf="order.comment"><b>Комментарий:</b> {{ order.comment }}</div>
+        <div>
+          <b>Заказ:</b>
+          <div class="dish" *ngFor="let dish of order.orderDishes">
+            <div
+              class="dish-icon"
+              *ngIf="dish.dishIconUrl; else emptyImg"
+              [ngStyle]="{
+                'background-image': 'url(' + dish.dishIconUrl + ')'
+              }"
+            ></div>
+            <ng-template #emptyImg>
+              <div class="empty-image"></div>
+            </ng-template>
+            <div>{{ dish.dishName }}</div>
+            <div class="number-of-dishes">{{ dish.numberOfDishes }} шт.</div>
+          </div>
+        </div>
+        <div class="total-price"><b>Итого:</b> {{ order.totalPrice }}</div>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

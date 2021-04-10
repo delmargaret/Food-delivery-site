@@ -58,6 +58,7 @@ namespace EzhaBy.Business.Orders
                         Comment = order.Comment,
                         OrderStatus = order.OrderStatus,
                         OrderDateTime = order.OrderDateTime,
+                        TotalPrice = order.TotalPrice,
                         IsOrderAccepted = order.IsOrderAccepted,
                         OrderDishes = order.OrderDishes.Where(dish 
                             => dish.Dish.CateringFacilityCategory.CateringFacilityId == cateringFacilityId.Value)
