@@ -152,6 +152,10 @@ select:active:focus {
   align-items: center;
 }
 
+.status .btn-red {
+  width: 196px;
+}
+
 .not-responded {
   display: flex;
 }

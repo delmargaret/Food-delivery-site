@@ -94,32 +94,12 @@ export class CourierPageComponent implements OnInit {
     );
   }
 
-  onChangeStatus(value: string, orderId: string) {
-    this.selected = value;
-    this.ordersService.SetOrderStatus(orderId, Number(value)).subscribe(
-      () => this.getOrders(),
-      () => {}
-    );
-  }
-
-  onChangeCourier(event: Event, orderId: string) {
+  onChangeStatus(event: Event, orderId: string) {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.isCourierButtonAvailable) {
-      return;
-    }
-
-    this.isCourierButtonAvailable = false;
-
-    this.ordersService.SetOrderCourier(orderId).subscribe(
-      () =>
-        setTimeout(() => {
-          this.isCourierButtonAvailable = true;
-        }, 60 * 3 * 1000),
-      () =>
-        setTimeout(() => {
-          this.isCourierButtonAvailable = true;
-        }, 60 * 3 * 1000)
+    this.ordersService.SetOrderStatus(orderId, this.statuses.Done).subscribe(
+      () => this.getOrders(),
+      () => {}
     );
   }
 

@@ -44,56 +44,16 @@
               class="form-group"
               *ngIf="order.orderStatus !== 3; else closedStatus"
             >
-              <select
-                class="form-control"
-                id="orderStatus"
-                [ngModel]="order.orderStatus"
-                #orderStatus
-                (change)="onChangeStatus(orderStatus.value, order.id)"
-                (click)="$event.stopPropagation()"
-                [ngStyle]="
-                  selected
-                    ? dropdownStyles[selected]
-                    : dropdownStyles[order.orderStatus]
-                "
+              <button
+                type="button"
+                class="btn btn-red"
+                (click)="onChangeStatus($event, order.id)"
               >
-                <option [value]="statuses.New" class="green">Новый</option>
-                <option [value]="statuses.InProgress" class="orange">
-                  Принят в обработку
-                </option>
-                <option [value]="statuses.AcceptedByCourier" class="blue">
-                  Передан курьеру
-                </option>
-              </select>
+                Завершить заказ
+              </button>
             </div>
             <ng-template #closedStatus>
               <div class="closed-order">Завершен</div>
-            </ng-template>
-            <div
-              *ngIf="order.isOrderAccepted; else notResponded"
-              class="responded"
-              matTooltip="Курьер принял этот заказ."
-              matTooltipPosition="above"
-            >
-              <mat-icon aria-hidden="false" aria-label="Waiting"
-                >check_circle_outline</mat-icon
-              >
-            </div>
-            <ng-template #notResponded>
-              <div
-                matTooltip="Курьер ещё не принял этот заказ. Нажмите, чтобы перенаправить заказ другому курьеру. Функция доступна раз в 3 минуты."
-                matTooltipPosition="above"
-                [ngClass]="
-                  isCourierButtonAvailable
-                    ? 'not-responded'
-                    : 'not-responded-disabled'
-                "
-                (click)="onChangeCourier($event, order.id)"
-              >
-                <mat-icon aria-hidden="false" aria-label="Waiting"
-                  >schedule</mat-icon
-                >
-              </div>
             </ng-template>
           </div>
           <ng-template #notAccepted>
