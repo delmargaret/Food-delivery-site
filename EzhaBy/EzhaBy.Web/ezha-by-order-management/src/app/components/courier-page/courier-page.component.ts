@@ -43,7 +43,7 @@ export class CourierPageComponent implements OnInit {
     this.getOrders();
     this.interval = setInterval(() => {
       this.getOrders();
-    }, 60 * 3 * 1000);
+    }, 60 * 2 * 1000);
   }
 
   closePanel(id: string): void {
