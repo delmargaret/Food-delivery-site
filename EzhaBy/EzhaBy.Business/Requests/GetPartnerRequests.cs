@@ -30,6 +30,11 @@ namespace EzhaBy.Business.Requests
                     throw new Exception("parner requests not found");
                 }
 
+                requests.ToList().ForEach(req =>
+                {
+                    req.IsExists = context.CafeUsers.Any(user => user.User.Email == req.Email);
+                });
+
                 return Task.FromResult(requests);
             }
         }

@@ -22,6 +22,7 @@ import Emitter from "../../services/event-emitter";
 
 import checkmark from "./../../checkmark.png";
 import cross from "./../../cross.png";
+import CateringFacilitiesService from "../../services/catering-facilities-service";
 
 const { SearchBar } = Search;
 
@@ -33,25 +34,83 @@ export default class PartnerRequestsPage extends Component {
       show: false,
       currentPartner: {},
       currentStatus: null,
+      cateringFacilities: [],
     };
 
     this.getPartnerRequests = this.getPartnerRequests.bind(this);
+    this.renderPartnerAccountButton = this.renderPartnerAccountButton.bind(
+      this
+    );
+    this.getCateringFacilities = this.getCateringFacilities.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
     this.setShow = this.setShow.bind(this);
     this.subjectInput = React.createRef();
     this.bodyInput = React.createRef();
+    this.cateringFacility = React.createRef();
   }
 
   componentDidMount() {
     this.getPartnerRequests();
+    this.getCateringFacilities();
     Emitter.on(PARTNER_LIST_UPDATED, (_) => this.getPartnerRequests());
   }
 
   async getPartnerRequests() {
     const requestList = await RequestsService.getPartnerRequests();
 
-    this.setState({ requests: requestList ? requestList.data : []});
+    this.setState({ requests: requestList ? requestList.data : [] });
+  }
+
+  async getCateringFacilities() {
+    const cateringFacilitiesList = await CateringFacilitiesService.getCateringFacilities();
+
+    this.setState({
+      cateringFacilities: cateringFacilitiesList
+        ? cateringFacilitiesList.data
+        : [],
+    });
+  }
+
+  renderPartnerAccountButton(partner) {
+    if (partner.isExists) {
+      return (
+        <Button
+          style={{ fontSize: "14px" }}
+          variant="outline-success"
+          onClick={() => RequestsService.ResendPartnerPassword(partner.id)}
+        >
+          Повторно отправить пароль
+        </Button>
+      );
+    }
+    return (
+      <React.Fragment>
+        <Form.Control
+          style={{ fontSize: "14px", marginBottom: "5px", cursor: "pointer" }}
+          as="select"
+          ref={this.cateringFacility}
+        >
+          {this.state.cateringFacilities.map((cafe) => (
+            <option key={cafe.id} value={cafe.id}>
+              {cafe.cateringFacilityName}
+            </option>
+          ))}
+        </Form.Control>
+        <Button
+          style={{ fontSize: "14px" }}
+          variant="outline-success"
+          onClick={() =>
+            RequestsService.AddPartnerAccount(
+              partner.id,
+              this.cateringFacility.current.value
+            ).then((_) => this.getPartnerRequests())
+          }
+        >
+          Создать аккаунт
+        </Button>
+      </React.Fragment>
+    );
   }
 
   setShow(show) {
@@ -115,7 +174,7 @@ export default class PartnerRequestsPage extends Component {
           </React.Fragment>
         );
       case REQUEST_STATUSES.Accepted:
-        return <div>Принят</div>;
+        return <div>{this.renderPartnerAccountButton(partner)}</div>;
       case REQUEST_STATUSES.Rejected:
         return <div>Отклонен</div>;
       default:

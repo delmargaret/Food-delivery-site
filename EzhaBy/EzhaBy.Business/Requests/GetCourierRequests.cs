@@ -30,6 +30,11 @@ namespace EzhaBy.Business.Requests
                     throw new Exception("courier requests not found");
                 }
 
+                requests.ToList().ForEach(req =>
+                {
+                    req.IsExists = context.Couriers.Any(user => user.User.Email == req.Email);
+                });
+
                 return Task.FromResult(requests);
             }
         }

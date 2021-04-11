@@ -36,6 +36,9 @@ export default class CourierRequestsPage extends Component {
     };
 
     this.getCourierRequests = this.getCourierRequests.bind(this);
+    this.renderCourierAccountButton = this.renderCourierAccountButton.bind(
+      this
+    );
     this.changeStatus = this.changeStatus.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
     this.setShow = this.setShow.bind(this);
@@ -51,7 +54,36 @@ export default class CourierRequestsPage extends Component {
   async getCourierRequests() {
     const requestList = await RequestsService.getCourierRequests();
 
-    this.setState({ requests: requestList ? requestList.data : []});
+    this.setState({ requests: requestList ? requestList.data : [] });
+  }
+
+  renderCourierAccountButton(courier) {
+    if (courier.isExists) {
+      return (
+        <Button
+          style={{ fontSize: "14px" }}
+          variant="outline-success"
+          onClick={() => RequestsService.ResendCourierPassword(courier.id)}
+        >
+          Повторно отправить пароль
+        </Button>
+      );
+    }
+    return (
+      <React.Fragment>
+        <Button
+          style={{ fontSize: "14px" }}
+          variant="outline-success"
+          onClick={() =>
+            RequestsService.AddCourierAccount(courier.id).then((_) =>
+              this.getCourierRequests()
+            )
+          }
+        >
+          Создать аккаунт
+        </Button>
+      </React.Fragment>
+    );
   }
 
   setShow(show) {
@@ -115,7 +147,7 @@ export default class CourierRequestsPage extends Component {
           </React.Fragment>
         );
       case REQUEST_STATUSES.Accepted:
-        return <div>Принят</div>;
+        return <div>{this.renderCourierAccountButton(courier)}</div>;
       case REQUEST_STATUSES.Rejected:
         return <div>Отклонен</div>;
       default:

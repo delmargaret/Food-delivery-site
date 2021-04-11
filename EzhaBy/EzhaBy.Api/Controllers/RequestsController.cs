@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using EzhaBy.Business.Requests;
 using EzhaBy.Entities;
@@ -46,6 +46,36 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [HttpPut("partners/{id}/account")]
+        public async Task<IActionResult> AddPartnerAccount(string id, [FromBody] AddPartnerAccount.Command command)
+        {
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("partners/{id}/resend-password")]
+        public async Task<IActionResult> ResendPartnerPassword(string id, [FromBody] ResendPartnerPassword.Command command)
+        {
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("couriers")]
         public async Task<IActionResult> GetCourierRequests()
         {
@@ -61,6 +91,36 @@ namespace EzhaBy.Api.Controllers
 
         [HttpPut("couriers/{id}/status")]
         public async Task<IActionResult> SetCourierRequestStatus(string id, [FromBody] SetCourierRequestStatus.Command command)
+        {
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("couriers/{id}/account")]
+        public async Task<IActionResult> AddCourierAccount(string id, [FromBody] AddCourierAccount.Command command)
+        {
+            try
+            {
+                command.Id = Guid.Parse(id);
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPut("couriers/{id}/resend-password")]
+        public async Task<IActionResult> ResendCourierPassword(string id, [FromBody] ResendCourierPassword.Command command)
         {
             try
             {

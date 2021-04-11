@@ -182,6 +182,9 @@
     <Compile Include="Categories\Dto\CategoryDto.cs" />
     <Compile Include="Categories\GetCategories.cs" />
     <Compile Include="Categories\UpdateCategoryName.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Requests\AddCourierAccount.cs" />
+    <Compile Include="Requests\AddPartnerAccount.cs" />
     <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
     <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />
     <Compile Include="CateringFacilities\GetCateringFacilities.cs" />
@@ -212,6 +215,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\GetCourierRequests.cs" />
     <Compile Include="Requests\GetPartnerRequests.cs" />
+    <Compile Include="Requests\ResendCourierPassword.cs" />
+    <Compile Include="Requests\ResendPartnerPassword.cs" />
     <Compile Include="Requests\SetCourierRequestStatus.cs" />
     <Compile Include="Requests\SetPartnerRequestStatus.cs" />
     <Compile Include="Tags\CreateTag.cs" />

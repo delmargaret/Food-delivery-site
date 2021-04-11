@@ -11,6 +11,7 @@ namespace EzhaBy.Entities
         public string Patronymic { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public bool? IsExists { get; set; }
         public CateringFacilityTypes CateringFacilityType { get; set; }
         public RequestStatuses RequestStatus { get; set; } 
     }
