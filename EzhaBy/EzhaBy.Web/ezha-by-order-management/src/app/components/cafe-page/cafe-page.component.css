@@ -189,3 +189,7 @@ select:active:focus {
   margin-right: 10px;
   margin-bottom: 1rem;
 }
+
+.not-found {
+  text-align-last: center;
+}

@@ -184,10 +184,13 @@ select:active:focus {
 .courier-status {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .courier-status .form-control {
   width: 196px;
   margin-left: 25px;
+}
+
+.not-found {
+  text-align-last: center;
 }

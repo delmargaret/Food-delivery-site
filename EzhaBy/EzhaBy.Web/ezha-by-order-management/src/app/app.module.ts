@@ -10,24 +10,23 @@ import { LogInComponent } from './pages/log-in/log-in.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { AuthModule } from './security/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { mainReducer } from './state/reducers/main.reducer';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LogInComponent,
-    OrdersComponent,
-  ],
+  declarations: [AppComponent, LogInComponent, OrdersComponent],
   imports: [
     RouterModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,   
+    HttpClientModule,
     ComponentsModule,
     AuthModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(mainReducer),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

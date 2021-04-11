@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from '../models/token';
 import { CredentialsStatus } from '../models/credentialsStatus';
 import { ConfigService } from '../services/config.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { SetLoginState } from '../state/actions/app.actions';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +19,11 @@ export class AuthService {
   private allowedRoles = ['Courier', 'CafeAdmin'];
   private tokenHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+    private router: Router
+  ) {}
 
   public hasValidToken(): boolean {
     const token = localStorage.getItem(this.tokenKey);
@@ -42,6 +49,8 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.roleKey);
     localStorage.removeItem(this.userId);
+    this.router.navigate(['/login']);
+    this.store.dispatch(new SetLoginState({ isLoggedIn: false }));
   }
 
   public authorize(email: string, password: string) {
@@ -68,7 +77,7 @@ export class AuthService {
     return CredentialsStatus.CREDENTIALS_OK;
   }
 
-  public getUserRole() : string | null {
+  public getUserRole(): string | null {
     return localStorage.getItem(this.roleKey);
   }
 }
