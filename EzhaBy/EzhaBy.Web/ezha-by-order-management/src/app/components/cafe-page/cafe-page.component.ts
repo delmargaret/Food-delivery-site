@@ -30,6 +30,7 @@ export class CafePageComponent implements OnInit {
   selectedFilter: string = this.orderFilters[0];
   selected: string | null = null;
   isCourierButtonAvailable = true;
+  openedOrders: string[] = [];
 
   constructor(private ordersService: OrdersService) {}
 
@@ -38,6 +39,19 @@ export class CafePageComponent implements OnInit {
     this.interval = setInterval(() => {
       this.getOrders();
     }, 60 * 3 * 1000);
+  }
+
+  closePanel(id: string): void {
+    const index = this.openedOrders.indexOf(id);
+    if (index !== -1) {
+      this.openedOrders.splice(index, 1);
+    }
+  }
+
+  openPanel(id: string): void {
+    if (!this.openedOrders.includes(id)) {
+      this.openedOrders.push(id);
+    }
   }
 
   getActive(event?: Event) {

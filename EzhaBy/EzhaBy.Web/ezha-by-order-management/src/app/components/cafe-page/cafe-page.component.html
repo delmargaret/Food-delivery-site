@@ -30,7 +30,12 @@
   <br />
   <div *ngIf="orders.length > 0; else ordersNotFound">
     <mat-accordion class="orders" *ngFor="let order of orders">
-      <mat-expansion-panel hideToggle>
+      <mat-expansion-panel
+        hideToggle
+        (opened)="openPanel(order.id)"
+        (closed)="closePanel(order.id)"
+        [expanded]="openedOrders.includes(order.id)"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{ order.name + " " + order.surname }}

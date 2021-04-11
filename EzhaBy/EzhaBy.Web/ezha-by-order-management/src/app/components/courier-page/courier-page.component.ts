@@ -34,6 +34,7 @@ export class CourierPageComponent implements OnInit {
   selectedFilter: string = this.orderFilters[0];
   selected: string | null = null;
   courierStatus: CourierStatuses | null = null;
+  openedOrders: string[] = [];
 
   constructor(private ordersService: OrdersService) {}
 
@@ -43,6 +44,19 @@ export class CourierPageComponent implements OnInit {
     this.interval = setInterval(() => {
       this.getOrders();
     }, 60 * 3 * 1000);
+  }
+
+  closePanel(id: string): void {
+    const index = this.openedOrders.indexOf(id);
+    if (index !== -1) {
+      this.openedOrders.splice(index, 1);
+    }
+  }
+
+  openPanel(id: string): void {
+    if (!this.openedOrders.includes(id)) {
+      this.openedOrders.push(id);
+    }
   }
 
   getActive(event?: Event) {
@@ -112,7 +126,7 @@ export class CourierPageComponent implements OnInit {
     this.selected = value;
 
     this.ordersService.SetCourierStatus(Number(value)).subscribe(
-      () => (this.getCourierStatus()),
+      () => this.getCourierStatus(),
       () => {}
     );
   }
