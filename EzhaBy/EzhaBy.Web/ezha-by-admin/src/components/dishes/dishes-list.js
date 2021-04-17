@@ -66,7 +66,10 @@ export default class DishesList extends Component {
             accept=".png, .jpg, .jpeg"
             onChange={(e) => this.handleImageChange(e, id)}
           />
-          <img height="150px" alt="" src={iconUrl} />
+          <div
+            className="img-background"
+            style={{ backgroundImage: `url(${iconUrl})` }}
+          ></div>
         </label>
         <span
           className="close"

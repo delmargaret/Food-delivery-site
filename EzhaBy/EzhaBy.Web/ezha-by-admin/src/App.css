@@ -200,3 +200,12 @@
 .preview:hover {
   background-color: rgba(235, 95, 95, 0.075);
 }
+
+.img-background {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}

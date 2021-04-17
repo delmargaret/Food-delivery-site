@@ -68,11 +68,6 @@ namespace EzhaBy.Business.Orders
                             }).ToList()
                     });
 
-                if (orders.Count() == 0)
-                {
-                    throw new Exception("courier orders not found");
-                }
-
                 return Task.FromResult(orders);
             }
         }
