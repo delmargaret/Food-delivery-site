@@ -29,7 +29,7 @@ namespace EzhaBy.Business.Tags
                     {
                         Id = tag.Id,
                         TagName = tag.TagName,
-                        isAssigned = tag.CateringFacilityTags.Any()
+                        IsAssigned = tag.CateringFacilityTags.Any()
                     });
 
                 if (tags.Count() == 0)

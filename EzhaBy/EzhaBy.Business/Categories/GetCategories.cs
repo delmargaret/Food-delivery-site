@@ -37,7 +37,7 @@ namespace EzhaBy.Business.Categories
                         Id = category.Id,
                         CategoryId = category.CategoryId,
                         CategoryName = category.Category.CategoryName,
-                        isAssigned = category.Dishes.Any()
+                        IsAssigned = category.Dishes.Any()
                     });
 
                 if (categories.Count() == 0)
