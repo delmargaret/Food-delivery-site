@@ -7,7 +7,7 @@ namespace EzhaBy.Infrastructure
     {
         public static void SendMail(string email, string subject, string body)
         {
-            MailAddress from = new MailAddress("appprojectmanagement@gmail.com");
+            MailAddress from = new MailAddress("ezha.by.service@gmail.com");
             MailAddress to = new MailAddress(email);
             MailMessage m = new MailMessage(from, to)
             {
@@ -17,8 +17,9 @@ namespace EzhaBy.Infrastructure
             };
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("appprojectmanagement@gmail.com", "zsvspsosnyhmtwln"),
-                EnableSsl = true
+                Credentials = new NetworkCredential("ezha.by.service@gmail.com", "EzhaBy-12345678"),
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
             };
             smtp.Send(m);
         }

@@ -13,7 +13,7 @@
   display: inline-block;
 }
 
-.app-link {
+.app-link a {
   color: rgb(235, 85, 85);
   display: block;
   padding: 0.5rem 2rem;
@@ -21,12 +21,12 @@
   cursor: pointer;
 }
 
-.app-link:hover {
+.app-link a:hover {
   color: rgb(235, 10, 10);
   text-decoration: underline !important;
 }
 
-.app-link:focus {
+.app-link a:focus {
   color: rgb(235, 10, 10);
   text-decoration: underline !important;
 }
