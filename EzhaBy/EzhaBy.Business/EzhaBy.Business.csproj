@@ -64,6 +64,7 @@
     <Compile Include="Categories\UpdateCategoryName.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Requests\AddCourierAccount.cs" />
+    <Compile Include="Requests\AddPartner.cs" />
     <Compile Include="Requests\AddPartnerAccount.cs" />
     <Compile Include="CateringFacilities\CreateCateringFacility.cs" />
     <Compile Include="CateringFacilities\Dto\CateringFacilityDto.cs" />

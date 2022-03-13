@@ -31,6 +31,21 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost("partners")]
+        public async Task<IActionResult> AddPartner([FromBody] AddPartner.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPut("partners/{id}/status")]
         public async Task<IActionResult> SetPartnerRequestStatus(string id, [FromBody] SetPartnerRequestStatus.Command command)
         {

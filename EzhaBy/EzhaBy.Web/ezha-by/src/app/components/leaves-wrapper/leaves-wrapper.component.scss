@@ -1,0 +1,20 @@
+.leaves-left {
+  border-width: 0px;
+  position: absolute;
+  left: 0px;
+  top: 80px;
+  height: 525px;
+}
+
+.leaves-right {
+  border-width: 0px;
+  position: absolute;
+  right: 0px;
+  top: 80px;
+  height: 525px;
+  transform: rotate(180deg);
+}
+
+.row {
+  --bs-gutter-x: 0;
+}
