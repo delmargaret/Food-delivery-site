@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { OffcanvasComponent } from './nav-bar/offcanvas/offcanvas.component';
 
 @NgModule({
-  declarations: [NavBarComponent, FooterComponent],
+  declarations: [NavBarComponent, FooterComponent, OffcanvasComponent],
   imports: [CommonModule, FormsModule],
   exports: [NavBarComponent, FooterComponent],
 })
