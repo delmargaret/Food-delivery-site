@@ -13,5 +13,9 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['./partner']);
   }
 
+  redirectToCourier() {
+    this.router.navigate(['./courier']);
+  }
+
   ngOnInit(): void {}
 }

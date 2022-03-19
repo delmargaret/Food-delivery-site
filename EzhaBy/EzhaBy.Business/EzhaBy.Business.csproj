@@ -63,6 +63,7 @@
     <Compile Include="Categories\GetCategories.cs" />
     <Compile Include="Categories\UpdateCategoryName.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Requests\AddCourier.cs" />
     <Compile Include="Requests\AddCourierAccount.cs" />
     <Compile Include="Requests\AddPartner.cs" />
     <Compile Include="Requests\AddPartnerAccount.cs" />

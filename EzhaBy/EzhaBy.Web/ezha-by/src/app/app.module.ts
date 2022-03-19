@@ -12,9 +12,10 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RequestsService } from './services/requests.service';
+import { CourierPageComponent } from './pages/courier-page/courier-page.component';
 
 @NgModule({
-  declarations: [AppComponent, MainPageComponent, PartnerPageComponent],
+  declarations: [AppComponent, MainPageComponent, PartnerPageComponent, CourierPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

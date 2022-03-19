@@ -104,6 +104,21 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost("couriers")]
+        public async Task<IActionResult> AddCourier([FromBody] AddCourier.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpPut("couriers/{id}/status")]
         public async Task<IActionResult> SetCourierRequestStatus(string id, [FromBody] SetCourierRequestStatus.Command command)
         {
