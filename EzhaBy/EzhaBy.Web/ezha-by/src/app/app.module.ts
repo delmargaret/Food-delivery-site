@@ -14,9 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RequestsService } from './services/requests.service';
 import { CourierPageComponent } from './pages/courier-page/courier-page.component';
 import { TermsOfServicePageComponent } from './pages/terms-of-service-page/terms-of-service-page.component';
+import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 
 @NgModule({
-  declarations: [AppComponent, MainPageComponent, PartnerPageComponent, CourierPageComponent, TermsOfServicePageComponent],
+  declarations: [AppComponent, MainPageComponent, PartnerPageComponent, CourierPageComponent, TermsOfServicePageComponent, HowToOrderPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
