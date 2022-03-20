@@ -1,0 +1,21 @@
+.about-us-header {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
+  color: rgb(0, 0, 0);
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.about-us {
+  background: url("../../../assets/15.png");
+  background-size: 350px;
+  background-repeat: no-repeat;
+  font-style: normal;
+  color: #000000;
+  min-height: 600px;
+
+  .about-us-container {
+    margin: 20px 20px 20px 420px;
+  }
+}
