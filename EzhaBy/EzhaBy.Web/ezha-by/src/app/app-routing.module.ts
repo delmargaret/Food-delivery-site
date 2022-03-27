@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CourierPageComponent } from './pages/courier-page/courier-page.component';
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -12,8 +13,13 @@ const routes: Routes = [
   { path: 'partner', component: PartnerPageComponent, pathMatch: 'full' },
   { path: 'courier', component: CourierPageComponent, pathMatch: 'full' },
   { path: 'terms', component: TermsOfServicePageComponent, pathMatch: 'full' },
-  { path: 'howToOrder', component: HowToOrderPageComponent, pathMatch: 'full' },
-  { path: 'aboutUs', component: AboutUsPageComponent, pathMatch: 'full' },
+  {
+    path: 'how-to-order',
+    component: HowToOrderPageComponent,
+    pathMatch: 'full',
+  },
+  { path: 'about-us', component: AboutUsPageComponent, pathMatch: 'full' },
+  { path: 'contact-us', component: ContactUsPageComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '' },
 ];
 

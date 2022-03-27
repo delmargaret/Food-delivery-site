@@ -62,6 +62,7 @@
     <Compile Include="Categories\Dto\CategoryDto.cs" />
     <Compile Include="Categories\GetCategories.cs" />
     <Compile Include="Categories\UpdateCategoryName.cs" />
+    <Compile Include="Feedbacks\AddFeedback.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Requests\AddCourier.cs" />
     <Compile Include="Requests\AddCourierAccount.cs" />

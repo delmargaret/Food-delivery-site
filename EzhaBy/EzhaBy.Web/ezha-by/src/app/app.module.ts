@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
@@ -16,9 +15,20 @@ import { CourierPageComponent } from './pages/courier-page/courier-page.componen
 import { TermsOfServicePageComponent } from './pages/terms-of-service-page/terms-of-service-page.component';
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
+import { CateringFacilitiesService } from './services/catering-facilities.service';
 
 @NgModule({
-  declarations: [AppComponent, MainPageComponent, PartnerPageComponent, CourierPageComponent, TermsOfServicePageComponent, HowToOrderPageComponent, AboutUsPageComponent],
+  declarations: [
+    AppComponent,
+    MainPageComponent,
+    PartnerPageComponent,
+    CourierPageComponent,
+    TermsOfServicePageComponent,
+    HowToOrderPageComponent,
+    AboutUsPageComponent,
+    ContactUsPageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +38,7 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
     ReactiveFormsModule,
     StoreModule.forRoot(mainReducer),
   ],
-  providers: [RequestsService],
+  providers: [RequestsService, CateringFacilitiesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,12 +10,12 @@
         <div>
           <select name="location" id="location">
             <option value="none" key="none">Выберите город доставки</option>
-            <option value="minsk" key="minsk">Минск</option>
-            <option value="brest" key="brest">Брест</option>
-            <option value="gomel" key="gomel">Гомель</option>
-            <option value="grodno" key="grodno">Гродно</option>
-            <option value="mogilev" key="mogilev">Могилев</option>
-            <option value="vitebsk" key="vitebsk">Витебск</option>
+            <option [value]="towns.Minsk" key="minsk">Минск</option>
+            <option [value]="towns.Grodno" key="grodno">Гродно</option>
+            <option [value]="towns.Gomel" key="gomel">Гомель</option>
+            <option [value]="towns.Brest" key="brest">Брест</option>
+            <option [value]="towns.Mogilev" key="mogilev">Могилев</option>
+            <option [value]="towns.Vitebsk" key="vitebsk">Витебск</option>
           </select>
           <button type="button" class="search-btn btn btn-light">
             Найти заведения

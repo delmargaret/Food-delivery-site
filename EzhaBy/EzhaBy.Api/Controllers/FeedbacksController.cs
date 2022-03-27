@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EzhaBy.Business.Feedbacks;
+using EzhaBy.Business.Requests;
 using EzhaBy.Entities;
 using EzhaBy.Infrastructure;
 using MediatR;
@@ -24,6 +25,21 @@ namespace EzhaBy.Api.Controllers
             try
             {
                 return Ok(await mediator.Send(new GetFeedbacks.Query()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback([FromBody] AddFeedback.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
             }
             catch (Exception ex)
             {

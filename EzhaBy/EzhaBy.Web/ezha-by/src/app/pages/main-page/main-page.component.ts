@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Towns } from 'src/app/models/towns';
 
 @Component({
   selector: 'app-main-page',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
+  towns = Towns;
+
   constructor(private router: Router) {}
 
   redirectToPartner() {

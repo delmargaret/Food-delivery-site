@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourierRequest } from '../models/courierRequest';
+import { Feedback } from '../models/feedback';
 import { PartnerRequest } from '../models/partnerRequest';
 import { ConfigService } from './config.service';
 
@@ -21,5 +22,9 @@ export class RequestsService {
       ConfigService.addBaseAddress(`api/requests/couriers`),
       data
     );
+  }
+
+  AddFeedback(data: Feedback): Observable<Object> {
+    return this.http.post(ConfigService.addBaseAddress(`api/feedbacks`), data);
   }
 }

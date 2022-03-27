@@ -1,4 +1,4 @@
-import { LoginState } from 'src/app/models/loginState';
+import { LoginState } from 'src/app/models/state/loginState';
 import { ActionTypes, PayloadAction } from '../actions/app.actions';
 
 const initialState: LoginState = {

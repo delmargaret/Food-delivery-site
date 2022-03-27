@@ -1,8 +1,14 @@
 <div id="app">
   <app-nav-bar></app-nav-bar>
-  <div class="root">
+  <div class="root" [ngClass]="isLoading ? 'disabled' : ''">
+    <div
+      class="main-spinner spinner-border text-danger"
+      role="status"
+      *ngIf="isLoading"
+    >
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <router-outlet></router-outlet>
   </div>
-  <br />
   <app-footer></app-footer>
 </div>

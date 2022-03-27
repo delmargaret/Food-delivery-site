@@ -78,7 +78,7 @@ namespace EzhaBy.Infrastructure.Extensions
                     new CateringFacility
                     {
                         Id = cateringFacilityId,
-                        CateringFacilityName = "KFC",
+                        CateringFacilityName = "KFC Минск",
                         CateringFacilityStatus = CateringFacilityStatuses.Active,
                         CateringFacilityType = CateringFacilityTypes.Cafe,
                         DeliveryPrice = 2,
@@ -88,7 +88,77 @@ namespace EzhaBy.Infrastructure.Extensions
                         Street = "Белорусская",
                         HouseNumber = "21",
                         CateringFacilityIconUrl = string.Empty
-                    }               
+                    },
+                    //new CateringFacility
+                    //{
+                    //    Id = cateringFacilityId,
+                    //    CateringFacilityName = "KFC Гродно",
+                    //    CateringFacilityStatus = CateringFacilityStatuses.Active,
+                    //    CateringFacilityType = CateringFacilityTypes.Cafe,
+                    //    DeliveryPrice = 2,
+                    //    DeliveryTime = "30-45 минут",
+                    //    WorkingHours = "10.00 - 20.00",
+                    //    Town = Towns.Grodno,
+                    //    Street = "Белорусская",
+                    //    HouseNumber = "21",
+                    //    CateringFacilityIconUrl = string.Empty
+                    //},
+                    //new CateringFacility
+                    //{
+                    //    Id = cateringFacilityId,
+                    //    CateringFacilityName = "KFC Гомель",
+                    //    CateringFacilityStatus = CateringFacilityStatuses.Active,
+                    //    CateringFacilityType = CateringFacilityTypes.Cafe,
+                    //    DeliveryPrice = 2,
+                    //    DeliveryTime = "30-45 минут",
+                    //    WorkingHours = "10.00 - 20.00",
+                    //    Town = Towns.Gomel,
+                    //    Street = "Белорусская",
+                    //    HouseNumber = "21",
+                    //    CateringFacilityIconUrl = string.Empty
+                    //},
+                    //new CateringFacility
+                    //{
+                    //    Id = cateringFacilityId,
+                    //    CateringFacilityName = "KFC Брест",
+                    //    CateringFacilityStatus = CateringFacilityStatuses.Active,
+                    //    CateringFacilityType = CateringFacilityTypes.Cafe,
+                    //    DeliveryPrice = 2,
+                    //    DeliveryTime = "30-45 минут",
+                    //    WorkingHours = "10.00 - 20.00",
+                    //    Town = Towns.Brest,
+                    //    Street = "Белорусская",
+                    //    HouseNumber = "21",
+                    //    CateringFacilityIconUrl = string.Empty
+                    //},
+                    //new CateringFacility
+                    //{
+                    //    Id = cateringFacilityId,
+                    //    CateringFacilityName = "KFC Могилев",
+                    //    CateringFacilityStatus = CateringFacilityStatuses.Active,
+                    //    CateringFacilityType = CateringFacilityTypes.Cafe,
+                    //    DeliveryPrice = 2,
+                    //    DeliveryTime = "30-45 минут",
+                    //    WorkingHours = "10.00 - 20.00",
+                    //    Town = Towns.Mogilev,
+                    //    Street = "Белорусская",
+                    //    HouseNumber = "21",
+                    //    CateringFacilityIconUrl = string.Empty
+                    //},
+                    //new CateringFacility
+                    //{
+                    //    Id = cateringFacilityId,
+                    //    CateringFacilityName = "KFC Витебск",
+                    //    CateringFacilityStatus = CateringFacilityStatuses.Active,
+                    //    CateringFacilityType = CateringFacilityTypes.Cafe,
+                    //    DeliveryPrice = 2,
+                    //    DeliveryTime = "30-45 минут",
+                    //    WorkingHours = "10.00 - 20.00",
+                    //    Town = Towns.Vitebsk,
+                    //    Street = "Белорусская",
+                    //    HouseNumber = "21",
+                    //    CateringFacilityIconUrl = string.Empty
+                    //}
                 }
             );
 

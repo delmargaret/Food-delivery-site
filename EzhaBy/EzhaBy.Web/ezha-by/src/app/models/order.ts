@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { CourierDish } from './courierDish';
 import { OrderDish } from './orderDish';
+import { Towns } from './towns';
 
 export interface Order {
   id: string;
@@ -8,7 +9,7 @@ export interface Order {
   surname: string;
   patronymic: string;
   phone: string;
-  town: number;
+  town: Towns;
   street: string;
   houseNumber: string;
   flatNumber: string;
@@ -19,5 +20,5 @@ export interface Order {
   isOrderAccepted: boolean;
   totalPrice: number;
   orderDishes: OrderDish[];
-  courierDishes?: CourierDish[]
+  courierDishes?: CourierDish[];
 }

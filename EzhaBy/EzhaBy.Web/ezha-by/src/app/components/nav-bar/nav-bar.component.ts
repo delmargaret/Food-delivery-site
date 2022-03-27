@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/security/auth.service';
 import { AppState } from 'src/app/state/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { LoginState } from 'src/app/models/loginState';
+import { LoginState } from 'src/app/models/state/loginState';
 
 @Component({
   selector: 'app-nav-bar',

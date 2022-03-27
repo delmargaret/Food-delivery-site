@@ -31,6 +31,7 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetCateringFacilities()
         {
