@@ -1,5 +1,10 @@
 <div class="card cafe-card" style="width: 24rem" *ngIf="cafe">
-  <img src="{{ mainPicture }}" class="card-img-top card-image" alt="..." />
+  <img
+    src="{{ mainPicture }}"
+    class="card-img-top card-image"
+    style="height: 228px; object-fit: contain"
+    alt="..."
+  />
   <div class="card-body">
     <div class="title">{{ cafe.cateringFacilityName }}</div>
     <div class="tags">
