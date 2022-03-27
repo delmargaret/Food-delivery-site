@@ -34,10 +34,12 @@
   .tags {
     padding-top: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 
     .tag {
       margin-right: 10px;
+      margin-bottom: 10px;
     }
 
     .tag {
