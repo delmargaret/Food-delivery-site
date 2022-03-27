@@ -17,6 +17,7 @@ import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CateringFacilitiesService } from './services/catering-facilities.service';
+import { CateringFacilitiesPageComponent } from './pages/catering-facilities-page/catering-facilities-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CateringFacilitiesService } from './services/catering-facilities.servic
     HowToOrderPageComponent,
     AboutUsPageComponent,
     ContactUsPageComponent,
+    CateringFacilitiesPageComponent,
   ],
   imports: [
     BrowserModule,

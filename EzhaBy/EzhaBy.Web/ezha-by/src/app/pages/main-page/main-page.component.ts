@@ -9,6 +9,7 @@ import { Towns } from 'src/app/models/towns';
 })
 export class MainPageComponent implements OnInit {
   towns = Towns;
+  townIsValid: boolean = true;
 
   constructor(private router: Router) {}
 
@@ -21,4 +22,25 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  changeTown() {
+    this.townIsValid = true;
+  }
+
+  selectLocation(event: any, town: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.townIsValid = true;
+    if (!town || town == 'none') {
+      this.townIsValid = false;
+      return;
+    }
+
+    let currentTown = parseInt(town);
+    this.router.navigate(['./cafes'], {
+      queryParams: { town: currentTown },
+      queryParamsHandling: 'merge',
+    });
+  }
 }

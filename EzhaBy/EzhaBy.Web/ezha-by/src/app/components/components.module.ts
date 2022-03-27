@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { OffcanvasComponent } from './nav-bar/offcanvas/offcanvas.component';
 import { LeavesWrapperComponent } from './leaves-wrapper/leaves-wrapper.component';
+import { CafeCardComponent } from './cafe-card/cafe-card.component';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,14 @@ import { LeavesWrapperComponent } from './leaves-wrapper/leaves-wrapper.componen
     FooterComponent,
     OffcanvasComponent,
     LeavesWrapperComponent,
+    CafeCardComponent,
   ],
   imports: [CommonModule, FormsModule],
-  exports: [NavBarComponent, FooterComponent, LeavesWrapperComponent],
+  exports: [
+    NavBarComponent,
+    FooterComponent,
+    LeavesWrapperComponent,
+    CafeCardComponent,
+  ],
 })
 export class ComponentsModule {}

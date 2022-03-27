@@ -8,7 +8,16 @@
       <div>
         <div class="header-3">Укажите город, в котором вы находитесь</div>
         <div>
-          <select name="location" id="location">
+          <select
+            name="location"
+            id="location"
+            #town
+            (change)="changeTown()"
+            [ngStyle]="{
+              border: townIsValid ? 'none' : 'solid 3px #dc3545',
+              'background-color': townIsValid ? 'white' : 'rgb(255, 170, 170)'
+            }"
+          >
             <option value="none" key="none">Выберите город доставки</option>
             <option [value]="towns.Minsk" key="minsk">Минск</option>
             <option [value]="towns.Grodno" key="grodno">Гродно</option>
@@ -17,7 +26,11 @@
             <option [value]="towns.Mogilev" key="mogilev">Могилев</option>
             <option [value]="towns.Vitebsk" key="vitebsk">Витебск</option>
           </select>
-          <button type="button" class="search-btn btn btn-light">
+          <button
+            type="button"
+            class="search-btn btn btn-light"
+            (click)="selectLocation($event, town.value)"
+          >
             Найти заведения
           </button>
         </div>

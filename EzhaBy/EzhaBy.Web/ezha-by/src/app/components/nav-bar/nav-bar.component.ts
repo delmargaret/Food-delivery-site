@@ -5,6 +5,7 @@ import { AppState } from 'src/app/state/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LoginState } from 'src/app/models/state/loginState';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,7 +18,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +29,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
       .subscribe((loginState) => {
         this.isLoggedIn = loginState.isLoggedIn;
       });
+  }
+
+  redirectToMainPage() {
+    this.router.navigate(['']);
   }
 
   logOut() {
