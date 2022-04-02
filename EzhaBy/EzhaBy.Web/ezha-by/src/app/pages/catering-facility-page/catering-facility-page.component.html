@@ -61,6 +61,7 @@
     <div class="dish-list">
       <app-dish-card
         [dish]="dish"
+        [orderDishes]="orderDishes"
         *ngFor="let dish of filteredDishes"
       ></app-dish-card>
     </div>

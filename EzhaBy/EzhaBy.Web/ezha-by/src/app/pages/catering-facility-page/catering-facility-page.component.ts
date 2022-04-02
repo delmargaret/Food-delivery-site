@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CateringFacility } from 'src/app/models/cateringFacility';
 import { AppState } from 'src/app/state/app.state';
@@ -10,13 +10,15 @@ import { CateringFacilitiesService } from 'src/app/services/catering-facilities.
 import TownsDict from 'src/app/models/townsDict';
 import { CateringFacilityCategory } from 'src/app/models/cateringFacilityCategory';
 import { DishStatuses } from 'src/app/models/dishStatuses';
+import { OrderState } from 'src/app/models/state/orderState';
+import { OrderDish } from 'src/app/models/orderDish';
 
 @Component({
   selector: 'app-catering-facility-page',
   templateUrl: './catering-facility-page.component.html',
   styleUrls: ['./catering-facility-page.component.scss'],
 })
-export class CateringFacilityPageComponent implements OnInit {
+export class CateringFacilityPageComponent implements OnInit, OnDestroy {
   private $unsubscribe: Subject<void> = new Subject<void>();
   private filters: string[] = [];
   cateringFacility: CateringFacility | null = null;
@@ -25,6 +27,7 @@ export class CateringFacilityPageComponent implements OnInit {
   listIsLoaded: boolean = false;
   towns = TownsDict;
   isLoading: boolean = true;
+  orderDishes: OrderDish[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -51,6 +54,13 @@ export class CateringFacilityPageComponent implements OnInit {
         if (!this.listIsLoaded && this.cateringFacility) {
           this.getDishes(id);
         }
+      });
+
+    this.store
+      .select<OrderState>((state) => state.orderState)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((orderState) => {
+        this.orderDishes = orderState.orderDishes;
       });
   }
 
@@ -112,5 +122,10 @@ export class CateringFacilityPageComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
   }
 }

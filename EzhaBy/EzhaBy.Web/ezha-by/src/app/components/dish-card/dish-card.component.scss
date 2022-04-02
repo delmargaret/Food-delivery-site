@@ -16,8 +16,30 @@
     }
 
     .card-text.price {
-      position: absolute;
-      bottom: 15px;
+      font-size: 18px;
+      display: flex;
+
+      .buy {
+        margin-left: auto;
+        display: flex;
+
+        .cart-img {
+          cursor: pointer;
+        }
+
+        .dish-number {
+          display: flex;
+
+          div {
+            margin-left: 8px;
+          }
+
+          .plus,
+          .minus {
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }

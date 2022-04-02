@@ -14,12 +14,26 @@
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ dish.dishName }}</h5>
-        <p class="card-text">
+        <div class="card-text" style="min-height: 156px">
           {{ dish.description }}
-        </p>
-        <p class="card-text price">
-          <small class="text-muted">{{ dish.price }} руб.</small>
-        </p>
+        </div>
+        <div class="card-text price">
+          <div class="text-muted">{{ dish.price }} руб.</div>
+          <div class="buy">
+            <div class="cart-img" *ngIf="!isOrdered" (click)="addToCart()">
+              <img src="../../../assets/24.png" />
+            </div>
+            <div class="dish-number" *ngIf="isOrdered">
+              <div class="minus" (click)="minusDish()">
+                <i class="fa-solid fa-minus" style="color: black"></i>
+              </div>
+              <div>{{ number }}</div>
+              <div class="plus" (click)="plusDish()">
+                <i class="fa-solid fa-plus" style="color: black"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
