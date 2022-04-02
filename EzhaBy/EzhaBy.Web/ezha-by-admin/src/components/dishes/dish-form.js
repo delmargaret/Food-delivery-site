@@ -39,6 +39,7 @@ export default class DishForm extends Component {
               as="textarea"
               type="text"
               required
+              maxLength={120}
             />
             <Form.Control.Feedback type="invalid">
               Введите описание блюда
@@ -52,7 +53,7 @@ export default class DishForm extends Component {
               ref={this.priceInput}
               type="number"
               min="0"
-              step='0.01'
+              step="0.01"
               required
             />
             <Form.Control.Feedback type="invalid">

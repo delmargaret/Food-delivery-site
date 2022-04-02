@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { CateringFacilitiesState } from 'src/app/models/state/cateringFacilitiesState';
 import { of, Subject, switchMap, takeUntil, zip } from 'rxjs';
 import { Towns } from 'src/app/models/towns';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CateringFacility } from 'src/app/models/cateringFacility';
 import { CateringFacilityTypes } from 'src/app/models/cateringFacilityTypes';
 
@@ -22,7 +22,11 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
   cateringFacilities: CateringFacility[] = [];
   filteredCateringFacilities: CateringFacility[] = [];
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.store
@@ -59,6 +63,12 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
       });
 
     return tags;
+  }
+
+  selectCafe(cafeId: string) {
+    this.router.navigate(['./cafe'], {
+      queryParams: { id: cafeId },
+    });
   }
 
   searchCafes(value: string) {

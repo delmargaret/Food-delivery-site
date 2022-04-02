@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { CateringFacilitiesPageComponent } from './pages/catering-facilities-page/catering-facilities-page.component';
+import { CateringFacilityPageComponent } from './pages/catering-facility-page/catering-facility-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CourierPageComponent } from './pages/courier-page/courier-page.component';
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'cafes',
     component: CateringFacilitiesPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'cafe',
+    component: CateringFacilityPageComponent,
     pathMatch: 'full',
   },
   { path: '**', redirectTo: '' },

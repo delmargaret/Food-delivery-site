@@ -18,6 +18,7 @@ import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.compon
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CateringFacilitiesService } from './services/catering-facilities.service';
 import { CateringFacilitiesPageComponent } from './pages/catering-facilities-page/catering-facilities-page.component';
+import { CateringFacilityPageComponent } from './pages/catering-facility-page/catering-facility-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CateringFacilitiesPageComponent } from './pages/catering-facilities-pag
     AboutUsPageComponent,
     ContactUsPageComponent,
     CateringFacilitiesPageComponent,
+    CateringFacilityPageComponent,
   ],
   imports: [
     BrowserModule,

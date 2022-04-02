@@ -38,6 +38,7 @@
       <app-cafe-card
         [cafe]="cafe"
         *ngFor="let cafe of filteredCateringFacilities"
+        (click)="selectCafe(cafe.id)"
       ></app-cafe-card>
     </div>
     <div class="not-found" *ngIf="!filteredCateringFacilities.length">

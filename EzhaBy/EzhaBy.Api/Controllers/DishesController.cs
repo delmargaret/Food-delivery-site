@@ -31,6 +31,7 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetDishes(string cateringFacilityId)
         {
@@ -44,6 +45,7 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDish(string id)
         {

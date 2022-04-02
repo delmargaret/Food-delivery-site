@@ -1,0 +1,26 @@
+<div
+  class="card dish-card"
+  style="max-width: 500px; max-height: 250px"
+  *ngIf="dish"
+>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="{{ mainPicture }}"
+        class="img-fluid rounded-start card-image"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ dish.dishName }}</h5>
+        <p class="card-text">
+          {{ dish.description }}
+        </p>
+        <p class="card-text price">
+          <small class="text-muted">{{ dish.price }} руб.</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { OffcanvasComponent } from './nav-bar/offcanvas/offcanvas.component';
 import { LeavesWrapperComponent } from './leaves-wrapper/leaves-wrapper.component';
 import { CafeCardComponent } from './cafe-card/cafe-card.component';
+import { DishCardComponent } from './dish-card/dish-card.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CafeCardComponent } from './cafe-card/cafe-card.component';
     OffcanvasComponent,
     LeavesWrapperComponent,
     CafeCardComponent,
+    DishCardComponent,
   ],
   imports: [CommonModule, FormsModule],
   exports: [
@@ -21,6 +23,7 @@ import { CafeCardComponent } from './cafe-card/cafe-card.component';
     FooterComponent,
     LeavesWrapperComponent,
     CafeCardComponent,
+    DishCardComponent,
   ],
 })
 export class ComponentsModule {}
