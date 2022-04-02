@@ -4,6 +4,12 @@
   left: 0px;
   top: 40px;
   height: 525px;
+
+  &.large {
+    height: 700px;
+    width: 130px;
+    object-fit: cover;
+  }
 }
 
 .leaves-right {
@@ -12,6 +18,12 @@
   float: right;
   top: 40px;
   height: 525px;
+
+  &.large {
+    height: 700px;
+    width: 130px;
+    object-fit: cover;
+  }
 }
 
 .row {

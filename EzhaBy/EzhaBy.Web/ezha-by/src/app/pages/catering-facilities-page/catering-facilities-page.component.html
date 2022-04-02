@@ -33,13 +33,15 @@
       <i class="fa-solid fa-magnifying-glass" style="color: black"></i>
     </span>
   </div>
-  <div class="cafe-list" *ngIf="filteredCateringFacilities.length">
-    <app-cafe-card
-      [cafe]="cafe"
-      *ngFor="let cafe of filteredCateringFacilities"
-    ></app-cafe-card>
-  </div>
-  <div class="not-found" *ngIf="!filteredCateringFacilities.length">
-    Заведения не найдены
-  </div>
+  <app-leaves-wrapper leavesClass="large">
+    <div class="cafe-list" *ngIf="filteredCateringFacilities.length">
+      <app-cafe-card
+        [cafe]="cafe"
+        *ngFor="let cafe of filteredCateringFacilities"
+      ></app-cafe-card>
+    </div>
+    <div class="not-found" *ngIf="!filteredCateringFacilities.length">
+      Заведения не найдены
+    </div>
+  </app-leaves-wrapper>
 </div>

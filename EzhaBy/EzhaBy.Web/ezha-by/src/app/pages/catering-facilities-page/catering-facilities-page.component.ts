@@ -35,8 +35,9 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(([cateringFacilitiesState, params]) => {
         this.town = parseInt(params['town']);
-        this.allCateringFacilities =
-          cateringFacilitiesState.allCateringFacilities;
+        this.allCateringFacilities = [
+          ...cateringFacilitiesState.allCateringFacilities,
+        ];
         this.cateringFacilities = this.allCateringFacilities.filter(
           (x) => x.town === this.town
         );
@@ -106,9 +107,7 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
           cafesByType.push(x);
         }
       });
-    }
-
-    if (this.filters.some((x) => x === 'shop')) {
+    } else if (this.filters.some((x) => x === 'shop')) {
       const filtered = allCafes.filter(
         (x) => x.cateringFacilityType === CateringFacilityTypes.Shop
       );
@@ -117,6 +116,8 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
           cafesByType.push(x);
         }
       });
+    } else {
+      cafesByType = [...allCafes];
     }
 
     const tagFilters = this.filters.filter((x) => x !== 'shop' && x !== 'cafe');
