@@ -3,6 +3,7 @@ import { CateringFacilitiesService } from './services/catering-facilities.servic
 import { AppState } from './state/app.state';
 import { Store } from '@ngrx/store';
 import { SetCateringFacilities } from './state/actions/app.actions';
+import { CateringFacilityStatuses } from './models/cateringFacilityStatuses';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,10 @@ export class AppComponent implements OnInit {
       next: (cateringFacilities) => {
         this.store.dispatch(
           new SetCateringFacilities({
-            allCateringFacilities: cateringFacilities,
+            allCateringFacilities: cateringFacilities.filter(
+              (x) =>
+                x.cateringFacilityStatus === CateringFacilityStatuses.Active
+            ),
           })
         );
         this.isLoading = false;

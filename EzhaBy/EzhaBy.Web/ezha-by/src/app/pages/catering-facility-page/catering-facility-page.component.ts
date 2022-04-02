@@ -9,6 +9,7 @@ import { Dish } from 'src/app/models/dish';
 import { CateringFacilitiesService } from 'src/app/services/catering-facilities.service';
 import TownsDict from 'src/app/models/townsDict';
 import { CateringFacilityCategory } from 'src/app/models/cateringFacilityCategory';
+import { DishStatuses } from 'src/app/models/dishStatuses';
 
 @Component({
   selector: 'app-catering-facility-page',
@@ -17,8 +18,10 @@ import { CateringFacilityCategory } from 'src/app/models/cateringFacilityCategor
 })
 export class CateringFacilityPageComponent implements OnInit {
   private $unsubscribe: Subject<void> = new Subject<void>();
+  private filters: string[] = [];
   cateringFacility: CateringFacility | null = null;
   dishes: Dish[] = [];
+  filteredDishes: Dish[] = [];
   listIsLoaded: boolean = false;
   towns = TownsDict;
   isLoading: boolean = true;
@@ -71,15 +74,41 @@ export class CateringFacilityPageComponent implements OnInit {
     return categories;
   }
 
+  applyFilter(event: any, categoryId: string) {
+    const hasClass = event.target.classList.contains('selected');
+
+    if (hasClass) {
+      this.filters = this.filters.filter((x) => x !== categoryId);
+      $(event.target).removeClass('selected');
+    } else {
+      if (!this.filters.some((x) => x === categoryId)) {
+        this.filters.push(categoryId);
+      }
+      $(event.target).addClass('selected');
+    }
+
+    if (!this.filters.length) {
+      this.filteredDishes = [...this.dishes];
+      return;
+    }
+    this.filteredDishes = [...this.dishes].filter((x) =>
+      this.filters.some((f) => f === x.cateringFacilityCategory.categoryId)
+    );
+  }
+
   getDishes(cafeId: string) {
     this.cateringFacilitiesService.GetAllDishes(cafeId).subscribe({
       next: (dishes) => {
-        this.dishes = dishes;
+        this.dishes = dishes.filter(
+          (x) => x.dishStatus === DishStatuses.InStock
+        );
+        this.filteredDishes = [...this.dishes];
         this.isLoading = false;
       },
       error: (err) => {
         console.log(err);
         this.dishes = [];
+        this.filteredDishes = [];
         this.isLoading = false;
       },
     });

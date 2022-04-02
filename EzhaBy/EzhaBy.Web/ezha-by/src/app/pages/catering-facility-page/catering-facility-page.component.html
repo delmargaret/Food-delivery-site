@@ -47,19 +47,26 @@
     </div>
   </div>
 
-  <div class="cafe-dishes" *ngIf="dishes.length">
+  <div class="cafe-dishes" *ngIf="filteredDishes.length">
     <div class="categories">
-      <div class="category" *ngFor="let category of allCategories">
+      <div
+        class="category"
+        *ngFor="let category of allCategories"
+        (click)="applyFilter($event, category.categoryId)"
+      >
         {{ category.categoryName }}
       </div>
     </div>
 
     <div class="dish-list">
-      <app-dish-card [dish]="dish" *ngFor="let dish of dishes"></app-dish-card>
+      <app-dish-card
+        [dish]="dish"
+        *ngFor="let dish of filteredDishes"
+      ></app-dish-card>
     </div>
   </div>
 
-  <div *ngIf="!dishes.length && !isLoading">
+  <div *ngIf="!filteredDishes.length && !isLoading">
     <app-leaves-wrapper>
       <div class="not-found">Блюда не найдены</div>
     </app-leaves-wrapper>
