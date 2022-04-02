@@ -29,7 +29,9 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
   get price() {
     let price = 0;
     this.groupedOrderDishes.forEach((group) => {
-      group.dishes.forEach((x) => (price = price + x.dish.price));
+      group.dishes.forEach(
+        (x) => (price = price + x.dish.price * x.numberOfDishes)
+      );
     });
     return price;
   }

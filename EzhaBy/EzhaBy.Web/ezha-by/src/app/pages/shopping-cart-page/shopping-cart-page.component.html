@@ -47,11 +47,11 @@
     <div class="total" *ngIf="groupedOrderDishes.length">
       <div class="price">
         <span class="text">Цена:</span>
-        {{ price }} р.
+        {{ price.toFixed(2) }} р.
       </div>
       <div class="delivery">
         <span class="text">Доставка:</span>
-        {{ delivery }} р.
+        {{ delivery.toFixed(2) }} р.
       </div>
       <div class="total-price">
         <span class="text">Общая сумма:</span>
