@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { LoginState } from 'src/app/models/state/loginState';
 import { Router } from '@angular/router';
+import { OrderState } from 'src/app/models/state/orderState';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,8 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  isLoggedIn = false;
   private $unsubscribe: Subject<void> = new Subject<void>();
+  isLoggedIn: boolean = false;
+  number: number = 0;
 
   constructor(
     private store: Store<AppState>,
@@ -28,6 +30,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.$unsubscribe))
       .subscribe((loginState) => {
         this.isLoggedIn = loginState.isLoggedIn;
+      });
+
+    this.store
+      .select<OrderState>((state) => state.orderState)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((orderState) => {
+        this.number = !orderState.orderDishes.length
+          ? 0
+          : orderState.orderDishes
+              .map((x) => x.numberOfDishes)
+              .reduce((prev, curr) => prev + curr);
       });
   }
 

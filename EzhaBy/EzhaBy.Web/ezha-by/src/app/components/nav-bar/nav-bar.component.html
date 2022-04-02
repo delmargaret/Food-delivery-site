@@ -15,7 +15,17 @@
   <div class="brand" (click)="redirectToMainPage()">
     <img src="../../../assets/logo9.png" width="120" alt="logo" />
   </div>
-  <div class="app-link">
-    <a *ngIf="isLoggedIn" (click)="logOut()">Выход</a>
+  <div class="cart">
+    <img src="../../../assets/26.png" height="30" alt="" />
+    <span
+      *ngIf="number && number > 0"
+      class="position-absolute translate-middle badge rounded-pill bg-danger"
+    >
+      {{ number > 99 ? "99+" : number }}
+      <span class="visually-hidden">unread messages</span>
+    </span>
+  </div>
+  <div class="user">
+    <img src="../../../assets/25.png" height="30" alt="" />
   </div>
 </div>
