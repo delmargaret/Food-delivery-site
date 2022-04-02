@@ -48,6 +48,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.navigate(['']);
   }
 
+  redirectToCart() {
+    this.router.navigate(['cart']);
+  }
+
   logOut() {
     this.authService.removeUser();
   }

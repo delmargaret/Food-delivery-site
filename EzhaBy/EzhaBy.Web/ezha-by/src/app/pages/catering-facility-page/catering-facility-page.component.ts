@@ -28,6 +28,7 @@ export class CateringFacilityPageComponent implements OnInit, OnDestroy {
   towns = TownsDict;
   isLoading: boolean = true;
   orderDishes: OrderDish[] = [];
+  id: string = '';
 
   constructor(
     private store: Store<AppState>,
@@ -46,6 +47,7 @@ export class CateringFacilityPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(([cateringFacilitiesState, params]) => {
         const id = params['id'];
+        this.id = id;
         this.cateringFacility =
           cateringFacilitiesState.allCateringFacilities.find(
             (x) => x.id === id

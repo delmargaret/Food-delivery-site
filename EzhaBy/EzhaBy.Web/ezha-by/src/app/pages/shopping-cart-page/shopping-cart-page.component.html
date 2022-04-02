@@ -1,0 +1,62 @@
+<div class="cart">
+  <div class="order">
+    <div class="group" *ngFor="let group of groupedOrderDishes">
+      <div class="cafe-name">{{ group.cafe.cateringFacilityName }}</div>
+      <div class="dish" *ngFor="let dish of group.dishes">
+        <div>
+          <img
+            src="{{
+              dish.dish.dishIconUrl
+                ? dish.dish.dishIconUrl
+                : '../../../assets/19.png'
+            }}"
+            class="dish-img"
+          />
+        </div>
+
+        <div class="description">
+          <div class="title">
+            {{ dish.dish.dishName }}
+          </div>
+          <div>{{ dish.dish.description }}</div>
+        </div>
+
+        <div class="price-1">
+          {{ dish.dish.price }}
+        </div>
+
+        <div class="number">
+          <div class="minus" (click)="minusDish(dish)">
+            <i class="fa-solid fa-minus" style="color: black"></i>
+          </div>
+          <div>{{ dish.numberOfDishes }}</div>
+          <div class="plus" (click)="plusDish(dish)">
+            <i class="fa-solid fa-plus" style="color: black"></i>
+          </div>
+        </div>
+
+        <div class="price-2">
+          {{ (dish.dish.price * dish.numberOfDishes).toFixed(2) }}
+        </div>
+
+        <div class="delete" (click)="deleteDish(dish)">
+          <i class="fa-solid fa-xmark" style="color: black"></i>
+        </div>
+      </div>
+    </div>
+    <div class="total" *ngIf="groupedOrderDishes.length">
+      <div class="price">
+        <span class="text">Цена:</span>
+        {{ price }} р.
+      </div>
+      <div class="delivery">
+        <span class="text">Доставка:</span>
+        {{ delivery }} р.
+      </div>
+      <div class="total-price">
+        <span class="text">Общая сумма:</span>
+        {{ (price + delivery).toFixed(2) }} р.
+      </div>
+    </div>
+  </div>
+</div>

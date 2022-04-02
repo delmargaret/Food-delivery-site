@@ -8,6 +8,7 @@ import { CourierPageComponent } from './pages/courier-page/courier-page.componen
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
+import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { TermsOfServicePageComponent } from './pages/terms-of-service-page/terms-of-service-page.component';
 
 const routes: Routes = [
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'cafe',
     component: CateringFacilityPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'cart',
+    component: ShoppingCartPageComponent,
     pathMatch: 'full',
   },
   { path: '**', redirectTo: '' },

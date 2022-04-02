@@ -13,6 +13,7 @@ import { SetOrderDishes } from 'src/app/state/actions/app.actions';
 export class DishCardComponent implements OnInit {
   @Input() dish: Dish | null = null;
   @Input() orderDishes: OrderDish[] = [];
+  @Input() cafeId: string = '';
 
   constructor(private store: Store<AppState>) {}
 
@@ -38,7 +39,11 @@ export class DishCardComponent implements OnInit {
   addToCart() {
     if (this.dish) {
       let dishes = [...this.orderDishes];
-      dishes.push({ dish: this.dish, numberOfDishes: 1 });
+      dishes.push({
+        dish: this.dish,
+        numberOfDishes: 1,
+        cateringFacilityId: this.cafeId,
+      });
 
       this.store.dispatch(
         new SetOrderDishes({
@@ -67,7 +72,11 @@ export class DishCardComponent implements OnInit {
           return;
         }
 
-        const newDish: OrderDish = { dish: this.dish, numberOfDishes: number };
+        const newDish: OrderDish = {
+          dish: this.dish,
+          numberOfDishes: number,
+          cateringFacilityId: this.cafeId,
+        };
         this.store.dispatch(
           new SetOrderDishes({
             orderDishes: [
@@ -88,7 +97,11 @@ export class DishCardComponent implements OnInit {
 
       if (dish) {
         const number = dish.numberOfDishes + 1;
-        const newDish: OrderDish = { dish: this.dish, numberOfDishes: number };
+        const newDish: OrderDish = {
+          dish: this.dish,
+          numberOfDishes: number,
+          cateringFacilityId: this.cafeId,
+        };
         this.store.dispatch(
           new SetOrderDishes({
             orderDishes: [

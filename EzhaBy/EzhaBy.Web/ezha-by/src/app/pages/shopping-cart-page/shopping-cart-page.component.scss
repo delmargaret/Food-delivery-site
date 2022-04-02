@@ -1,0 +1,80 @@
+.cart {
+  padding-top: 20px;
+
+  .group {
+    margin: 0 80px;
+
+    .cafe-name {
+      font-size: 22px;
+      border-bottom: 1px solid rgb(165, 165, 165);
+    }
+
+    .dish {
+      height: 150px;
+      display: flex;
+      margin-top: 50px;
+
+      .dish-img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+        border-radius: 15px;
+      }
+
+      .description {
+        width: 500px;
+        overflow-wrap: break-word;
+        margin-left: 50px;
+
+        .title {
+          font-weight: 700;
+          font-style: normal;
+          font-size: 18px;
+          color: #000000;
+        }
+      }
+
+      .price-1,
+      .number,
+      .price-2,
+      .delete {
+        margin-top: 30px;
+        margin: auto;
+        width: 20px;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      .delete {
+        font-size: x-large;
+        cursor: pointer;
+      }
+
+      .number {
+        display: flex;
+
+        div {
+          margin-left: 8px;
+        }
+
+        .plus,
+        .minus {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .total {
+    padding: 20px 80px;
+    margin-top: 50px;
+    border-bottom: 1px solid rgb(165, 165, 165);
+    border-top: 1px solid rgb(165, 165, 165);
+    background-color: rgb(228, 228, 228);
+
+    .text {
+      margin-right: 15px;
+      font-weight: 600;
+    }
+  }
+}
