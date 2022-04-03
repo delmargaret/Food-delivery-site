@@ -260,5 +260,11 @@
         </div>
       </app-leaves-wrapper>
     </div>
+
+    <div *ngIf="!groupedOrderDishes.length">
+      <app-leaves-wrapper>
+        <div class="not-found">Ваша корзина пуста.</div>
+      </app-leaves-wrapper>
+    </div>
   </div>
 </div>
