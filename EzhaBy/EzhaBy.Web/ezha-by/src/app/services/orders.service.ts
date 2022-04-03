@@ -9,6 +9,10 @@ import { ConfigService } from './config.service';
 export class OrdersService {
   constructor(private http: HttpClient) {}
 
+  AddOrder(order: Order): Observable<Object> {
+    return this.http.post(ConfigService.addBaseAddress(`api/orders`), order);
+  }
+
   GetCafeOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(
       ConfigService.addBaseAddress('api/orders/cafe-orders')
@@ -23,43 +27,49 @@ export class OrdersService {
 
   SetOrderStatus(id: string, status: number): Observable<Object> {
     const data = {
-      orderStatus: status
+      orderStatus: status,
     };
     return this.http.put(
-      ConfigService.addBaseAddress(`api/orders/${id}/status`), data
+      ConfigService.addBaseAddress(`api/orders/${id}/status`),
+      data
     );
   }
 
   SetOrderCourier(id: string): Observable<Object> {
     return this.http.put(
-      ConfigService.addBaseAddress(`api/orders/${id}/courier`), {}
+      ConfigService.addBaseAddress(`api/orders/${id}/courier`),
+      {}
     );
   }
 
   AcceptOrder(id: string): Observable<Object> {
     return this.http.put(
-      ConfigService.addBaseAddress(`api/orders/${id}/accept`), {}
+      ConfigService.addBaseAddress(`api/orders/${id}/accept`),
+      {}
     );
   }
 
   RejectOrder(id: string): Observable<Object> {
     return this.http.put(
-      ConfigService.addBaseAddress(`api/orders/${id}/reject`), {}
+      ConfigService.addBaseAddress(`api/orders/${id}/reject`),
+      {}
     );
   }
 
   GetCourierStatus(): Observable<CourierStatuses> {
     return this.http.get<CourierStatuses>(
-      ConfigService.addBaseAddress(`api/orders/courier-status`), {}
+      ConfigService.addBaseAddress(`api/orders/courier-status`),
+      {}
     );
   }
 
   SetCourierStatus(status: number): Observable<Object> {
     const data = {
-      courierStatus: status
+      courierStatus: status,
     };
     return this.http.put(
-      ConfigService.addBaseAddress(`api/orders/courier-status`), data
+      ConfigService.addBaseAddress(`api/orders/courier-status`),
+      data
     );
   }
 }

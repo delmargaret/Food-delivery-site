@@ -7,6 +7,13 @@ import { Subject, takeUntil } from 'rxjs';
 import { CateringFacility } from 'src/app/models/cateringFacility';
 import { SetOrderDishes } from 'src/app/state/actions/app.actions';
 import { OrderState } from 'src/app/models/state/orderState';
+import TownsDict from 'src/app/models/townsDict';
+import { Towns } from 'src/app/models/towns';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PaymentTypes } from 'src/app/models/paymentTypes';
+import { OrdersService } from 'src/app/services/orders.service';
+import { OrderLine } from 'src/app/models/orderLine';
+import { Router } from '@angular/router';
 
 interface GroupedOrderDish {
   cafe: CateringFacility;
@@ -20,11 +27,67 @@ interface GroupedOrderDish {
 })
 export class ShoppingCartPageComponent implements OnInit, OnDestroy {
   private $unsubscribe: Subject<void> = new Subject<void>();
+  cartForm: FormGroup;
   orderDishes: OrderDish[] = [];
   cafes: CateringFacility[] = [];
   groupedOrderDishes: GroupedOrderDish[] = [];
+  townName: string = TownsDict[Towns.Minsk];
+  town: Towns = Towns.Minsk;
+  paymentType: PaymentTypes = PaymentTypes.Cash;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private ordersService: OrdersService,
+    private router: Router
+  ) {
+    this.cartForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      surname: new FormControl('', Validators.required),
+      phone: new FormControl('', [Validators.required]),
+      patronymic: new FormControl(),
+      street: new FormControl(),
+      house: new FormControl(),
+      flat: new FormControl(),
+      payment: new FormControl('0'),
+      comment: new FormControl(),
+    });
+  }
+
+  get patronymic() {
+    return this.cartForm.get('patronymic');
+  }
+
+  get name() {
+    return this.cartForm.get('name');
+  }
+
+  get surname() {
+    return this.cartForm.get('surname');
+  }
+
+  get street() {
+    return this.cartForm.get('street');
+  }
+
+  get phone() {
+    return this.cartForm.get('phone');
+  }
+
+  get house() {
+    return this.cartForm.get('house');
+  }
+
+  get flat() {
+    return this.cartForm.get('flat');
+  }
+
+  get payment() {
+    return this.cartForm.get('payment');
+  }
+
+  get comment() {
+    return this.cartForm.get('comment');
+  }
 
   get price() {
     let price = 0;
@@ -45,6 +108,9 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.town = parseInt(localStorage.getItem('town') ?? '0');
+    this.townName = TownsDict[this.town];
+
     this.store
       .select<OrderState>((state) => state.orderState)
       .pipe(takeUntil(this.$unsubscribe))
@@ -143,6 +209,59 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
         })
       );
     }
+  }
+
+  onSubmit(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (this.cartForm?.invalid) {
+      this.patronymic?.invalid && this.patronymic.markAsDirty();
+      this.name?.invalid && this.name.markAsDirty();
+      this.surname?.invalid && this.surname.markAsDirty();
+      this.phone?.invalid && this.phone.markAsDirty();
+      this.street?.invalid && this.street.markAsDirty();
+      this.house?.invalid && this.house.markAsDirty();
+      this.flat?.invalid && this.flat.markAsDirty();
+      this.payment?.invalid && this.payment.markAsDirty();
+      this.comment?.invalid && this.comment.markAsDirty();
+      return;
+    }
+
+    var orders: OrderLine[] = this.orderDishes.map((x) => {
+      return {
+        dishId: x.dish.id,
+        numberOfDishes: x.numberOfDishes,
+      };
+    });
+
+    this.ordersService
+      .AddOrder({
+        name: this.name?.value,
+        surname: this.surname?.value,
+        patronymic: this.patronymic?.value,
+        phone: this.phone?.value,
+        street: this.street?.value,
+        town: this.town,
+        houseNumber: this.house?.value,
+        flatNumber: this.flat?.value,
+        paymentType: this.payment?.value,
+        comment: this.comment?.value,
+        totalPrice: this.price + this.delivery,
+        userId: null,
+        orderDishes: orders,
+      })
+      .subscribe({
+        next: () => {
+          this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+          this.router.navigate(['cart/success']);
+        },
+        error: (e) => {
+          this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+          this.router.navigate(['cart/error']);
+          console.error(e);
+        },
+      });
   }
 
   ngOnDestroy(): void {

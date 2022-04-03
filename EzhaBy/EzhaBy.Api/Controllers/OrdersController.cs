@@ -18,6 +18,20 @@ namespace EzhaBy.Api.Controllers
         
         public OrdersController(IMediator mediator) => this.mediator = mediator;
 
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrder.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("cafe-orders")]
         [Authorize(Roles = AuthorizationRoles.CafeAdmin)]
         public async Task<IActionResult> GetCafeOrders()

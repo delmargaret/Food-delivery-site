@@ -8,7 +8,9 @@ import { CourierPageComponent } from './pages/courier-page/courier-page.componen
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
+import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
+import { ShoppingCartSuccessPageComponent } from './pages/shopping-cart-success-page/shopping-cart-success-page.component';
 import { TermsOfServicePageComponent } from './pages/terms-of-service-page/terms-of-service-page.component';
 
 const routes: Routes = [
@@ -36,6 +38,16 @@ const routes: Routes = [
   {
     path: 'cart',
     component: ShoppingCartPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'cart/success',
+    component: ShoppingCartSuccessPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'cart/error',
+    component: ShoppingCartErrorPageComponent,
     pathMatch: 'full',
   },
   { path: '**', redirectTo: '' },

@@ -22,7 +22,7 @@
         </div>
 
         <div class="price-1">
-          {{ dish.dish.price }}
+          {{ dish.dish.price.toFixed(2) }}
         </div>
 
         <div class="number">
@@ -44,6 +44,7 @@
         </div>
       </div>
     </div>
+
     <div class="total" *ngIf="groupedOrderDishes.length">
       <div class="price">
         <span class="text">Цена:</span>
@@ -51,12 +52,213 @@
       </div>
       <div class="delivery">
         <span class="text">Доставка:</span>
-        {{ delivery.toFixed(2) }} р.
+        {{
+          delivery && delivery !== 0 ? delivery.toFixed(2) + " р." : "Бесплатно"
+        }}
       </div>
       <div class="total-price">
         <span class="text">Общая сумма:</span>
         {{ (price + delivery).toFixed(2) }} р.
       </div>
+    </div>
+
+    <div class="order-info" *ngIf="groupedOrderDishes.length">
+      <app-leaves-wrapper>
+        <div class="title">Доставка</div>
+
+        <div class="row" id="main-row">
+          <div class="col"></div>
+          <div class="col-8">
+            <form
+              novalidate
+              (ngSubmit)="onSubmit($event)"
+              [formGroup]="cartForm"
+              class="app-form"
+            >
+              <div class="form-row row">
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="surname"
+                      autocomplete="off"
+                      placeholder="Фамилия"
+                    />
+                    <div
+                      *ngIf="
+                        surname &&
+                        surname.invalid &&
+                        (surname.dirty || surname.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите фамилию
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="name"
+                      autocomplete="off"
+                      placeholder="Имя"
+                    />
+                    <div
+                      *ngIf="
+                        name && name.invalid && (name.dirty || name.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите имя
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row row">
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="patronymic"
+                      autocomplete="off"
+                      placeholder="Отчество"
+                    />
+                    <div
+                      *ngIf="
+                        patronymic &&
+                        patronymic.invalid &&
+                        (patronymic.dirty || patronymic.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите отчество
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="phone"
+                      autocomplete="off"
+                      placeholder="Телефон"
+                    />
+                    <div
+                      *ngIf="
+                        phone && phone.invalid && (phone.dirty || phone.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите телефон
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row row">
+                <div class="col-3 town">город {{ townName }}</div>
+                <div class="col-9">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="street"
+                      autocomplete="off"
+                      placeholder="Улица"
+                    />
+                    <div
+                      *ngIf="
+                        street &&
+                        street.invalid &&
+                        (street.dirty || street.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите название улицы
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row row">
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      formControlName="house"
+                      autocomplete="off"
+                      placeholder="Дом"
+                    />
+                    <div
+                      *ngIf="
+                        house && house.invalid && (house.dirty || house.touched)
+                      "
+                      style="display: block"
+                      class="invalid-feedback"
+                    >
+                      Введите номер дома
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="flat"
+                      autocomplete="off"
+                      placeholder="Квартира"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row row">
+                <div class="payment-title">Способ оплаты</div>
+                <div class="col">
+                  <div class="form-group" style="display: flex">
+                    <input type="radio" value="0" formControlName="payment" />
+                    <div class="radio-text">Наличные</div>
+                    <input type="radio" value="1" formControlName="payment" />
+                    <div class="radio-text">Карточка</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row row">
+                <div class="col">
+                  <div class="form-group">
+                    <textarea
+                      class="form-control"
+                      formControlName="comment"
+                      autocomplete="off"
+                      placeholder="Комментарий"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-red btn btn-primary btn-submit">
+                Заказать
+              </button>
+            </form>
+          </div>
+          <div class="col"></div>
+        </div>
+      </app-leaves-wrapper>
     </div>
   </div>
 </div>

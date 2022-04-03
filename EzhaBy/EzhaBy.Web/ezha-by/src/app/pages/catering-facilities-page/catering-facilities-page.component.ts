@@ -39,6 +39,7 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(([cateringFacilitiesState, params]) => {
         this.town = parseInt(params['town']);
+        this.saveTown(this.town);
         this.allCateringFacilities = [
           ...cateringFacilitiesState.allCateringFacilities,
         ];
@@ -63,6 +64,12 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
       });
 
     return tags;
+  }
+
+  saveTown(town: Towns | null = null) {
+    if (!localStorage.getItem('town') && town) {
+      localStorage.setItem('town', JSON.stringify(town));
+    }
   }
 
   selectCafe(cafeId: string) {

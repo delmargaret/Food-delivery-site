@@ -76,4 +76,44 @@
       font-weight: 600;
     }
   }
+
+  .order-info {
+    .title {
+      text-align: center;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 24px;
+      color: #000000;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .town {
+      margin: auto;
+    }
+
+    .radio-text {
+      margin: auto 15px auto 5px;
+    }
+
+    .payment-title {
+      font-size: large;
+    }
+
+    .btn-submit {
+      margin-bottom: 50px;
+    }
+
+    input {
+      height: 45px;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    button {
+      min-width: -webkit-fill-available;
+    }
+  }
 }

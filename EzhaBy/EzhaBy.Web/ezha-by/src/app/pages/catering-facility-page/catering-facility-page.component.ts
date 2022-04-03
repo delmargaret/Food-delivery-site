@@ -12,6 +12,7 @@ import { CateringFacilityCategory } from 'src/app/models/cateringFacilityCategor
 import { DishStatuses } from 'src/app/models/dishStatuses';
 import { OrderState } from 'src/app/models/state/orderState';
 import { OrderDish } from 'src/app/models/orderDish';
+import { Towns } from 'src/app/models/towns';
 
 @Component({
   selector: 'app-catering-facility-page',
@@ -54,6 +55,7 @@ export class CateringFacilityPageComponent implements OnInit, OnDestroy {
           ) ?? null;
 
         if (!this.listIsLoaded && this.cateringFacility) {
+          this.saveTown(this.cateringFacility.town);
           this.getDishes(id);
         }
       });
@@ -84,6 +86,12 @@ export class CateringFacilityPageComponent implements OnInit, OnDestroy {
       });
 
     return categories;
+  }
+
+  saveTown(town: Towns | null = null) {
+    if (!localStorage.getItem('town') && town) {
+      localStorage.setItem('town', JSON.stringify(town));
+    }
   }
 
   applyFilter(event: any, categoryId: string) {

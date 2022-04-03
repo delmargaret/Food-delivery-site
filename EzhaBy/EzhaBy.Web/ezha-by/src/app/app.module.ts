@@ -20,6 +20,9 @@ import { CateringFacilitiesService } from './services/catering-facilities.servic
 import { CateringFacilitiesPageComponent } from './pages/catering-facilities-page/catering-facilities-page.component';
 import { CateringFacilityPageComponent } from './pages/catering-facility-page/catering-facility-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
+import { ShoppingCartSuccessPageComponent } from './pages/shopping-cart-success-page/shopping-cart-success-page.component';
+import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
+import { OrdersService } from './services/orders.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
     CateringFacilitiesPageComponent,
     CateringFacilityPageComponent,
     ShoppingCartPageComponent,
+    ShoppingCartSuccessPageComponent,
+    ShoppingCartErrorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,7 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
     ReactiveFormsModule,
     StoreModule.forRoot(mainReducer),
   ],
-  providers: [RequestsService, CateringFacilitiesService],
+  providers: [RequestsService, CateringFacilitiesService, OrdersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

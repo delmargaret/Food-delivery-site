@@ -1,10 +1,8 @@
-import * as _ from 'lodash';
-import { CourierDish } from './courierDish';
-import { OrderDish } from './orderDish';
+import { OrderLine } from './orderLine';
+import { PaymentTypes } from './paymentTypes';
 import { Towns } from './towns';
 
 export interface Order {
-  id: string;
   name: string;
   surname: string;
   patronymic: string;
@@ -13,12 +11,9 @@ export interface Order {
   street: string;
   houseNumber: string;
   flatNumber: string;
-  paymentType: number;
+  paymentType: PaymentTypes;
   comment: string;
-  orderStatus: number;
-  orderDateTime: string;
-  isOrderAccepted: boolean;
   totalPrice: number;
-  orderDishes: OrderDish[];
-  courierDishes?: CourierDish[];
+  userId: string | null;
+  orderDishes: OrderLine[];
 }

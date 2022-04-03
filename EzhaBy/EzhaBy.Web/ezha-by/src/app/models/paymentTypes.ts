@@ -1,8 +1,4 @@
-interface PaymentType {
-  [index: number]: string;
+export enum PaymentTypes {
+  Cash,
+  Card,
 }
-
-export const PaymentTypes: PaymentType = {
-  0: 'Наличные',
-  1: 'Банковская карта',
-};
