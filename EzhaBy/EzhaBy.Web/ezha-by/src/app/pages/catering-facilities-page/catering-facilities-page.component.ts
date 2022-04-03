@@ -7,6 +7,10 @@ import { Towns } from 'src/app/models/towns';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CateringFacility } from 'src/app/models/cateringFacility';
 import { CateringFacilityTypes } from 'src/app/models/cateringFacilityTypes';
+import {
+  SetCurrentTown,
+  SetOrderDishes,
+} from 'src/app/state/actions/app.actions';
 
 @Component({
   selector: 'app-catering-facilities-page',
@@ -67,9 +71,19 @@ export class CateringFacilitiesPageComponent implements OnInit, OnDestroy {
   }
 
   saveTown(town: Towns | null = null) {
-    if (!localStorage.getItem('town') && town) {
-      localStorage.setItem('town', JSON.stringify(town));
+    const townStr = localStorage.getItem('town');
+    if (!townStr) {
+      this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+      this.store.dispatch(new SetCurrentTown({ town: town ?? Towns.Minsk }));
+      return;
     }
+
+    const curr = parseInt(townStr);
+    if ((curr as Towns) !== town) {
+      console.log(curr, town);
+      this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+    }
+    this.store.dispatch(new SetCurrentTown({ town: town ?? Towns.Minsk }));
   }
 
   selectCafe(cafeId: string) {

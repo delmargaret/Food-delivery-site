@@ -14,6 +14,7 @@ import { PaymentTypes } from 'src/app/models/paymentTypes';
 import { OrdersService } from 'src/app/services/orders.service';
 import { OrderLine } from 'src/app/models/orderLine';
 import { Router } from '@angular/router';
+import { TownState } from 'src/app/models/state/townState';
 
 interface GroupedOrderDish {
   cafe: CateringFacility;
@@ -110,6 +111,16 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.town = parseInt(localStorage.getItem('town') ?? '0');
     this.townName = TownsDict[this.town];
+
+    this.store
+      .select<TownState>((state) => state.townState)
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe((townState) => {
+        if (townState) {
+          this.town = townState.town;
+          this.townName = TownsDict[this.town];
+        }
+      });
 
     this.store
       .select<OrderState>((state) => state.orderState)

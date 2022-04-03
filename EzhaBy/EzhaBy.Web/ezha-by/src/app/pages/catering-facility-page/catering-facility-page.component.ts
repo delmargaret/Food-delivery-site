@@ -13,6 +13,10 @@ import { DishStatuses } from 'src/app/models/dishStatuses';
 import { OrderState } from 'src/app/models/state/orderState';
 import { OrderDish } from 'src/app/models/orderDish';
 import { Towns } from 'src/app/models/towns';
+import {
+  SetCurrentTown,
+  SetOrderDishes,
+} from 'src/app/state/actions/app.actions';
 
 @Component({
   selector: 'app-catering-facility-page',
@@ -89,9 +93,19 @@ export class CateringFacilityPageComponent implements OnInit, OnDestroy {
   }
 
   saveTown(town: Towns | null = null) {
-    if (!localStorage.getItem('town') && town) {
-      localStorage.setItem('town', JSON.stringify(town));
+    const townStr = localStorage.getItem('town');
+    if (!townStr) {
+      this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+      this.store.dispatch(new SetCurrentTown({ town: town ?? Towns.Minsk }));
+      return;
     }
+
+    const curr = parseInt(townStr);
+    if ((curr as Towns) !== town) {
+      console.log(curr, town);
+      this.store.dispatch(new SetOrderDishes({ orderDishes: [] }));
+    }
+    this.store.dispatch(new SetCurrentTown({ town: town ?? Towns.Minsk }));
   }
 
   applyFilter(event: any, categoryId: string) {
