@@ -26,6 +26,32 @@
     </span>
   </div>
   <div class="user">
-    <img src="../../../assets/25.png" height="30" alt="" />
+    <a
+      data-bs-toggle="collapse"
+      href="#collapseExample"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      <img src="../../../assets/25.png" height="30" alt="" />
+    </a>
+  </div>
+  <div class="collapse nav-collapse" id="collapseExample">
+    <div class="card card-body" *ngIf="!isLoggedIn">
+      <div class="app-link">
+        <a href="/login">Войти</a>
+      </div>
+    </div>
+    <div class="card card-body" *ngIf="isLoggedIn">
+      <div class="app-link loggedin">
+        <a href="account">Аккаунт</a>
+      </div>
+      <div class="app-link loggedin">
+        <a href="">Мои заказы</a>
+      </div>
+      <div class="app-link loggedin">
+        <a (click)="logOut()">Выйти</a>
+      </div>
+    </div>
   </div>
 </div>

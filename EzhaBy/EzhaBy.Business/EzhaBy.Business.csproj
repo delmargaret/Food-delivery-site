@@ -110,8 +110,12 @@
     <Compile Include="Tags\GetTag.cs" />
     <Compile Include="Tags\GetTags.cs" />
     <Compile Include="Tags\UpdateTagName.cs" />
+    <Compile Include="Users\AddUser.cs" />
     <Compile Include="Users\Dto\LoginDto.cs" />
+    <Compile Include="Users\Dto\UserDto.cs" />
     <Compile Include="Users\GetToken.cs" />
+    <Compile Include="Users\GetUser.cs" />
+    <Compile Include="Users\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

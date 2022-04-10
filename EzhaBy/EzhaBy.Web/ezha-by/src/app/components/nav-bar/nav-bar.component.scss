@@ -26,8 +26,7 @@
 .app-link a {
   color: rgb(235, 85, 85);
   display: block;
-  padding: 0.5rem 2rem;
-  margin-right: 1rem;
+  text-decoration: underline !important;
   cursor: pointer;
 }
 
@@ -39,4 +38,20 @@
 .app-link a:focus {
   color: rgb(235, 10, 10);
   text-decoration: underline !important;
+}
+
+.app-link.loggedin {
+  border-bottom: 1px solid rgb(109, 109, 109);
+  padding: 8px 0;
+}
+
+.nav-collapse {
+  position: absolute;
+  right: 1rem;
+  top: 3.2rem;
+  z-index: 100;
+
+  .card-body {
+    min-width: 200px;
+  }
 }

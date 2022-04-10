@@ -23,6 +23,11 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
 import { ShoppingCartSuccessPageComponent } from './pages/shopping-cart-success-page/shopping-cart-success-page.component';
 import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
 import { OrdersService } from './services/orders.service';
+import { LogInPageComponent } from './pages/log-in-page/log-in-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { UsersService } from './services/users.service';
+import { AccountPageComponent } from './pages/account-page/account-page.component';
+import { PasswordService } from './services/password.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,9 @@ import { OrdersService } from './services/orders.service';
     ShoppingCartPageComponent,
     ShoppingCartSuccessPageComponent,
     ShoppingCartErrorPageComponent,
+    LogInPageComponent,
+    RegisterPageComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,13 @@ import { OrdersService } from './services/orders.service';
     ReactiveFormsModule,
     StoreModule.forRoot(mainReducer),
   ],
-  providers: [RequestsService, CateringFacilitiesService, OrdersService],
+  providers: [
+    RequestsService,
+    CateringFacilitiesService,
+    OrdersService,
+    UsersService,
+    PasswordService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

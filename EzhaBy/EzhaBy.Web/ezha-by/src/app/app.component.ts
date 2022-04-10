@@ -4,9 +4,11 @@ import { AppState } from './state/app.state';
 import { Store } from '@ngrx/store';
 import {
   SetCateringFacilities,
+  SetLoginState,
   SetOrderDishes,
 } from './state/actions/app.actions';
 import { CateringFacilityStatuses } from './models/cateringFacilityStatuses';
+import { AuthService } from './security/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +21,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     private cateringFacilitiesService: CateringFacilitiesService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.hasValidToken()) {
+      this.store.dispatch(new SetLoginState({ isLoggedIn: true }));
+    }
+
     const order = localStorage.getItem('order');
     if (order) {
       this.store.dispatch(

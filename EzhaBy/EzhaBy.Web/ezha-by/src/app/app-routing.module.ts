@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { AccountPageComponent } from './pages/account-page/account-page.component';
 import { CateringFacilitiesPageComponent } from './pages/catering-facilities-page/catering-facilities-page.component';
 import { CateringFacilityPageComponent } from './pages/catering-facility-page/catering-facility-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CourierPageComponent } from './pages/courier-page/courier-page.component';
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
+import { LogInPageComponent } from './pages/log-in-page/log-in-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { ShoppingCartSuccessPageComponent } from './pages/shopping-cart-success-page/shopping-cart-success-page.component';
 import { TermsOfServicePageComponent } from './pages/terms-of-service-page/terms-of-service-page.component';
+import { AuthGuard } from './security/auth-guard';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, pathMatch: 'full' },
@@ -49,6 +53,21 @@ const routes: Routes = [
     path: 'cart/error',
     component: ShoppingCartErrorPageComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LogInPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'account',
+    component: AccountPageComponent,
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },
 ];

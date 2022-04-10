@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'token';
-  private roleKey = 'role';
-  private userId = 'userId';
-  private allowedRoles = ['Courier', 'CafeAdmin'];
+  private tokenKey = 'main-token';
+  private roleKey = 'main-role';
+  private userId = 'main-userId';
+  private allowedRoles = ['User'];
   private tokenHelper = new JwtHelperService();
 
   constructor(
@@ -74,6 +74,10 @@ export class AuthService {
     localStorage.setItem(this.tokenKey, token.token);
     localStorage.setItem(this.roleKey, token.role);
     localStorage.setItem(this.userId, token.userId);
+
+    if (this.hasValidToken()) {
+      this.store.dispatch(new SetLoginState({ isLoggedIn: true }));
+    }
     return CredentialsStatus.CREDENTIALS_OK;
   }
 

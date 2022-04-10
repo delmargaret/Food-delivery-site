@@ -1,0 +1,36 @@
+.login {
+  padding-top: 50px;
+
+  .app-form label {
+    font-weight: bold;
+  }
+
+  input {
+    height: 45px;
+  }
+
+  .form-row {
+    margin-bottom: 20px;
+  }
+
+  .register-link {
+    font-size: small;
+    text-align: end;
+    margin-bottom: 5px;
+
+    a {
+      color: rgb(235, 85, 85);
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: rgb(235, 10, 10);
+      text-decoration: underline !important;
+    }
+
+    a:focus {
+      color: rgb(235, 10, 10);
+      text-decoration: underline !important;
+    }
+  }
+}
