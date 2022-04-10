@@ -29,7 +29,7 @@ namespace EzhaBy.Api.Controllers
                 var jwt = new JwtSecurityToken(
                         notBefore: now,
                         claims: identity.Claims,
-                        expires: now.Add(TimeSpan.FromMinutes(TokenParams.Lifetime)),
+                        expires: now.Add(TimeSpan.FromHours(TokenParams.Lifetime)),
                         signingCredentials: new SigningCredentials(
                             new SymmetricSecurityKey(Convert.FromBase64String(TokenParams.Key)), 
                             SecurityAlgorithms.HmacSha256Signature
