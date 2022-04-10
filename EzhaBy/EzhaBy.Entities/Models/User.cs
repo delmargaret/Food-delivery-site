@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EzhaBy.Entities
 {
@@ -16,5 +17,6 @@ namespace EzhaBy.Entities
         public string Street { get; set; }
         public string HouseNumber { get; set; }
         public string FlatNumber { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

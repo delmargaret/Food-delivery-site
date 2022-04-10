@@ -9,6 +9,7 @@ import { CourierPageComponent } from './pages/courier-page/courier-page.componen
 import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { LogInPageComponent } from './pages/log-in-page/log-in-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
@@ -67,6 +68,11 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'orders',
+    component: MyOrdersPageComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },

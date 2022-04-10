@@ -15,6 +15,8 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { OrderLine } from 'src/app/models/orderLine';
 import { Router } from '@angular/router';
 import { TownState } from 'src/app/models/state/townState';
+import { AuthService } from 'src/app/security/auth.service';
+import { UsersService } from 'src/app/services/users.service';
 
 interface GroupedOrderDish {
   cafe: CateringFacility;
@@ -35,11 +37,14 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
   townName: string = TownsDict[Towns.Minsk];
   town: Towns = Towns.Minsk;
   paymentType: PaymentTypes = PaymentTypes.Cash;
+  userId: string | null = null;
 
   constructor(
     private store: Store<AppState>,
     private ordersService: OrdersService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private usersService: UsersService
   ) {
     this.cartForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -112,15 +117,25 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
     this.town = parseInt(localStorage.getItem('town') ?? '0');
     this.townName = TownsDict[this.town];
 
-    this.store
-      .select<TownState>((state) => state.townState)
-      .pipe(takeUntil(this.$unsubscribe))
-      .subscribe((townState) => {
-        if (townState) {
-          this.town = townState.town;
-          this.townName = TownsDict[this.town];
-        }
+    this.userId = this.authService.getUser().userId;
+    if (this.userId) {
+      this.usersService.GetUser(this.userId).subscribe({
+        next: (user) => {
+          this.cartForm.setValue({
+            name: user.name,
+            surname: user.surname,
+            phone: user.phone,
+            patronymic: user.patronymic,
+            street: user.town === this.town ? user.street : '',
+            house: user.town === this.town ? user.houseNumber : '',
+            flat: user.town === this.town ? user.flatNumber : '',
+            payment: '0',
+            comment: '',
+          });
+        },
+        error: (err) => console.log(err),
       });
+    }
 
     this.store
       .select<OrderState>((state) => state.orderState)
@@ -259,7 +274,7 @@ export class ShoppingCartPageComponent implements OnInit, OnDestroy {
         paymentType: this.payment?.value,
         comment: this.comment?.value,
         totalPrice: this.price + this.delivery,
-        userId: null,
+        userId: this.userId,
         orderDishes: orders,
       })
       .subscribe({

@@ -66,6 +66,7 @@
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Orders\CreateOrder.cs" />
     <Compile Include="Orders\Dto\OrderLineDto.cs" />
+    <Compile Include="Orders\GetUserOrders.cs" />
     <Compile Include="Requests\AddCourier.cs" />
     <Compile Include="Requests\AddCourierAccount.cs" />
     <Compile Include="Requests\AddPartner.cs" />

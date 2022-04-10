@@ -28,6 +28,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { UsersService } from './services/users.service';
 import { AccountPageComponent } from './pages/account-page/account-page.component';
 import { PasswordService } from './services/password.service';
+import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PasswordService } from './services/password.service';
     LogInPageComponent,
     RegisterPageComponent,
     AccountPageComponent,
+    MyOrdersPageComponent,
   ],
   imports: [
     BrowserModule,

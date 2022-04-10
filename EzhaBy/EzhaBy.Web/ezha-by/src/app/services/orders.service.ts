@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourierStatuses } from '../models/courierStatuses';
 import { Order } from '../models/order';
+import { UserOrder } from '../models/userOrder';
 import { ConfigService } from './config.service';
 
 @Injectable()
@@ -11,6 +12,12 @@ export class OrdersService {
 
   AddOrder(order: Order): Observable<Object> {
     return this.http.post(ConfigService.addBaseAddress(`api/orders`), order);
+  }
+
+  GetUserOrders(): Observable<UserOrder[]> {
+    return this.http.get<UserOrder[]>(
+      ConfigService.addBaseAddress('api/orders')
+    );
   }
 
   GetCafeOrders(): Observable<Order[]> {

@@ -32,6 +32,21 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [HttpGet("")]
+        [Authorize(Roles = AuthorizationRoles.User)]
+        public async Task<IActionResult> GetUserOrders()
+        {
+            try
+            {
+                var userId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+                return Ok(await mediator.Send(new GetUserOrders.Query(Guid.Parse(userId))));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("cafe-orders")]
         [Authorize(Roles = AuthorizationRoles.CafeAdmin)]
         public async Task<IActionResult> GetCafeOrders()
