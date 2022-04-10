@@ -2,8 +2,8 @@
 using EzhaBy.Business.Feedbacks.Dto;
 using EzhaBy.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

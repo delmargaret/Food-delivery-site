@@ -1,6 +1,5 @@
 ﻿using EzhaBy.Entities;
 using EzhaBy.Infrastructure;
-using FluentValidation;
 using MediatR;
 using System;
 using System.Linq;
