@@ -116,6 +116,8 @@
     <Compile Include="Users\Dto\UserDto.cs" />
     <Compile Include="Users\GetToken.cs" />
     <Compile Include="Users\GetUser.cs" />
+    <Compile Include="Users\ResetPassword.cs" />
+    <Compile Include="Users\SendResetEmail.cs" />
     <Compile Include="Users\UpdateUser.cs" />
   </ItemGroup>
   <ItemGroup>

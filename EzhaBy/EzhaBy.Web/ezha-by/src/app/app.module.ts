@@ -29,6 +29,8 @@ import { UsersService } from './services/users.service';
 import { AccountPageComponent } from './pages/account-page/account-page.component';
 import { PasswordService } from './services/password.service';
 import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
+import { NewPasswordPageComponent } from './pages/new-password-page/new-password-page.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.com
     RegisterPageComponent,
     AccountPageComponent,
     MyOrdersPageComponent,
+    ResetPasswordPageComponent,
+    NewPasswordPageComponent,
   ],
   imports: [
     BrowserModule,

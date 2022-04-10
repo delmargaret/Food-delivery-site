@@ -17,7 +17,7 @@ namespace EzhaBy.Infrastructure
             };
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("ezha.by.service@gmail.com", "EzhaBy-12345678"),
+                Credentials = new NetworkCredential("ezha.by.service@gmail.com", "vjmliniziovzfmep"),
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
             };

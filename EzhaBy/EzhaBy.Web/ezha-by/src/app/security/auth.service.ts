@@ -49,7 +49,7 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.roleKey);
     localStorage.removeItem(this.userId);
-    this.router.navigate(['/login']);
+    window.location.href = '/login';
     this.store.dispatch(new SetLoginState({ isLoggedIn: false }));
   }
 

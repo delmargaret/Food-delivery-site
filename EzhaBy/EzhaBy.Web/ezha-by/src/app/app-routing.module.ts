@@ -10,8 +10,10 @@ import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-
 import { LogInPageComponent } from './pages/log-in-page/log-in-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.component';
+import { NewPasswordPageComponent } from './pages/new-password-page/new-password-page.component';
 import { PartnerPageComponent } from './pages/partner-page/partner-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { ShoppingCartErrorPageComponent } from './pages/shopping-cart-error-page/shopping-cart-error-page.component';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { ShoppingCartSuccessPageComponent } from './pages/shopping-cart-success-page/shopping-cart-success-page.component';
@@ -74,6 +76,14 @@ const routes: Routes = [
     path: 'orders',
     component: MyOrdersPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordPageComponent,
+  },
+  {
+    path: 'new-password',
+    component: NewPasswordPageComponent,
   },
   { path: '**', redirectTo: '' },
 ];

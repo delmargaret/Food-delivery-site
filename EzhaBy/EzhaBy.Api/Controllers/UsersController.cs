@@ -34,6 +34,38 @@ namespace EzhaBy.Api.Controllers
             }
         }
 
+        [HttpPost("resend-email")]
+        public async Task<IActionResult> SendResetEmail([FromBody] SendResetEmail.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+                return Conflict();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost("new-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPassword.Command command)
+        {
+            try
+            {
+                await mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [Authorize(Roles = AuthorizationRoles.User)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(string id)

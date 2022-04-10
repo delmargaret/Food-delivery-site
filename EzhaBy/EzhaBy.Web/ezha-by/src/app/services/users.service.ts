@@ -25,4 +25,18 @@ export class UsersService {
       ConfigService.addBaseAddress(`api/users/${id}`)
     );
   }
+
+  ResendEmail(email: string) {
+    return this.http.post(
+      ConfigService.addBaseAddress('api/users/resend-email'),
+      { email: email }
+    );
+  }
+
+  SendNewPassword(id: string, password: string) {
+    return this.http.post(
+      ConfigService.addBaseAddress('api/users/new-password'),
+      { id: id, password: password }
+    );
+  }
 }
