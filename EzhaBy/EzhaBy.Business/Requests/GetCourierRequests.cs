@@ -11,31 +11,31 @@ namespace EzhaBy.Business.Requests
 {
     public static class GetCourierRequests
     {
-        public class Query : IRequest<IQueryable<CourierRequest>>
+        public class Query : IRequest<CourierRequest[]>
         {
         }
 
-        public class Handler : IRequestHandler<Query, IQueryable<CourierRequest>>
+        public class Handler : IRequestHandler<Query, CourierRequest[]>
         {
             private readonly DataContext context;
 
             public Handler(DataContext context) => this.context = context;
 
-            public Task<IQueryable<CourierRequest>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<CourierRequest[]> Handle(Query request, CancellationToken cancellationToken)
             {
-                var requests = context.CourierRequests.AsNoTracking();
+                var requests = await context.CourierRequests.AsNoTracking().ToListAsync();
 
                 if (requests.Count() == 0)
                 {
                     throw new Exception("courier requests not found");
                 }
 
-                requests.ToList().ForEach(req =>
+                foreach (var req in requests)
                 {
                     req.IsExists = context.Couriers.Any(user => user.User.Email == req.Email);
-                });
+                }
 
-                return Task.FromResult(requests);
+                return requests.ToArray();
             }
         }
     }
