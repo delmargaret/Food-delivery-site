@@ -1,24 +1,24 @@
 .search-location {
   background: url("../../../assets/1.png");
   background-size: cover;
-  height: 600px;
+  height: 700px;
 
   .search-container {
-    max-width: 530px;
+    max-width: 620px;
     margin: auto;
-    padding-top: 130px;
+    padding-top: 180px;
 
     .header-1 {
       font-weight: 700;
       font-style: normal;
-      font-size: 42px;
+      font-size: 52px;
       color: #ffffff;
       margin-bottom: 10px;
     }
 
     .header-2 {
       font-weight: 700;
-      font-size: 26px;
+      font-size: 32px;
       color: #ffffff;
       margin-bottom: 35px;
     }
@@ -26,23 +26,23 @@
     .header-3 {
       font-weight: 400;
       font-style: normal;
-      font-size: 16px;
+      font-size: 24px;
       color: #ffffff;
       margin-bottom: 10px;
     }
 
     #location {
       height: 50px;
-      width: 350px;
-      font-size: 18px;
+      width: 400px;
+      font-size: 22px;
       cursor: pointer;
     }
 
     .search-btn {
       height: 50px;
-      margin-left: 5px;
+      margin-left: 8px;
       vertical-align: inherit;
-      font-size: 18px;
+      font-size: 22px;
 
       &:hover {
         background-color: rgb(224, 224, 224);
@@ -54,31 +54,32 @@
 .about-us {
   background: url("../../../assets/2.png");
   background-size: contain;
-  height: 500px;
+  min-height: 500px;
   background-repeat: no-repeat;
   font-style: normal;
   color: #000000;
   border-bottom: 1px solid rgb(136, 136, 136);
 
   .about-us-container {
-    padding: 2% 3% 0 35%;
+    padding: 2% 4% 0 35%;
 
     .header-1 {
       font-weight: 700;
-      font-size: 40px;
+      font-size: 52px;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .header-2 {
       font-weight: 400;
-      font-size: 17px;
+      font-size: 24px;
+      margin-bottom: 26px;
     }
   }
 }
 
 .how-it-works {
-  height: 500px;
+  min-height: 600px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgb(136, 136, 136);
@@ -86,10 +87,10 @@
   .left-picture {
     background: url("../../../assets/3.png");
     background-repeat: no-repeat;
-    height: 500px;
+    height: 600px;
     width: 250px;
     background-position-x: left;
-    background-position-y: 200px;
+    background-position-y: 300px;
   }
 
   .right-picture {
@@ -105,7 +106,7 @@
 
     .header-1 {
       font-weight: 700;
-      font-size: 40px;
+      font-size: 52px;
       text-align: center;
       margin-bottom: 60px;
     }
@@ -113,13 +114,13 @@
     .steps {
       display: flex;
       justify-content: space-between;
-      min-width: 800px;
+      min-width: 1000px;
 
       .step {
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: 250px;
+        width: 320px;
         font-weight: 700;
 
         .circle {
@@ -132,12 +133,13 @@
         }
 
         .header {
-          font-size: 26px;
+          font-size: 32px;
           margin-bottom: 30px;
         }
 
         .description {
-          font-size: 16px;
+          font-size: 20px;
+          width: 300px;
         }
       }
     }
@@ -148,31 +150,32 @@
   background: url("../../../assets/6.png");
   background-size: contain;
   background-position-x: right;
-  height: 500px;
+  min-height: 500px;
   background-repeat: no-repeat;
   font-style: normal;
   color: #000000;
   border-bottom: 1px solid rgb(136, 136, 136);
 
   .delivery-terms-container {
-    padding: 2% 35% 0 3%;
+    padding: 2% 30% 0 4%;
 
     .header-1 {
       font-weight: 700;
-      font-size: 40px;
+      font-size: 52px;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 50px;
     }
 
     .header-2 {
       font-weight: 400;
-      font-size: 17px;
+      font-size: 24px;
+      margin-bottom: 26px;
     }
   }
 }
 
 .work-with-us {
-  height: 600px;
+  min-height: 600px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgb(136, 136, 136);
@@ -182,22 +185,23 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position-y: bottom;
-    width: 350px;
+    width: 340px;
   }
 
   .right-picture {
     background: url("../../../assets/8.png");
     background-repeat: no-repeat;
-    width: 350px;
+    width: 340px;
     background-size: cover;
   }
 
   .work-with-us-container {
     padding-top: 20px;
+    min-width: 800px;
 
     .header-1 {
       font-weight: 700;
-      font-size: 40px;
+      font-size: 52px;
       text-align: center;
       margin-bottom: 30px;
     }
@@ -211,7 +215,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: 300px;
+        width: 350px;
 
         .circle {
           background: url("../../../assets/9.png");
@@ -224,14 +228,17 @@
         }
 
         .description {
-          font-size: 16px;
+          font-size: 20px;
+          min-height: 380px;
         }
 
         .step-btn {
           margin-left: 5px;
           vertical-align: inherit;
           border: 1px solid rgb(167, 167, 167);
-          margin-top: 10px;
+          margin-top: 20px;
+          margin-bottom: 60px;
+          font-size: 20px;
 
           &:hover {
             background-color: rgb(224, 224, 224);

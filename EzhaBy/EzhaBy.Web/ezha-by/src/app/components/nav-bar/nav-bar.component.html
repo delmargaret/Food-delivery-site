@@ -5,6 +5,7 @@
     data-bs-toggle="offcanvas"
     data-bs-target="#offcanvas-navbar"
     aria-controls="offcanvas-navbar"
+    style="height: 46px"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,10 +14,10 @@
   </div>
 
   <div class="brand" (click)="redirectToMainPage()">
-    <img src="../../../assets/logo9.png" width="120" alt="logo" />
+    <img src="../../../assets/logo9.png" width="150" alt="logo" />
   </div>
   <div class="cart" (click)="redirectToCart()">
-    <img src="../../../assets/26.png" height="30" alt="" />
+    <img src="../../../assets/26.png" height="35" alt="" />
     <span
       *ngIf="number && number > 0"
       class="position-absolute translate-middle badge rounded-pill bg-danger"
@@ -33,7 +34,7 @@
       aria-expanded="false"
       aria-controls="collapseExample"
     >
-      <img src="../../../assets/25.png" height="30" alt="" />
+      <img src="../../../assets/25.png" height="35" alt="" />
     </a>
   </div>
   <div class="collapse nav-collapse" id="collapseExample">

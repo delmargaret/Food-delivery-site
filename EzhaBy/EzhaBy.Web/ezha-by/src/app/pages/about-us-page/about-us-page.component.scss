@@ -9,11 +9,11 @@
 }
 .about-us {
   background: url("../../../assets/15.png");
-  background-size: 350px;
+  background-size: 550px;
   background-repeat: no-repeat;
   font-style: normal;
   color: #000000;
-  min-height: 600px;
+  min-height: calc(100vh - 100px);
 
   .about-us-container {
     margin: 20px 20px 20px 420px;
