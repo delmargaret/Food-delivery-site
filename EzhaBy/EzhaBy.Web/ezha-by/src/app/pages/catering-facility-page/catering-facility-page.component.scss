@@ -19,20 +19,20 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url("../../../assets/23.jpg");
     background-size: cover;
-    height: 300px;
+    height: 400px;
 
     .cafe-img {
       width: 400px;
       font-weight: 700;
-      font-size: 36px;
+      font-size: 40px;
       color: #ffffff;
       text-align: center;
       padding-top: 20px;
       padding-left: 100px;
 
       .image {
-        height: 200px;
-        width: 200px;
+        height: 250px;
+        width: 250px;
         border-radius: 50%;
         flex-shrink: 0;
         background-size: cover;
@@ -43,7 +43,7 @@
   }
 
   .additional-info {
-    height: 80px;
+    height: 100px;
     background-color: #c2c2c2;
     display: flex;
     justify-content: space-around;
@@ -52,13 +52,13 @@
 
     .title {
       font-weight: 700;
-      font-size: 20px;
+      font-size: 24px;
       color: #000000;
       text-align: center;
     }
 
     .text {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 
@@ -81,7 +81,8 @@
       background-color: rgb(228, 155, 155);
       border-radius: 8px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 20px;
+      padding: 2px 4px;
       cursor: pointer;
 
       &:hover {

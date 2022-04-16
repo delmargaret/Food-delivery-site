@@ -14,7 +14,9 @@
     <div class="description">
       <div class="field">
         <img src="../../../assets/20.png" />
-        <div>{{ cafe.deliveryTime }}</div>
+        <div class="delivery-time" [title]="cafe.deliveryTime">
+          {{ cafe.deliveryTime }}
+        </div>
       </div>
       <div class="field">
         <img src="../../../assets/21.png" />

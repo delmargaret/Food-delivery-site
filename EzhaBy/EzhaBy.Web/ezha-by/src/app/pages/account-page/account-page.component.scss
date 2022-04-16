@@ -1,8 +1,10 @@
 .account {
+  font-size: 20px;
+  
   .title {
     font-weight: 700;
     font-style: normal;
-    font-size: 30px;
+    font-size: 52px;
     color: rgb(0, 0, 0);
     text-align: center;
     padding-top: 30px;
@@ -23,6 +25,14 @@
     border-radius: 0.25rem;
     min-width: -webkit-fill-available;
     cursor: pointer;
+  }
+
+  .form-control {
+    font-size: 20px !important;
+  }
+
+  .btn-red {
+    font-size: 20px;
   }
 }
 

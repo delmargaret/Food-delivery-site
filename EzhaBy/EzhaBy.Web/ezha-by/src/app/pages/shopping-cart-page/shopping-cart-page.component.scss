@@ -2,7 +2,7 @@
   .not-found {
     text-align: center;
     margin-top: 50px;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
   }
 
@@ -11,12 +11,12 @@
     padding-top: 30px;
 
     .cafe-name {
-      font-size: 22px;
+      font-size: 24px;
       border-bottom: 1px solid rgb(165, 165, 165);
     }
 
     .dish {
-      height: 150px;
+      min-height: 150px;
       display: flex;
       margin-top: 50px;
 
@@ -31,11 +31,12 @@
         width: 500px;
         overflow-wrap: break-word;
         margin-left: 50px;
+        font-size: 20px;
 
         .title {
           font-weight: 700;
           font-style: normal;
-          font-size: 18px;
+          font-size: 24px;
           color: #000000;
         }
       }
@@ -46,9 +47,9 @@
       .delete {
         margin-top: 30px;
         margin: auto;
-        width: 20px;
+        width: 50px;
         text-align: center;
-        font-size: 18px;
+        font-size: 22px;
       }
 
       .delete {
@@ -77,6 +78,7 @@
     border-bottom: 1px solid rgb(165, 165, 165);
     border-top: 1px solid rgb(165, 165, 165);
     background-color: rgb(228, 228, 228);
+    font-size: 20px;
 
     .text {
       margin-right: 15px;
@@ -85,11 +87,13 @@
   }
 
   .order-info {
+    font-size: 20px;
+
     .title {
       text-align: center;
       font-weight: 700;
       font-style: normal;
-      font-size: 24px;
+      font-size: 40px;
       color: #000000;
       padding-top: 30px;
       padding-bottom: 30px;
@@ -119,8 +123,13 @@
       margin-bottom: 20px;
     }
 
+    .form-control {
+      font-size: 20px !important;
+    }
+
     button {
       min-width: -webkit-fill-available;
+      font-size: 20px;
     }
   }
 }
