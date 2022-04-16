@@ -33,7 +33,7 @@ export default class NavbarComponent extends Component {
     return (
       <Navbar bg="light">
         <Navbar.Brand id="logo-img">
-          <img src={logo} width="120" alt="React Bootstrap logo" />
+          <img src={logo} width="150" alt="React Bootstrap logo" />
         </Navbar.Brand>
         {isAuthorized ? logout : null}
       </Navbar>

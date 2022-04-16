@@ -6,7 +6,9 @@ export default class FooterComponent extends Component {
     return (
       <Navbar bg="light" className="footer">
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>Ezha.by@{new Date().getFullYear()}</Navbar.Text>
+          <Navbar.Text style={{ fontSize: "14px" }}>
+            Ezha.by@{new Date().getFullYear()}
+          </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
     );
