@@ -39,7 +39,7 @@ namespace EzhaBy.Business.Users
                     throw new ArgumentException("user isn't exists");
                 }
 
-                var url = "http://localhost:4200/new-password?u=" + user.Id;
+                var url = "https://ezha-by.herokuapp.com//new-password?u=" + user.Id;
 
                 EmailService.SendMail(
                     request.Email,

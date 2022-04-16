@@ -61,7 +61,7 @@ namespace EzhaBy.Business.Requests
                     courier.Email,
                     "Аккаунт ezha.by создан",
 $@"Для вас был соднан аккаунт в сервисе ezha.by. 
-Для того, чтобы зайти в приложение, перейдите на страницу http://localhost:4200/.
+Для того, чтобы зайти в приложение, перейдите на страницу https://ezha-by-order-management.herokuapp.com/.
 Для входа используйте логин <b>{courier.Email}</b> и пароль <b>{password}</b>");
 
                 await context.SaveChangesAsync();

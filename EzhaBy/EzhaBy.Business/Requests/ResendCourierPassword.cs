@@ -45,7 +45,7 @@ namespace EzhaBy.Business.Requests
                 EmailService.SendMail(
                     user.User.Email,
                     "Учетные данные ezha.by",
-$@"Для того, чтобы зайти в приложение, перейдите на страницу http://localhost:4200/.
+$@"Для того, чтобы зайти в приложение, перейдите на страницу https://ezha-by-order-management.herokuapp.com/.
 Для входа используйте логин <b>{user.User.Email}</b> и пароль <b>{user.User.Password}</b>");
 
                 await context.SaveChangesAsync();
