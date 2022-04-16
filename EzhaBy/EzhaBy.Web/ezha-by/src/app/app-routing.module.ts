@@ -6,7 +6,6 @@ import { CateringFacilitiesPageComponent } from './pages/catering-facilities-pag
 import { CateringFacilityPageComponent } from './pages/catering-facility-page/catering-facility-page.component';
 import { ContactUsPageComponent } from './pages/contact-us-page/contact-us-page.component';
 import { CourierPageComponent } from './pages/courier-page/courier-page.component';
-import { HowToOrderPageComponent } from './pages/how-to-order-page/how-to-order-page.component';
 import { LogInPageComponent } from './pages/log-in-page/log-in-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { MyOrdersPageComponent } from './pages/my-orders-page/my-orders-page.component';
@@ -25,11 +24,6 @@ const routes: Routes = [
   { path: 'partner', component: PartnerPageComponent, pathMatch: 'full' },
   { path: 'courier', component: CourierPageComponent, pathMatch: 'full' },
   { path: 'terms', component: TermsOfServicePageComponent, pathMatch: 'full' },
-  {
-    path: 'how-to-order',
-    component: HowToOrderPageComponent,
-    pathMatch: 'full',
-  },
   { path: 'about-us', component: AboutUsPageComponent, pathMatch: 'full' },
   { path: 'contact-us', component: ContactUsPageComponent, pathMatch: 'full' },
   {
